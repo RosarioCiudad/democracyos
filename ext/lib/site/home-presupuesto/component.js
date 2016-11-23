@@ -32,6 +32,16 @@ class HomePresupuesto extends Component {
     }
   }
 
+  componentWillMount () {
+    const distritoHash = location.hash.replace('#', '')
+    if (!!distritoHash) {
+      const distritoKey = distritos.map(d => d.name).indexOf(distritoHash)
+      if (~distritoKey) {
+        this.setState({distrito: distritos[distritoKey]}, this.fetchForums)
+      }
+    }
+  }
+
   componentDidMount () {
     this.setState({loading: true}, this.fetchForums)
   }
@@ -111,6 +121,7 @@ class HomePresupuesto extends Component {
   }
 
   handleDistritoFilterChange = (distrito) => {
+    history.pushState(null, null, `#${distrito.name}`)
     this.setState({distrito}, this.fetchForums)
   }
 
