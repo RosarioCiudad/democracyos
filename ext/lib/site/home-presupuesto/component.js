@@ -7,6 +7,7 @@ import user from 'lib/site/user/user'
 import userConnector from 'lib/site/connectors/user'
 import VotingModule from '../voting-module/component'
 import TopicCard from './topic-card/component'
+import jump from 'jump.js'
 
 const distritos = [
   {title: 'Centro', name: 'centro'},
@@ -123,6 +124,7 @@ class HomePresupuesto extends Component {
   handleDistritoFilterChange = (distrito) => {
     history.pushState(null, null, `#${distrito.name}`)
     this.setState({distrito}, this.fetchForums)
+    jump('.topics-section')
   }
 
   render () {
