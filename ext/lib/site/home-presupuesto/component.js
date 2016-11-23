@@ -126,7 +126,7 @@ class HomePresupuesto extends Component {
 
   handleDistritoFilterChange = (distrito) => {
     history.pushState(null, null, `#${distrito.name}`)
-    this.setState({distrito}, this.fetchForums)
+    this.setState({distrito, scrollAfterFetch: true}, this.fetchForums)
   }
 
   render () {
