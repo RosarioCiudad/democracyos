@@ -109,7 +109,12 @@ class HomePresupuesto extends Component {
             return t.extra.distrito === this.state.distrito.name
           })
         }, () => {
-          if (this.state.scrollAfterFetch) jump('.topics-section')
+          if (this.state.scrollAfterFetch) {
+            const header = document.querySelector('.ext-site-header')
+            jump('.topics-section', {
+              offset: -(header && header.clientHeight ? header.clientHeight : 100)
+            })
+          }
         })
       })
       .catch((err) => {
