@@ -18,6 +18,8 @@ const distritos = [
   {title: 'Sur', name: 'sur'}
 ]
 
+let distritoCurrent = ''
+
 class HomePresupuesto extends Component {
   constructor (props) {
     super(props)
@@ -35,12 +37,11 @@ class HomePresupuesto extends Component {
   }
 
   componentWillMount () {
-    const distritoHash = location.hash.replace('#', '')
-    if (!!distritoHash) {
-      const distritoKey = distritos.map(d => d.name).indexOf(distritoHash)
-      if (~distritoKey) {
-        this.setState({distrito: distritos[distritoKey]}, this.fetchForums)
-      }
+    if (!location.hash && !distritoCurrent) return
+    const distritoKey = distritos.map(d => d.name).indexOf(distritoCurrent)
+    if (~distritoKey) {
+      history.pushState(null, null, `#${distritoCurrent}`)
+      this.setState({distrito: distritos[distritoKey]}, this.fetchForums)
     }
   }
 
@@ -131,6 +132,7 @@ class HomePresupuesto extends Component {
   }
 
   handleDistritoFilterChange = (distrito) => {
+    distritoCurrent = distrito.name
     history.pushState(null, null, `#${distrito.name}`)
     this.setState({distrito, scrollAfterFetch: true}, this.fetchForums)
   }
