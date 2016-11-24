@@ -80,16 +80,18 @@ const Comment = userConnector(class extends Component {
             alt={comment.author.fullName} />
           <h3 className='name'>
             {comment.author.displayName}
-            {
-              comment.author.extra && comment.author.extra.validated
-              (
-                <div className='validated-badge'>
-                  <i className='icon-badge'></i>
-                  <span className='validated-label'>{comment.author.extra.label}</span>
-                </div>
-              )
-            }
           </h3>
+          {
+            (comment.author.extra && comment.author.extra.validated) &&
+            (
+              <div className='validated-badge'>
+              <i className='icon-badge'></i>
+              <div className='validated-label'>
+              <span>{comment.author.extra.label}</span>
+              </div>
+              </div>
+            )
+          }
           <div className='created-at'>
             <Timeago date={comment.createdAt} />
           </div>

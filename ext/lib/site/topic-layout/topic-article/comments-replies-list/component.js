@@ -27,11 +27,13 @@ function Reply (props) {
         <h3 className='name'>
           {reply.author.displayName}
           {
-            reply.author.extra && reply.author.extra.validated
+            (reply.author.extra && reply.author.extra.validated) &&
             (
               <div className='validated-badge'>
                 <i className='icon-badge'></i>
-                <span className='validated-label'>{reply.author.extra.label}</span>
+                <div className='validated-label'>
+                  <span>{comment.author.extra.label}</span>
+                </div>
               </div>
             )
           }
