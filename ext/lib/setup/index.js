@@ -1,5 +1,6 @@
 const topicApi = require('lib/api/topic')
 const userApi = require('lib/db-api/user')
+require('./users-scopes')
 
 const topicExtraFields = [
   'extra',
