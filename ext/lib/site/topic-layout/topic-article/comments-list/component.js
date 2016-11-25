@@ -85,10 +85,10 @@ const Comment = userConnector(class extends Component {
             (comment.author.extra && comment.author.extra.validated) &&
             (
               <div className='validated-badge'>
-              <i className='icon-badge'></i>
-              <div className='validated-label'>
-              <span>{comment.author.extra.label}</span>
-              </div>
+                <i className='icon-check'></i>
+                <div className='validated-label'>
+                  <span>{comment.author.extra.label}</span>
+                </div>
               </div>
             )
           }
