@@ -3,6 +3,7 @@ import t from 't-component'
 import Timeago from 'lib/site/timeago'
 import userConnector from 'lib/site/connectors/user'
 import CommentReplies from 'lib/site/topic-layout/topic-article/comments/list/replies/component'
+import ValidatedBadge from '../validated-badge/component'
 
 export default function CommentsList (props) {
   const comments = props.comments || []
@@ -81,17 +82,7 @@ const Comment = userConnector(class extends Component {
           <h3 className='name'>
             {comment.author.displayName}
           </h3>
-          {
-            (comment.author.extra && comment.author.extra.validated) &&
-            (
-              <div className='validated-badge'>
-                <i className='icon-check'></i>
-                <div className='validated-label'>
-                  <span>{comment.author.extra.label}</span>
-                </div>
-              </div>
-            )
-          }
+          <ValidatedBadge comment={comment} />
           <div className='created-at'>
             <Timeago date={comment.createdAt} />
           </div>

@@ -1,35 +1,10 @@
 .proyecto-container
-  .name
-    flex-grow: 0!important
-  .validated-badge
-    flex: 1
-    display: inline-block
-    vertical-align: middle
-    margin-left: 8px
-    position: relative
-    i
-      color: #f7931d
-      font-size: 15px
-      border-radius: 50%
-      padding: 2px 2px 2px 3px
-    .validated-label
-      position: absolute
-      top: -1px
-      left: 25px
-      display: none
-      span
-        background: #ffa500
-        color: #fff
-        border-radius: 10px
-        padding: 1px 10px 2px
-        font-size: 12px
-
   .created-at
-    flex: 1
     text-align: right
 
-  .comments-list-item:hover
-    .validated-label
-      display: inline-block
+  .comments-list-item:hover > .meta .validated-badge .validated-label,
+  .replies-list-item:hover > .meta .validated-badge .validated-label
+    display: inline-block
 
+  @import './validated-badge/styles'
   @import '../../../../../lib/site/topic-layout/topic-article/comments/styles'

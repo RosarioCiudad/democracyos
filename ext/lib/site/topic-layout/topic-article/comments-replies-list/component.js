@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Timeago from 'lib/site/timeago'
+import ValidatedBadge from '../validated-badge/component'
 
 export default function RepliesList (props) {
   const replies = props.replies || []
@@ -26,18 +27,8 @@ function Reply (props) {
           alt={reply.author.fullName} />
         <h3 className='name'>
           {reply.author.displayName}
-          {
-            (reply.author.extra && reply.author.extra.validated) &&
-            (
-              <div className='validated-badge'>
-                <i className='icon-badge'></i>
-                <div className='validated-label'>
-                  <span>{comment.author.extra.label}</span>
-                </div>
-              </div>
-            )
-          }
         </h3>
+        <ValidatedBadge comment={reply} />
         <div className='created-at'>
           <Timeago date={reply.createdAt} />
         </div>
