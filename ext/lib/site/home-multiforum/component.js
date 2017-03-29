@@ -28,11 +28,14 @@ export default function HomeMultiforumOverride (props) {
           </div>
         )}
         <div className='container'>
-          <h2>Presupuesto Participativo 2017</h2>
-          <h1>Ya elegiste los proyectos<br/>que van a cambiar tu barrio</h1>
+          <h1>Queremos que seas parte de las decisiones:</h1>
+          <p>Las opiniones y las acciones colectivas mejoran la ciudad.
+            <br />
+            Participá y mejoremos juntos la ciudad.</p>
           <Link to='/presupuesto' className='btn call-to-action btn-lg'>
-            Ver los proyectos
+            Participá
           </Link>
+          <span className='icon-arrow-down'></span>
         </div>
       </div>
       <div className='intro'>

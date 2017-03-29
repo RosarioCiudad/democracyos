@@ -22,7 +22,6 @@ import * as CommentListOverride from 'ext/lib/site/topic-layout/topic-article/co
 import * as CommentRepliesList from 'lib/site/topic-layout/topic-article/comments/list/comment/replies/list/component'
 import * as CommentRepliesListOverride from 'ext/lib/site/topic-layout/topic-article/comments-replies-list/component'
 
-
 Object.assign(Layout, LayoutOverride)
 Object.assign(Header, HeaderOverride)
 Object.assign(HomeMultiforum, HomeMultiforumOverride)

@@ -3,7 +3,7 @@ import {browserHistory} from 'react-router'
 import user from 'lib/site/user/user'
 import userConnector from 'lib/site/connectors/user'
 import * as Layout from 'lib/site/layout/component'
-import VotingModule from '../voting-module/component'
+// import VotingModule from '../voting-module/component'
 
 const LayoutOriginal = Layout.default
 
@@ -19,7 +19,7 @@ class LayoutOverride extends Component {
 
   componentDidMount () {
     const children = React.Children.toArray(this.props.children)
-    children.push(<VotingModule key='voting-module'/>)
+    // children.push(<VotingModule key='voting-module'/>)
 
     this.setState({
       props: Object.assign({}, this.props, {children})
@@ -50,7 +50,7 @@ class LayoutOverride extends Component {
     }
 
     const children = React.Children.toArray(nextProps.children)
-    children.push(<VotingModule key='voting-module'/>)
+    // children.push(<VotingModule key='voting-module'/>)
 
     this.setState({
       props: Object.assign({}, nextProps, {children})
