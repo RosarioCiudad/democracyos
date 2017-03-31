@@ -41,93 +41,46 @@ export default function HomeMultiforumOverride (props) {
       <div className='intro'>
         <div className='container'>
           <div className='row'>
-            <div className='col-md-6'>
-              <h2 className='section-subtitle'>Últimas noticias</h2>
-              <p className='light-text'>Este año participaron del Presupuesto Participativo un total de <strong>93.300 rosarinos</strong>. Del 18 al 28 de noviembre votaron un proyecto para su barrio y otro para su distrito, 66.718 ciudadanos.</p>
-
-              <p className='light-text'>En el Presupuesto Participativo Joven participaron 26.582 jóvenes y cada uno pudo elegir tres proyectos para su distrito.</p>
-
-              <p className='light-text'>El distrito que más votantes de Presupuesto Participativo registró, fue el Oeste con un total de 16.009 votantes y le siguieron Distrito Centro (13.557), Distrito Sudoeste (11.072), Distrito Norte (10.021), Distrito Noroeste (8.342) y Distrito Sur (7.717).</p>
-
-              <p className='light-text'>En este portal, recibimos 5035 votos y 609 comentarios a los proyectos y, en adelante, será el espacio donde podrás seguir el avance de los que resultaron ganadores.</p>
-
-              <p className='light-text'><strong>Gracias por sumarte a cambiar tu lugar.</strong></p>
-              <Link
-                to='http://www.rosarionoticias.gob.ar/page/noticias/tag/Presupuesto%20Participativo'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='btn btn-primary mas-info'>
-                Ver Noticias
-              </Link>
-            </div>
-            <div className='col-md-6 video-container'>
-              <div className='video'>
-                <iframe
-                  sandbox='allow-scripts allow-same-origin'
-                  src='https://www.youtube.com/embed/aKvwzNaW1Bc'></iframe>
+            <h2>¿Cómo podés participar?</h2>
+            <div className="participa-steps">
+              <div className="p-step">
+                <div>
+                  <span className="num">1</span>
+                  <p>Registrate</p>
+                </div>
+                <p className="p-text">
+                  Hacé click en Participá,<br/>
+                  completá el formulario y sé<br/>
+                  parte de Rosario Participa.
+                </p>
+              </div>
+              <div className="p-step">
+                <div>
+                  <span className="num">2</span>
+                  <p>Votá</p>
+                </div>
+                <p className="p-text">
+                  Elegí, debatí y proponé cómo <br/>
+                  querés que sea la ciudad.
+                </p>
+              </div>
+              <div className="p-step">
+                <div>
+                  <span className="num">3</span>
+                  <p>Compartí</p>
+                </div>
+                <p className="p-text">
+                  Compartí en redes sociales <br/>
+                  para que más vecinos <br/>
+                  puedan aportar sus ideas.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className='info'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-6'>
-              <h2 className='section-title'>Votación actual 2016</h2>
-              <h2>Presupuesto Participativo 2017</h2>
-              <p>En las últimas semanas, vecinos de todos los distritos priorizaron los nuevos proyectos para mejorar nuestra ciudad.</p>
-              <ul className='proyectos-stats'>
-                <li>
-                  <span className='img'></span>
-                  <span className='num'>134</span>
-                  <p>Proyectos<br />presentados</p>
-                </li>
-                <li>
-                  <span className='img'></span>
-                  <span className='num'>207 millones</span>
-                  <p>Presupuesto<br />asignado</p>
-                </li>
-                <li>
-                  <span className='img'></span>
-                  <span className='num'>56</span>
-                  <p>Proyectos<br />ganadores</p>
-                </li>
-              </ul>
-              <Link
-                to='/presupuesto'
-                className='btn ver-mas'>
-                Ver proyectos
-              </Link>
-            </div>
-            <div className='col-md-6 linea-tiempo'>
-              <ul>
-                <li className='highlighted'>
-                  <h4>2016</h4>
-                  <span>- Ejecución del presupuesto votado en 2015</span>
-                </li>
-                <li>
-                  <h4>Mayo - Junio 2016</h4>
-                  <span>- Reuniones de vecinos en todos los barrios</span>
-                  <span>- Elección de Consejeros</span>
-                  <span>- Formación de los Consejos Participativos</span>
-                </li>
-                <li>
-                  <h4>Julio - Octubre 2016</h4>
-                  <span>- Elaboración de proyectos en los Consejos Participativos</span>
-                </li>
-                <li>
-                  <h4>Noviembre 2016</h4>
-                  <span>- Presentación y votación de los proyectos</span>
-                </li>
-                <li className='highlighted'>
-                  <h4>2017</h4>
-                  <span>- Ejecución del presupuesto 2017</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+
       </div>
       <TweetsFeed />
       <footer className='container-fluid'>
