@@ -38,38 +38,38 @@ export default function HomeMultiforumOverride (props) {
           <span className='icon-arrow-down'></span>
         </div>
       </div>
-      <div className='intro'>
+      <div className='pasos'>
         <div className='container'>
           <div className='row'>
             <h2>¿Cómo podés participar?</h2>
-            <div className="participa-steps">
-              <div className="p-step">
+            <div className='participa-steps'>
+              <div className='p-step'>
                 <div>
-                  <span className="num">1</span>
+                  <span className='num'>1</span>
                   <p>Registrate</p>
                 </div>
-                <p className="p-text">
+                <p className='p-text'>
                   Hacé click en Participá,<br/>
                   completá el formulario y sé<br/>
                   parte de Rosario Participa.
                 </p>
               </div>
-              <div className="p-step">
+              <div className='p-step'>
                 <div>
-                  <span className="num">2</span>
+                  <span className='num'>2</span>
                   <p>Votá</p>
                 </div>
-                <p className="p-text">
+                <p className='p-text'>
                   Elegí, debatí y proponé cómo <br/>
                   querés que sea la ciudad.
                 </p>
               </div>
-              <div className="p-step">
+              <div className='p-step'>
                 <div>
-                  <span className="num">3</span>
+                  <span className='num'>3</span>
                   <p>Compartí</p>
                 </div>
-                <p className="p-text">
+                <p className='p-text'>
                   Compartí en redes sociales <br/>
                   para que más vecinos <br/>
                   puedan aportar sus ideas.
@@ -80,7 +80,26 @@ export default function HomeMultiforumOverride (props) {
         </div>
       </div>
       <div className='info'>
-
+        <div className='action action-consulta'>
+          <div className='action-img'></div>
+          <div className='action-content'>
+            <h3>Consultas</h3>
+            <h4>La Municipalidad quiere conocer tu opinion sobre diferentes temas</h4>
+            <span className='action-separador'></span>
+            <p>Podés votar y decidir qué acciones impulsa la Municipalidad en temáticas culturales, ambientales, sociales.</p>
+            <button>Quiero opinar</button>
+          </div>
+        </div>
+        <div className='action action-presupuesto'>
+          <div className='action-img'></div>
+          <div className='action-content'>
+            <h3>Presupuesto participativo</h3>
+            <h4>Vos podes decidir sobre cómo invertir mas de 200 millones de pesos para la ciudad.</h4>
+            <span className='action-separador'></span>
+            <p>Elegí los proyectos que transformarán tu barrio.</p>
+            <button>Quiero votar</button>
+          </div>
+        </div>
       </div>
       <TweetsFeed />
       <footer className='container-fluid'>
