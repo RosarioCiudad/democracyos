@@ -32,7 +32,7 @@ export default function HomeMultiforumOverride (props) {
           <p>Las opiniones y las acciones colectivas mejoran la ciudad.
             <br />
             Participá y mejoremos juntos la ciudad.</p>
-          <Link to='/presupuesto' className='btn call-to-action btn-lg'>
+          <Link to='/signin' className='btn call-to-action btn-lg'>
             Participá
           </Link>
           <span className='icon-arrow-down'></span>
@@ -87,7 +87,7 @@ export default function HomeMultiforumOverride (props) {
             <h4>La Municipalidad quiere conocer tu opinion sobre diferentes temas</h4>
             <span className='action-separador'></span>
             <p>Podés votar y decidir qué acciones impulsa la Municipalidad en temáticas culturales, ambientales, sociales.</p>
-            <button>Quiero opinar</button>
+            <Link to='/consulta'>Quiero opinar</Link>
           </div>
         </div>
         <div className='action action-presupuesto'>
@@ -97,7 +97,7 @@ export default function HomeMultiforumOverride (props) {
             <h4>Vos podes decidir sobre cómo invertir mas de 200 millones de pesos para la ciudad.</h4>
             <span className='action-separador'></span>
             <p>Elegí los proyectos que transformarán tu barrio.</p>
-            <button>Quiero votar</button>
+            <Link to='/presupuesto'>Quiero votar</Link>
           </div>
         </div>
       </div>

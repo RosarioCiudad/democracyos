@@ -91,14 +91,14 @@ class Header extends Component {
               )}
 
               {this.props.user.state.rejected && (
-                <button className='login-rosario'>Participá</button>
+                <Link to='/signin' className='login-rosario'>Participá</Link>
               )}
             </ul>
           </div>
         </div>
         <div className='ext-site-header-sub'>
-          <Link>Consultas</Link>
-          <Link>Presupuesta participativo</Link>
+          <Link to='/consultas'>Consultas</Link>
+          <Link to='/presupuesto'>Presupuesta participativo</Link>
         </div>
       </header>
     )
