@@ -17,7 +17,7 @@
   .ext-home-cover
     display: flex
     align-items: center
-    min-height: 90vh
+    min-height: 84vh
     padding: 15px 0
     color: #fff
     text-align: center
@@ -58,14 +58,20 @@
         letter-spacing: 1px
         font-weight: 500
       span
-        bottom: 42px
-        font-size: 40px
-        margin-left: -32px
+        bottom: 15px
         left: 50%
-        padding: 13px 10px 7px
         position: absolute
         border: 2px solid #fff
         border-radius: 50%
+        font-size: 20px
+        margin-left: -15px
+        padding: 10px
+        @media screen and (min-width: 768px)
+          font-size: 40px
+          margin-left: -32px
+          padding: 13px 10px 7px
+        @media screen and (max-width: 451px)
+          display: none
 
     .banner
       display: none
@@ -109,12 +115,20 @@
       display: flex
       justify-content: space-between
       padding: 0 27px
+      @media screen and (max-width: 1015px)
+        flex-direction: column
+        .p-step
+          margin-bottom: 20px
+          width: 100%!important
+          &::before
+            content: none!important
       .p-step
         display: flex
         flex-direction: column
         align-items: center
         margin-right: 40px
         position: relative
+        width: 230px
         p.p-text
           font-size: 22px
           margin-top: 16px
@@ -152,7 +166,7 @@
           border-width: 20px 0 20px 40px
           border-color: transparent transparent transparent #d8d8d8
           position: absolute
-          right: -57px
+          right: -60px
           top: 100px
         &:last-child
           margin-right: 0
@@ -190,12 +204,17 @@
       display: flex
       justify-content: center
       min-height: 559px
-      padding-top: 50px
+      padding: 50px 10px 0
       position: relative
+      @media screen and (max-width: 1015px)
+        min-height: 650px
+      @media screen and (max-width: 500px)
+        min-height: 550px
       &:nth-child(even)
         background-color: #f7f7f7
       .action-content
         max-width: 677px
+
       h3
         color: #3ba4ce
         margin: 9px 0
@@ -237,6 +256,12 @@
         background-repeat: no-repeat
         background-color: #3ba4ce
         border-radius: 50%
+        @media screen and (max-width: 1015px)
+          min-width: 200px
+          height: 200px
+          background-size: 150px
+        @media screen and (max-width: 500px)
+          display: none
     .action-consulta
       .action-img
         background-image: unquote("url('/ext/lib/site/home-multiforum/consulta-icono.png')")

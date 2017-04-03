@@ -27,16 +27,22 @@
 
 .ext-site-header-sub
   background: #f6f6f6
-  padding: 5px 0
-  color: #8d8d8d
+  background-color: #E9E9EB
+  border-bottom: solid 0px #d6d8e0
+  padding: 2px 0
+  color: #58595B
   display: flex
   justify-content: center
   a
+    border-right: solid 1px #A7A8AC
+    padding: 5px 25px
     font-weight: 400
     font-size: 16px
     cursor: pointer
+    &:last-child
+      border: none
     &:hover
-      font-weight: 500
+      color: #00acec!important
   span
     padding: 0 20px
 
@@ -108,3 +114,6 @@
       border: none
       padding: 5px 20px
       cursor: pointer
+      display: none
+      @media (min-width: 992px)
+        display: block

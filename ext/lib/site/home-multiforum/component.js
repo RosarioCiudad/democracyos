@@ -49,8 +49,8 @@ export default function HomeMultiforumOverride (props) {
                   <p>Registrate</p>
                 </div>
                 <p className='p-text'>
-                  Hacé click en Participá,<br/>
-                  completá el formulario y sé<br/>
+                  Hacé click en Participá,
+                  completá el formulario y sé
                   parte de Rosario Participa.
                 </p>
               </div>
@@ -60,7 +60,7 @@ export default function HomeMultiforumOverride (props) {
                   <p>Votá</p>
                 </div>
                 <p className='p-text'>
-                  Elegí, debatí y proponé cómo <br/>
+                  Elegí, debatí y proponé cómo
                   querés que sea la ciudad.
                 </p>
               </div>
@@ -70,8 +70,8 @@ export default function HomeMultiforumOverride (props) {
                   <p>Compartí</p>
                 </div>
                 <p className='p-text'>
-                  Compartí en redes sociales <br/>
-                  para que más vecinos <br/>
+                  Compartí en redes sociales
+                  para que más vecinos
                   puedan aportar sus ideas.
                 </p>
               </div>

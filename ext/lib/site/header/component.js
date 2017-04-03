@@ -55,7 +55,7 @@ class Header extends Component {
 
   render () {
     return (
-      <header className='navbar navbar-fixed-top ext-site-header'>
+      <header className='navbar ext-site-header'>
         <div className='ext-site-header-prefix'>
           <a href='http://rosario.gob.ar' rel='noopener noreferrer'>
             <img src='/ext/lib/site/header/rosarioigual.png' />
@@ -98,7 +98,6 @@ class Header extends Component {
         </div>
         <div className='ext-site-header-sub'>
           <Link>Consultas</Link>
-          <span>|</span>
           <Link>Presupuesta participativo</Link>
         </div>
       </header>
