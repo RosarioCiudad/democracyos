@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
-import TopicCard from './topic-card/component'
+// import TopicCard from './topic-card/component'
 
-class HomePresupuesto extends Component {
+class HomeConsultas extends Component {
   constructor (props) {
     super(props)
 
@@ -15,12 +15,12 @@ class HomePresupuesto extends Component {
     }
   }
 
-  fetchForums = () => {
+  componentDidMount = () => {
     forumStore.findOneByName('consultas')
       .then((forum) => Promise.all([
         forum,
         topicStore.findAll({ forum: forum.id })
-      ])
+      ]))
       .then(([forum, topics]) => {
         this.setState({
           loading: false,
@@ -36,8 +36,9 @@ class HomePresupuesto extends Component {
 
   render () {
     const { forum, topics } = this.state
+
     return (
-      <div className='ext-home-presupuesto'>
+      <div className='ext-home-consultas'>
         <div className='cover'>
           <div className='container'>
             <div className='isologo consultas'></div>
@@ -50,4 +51,4 @@ class HomePresupuesto extends Component {
   }
 }
 
-export default userConnector(HomePresupuesto)
+export default userConnector(HomeConsultas)
