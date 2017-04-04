@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
-// import TopicCard from './topic-card/component'
+import TopicCard from './topic-card/component'
 
 class HomeConsultas extends Component {
   constructor (props) {
@@ -35,17 +35,26 @@ class HomeConsultas extends Component {
   }
 
   render () {
-    const { forum, topics } = this.state
+    const { topics } = this.state
 
     return (
       <div className='ext-home-consultas'>
         <div className='cover'>
           <div className='container'>
-            <div className='isologo consultas'></div>
+            <div className='isologo consultas' />
             <h1>Consultas</h1>
             <p>La Municipalidad quiere conocer tu opinión sobre<br />diferentes temáticas de nuestra Ciudad.</p>
           </div>
         </div>
+        {topics && topics.length > 0 && (
+          <div className='topics-section'>
+            <div className='topics-container'>
+              {topics.map((topic) => {
+                return <TopicCard key={topic.id} topic={topic} />
+              })}
+            </div>
+          </div>
+        )}
       </div>
     )
   }
