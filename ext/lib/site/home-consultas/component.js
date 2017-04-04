@@ -5,13 +5,33 @@ import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
 import TopicCard from './topic-card/component'
 
+const filters = {
+  all: {
+    text: 'Todas',
+    filter: (topic) => topic
+  },
+  open: {
+    text: 'Abiertas',
+    filter: (topic) => topic.open
+  },
+  closed: {
+    text: 'Cerradas',
+    filter: (topic) => topic.closed
+  }
+}
+
+function filter (key, items = []) {
+  return items.filter(filters[key].filter)
+}
+
 class HomeConsultas extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
       forum: null,
-      topics: null
+      topics: null,
+      filter: 'all'
     }
   }
 
@@ -24,7 +44,7 @@ class HomeConsultas extends Component {
       .then(([forum, topics]) => {
         this.setState({
           forum,
-          topics
+          topics: filter(this.state.filter, topics)
         })
 
         bus.on('topic-store:update:all', this.fetchTopics)
@@ -39,7 +59,20 @@ class HomeConsultas extends Component {
   fetchTopics = () => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then((topics) => {
-        this.setState({ topics })
+        this.setState({
+          topics: filter(this.state.filter, topics)
+        })
+      })
+      .catch((err) => { throw err })
+  }
+
+  handleFilterChange = (key) => {
+    topicStore.findAll({ forum: this.state.forum.id })
+      .then((topics) => {
+        this.setState({
+          filter: key,
+          topics: filter(key, topics)
+        })
       })
       .catch((err) => { throw err })
   }
@@ -56,6 +89,11 @@ class HomeConsultas extends Component {
             <p>La Municipalidad quiere conocer tu opinión sobre<br />diferentes temáticas de nuestra Ciudad.</p>
           </div>
         </div>
+        <div className='container'>
+          <Filter
+            onChange={this.handleFilterChange}
+            active={this.state.filter} />
+        </div>
         {topics && topics.length > 0 && (
           <div className='topics-section'>
             <div className='topics-container'>
@@ -69,5 +107,18 @@ class HomeConsultas extends Component {
     )
   }
 }
+
+const Filter = ({ onChange, active }) => (
+  <div className='topics-filter'>
+    {Object.keys(filters).map((key) => (
+      <button
+        key={key}
+        className={`btn btn-secondary btn-sm ${active === key ? 'active' : ''}`}
+        onClick={() => onChange(key)}>
+        {filters[key].text}
+      </button>
+    ))}
+  </div>
+)
 
 export default userConnector(HomeConsultas)
