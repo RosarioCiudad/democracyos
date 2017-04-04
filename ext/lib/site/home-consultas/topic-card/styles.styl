@@ -1,4 +1,6 @@
 .topic-card
+  @import '../../../../lib/site/topic-layout/topic-article/poll/styles'
+
   display: block
   display: flex
   flex-direction: column
@@ -30,7 +32,7 @@
     padding: 15px
 
   .title
-    margin: 0
+    margin: 0 0 .6em
     color: #444
     font-size: 1.5em
     font-weight: 400
@@ -47,11 +49,37 @@
         text-decoration: underline
 
 
-  .topic-card-footer
-    padding-top: 20px
-    align-self: flex-end
+  .topic-card-footer-container
     width: 100%
-    text-align: right
+    align-self: flex-end
+
+  .topic-card-footer
+    display: flex
+    flex-wrap: wrap
+    font-size: .9em
+    padding-top: .8em
+    width: 100%
+    color: #a5a9aa
+    border-top: 1px solid #ddd
+
+    & > div
+      display: inline-block
+      margin-right: 1em
+
+    [class*="icon-"]
+      position: relative
+      top: 1px
+
+    a
+      color: #00adef
+      font-weight: 400
+
+      &:hover
+        color: #3dacf1
+
+    .comments
+      margin-right: 0
+      margin-left: auto
 
   .social-links
     position: absolute
