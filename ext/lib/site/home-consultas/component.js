@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import bus from 'bus'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
@@ -9,7 +10,6 @@ class HomeConsultas extends Component {
     super(props)
 
     this.state = {
-      loading: true,
       forum: null,
       topics: null
     }
@@ -23,19 +23,29 @@ class HomeConsultas extends Component {
       ]))
       .then(([forum, topics]) => {
         this.setState({
-          loading: false,
           forum,
           topics
         })
+
+        bus.on('topic-store:update:all', this.fetchTopics)
       })
-      .catch((err) => {
-        this.setState({ loading: false })
-        throw err
+      .catch((err) => { throw err })
+  }
+
+  componentWillUnmount = () => {
+    bus.off('topic-store:update:all', this.fetchTopics)
+  }
+
+  fetchTopics = () => {
+    topicStore.findAll({ forum: this.state.forum.id })
+      .then((topics) => {
+        this.setState({ topics })
       })
+      .catch((err) => { throw err })
   }
 
   render () {
-    const { topics } = this.state
+    const { forum, topics } = this.state
 
     return (
       <div className='ext-home-consultas'>
@@ -50,7 +60,7 @@ class HomeConsultas extends Component {
           <div className='topics-section'>
             <div className='topics-container'>
               {topics.map((topic) => {
-                return <TopicCard key={topic.id} topic={topic} />
+                return <TopicCard key={topic.id} forum={forum} topic={topic} />
               })}
             </div>
           </div>
