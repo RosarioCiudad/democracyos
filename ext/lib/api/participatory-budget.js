@@ -9,7 +9,6 @@ const config = require('ext/lib/config')
 const utils = require('lib/utils')
 const User = require('lib/models').User
 const middlewares = require('lib/api-v2/middlewares')
-const validate = require('lib/api-v2/validate')
 
 const log = debug('democracyos:ext:api:participatory-budget')
 
