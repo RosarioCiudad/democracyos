@@ -30,16 +30,16 @@ export default function TopicCard (props) {
             <div className='poll-participants'>
               <span>{`${votes} voto${votes !== 1 ? 's' : ''}`}</span>
             </div>
-            {topic.open && topic.closingAt && (
+            {topic.closingAt && (
               <div className='closing-at'>
                 <span className='icon-clock' />
                 {' '}
-                <span>Cierra</span>
+                <span>{topic.closed ? 'Cerrado' : 'Cierra'}</span>
                 {' '}
                 <Timeago date={topic.closingAt} />
               </div>
             )}
-            {topic.closed && (
+            {!topic.closingAt && (
               <div className='created-at'>
                 <span>{moment(topic.createdAt).format('D/M/YY')}</span>
               </div>
