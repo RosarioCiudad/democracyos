@@ -1,6 +1,5 @@
-import React, {Component} from 'react'
-import {Link, browserHistory} from 'react-router'
-import t from 't-component'
+import React, { Component } from 'react'
+import { Link, browserHistory } from 'react-router'
 import user from 'lib/site/user/user'
 
 export default class SignupComplete extends Component {
@@ -24,7 +23,7 @@ export default class SignupComplete extends Component {
     }
   }
 
-  handleSuccess = (evt) => {
+  handleSuccess = (evt) => {
     evt.preventDefault()
     this.setState({
       error: '',
@@ -54,7 +53,7 @@ export default class SignupComplete extends Component {
         } else {
           throw err
         }
-      }).catch((err) => {
+      }).catch(() => {
         this.setState({
           error: 'Hubo un error guardando la información, intente de nuevo por favor.',
           loading: false
@@ -71,7 +70,7 @@ export default class SignupComplete extends Component {
       [name]: input.value
     })
 
-    this.setState({data})
+    this.setState({ data })
   }
 
   handleInputNumberChange = (evt) => {
@@ -83,27 +82,27 @@ export default class SignupComplete extends Component {
       [name]: value
     })
 
-    this.setState({data})
+    this.setState({ data })
   }
 
   render () {
     return (
       <div className='ext-signup-complete'>
-        {this.state.loading && <div className='loader'></div>}
+        {this.state.loading && <div className='loader' />}
         <h3 className='title'>Completá tus datos</h3>
         <p>Para poder votar el Presupuesto Participativo necesitás tener tu perfil completo.</p>
         <form role='form' onSubmit={this.handleSuccess} method='POST'>
           {this.state.error && (
             <div className='alert alert-danger error' role='alert'>
               <span dangerouslySetInnerHTML={{
-                  __html: this.state.error
-              }}></span>
+                __html: this.state.error
+              }} />
             </div>
           )}
           <div className='form-group'>
             <label htmlFor='cod_doc'>Tipo de documento</label>
             <div className='form-select-wrapper'>
-              <i className='icon-arrow-down'></i>
+              <i className='icon-arrow-down' />
               <select
                 className='form-control custom-select'
                 name='cod_doc'

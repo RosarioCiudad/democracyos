@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {browserHistory} from 'react-router'
+import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 import user from 'lib/site/user/user'
 import userConnector from 'lib/site/connectors/user'
 import * as Layout from 'lib/site/layout/component'
@@ -22,7 +22,7 @@ class LayoutOverride extends Component {
     // children.push(<VotingModule key='voting-module'/>)
 
     this.setState({
-      props: Object.assign({}, this.props, {children})
+      props: Object.assign({}, this.props, { children })
     })
 
     user.onChange(this.handleUserStateChange)
@@ -33,15 +33,16 @@ class LayoutOverride extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const {user} = nextProps
+    const { user } = nextProps
 
     if (nextProps.location.pathname !== '/signup/complete') {
       if (user.state.fulfilled && !user.profileIsComplete()) {
         if (!this.state.askedCompleteProfile) {
-          this.setState({askedCompleteProfile: true})
+          this.setState({ askedCompleteProfile: true })
+
           browserHistory.push({
             pathname: '/signup/complete',
-            query: {ref: location.pathname}
+            query: { ref: window.location.pathname }
           })
         }
       }
@@ -53,7 +54,7 @@ class LayoutOverride extends Component {
     // children.push(<VotingModule key='voting-module'/>)
 
     this.setState({
-      props: Object.assign({}, nextProps, {children})
+      props: Object.assign({}, nextProps, { children })
     })
   }
 
@@ -66,7 +67,7 @@ class LayoutOverride extends Component {
   render () {
     if (this.props.user.state.pending) return null
 
-    return <LayoutOriginal {...this.state.props}/>
+    return <LayoutOriginal {...this.state.props} />
   }
 }
 
