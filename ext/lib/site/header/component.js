@@ -98,7 +98,9 @@ class Header extends Component {
         </div>
         <div className='ext-site-header-sub'>
           <Link to='/consultas'>Consultas</Link>
+          <Link to='/desafios'>Desafíos</Link>
           <Link to='/presupuesto'>Presupuesta participativo</Link>
+          <Link to='/voluntariado'>Voluntariado</Link>
         </div>
       </header>
     )

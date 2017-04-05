@@ -90,6 +90,16 @@ export default function HomeMultiforumOverride (props) {
             <Link to='/consulta'>Quiero opinar</Link>
           </div>
         </div>
+        <div className='action action-desafio'>
+          <div className='action-img'></div>
+          <div className='action-content'>
+            <h3>Desafíos</h3>
+            <h4>Tenemos desafíos como comunidad y podemos resolverlos juntos.</h4>
+            <span className='action-separador'></span>
+            <p>Sé parte de las politicas de la ciudad: resolvamos en conjunto los desafíos que tenemos.</p>
+            <Link to='/desafios'>Quiero ser parte</Link>
+          </div>
+        </div>
         <div className='action action-presupuesto'>
           <div className='action-img'></div>
           <div className='action-content'>
@@ -98,6 +108,16 @@ export default function HomeMultiforumOverride (props) {
             <span className='action-separador'></span>
             <p>Elegí los proyectos que transformarán tu barrio.</p>
             <Link to='/presupuesto'>Quiero votar</Link>
+          </div>
+        </div>
+        <div className='action action-voluntariado'>
+          <div className='action-img'></div>
+          <div className='action-content'>
+            <h3>Voluntariado social</h3>
+            <h4>¡Muchas organizaciones buscan tu apoyo!</h4>
+            <span className='action-separador'></span>
+            <p>Conocé las organizaciones sociales que impulsan una ciudad más justa y solidaria y contactate con ellos.</p>
+            <Link to='/voluntariado'>Quiero sumarme</Link>
           </div>
         </div>
       </div>
