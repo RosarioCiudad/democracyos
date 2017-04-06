@@ -5,38 +5,18 @@ import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
 import TopicCard from './topic-card/component'
 
-const filters = {
-  all: {
-    text: 'Todas',
-    filter: (topic) => topic
-  },
-  open: {
-    text: 'Abiertas',
-    filter: (topic) => topic.open
-  },
-  closed: {
-    text: 'Cerradas',
-    filter: (topic) => topic.closed
-  }
-}
-
-function filter (key, items = []) {
-  return items.filter(filters[key].filter)
-}
-
-class HomeConsultas extends Component {
+class HomeVoluntariados extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
       forum: null,
-      topics: null,
-      filter: 'all'
+      topics: null
     }
   }
 
   componentDidMount = () => {
-    forumStore.findOneByName('consultas')
+    forumStore.findOneByName('voluntariado')
       .then((forum) => Promise.all([
         forum,
         topicStore.findAll({ forum: forum.id })
@@ -44,7 +24,7 @@ class HomeConsultas extends Component {
       .then(([forum, topics]) => {
         this.setState({
           forum,
-          topics: filter(this.state.filter, topics)
+          topics
         })
 
         bus.on('topic-store:update:all', this.fetchTopics)
@@ -59,9 +39,7 @@ class HomeConsultas extends Component {
   fetchTopics = () => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then((topics) => {
-        this.setState({
-          topics: filter(this.state.filter, topics)
-        })
+        this.setState({ topics })
       })
       .catch((err) => { throw err })
   }
@@ -69,10 +47,7 @@ class HomeConsultas extends Component {
   handleFilterChange = (key) => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then((topics) => {
-        this.setState({
-          filter: key,
-          topics: filter(key, topics)
-        })
+        this.setState({ topics })
       })
       .catch((err) => { throw err })
   }
@@ -81,19 +56,14 @@ class HomeConsultas extends Component {
     const { forum, topics } = this.state
 
     return (
-      <div className='ext-home-consultas'>
+      <div className='ext-home-voluntariados'>
         <div className='cover'>
           <div className='container'>
-            <div className='isologo consultas' />
+            <div className='isologo voluntariados' />
             <h1>Voluntariado social</h1>
             <p>Las organizaciones sociales son parte central de la vida en nuestra ciudad.</p>
-            <p>Conocelas y sumate como voluntario o <a href='#'>Sumá tu ONG</a></p>
+            <p className='sub-sub-title'>Conocelas y sumate como voluntario o <a href="#">Sumá tu ONG</a>.</p>
           </div>
-        </div>
-        <div className='container'>
-          <Filter
-            onChange={this.handleFilterChange}
-            active={this.state.filter} />
         </div>
         {topics && topics.length > 0 && (
           <div className='topics-section'>
@@ -109,17 +79,4 @@ class HomeConsultas extends Component {
   }
 }
 
-const Filter = ({ onChange, active }) => (
-  <div className='topics-filter'>
-    {Object.keys(filters).map((key) => (
-      <button
-        key={key}
-        className={`btn btn-secondary btn-sm ${active === key ? 'active' : ''}`}
-        onClick={() => onChange(key)}>
-        {filters[key].text}
-      </button>
-    ))}
-  </div>
-)
-
-export default userConnector(HomeConsultas)
+export default userConnector(HomeVoluntariados)
