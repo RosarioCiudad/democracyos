@@ -65,6 +65,16 @@ class HomeVoluntariados extends Component {
             <p className='sub-sub-title'>Conocelas y sumate como voluntario o <a href="#">Sumá tu ONG</a>.</p>
           </div>
         </div>
+        <h2 className='filter'>
+          Ver las organizacion en
+          <select>
+            <option selected>todos los distritos</option>
+          </select>
+          que trabajen sobre
+          <select>
+            <option selected>todos los temas</option>
+          </select>
+        </h2>
         {topics && topics.length > 0 && (
           <div className='topics-section'>
             <div className='topics-container'>

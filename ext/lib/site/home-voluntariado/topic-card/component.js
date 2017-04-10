@@ -15,6 +15,11 @@ export default function TopicCard (props) {
 
   return (
     <div className={classNames.join(' ')} >
+      <div className='topic-tags'>
+        <span className='primary-tag'>voluntariado</span>
+        <span>#transporte</span>
+        <span>#distritojacaranda</span>
+      </div>
       <div
         className='topic-card-cover'
         style={{ backgroundImage: `url(${topic.coverUrl})` }} />
