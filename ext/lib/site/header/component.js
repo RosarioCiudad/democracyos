@@ -97,6 +97,14 @@ class Header extends Component {
           </div>
         </div>
         <div className='ext-site-header-sub'>
+          <input type='checkbox' id='sub-menu-toggle' />
+          <label
+            htmlFor='sub-menu-toggle'
+            className='toggle-submenu-btn'>
+            <span className='bar-icon' />
+            <span className='bar-icon' />
+            <span className='bar-icon' />
+          </label>
           <Link to='/consultas'>Consultas</Link>
           <Link to='/desafios'>Desafíos</Link>
           <Link to='/presupuesto'>Presupuesta participativo</Link>

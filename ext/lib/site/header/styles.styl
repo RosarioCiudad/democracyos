@@ -33,6 +33,42 @@
   color: #58595B
   display: flex
   justify-content: center
+  input
+    position: absolute
+    -webkit-appearance: none
+    cursor: pointer
+    left: -100%
+    top: -100%
+  .toggle-submenu-btn
+    display: none
+  @media (max-width: 630px)
+    flex-direction: column
+    a
+      display: none
+      padding: 5px 15px!important
+    input:checked ~ a
+      display: block
+
+    .toggle-submenu-btn
+      display: block
+      padding: 3px 15px 8px
+      margin: 0
+      float: none
+      background-color: transparent
+      background-image: none
+      border: 1px solid transparent
+      border-radius: 4px
+      position: relative
+      max-width: 55px
+      cursor: pointer
+      .bar-icon
+        background-color: #58595B
+        margin-top: 4px
+        display: block
+        width: 22px
+        height: 2px
+        border-radius: 1px
+
   a
     border-right: solid 1px #A7A8AC
     padding: 5px 25px
@@ -44,8 +80,6 @@
       border: none
     &:hover
       color: #00acec!important
-  span
-    padding: 0 20px
 
 .ext-site-header-main
   border-bottom: 3px solid #F59231
