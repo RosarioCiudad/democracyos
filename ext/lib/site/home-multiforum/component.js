@@ -87,7 +87,7 @@ export default function HomeMultiforumOverride (props) {
             <h4>La Municipalidad quiere conocer tu opinion sobre diferentes temas</h4>
             <span className='action-separador'></span>
             <p>Podés votar y decidir qué acciones impulsa la Municipalidad en temáticas culturales, ambientales, sociales.</p>
-            <Link to='/consulta'>Quiero opinar</Link>
+            <Link to='/consultas'>Quiero opinar</Link>
           </div>
         </div>
         <div className='action action-desafio'>
