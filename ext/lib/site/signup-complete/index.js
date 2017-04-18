@@ -14,7 +14,7 @@ validate({
     cod_doc: {
       type: 'string',
       required: true,
-      enum: ['DNI', 'LC', 'LE'],
+      enum: ['DNI', 'LC', 'LE']
     },
     sexo: {
       type: 'string',
@@ -33,12 +33,12 @@ validate({
 function postSignupCompleteParseData (req, res, next) {
   const user = req.user
 
-  user.extra = user.extra || {}
+  user.extra = user.extra || {}
 
   const data = req.extraData = {
-    cod_doc: req.body.cod_doc,
-    sexo: req.body.sexo,
-    nro_doc: Number(req.body.nro_doc)
+    'extra.cod_doc': req.body.cod_doc,
+    'extra.sexo': req.body.sexo,
+    'extra.nro_doc': Number(req.body.nro_doc)
   }
 
   const modifying = Object.keys(data).find((key) => {
@@ -59,12 +59,9 @@ function postSignupCompleteParseData (req, res, next) {
 },
 function postSignupCompleteCheckDocDuplication (req, res, next) {
   User
-    .find({
-      _id: {$ne: req.user._id},
-      'extra.cod_doc': req.extraData.cod_doc,
-      'extra.sexo': req.extraData.sexo,
-      'extra.nro_doc': req.extraData.nro_doc
-    })
+    .find(Object.assign({
+      _id: { $ne: req.user._id }
+    }, req.extraData))
     .count()
     .exec()
     .then(function (count) {
@@ -91,7 +88,9 @@ function postSignupCompleteCheckDocDuplication (req, res, next) {
     })
 },
 function postSignupComplete (req, res) {
-  Object.assign(req.user.extra, req.extraData)
+  Object.keys(req.extraData).forEach((k) => {
+    req.user.set(k, req.extraData[k])
+  })
 
   req.user.save(function (err, user) {
     if (err) {
