@@ -1,25 +1,20 @@
-import React, {Component} from 'react'
+import React from 'react'
 
-export default class Content extends Component {
-  render () {
-    function createClauses (clauses) {
-      return {
-        __html: clauses
-          .sort(function (a, b) {
-            return a.position > b.position ? 1 : -1
-          })
-          .map(function (clause) {
-            return clause.markup
-          })
-          .join('')
-      }
-    }
+export default ({ clauses }) => (
+  <div
+    className='clauses'
+    dangerouslySetInnerHTML={createClauses(clauses)} />
+)
 
-    return (
-      <div
-        className='clauses'
-        dangerouslySetInnerHTML={createClauses(this.props.clauses)}>
-      </div>
-    )
+function createClauses (clauses) {
+  return {
+    __html: clauses
+      .sort(function (a, b) {
+        return a.position > b.position ? 1 : -1
+      })
+      .map(function (clause) {
+        return clause.markup
+      })
+      .join('')
   }
 }
