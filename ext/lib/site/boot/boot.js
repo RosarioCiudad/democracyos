@@ -1,4 +1,6 @@
 import 'lib/site/polyfills/polyfills'
+import 'lib/boot/moment'
+import 'lib/translations/translations'
 import '../user/user'
 import './overrides'
 // import './participatory-budget'
