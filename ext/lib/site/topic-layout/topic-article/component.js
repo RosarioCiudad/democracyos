@@ -37,11 +37,7 @@ class TopicArticle extends Component {
   }
 
   render () {
-    const {
-      topic,
-      forum,
-      user
-    } = this.props
+    const { topic, forum, user } = this.props
 
     const topicUrl = `${window.location.origin}${topic.url}`
 
@@ -56,12 +52,18 @@ class TopicArticle extends Component {
         <div className='proyecto-main container'>
           <div className='row'>
             <div className='proyecto-content col-md-8'>
-              <Link className='volver' to='/presupuesto'>
-                <i className='icon-arrow-left' />&nbsp;Ver todos los proyectos
-              </Link>
-              {
-                topic.clauses && <Content clauses={topic.clauses} />
-              }
+              <div className='row'>
+                <div className='col-12'>
+                  <Link className='volver' to={forum.url}>
+                    <i className='icon-arrow-left' />&nbsp;Volver a {forum.title}
+                  </Link>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col-12'>
+                  {topic.clauses && <Content clauses={topic.clauses} />}
+                </div>
+              </div>
             </div>
             <div className='proyecto-share col-md-4'>
               <div>
@@ -104,10 +106,12 @@ const Header = ({ topic }) => (
       backgroundImage: `url(${topic.coverUrl})`
     } : null}>
     <div className='header-content'>
-      <h1>{topic.mediaTitle}</h1>
-      {topic.extra && topic.extra.description && (
-        <p>{topic.extra.description}</p>
-      )}
+      <div className='container'>
+        <h1>{topic.mediaTitle}</h1>
+        {topic.extra && topic.extra.description && (
+          <p>{topic.extra.description}</p>
+        )}
+      </div>
     </div>
   </header>
 )
