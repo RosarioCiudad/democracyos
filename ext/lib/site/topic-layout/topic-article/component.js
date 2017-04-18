@@ -1,12 +1,11 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
+import React, { Component } from 'react'
+import { Link } from 'react-router'
 import bus from 'bus'
-import t from 't-component'
 import urlBuilder from 'lib/url-builder'
 import userConnector from 'lib/site/connectors/user'
 import Content from 'ext/lib/site/topic-layout/topic-article/content/component'
 import Comments from 'lib/site/topic-layout/topic-article/comments/component'
-import {SharerFacebook} from 'ext/lib/site/sharer'
+import { SharerFacebook } from 'ext/lib/site/sharer'
 
 class TopicArticle extends Component {
   constructor (props) {
@@ -44,39 +43,16 @@ class TopicArticle extends Component {
       user
     } = this.props
 
-    const userAttrs = user.state.fulfilled && (user.state.value || {})
-    const canCreateTopics = userAttrs.privileges &&
-      userAttrs.privileges.canManage &&
-      forum &&
-      forum.privileges &&
-      forum.privileges.canChangeTopics
-
-    const votes = {
-      positive: topic.upvotes || [],
-      negative: topic.downvotes || [],
-      neutral: topic.abstentions || []
-    }
-
-    const topicUrl = `${location.origin}${topic.url}`
+    const topicUrl = `${window.location.origin}${topic.url}`
 
     const twitterDesc = encodeURIComponent(`Mirá el proyecto que quiero para mi barrio ${topicUrl} #YoVotoPorMiBarrio`)
 
     return (
       <div className='proyecto-container'>
-        {
-          this.state.showSidebar &&
-            <div onClick={hideSidebar} className='topic-overlay' />
-        }
-        <header className='proyecto-container-header' style={topic.coverUrl ? {
-            backgroundImage: `url(${topic.coverUrl})`
-          } : null}>
-          <div className='header-content'>
-            <h1>{topic.mediaTitle}</h1>
-            {topic.extra && topic.extra.description && (
-              <p>{topic.extra.description}</p>
-            )}
-          </div>
-        </header>
+        {this.state.showSidebar && (
+          <div onClick={hideSidebar} className='topic-overlay' />
+        )}
+        <Header topic={topic} />
         <div className='proyecto-main container'>
           <div className='row'>
             <div className='proyecto-content col-md-8'>
@@ -94,11 +70,14 @@ class TopicArticle extends Component {
                 <div className='social-links'>
                   <SharerFacebook
                     className='fb'
-                    params={{picture: topic.coverUrl, link: location.href}} />
+                    params={{
+                      picture: topic.coverUrl,
+                      link: window.location.href
+                    }} />
                   <a
                     target='_blank'
                     href={`http://twitter.com/home?status=${twitterDesc}`}
-                    className='tw'></a>
+                    className='tw' />
                 </div>
               </div>
             </div>
@@ -117,3 +96,18 @@ export default userConnector(TopicArticle)
 function hideSidebar () {
   bus.emit('sidebar:show', false)
 }
+
+const Header = ({ topic }) => (
+  <header
+    className='proyecto-container-header'
+    style={topic.coverUrl ? {
+      backgroundImage: `url(${topic.coverUrl})`
+    } : null}>
+    <div className='header-content'>
+      <h1>{topic.mediaTitle}</h1>
+      {topic.extra && topic.extra.description && (
+        <p>{topic.extra.description}</p>
+      )}
+    </div>
+  </header>
+)
