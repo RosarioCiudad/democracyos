@@ -6,7 +6,7 @@ export default () => (
   <Anchor className='ext-home-steps' id='participar'>
     <div className='container'>
       <div className='row'>
-        <h2>¿Cómo podés participar?</h2>
+        <h2 className='container'>¿Cómo podés participar?</h2>
         <div className='participa-steps'>
           <div className='p-step'>
             <div>
@@ -14,7 +14,7 @@ export default () => (
               <p>Registrate</p>
             </div>
             <p className='p-text'>
-              Hacé click en Participá,
+              Hacé click en <Link to='/signin'>Participá</Link>,
               completá el formulario y sé
               parte de Rosario Participa.
             </p>
