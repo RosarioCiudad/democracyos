@@ -1,54 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
-import Anchor from '../anchor'
 import TweetsFeed from '../tweets-feed/component'
 import Cover from './cover/component'
+import Steps from './steps/component'
 
 export default function HomeMultiforumOverride (props) {
   return (
     <div className='ext-home-multiforum'>
       <Cover />
-      <Anchor className='pasos' id='participar'>
-        <div className='container'>
-          <div className='row'>
-            <h2>¿Cómo podés participar?</h2>
-            <div className='participa-steps'>
-              <div className='p-step'>
-                <div>
-                  <span className='num'>1</span>
-                  <p>Registrate</p>
-                </div>
-                <p className='p-text'>
-                  Hacé click en Participá,
-                  completá el formulario y sé
-                  parte de Rosario Participa.
-                </p>
-              </div>
-              <div className='p-step'>
-                <div>
-                  <span className='num'>2</span>
-                  <p>Votá</p>
-                </div>
-                <p className='p-text'>
-                  Elegí, debatí y proponé cómo
-                  querés que sea la ciudad.
-                </p>
-              </div>
-              <div className='p-step'>
-                <div>
-                  <span className='num'>3</span>
-                  <p>Compartí</p>
-                </div>
-                <p className='p-text'>
-                  Compartí en redes sociales
-                  para que más vecinos
-                  puedan aportar sus ideas.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Anchor>
+      <Steps />
       <div className='info'>
         <div className='action action-consulta'>
           <div className='action-img' />

@@ -1,11 +1,9 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
-import bus from 'bus'
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import moment from 'moment'
 import config from 'lib/config'
 import userConnector from 'lib/site/connectors/user'
 import UserBadge from 'lib/site/header/user-badge/component'
-import AnonUser from 'lib/site/header/anon-user/component'
-import moment from 'moment'
 
 class Header extends Component {
   constructor (props) {
@@ -16,41 +14,6 @@ class Header extends Component {
       showToggleSidebar: null,
       showSidebar: null
     }
-  }
-
-  componentWillMount () {
-    bus.on('user-form:load', this.onLoadUserForm)
-    // bus.on('sidebar:enable', this.showToggleSidebarChange)
-    // bus.on('sidebar:show', this.showSidebarChange)
-  }
-
-  componentWillUnmount () {
-    bus.off('user-form:load', this.onLoadUserForm)
-    // bus.off('sidebar:enable', this.showToggleSidebarChange)
-    // bus.off('sidebar:show', this.showSidebarChange)
-  }
-
-  onLoadUserForm = (formName) => {
-    this.setState({
-      userForm: formName
-    })
-  }
-
-  showToggleSidebarChange = (bool) => {
-    this.setState({
-      showToggleSidebar: bool
-    })
-  }
-
-  showSidebarChange = (bool) => {
-    this.setState({
-      showSidebar: bool
-    })
-  }
-
-  handleToggleSidebar = (evt) => {
-    evt.preventDefault()
-    bus.emit('sidebar:show', !this.state.showSidebar)
   }
 
   render () {
@@ -67,17 +30,6 @@ class Header extends Component {
               <span>{capitalizeFirstLetter(moment().format('dddd D'))}</span>
               <span>{capitalizeFirstLetter(moment().format('MMMM YYYY'))}</span>
             </div>
-
-            {this.state.showToggleSidebar && (
-              <button
-                type='button'
-                className='toggle-sidebar-btn'
-                onClick={this.handleToggleSidebar}>
-                <span className='bar-icon' />
-                <span className='bar-icon' />
-                <span className='bar-icon' />
-              </button>
-            )}
 
             <h1 className='logo'>
               <Link to={config.homeLink}>
@@ -117,7 +69,7 @@ class Header extends Component {
 
 export default userConnector(Header)
 
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter (string) {
   if (!string) return ''
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }
