@@ -25,9 +25,9 @@ export default () => (
     )}
     <div className='container'>
       <h1>Queremos que seas parte de las decisiones</h1>
-      <h2>Participá y mejoremos juntos la ciudad.</h2>
+      <h2>Las opiniones y las acciones colectivas<br />mejoran la ciudad.</h2>
       <Link to='/signin' className='btn btn-primary btn-lg'>
-        Participar
+        Participá
       </Link>
       <div className='follow-arrow'>
         <Link to='/#participar' className='icon-arrow-down' />
