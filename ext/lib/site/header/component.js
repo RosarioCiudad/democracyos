@@ -42,15 +42,17 @@ class Header extends Component {
               </Link>
             </h1>
 
-            <ul className='user-nav nav navbar-nav float-xs-right'>
-              {this.props.user.state.fulfilled && (
+            {this.props.user.state.fulfilled && (
+              <ul className='user-nav nav navbar-nav'>
                 <UserBadge />
-              )}
+              </ul>
+            )}
 
-              {this.props.user.state.rejected && (
-                <Link to='/signin' className='login-rosario'>Participá</Link>
-              )}
-            </ul>
+            {this.props.user.state.rejected && (
+              <Link to='/signin' className='btn btn-primary btn-sm'>
+                Participá
+              </Link>
+            )}
           </div>
         </div>
         {!this.state.onMobile && (
