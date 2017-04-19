@@ -13,6 +13,7 @@
 
   @media (max-width: 500px)
     display: none
+
   a
     color: #fff
     height: 100%
@@ -26,61 +27,75 @@
       background: rgba(255,255,255,0.1)
 
 .ext-site-header-sub
+  padding: 1px 0
+  color: #58595B
+  text-align: center
   background: #f6f6f6
   background-color: #E9E9EB
-  border-bottom: solid 0px #d6d8e0
-  padding: 2px 0
-  color: #58595B
-  display: flex
-  justify-content: center
-  input
-    position: absolute
-    -webkit-appearance: none
-    cursor: pointer
-    left: -100%
-    top: -100%
-  .toggle-submenu-btn
-    display: none
-    
-  @media (max-width: 630px)
-    flex-direction: column
-    a
-      display: none
-      padding: 5px 15px!important
-    input:checked ~ a
-      display: block
 
-    .toggle-submenu-btn
-      display: block
-      padding: 3px 15px 8px
-      margin: 0
-      float: none
-      background-color: transparent
-      background-image: none
-      border: 1px solid transparent
-      border-radius: 4px
-      position: relative
-      max-width: 55px
-      cursor: pointer
-      .bar-icon
-        background-color: #58595B
-        margin-top: 4px
+  &.mobile
+    display: block
+    .navigation
+      a
         display: block
-        width: 22px
-        height: 2px
-        border-radius: 1px
+        border-right: none
+
+  .toggle-submenu-btn
+    display: block
+    padding: 3px 15px 8px
+    margin: 0
+    float: none
+    background-color: transparent
+    background-image: none
+    border: 1px solid transparent
+    border-radius: 4px
+    position: relative
+    max-width: 55px
+    cursor: pointer
+
+    @media (min-width: 631px)
+      display: none
+
+    .bar-icon
+      background-color: #58595B
+      margin-top: 4px
+      display: block
+      width: 22px
+      height: 2px
+      border-radius: 1px
 
   a
-    border-right: solid 1px #A7A8AC
-    padding: 5px 25px
+    position: relative
+    display: inline-block
+    padding: 5px 15px
     font-weight: 400
     font-size: 16px
     cursor: pointer
     color: #58595B
+
     &:last-child
       border: none
+
     &:hover
-      color: #00acec!important
+      color: #00acec
+      background-color: #fff
+
+    @media (min-width: 631px)
+      padding: 5px 25px
+      margin-right: 1px
+
+      &:after
+        content: ''
+        z-index: 10
+        position: absolute
+        right: -1px
+        top: 5px
+        width: 1px
+        height: 22px
+        background-color: #A7A8AC
+
+      &:last-child:after
+        content: none
 
 .ext-site-header-main
   border-bottom: 3px solid #F59231

@@ -10,10 +10,15 @@ class Header extends Component {
     super(props)
 
     this.state = {
-      userForm: null,
-      showToggleSidebar: null,
-      showSidebar: null
+      onMobile: window.innerWidth <= 630,
+      showMobileNavigation: false
     }
+  }
+
+  toggleMobileNavigation = () => {
+    this.setState({
+      showMobileNavigation: !this.state.showMobileNavigation
+    })
   }
 
   render () {
@@ -48,24 +53,40 @@ class Header extends Component {
             </ul>
           </div>
         </div>
-        <div className='ext-site-header-sub'>
-          <input type='checkbox' id='sub-menu-toggle' />
-          <label
-            htmlFor='sub-menu-toggle'
-            className='toggle-submenu-btn'>
-            <span className='bar-icon' />
-            <span className='bar-icon' />
-            <span className='bar-icon' />
-          </label>
-          <Link to='/consultas'>Consultas</Link>
-          <Link to='/desafios'>Desafíos</Link>
-          <Link to='/presupuesto'>Presupuesta participativo</Link>
-          <Link to='/voluntariado'>Voluntariado</Link>
-        </div>
+        {!this.state.onMobile && (
+          <div className='ext-site-header-sub'>
+            <Navigation />
+          </div>
+        )}
+        {this.state.onMobile && (
+          <div
+            className='ext-site-header-sub mobile'
+            onClick={this.toggleMobileNavigation}>
+            <button
+              className='toggle-submenu-btn'
+              type='button'>
+              <div className='bar-icon' />
+              <div className='bar-icon' />
+              <div className='bar-icon' />
+            </button>
+            {this.state.showMobileNavigation && (
+              <Navigation onClick={this.toggleMobileNavigation} />
+            )}
+          </div>
+        )}
       </header>
     )
   }
 }
+
+const Navigation = ({ onClick }) => (
+  <div className='navigation'>
+    <Link onClick={onClick} to='/consultas'>Consultas</Link>
+    <Link onClick={onClick} to='/desafios'>Desafíos</Link>
+    <Link onClick={onClick} to='/presupuesto'>Presupuesto participativo</Link>
+    <Link onClick={onClick} to='/voluntariado'>Voluntariado Social</Link>
+  </div>
+)
 
 export default userConnector(Header)
 
