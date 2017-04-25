@@ -23,13 +23,13 @@ class Header extends Component {
 
   render () {
     return (
-      <header className='ext-site-header'>
-        <div className='ext-site-header-prefix'>
+      <header className='ext-header'>
+        <div className='ext-header-prefix'>
           <a href='http://rosario.gob.ar' rel='noopener noreferrer'>
             <img src='/ext/lib/header/rosarioigual.png' />
           </a>
         </div>
-        <div className='ext-site-header-main'>
+        <div className='ext-header-main'>
           <div className='container-simple'>
             <div className='current-date'>
               <span>{capitalizeFirstLetter(moment().format('dddd D'))}</span>
@@ -56,13 +56,13 @@ class Header extends Component {
           </div>
         </div>
         {!this.state.onMobile && (
-          <div className='ext-site-header-sub'>
+          <div className='ext-header-sub'>
             <Navigation />
           </div>
         )}
         {this.state.onMobile && (
           <div
-            className='ext-site-header-sub mobile'
+            className='ext-header-sub mobile'
             onClick={this.toggleMobileNavigation}>
             <button
               className='toggle-submenu-btn'

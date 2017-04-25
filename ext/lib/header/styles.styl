@@ -1,9 +1,9 @@
-.ext-site-header
+.ext-header
   padding: 0
   color: #525252
   background-color: #fff
 
-.ext-site-header-prefix
+.ext-header-prefix
   height: 29px
   background-color: #1DAEEC
 
@@ -23,11 +23,12 @@
     align-items: center
     padding: 0 5px
     margin-left: -5px
+
     &:hover
       color: #fff
-      background: rgba(255,255,255,0.1)
+      background: rgba(#fff, .1)
 
-.ext-site-header-sub
+.ext-header-sub
   padding: 1px 0
   color: #58595B
   text-align: center
@@ -98,7 +99,7 @@
       &:last-child:after
         content: none
 
-.ext-site-header-main
+.ext-header-main
   border-bottom: 3px solid #F59231
 
   .container-simple
@@ -146,6 +147,9 @@
     .user-badge
       position: relative
       margin-left: 8px
+
+      &.active button
+        background: none
 
       button
         margin: 0

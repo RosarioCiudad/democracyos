@@ -102,7 +102,7 @@ class HomePresupuesto extends Component {
           })
         }, () => {
           if (this.state.scrollAfterFetch) {
-            const header = document.querySelector('.ext-site-header')
+            const header = document.querySelector('.ext-header')
             jump('.topics-section', {
               duration: 750,
               offset: -(header && header.clientHeight ? header.clientHeight : 100)
