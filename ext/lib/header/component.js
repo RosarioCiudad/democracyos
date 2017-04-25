@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import moment from 'moment'
 import config from 'lib/config'
 import userConnector from 'lib/site/connectors/user'
-import UserBadge from 'lib/site/header/user-badge/component'
+import UserBadge from 'lib/header/user-badge/component'
 
 class Header extends Component {
   constructor (props) {
@@ -23,10 +23,10 @@ class Header extends Component {
 
   render () {
     return (
-      <header className='navbar ext-site-header'>
+      <header className='ext-site-header'>
         <div className='ext-site-header-prefix'>
           <a href='http://rosario.gob.ar' rel='noopener noreferrer'>
-            <img src='/ext/lib/site/header/rosarioigual.png' />
+            <img src='/ext/lib/header/rosarioigual.png' />
           </a>
         </div>
         <div className='ext-site-header-main'>
