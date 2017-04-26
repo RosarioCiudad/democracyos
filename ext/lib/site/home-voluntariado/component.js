@@ -11,7 +11,12 @@ class HomeVoluntariados extends Component {
 
     this.state = {
       forum: null,
-      topics: null
+      allTopics: null,
+      topics: null,
+      distritoActive: 'ALL',
+      distritos: ['ALL'],
+      tagActive: 'ALL',
+      tags: ['ALL']
     }
   }
 
@@ -22,10 +27,30 @@ class HomeVoluntariados extends Component {
         topicStore.findAll({ forum: forum.id })
       ]))
       .then(([forum, topics]) => {
+        const distritos = topics
+          .map((topic) => topic.extra.distrito)
+          .reduce((distritosAcc, distrito) => {
+            if (!~distritosAcc.indexOf(distrito)) distritosAcc.push(distrito)
+            return distritosAcc
+          }, [])
+
+        const tags = topics
+          .map((topic) => topic.tags)
+          .reduce((tagsAcc, tags) => {
+            if (tags.length > 0) {
+              tags.forEach((tag) => {
+                if (tag && !~tagsAcc.indexOf(tag)) tagsAcc.push(tag)
+              })
+            }
+            return tagsAcc
+          }, [])
+
         this.setState({
           forum,
-          topics
-        })
+          allTopics: topics,
+          distritos,
+          tags
+        }, this.updateTopics)
 
         bus.on('topic-store:update:all', this.fetchTopics)
       })
@@ -39,17 +64,34 @@ class HomeVoluntariados extends Component {
   fetchTopics = () => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then((topics) => {
-        this.setState({ topics })
+        this.setState({ allTopics: topics }, this.uṕdateTopics)
       })
       .catch((err) => { throw err })
   }
 
-  handleFilterChange = (key) => {
-    topicStore.findAll({ forum: this.state.forum.id })
-      .then((topics) => {
-        this.setState({ topics })
+  tagsFilterChange = (e) => {
+    console.log('tags change', e.target.value)
+    this.setState({ tagActive: e.target.value }, this.updateTopics)
+  }
+
+  distritoFilterChange = (e) => {
+    console.log('distrito change', e.target.value)
+    this.setState({ distritoActive: e.target.value }, this.updateTopics)
+  }
+
+  updateTopics = () => {
+    console.log('update topics')
+    const topics = this.state.allTopics
+      .filter((topic) => {
+        return (
+          this.state.distritoActive === 'ALL' ||
+          topic.extra.distrito === this.state.distritoActive
+        ) && (
+          this.state.tagActive === 'ALL' ||
+          ~topic.tags.indexOf(this.state.tagActive)
+        )
       })
-      .catch((err) => { throw err })
+    this.setState({ topics })
   }
 
   render () {
@@ -67,12 +109,20 @@ class HomeVoluntariados extends Component {
         </div>
         <h2 className='filter'>
           Ver las organizacion en
-          <select>
-            <option selected>todos los distritos</option>
+          <select onChange={this.distritoFilterChange}>
+            <option>todos los distritos</option>
+            {
+              this.state.distritos.length > 0 &&
+              this.state.distritos.map((distrito, i) => (<option key={i} value={distrito}>Distrito {distrito}</option>))
+            }
           </select>
           que trabajen sobre
-          <select>
-            <option selected>todos los temas</option>
+          <select onChange={this.tagsFilterChange}>
+            <option>todos los temas</option>
+            {
+              this.state.tags.length > 0 &&
+              this.state.tags.map((tag, i) => (<option key={i} value={tag}>{tag}</option>))
+            }
           </select>
         </h2>
         {topics && topics.length > 0 && (
