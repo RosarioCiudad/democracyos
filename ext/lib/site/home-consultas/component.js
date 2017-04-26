@@ -3,9 +3,11 @@ import bus from 'bus'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
+import Footer from '../footer/component'
 import TopicCard from './topic-card/component'
 
 const filters = {
+
   all: {
     text: 'Todas',
     filter: (topic) => topic
@@ -103,6 +105,7 @@ class HomeConsultas extends Component {
             </div>
           </div>
         )}
+        <Footer />
       </div>
     )
   }
