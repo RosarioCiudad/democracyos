@@ -62,7 +62,7 @@ class HomeVoluntariados extends Component {
             <div className='isologo voluntariados' />
             <h1>Voluntariado social</h1>
             <p>Las organizaciones sociales son parte central de la vida en nuestra ciudad.</p>
-            <p className='sub-sub-title'>Conocelas y sumate como voluntario o <a href="#">Sumá tu ONG</a>.</p>
+            <p className='sub-sub-title'>Conocelas y sumate como voluntario o <a href='#'>Sumá tu ONG</a>.</p>
           </div>
         </div>
         <h2 className='filter'>

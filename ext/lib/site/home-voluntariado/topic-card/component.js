@@ -17,8 +17,15 @@ export default function TopicCard (props) {
     <div className={classNames.join(' ')} >
       <div className='topic-tags'>
         <span className='primary-tag'>voluntariado</span>
-        <span>#transporte</span>
-        <span>#distritojacaranda</span>
+        {
+          topic.tags.length > 0 &&
+          topic.tags.map((tag, i) => (<span key={i}>#{tag}</span>))
+        }
+        {
+          topic.extra &&
+          topic.extra.distrito &&
+          (<span>#distrito{topic.extra.distrito}</span>)
+        }
       </div>
       <div
         className='topic-card-cover'
