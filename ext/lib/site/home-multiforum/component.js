@@ -1,16 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router'
+import userConnector from 'lib/site/connectors/user'
 import TweetsFeed from '../tweets-feed/component'
 import Footer from '../footer/component'
+import Anchor from '../anchor'
 import Cover from './cover/component'
 import Steps from './steps/component'
 
-export default function HomeMultiforumOverride (props) {
+export default userConnector(({ user }) => {
+  const coverActionLink = user.state.rejected ? '/#participar' : '/consultas'
+
   return (
     <div className='ext-home-multiforum'>
-      <Cover />
-      <Steps />
-      <div className='info'>
+      <Cover actionLink={coverActionLink} />
+      {user.state.rejected && (
+        <Anchor id='participar'>
+          <Steps />
+        </Anchor>
+      )}
+      <Anchor className='info' id={user.state.rejected ? '' : 'participar'}>
         <div className='action action-consulta'>
           <div className='action-img' />
           <div className='action-content'>
@@ -51,9 +59,9 @@ export default function HomeMultiforumOverride (props) {
             <Link to='/voluntariado' className='btn btn-primary btn-lg'>Quiero sumarme</Link>
           </div>
         </div>
-      </div>
+      </Anchor>
       <TweetsFeed />
       <Footer />
     </div>
   )
-}
+})

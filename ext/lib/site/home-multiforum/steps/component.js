@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
-import Anchor from '../../anchor'
 
 export default () => (
-  <Anchor className='ext-home-steps' id='participar'>
+  <div className='ext-home-steps'>
     <div className='container'>
       <div className='row'>
         <h2 className='container'>¿Cómo podés participar?</h2>
@@ -43,5 +42,5 @@ export default () => (
         </div>
       </div>
     </div>
-  </Anchor>
+  </div>
 )

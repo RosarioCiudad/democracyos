@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import * as HomeForum from 'lib/site/home-forum/component'
 import HomePresupuesto from 'ext/lib/site/home-presupuesto/component'
 import HomeConsultas from 'ext/lib/site/home-consultas/component'
@@ -7,21 +7,19 @@ import HomeVoluntariado from 'ext/lib/site/home-voluntariado/component'
 
 const HomeForumOriginal = HomeForum.default
 
-export default class HomeForumOverride extends Component {
-  render () {
-    const name = this.props.params.forum
+export default (props) => {
+  const name = props.params.forum
 
-    switch (name) {
-      case 'presupuesto':
-        return <HomePresupuesto {...this.props} />
-      case 'consultas':
-        return <HomeConsultas {...this.props} />
-      case 'desafios':
-        return <HomeDesafios {...this.props} />
-      case 'voluntariado':
-        return <HomeVoluntariado {...this.props} />
-      default:
-        return <HomeForumOriginal {...this.props} />
-    }
+  switch (name) {
+    case 'presupuesto':
+      return <HomePresupuesto {...props} />
+    case 'consultas':
+      return <HomeConsultas {...props} />
+    case 'desafios':
+      return <HomeDesafios {...props} />
+    case 'voluntariado':
+      return <HomeVoluntariado {...props} />
+    default:
+      return <HomeForumOriginal {...props} />
   }
 }

@@ -11,11 +11,15 @@ export default class Anchor extends Component {
   }
 
   componentDidMount () {
-    this.removeHistoryListener = browserHistory.listen(this.handleHashChange)
+    if (this.props.id) {
+      this.removeHistoryListener = browserHistory.listen(this.handleHashChange)
+    }
   }
 
   componentWillUnmount () {
-    this.removeHistoryListener()
+    if (typeof this.removeHistoryListener === 'function') {
+      this.removeHistoryListener()
+    }
   }
 
   handleHashChange = ({ hash }) => {
@@ -31,9 +35,11 @@ export default class Anchor extends Component {
   }
 
   render () {
+    const props = this.props
+
     return (
-      <div {...this.props} ref={(el) => { this.el = el }}>
-        { this.props.children }
+      <div {...props} id={props.id} ref={(el) => { this.el = el }}>
+        { props.children }
       </div>
     )
   }
