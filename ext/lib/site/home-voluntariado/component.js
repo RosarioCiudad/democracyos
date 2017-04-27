@@ -64,23 +64,20 @@ class HomeVoluntariados extends Component {
   fetchTopics = () => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then((topics) => {
-        this.setState({ allTopics: topics }, this.uṕdateTopics)
+        this.setState({ allTopics: topics }, this.updateTopics)
       })
       .catch((err) => { throw err })
   }
 
   tagsFilterChange = (e) => {
-    console.log('tags change', e.target.value)
     this.setState({ tagActive: e.target.value }, this.updateTopics)
   }
 
   distritoFilterChange = (e) => {
-    console.log('distrito change', e.target.value)
     this.setState({ distritoActive: e.target.value }, this.updateTopics)
   }
 
   updateTopics = () => {
-    console.log('update topics')
     const topics = this.state.allTopics
       .filter((topic) => {
         return (
