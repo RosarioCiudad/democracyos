@@ -86,7 +86,7 @@ class HomeIdeas extends Component {
         this.setState({
           forum,
           topics: filter(this.state.filter, topics),
-          tags: tags.results.tags
+          tags: tags.results.tags.filter(tag => tag.count > 1).map(tag => tag.tag)
         })
       })
       .catch((err) => { throw err })
