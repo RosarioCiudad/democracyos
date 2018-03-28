@@ -50,6 +50,8 @@ app.get('/topics.csv',
           `"${escapeTxt(topic.attrs.description)}"`,
           `"${topic.coverUrl}"`,
           `"${escapeTxt(topic.attrs.edad.charAt(0).toUpperCase() + (topic.attrs.edad).slice(1).toLowerCase())}"`
+          //agrego estado
+          `"${escapeTxt(topic.attrs.state)}"`
         ])
       }
     })
@@ -97,11 +99,15 @@ app.post('/topics.csv',
           : ~jornada.toLowerCase().indexOf('adulto')
             ? 'adulto'
             : null
+        const state = +csvTopic['Estado']
         return Topic.findOne({
           'attrs.anio': anio,
           'attrs.district': distrito,
           'attrs.number': numero,
-          'attrs.edad': edad
+          'attrs.edad': edad,
+//agrego estado
+          'attrs.state': state
+
         })
         .then((topic) => {
           if (!topic) return
