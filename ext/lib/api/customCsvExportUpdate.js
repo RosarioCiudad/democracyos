@@ -49,7 +49,7 @@ app.get('/topics.csv',
           `"${escapeTxt('DESCONOCIDO')}"`,
           `"${escapeTxt(topic.attrs.description)}"`,
           `"${topic.coverUrl}"`,
-          `"${escapeTxt(topic.attrs.edad.charAt(0).toUpperCase() + (topic.attrs.edad).slice(1).toLowerCase())}"`
+          `"${escapeTxt(topic.attrs.edad.charAt(0).toUpperCase() + (topic.attrs.edad).slice(1).toLowerCase())}"`,
           //agrego estado
           `"${escapeTxt(topic.attrs.state)}"`
         ])
@@ -99,7 +99,7 @@ app.post('/topics.csv',
           : ~jornada.toLowerCase().indexOf('adulto')
             ? 'adulto'
             : null
-        const state = +csvTopic['Estado']
+        const state = csvTopic['Estado']
         return Topic.findOne({
           'attrs.anio': anio,
           'attrs.district': distrito,
