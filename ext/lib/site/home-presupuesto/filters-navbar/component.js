@@ -3,6 +3,8 @@ import ReactOutsideEvent from 'react-outside-event'
 import update from 'immutability-helper'
 import distritos from '../distritos.json'
 
+
+
 class FiltersNavbar extends Component {
   constructor (props) {
     super(props)
@@ -70,13 +72,16 @@ class FiltersNavbar extends Component {
         },
         anio: {
           proyectos2017: false,
-          proyectos2018: false
+          proyectos2018: true
         },
         estado: {
           proyectado: false,
           ejecutandose: false,
           terminado: false
+       
+
         }
+     
       }
 
       switch (props.stage) {
