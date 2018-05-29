@@ -121,16 +121,12 @@ class TopicArticle extends Component {
 
                   {
                     topic.action.method && topic.action.method === 'poll' && (
-                      <Poll
-                        topic={topic}
-                        canVoteAndComment={forum.privileges.canVoteAndComment} />
+                      <Poll topic={topic} />
                     )
                   }
                   {
                     topic.action.method && topic.action.method === 'cause' && (
-                      <Cause
-                        topic={topic}
-                        canVoteAndComment={forum.privileges.canVoteAndComment} />
+                      <Cause topic={topic} />
                     )
                   }
                   {

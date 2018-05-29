@@ -43,9 +43,7 @@ export default ({ forum, topic }) => {
           <Link to={topic.url}>{topic.mediaTitle}</Link>
         </h1>
         {topic.action.method && topic.action.method === 'poll' && (
-          <Poll
-            topic={topic}
-            canVoteAndComment={forum.privileges.canVoteAndComment} />
+          <Poll topic={topic} />
         )}
         <div className='topic-card-footer-container'>
           <div className='topic-card-footer'>
