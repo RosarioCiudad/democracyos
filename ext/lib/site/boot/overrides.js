@@ -18,9 +18,17 @@ import * as SignUpOverride from 'ext/lib/site/sign-up/component'
 import * as Layout from 'lib/site/layout/component'
 import * as LayoutOverride from 'ext/lib/site/layout/component'
 
+import * as SignIn from 'lib/site/sign-in/component'
+import * as SignInOverride from 'ext/lib/site/sign-in/component'
+
+
+
+
+
 Object.assign(HomeMultiforum, HomeMultiforumOverride)
 Object.assign(HomeForum, HomeForumOverride)
 Object.assign(TopicLayoutSidebar, TopicLayoutSidebarOverride)
 Object.assign(TopicArticle, TopicArticleOverride)
 Object.assign(SignUp, SignUpOverride)
+Object.assign(SignIn, SignInOverride)
 Object.assign(Layout, LayoutOverride)
