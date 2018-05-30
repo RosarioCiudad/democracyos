@@ -5,6 +5,8 @@ import t from 't-component'
 import ReCAPTCHA from 'react-google-recaptcha'
 import config from 'lib/config'
 import FormAsync from 'lib/site/form-async'
+import PopupCenter from 'ext/lib/open-popup'
+
 
 export default class SignUp extends Component {
   constructor (props) {
@@ -25,6 +27,7 @@ export default class SignUp extends Component {
     }
     this.onSuccess = this.onSuccess.bind(this)
     this.onFail = this.onFail.bind(this)
+    this.openPopup = this.openPopup.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.saveName = this.saveName.bind(this)
     this.saveLastName = this.saveLastName.bind(this)
@@ -60,11 +63,18 @@ export default class SignUp extends Component {
     })
   }
 
+
+  openPopup = (e) => {
+    e.preventDefault()
+    let url = 'https://t-www.rosario.gov.ar/form/id/actualizar-email'
+    PopupCenter(url, '', 500, 600)
+  }
+
   onFail (err) {
-    console.log(err)
     if (err[0].code === 'DUPLICATED_VOTING_DATA') {
-      err = [`El número de documento ingresado se encuentra utilizado por una cuenta con la dirección de correo ${err[0].docOwner}, si esa dirección no te pertenece o notas algún problema comunicate a participa@rosario.gob.ar`]
-    }
+      err[0].message = [`El número de documento ingresado se encuentra utilizado por una cuenta con la dirección de correo ${err[0].docOwner}, en caso que no pueda ingresar con dicha cuenta puede hacer su reclamo haciendo clic`]
+   }
+    
     this.setState({ loading: false, errors: err, captchaKey: '' })
   }
 
@@ -176,7 +186,21 @@ export default class SignUp extends Component {
                   className={this.state.errors ? 'form-errors' : 'hide'}>
                   {
                     this.state.errors && this.state.errors
-                      .map((error, key) => (<li key={key}>{error}</li>))
+                      .map((error, key) => {
+                        if (error.code === 'DUPLICATED_VOTING_DATA') {
+                          return(
+                            <li key={key}>
+                              {error.message}
+                              <a onClick={this.openPopup} href='#'> aqui.</a>
+                            </li>
+                          
+                          )
+                        } else {
+                          return(
+                              <li key={key}>{error.message}</li>
+                            )
+                        }
+                      })
                   }
                 </ul>
                 <div className='form-group'>
@@ -264,6 +288,7 @@ export default class SignUp extends Component {
                     placeholder={t('password')}
                     required />
                 </div>
+               
                 <div className='form-group'>
                   <label htmlFor=''>{t('signup.retype-password')}</label>
                   <input
