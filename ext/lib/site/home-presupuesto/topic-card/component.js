@@ -103,7 +103,14 @@ export default withRouter(({ topic, router, fadeTopic, isSelected, isBlocked, st
             </p>
           )}
         </div>
+        
         <div className='topic-card-links'>
+        {
+          window.innerWidth <= 630 &&
+          (
+          <a target='_blank' href={`whatsapp://send?text=${topic.mediaTitle} - ${topicUrl}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh share'> </a>
+          )
+         }
           <SharerFacebook
             className='fb share'
             params={{
@@ -112,6 +119,8 @@ export default withRouter(({ topic, router, fadeTopic, isSelected, isBlocked, st
             }} />
           <a target='_blank' href={`http://twitter.com/share?text=${twitterDesc}&url=${topicUrl}`} rel='noopener noreferrer' className='tw share'> </a>
         </div>
+
+
         <div className='topic-card-footer'>
           <div className='topic-card-category'>
             <span>
