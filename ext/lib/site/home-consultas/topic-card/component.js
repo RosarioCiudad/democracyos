@@ -56,15 +56,17 @@ export default ({ forum, topic }) => {
               <SharerFacebook
                 className='fb'
                 params={{ picture: topic.coverUrl, link: topicUrl }} />
+              
               <span
                 onClick={handleLinkClick}
                 target='_blank'
                 href={`http://twitter.com/home?status=${twitterDesc}`}>
                 <i className='icon-social-twitter' />
               </span>
-              {window.innerWidth <= 630 &&
+              {window.innerWidth <= 600 &&
                 <span
                   onClick={handleLinkClick}
+                  target='_blank'
                   href={`whatsapp://send?text=${twitterDesc}`}
                   className='wp' />
               }
