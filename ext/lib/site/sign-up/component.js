@@ -191,7 +191,7 @@ export default class SignUp extends Component {
                           return(
                             <li key={key}>
                               {error.message}
-                              <a onClick={this.openPopup} href='#'> aqui.</a>
+                              <a onClick={this.openPopup} href='#'> aquí.</a>
                             </li>
                           
                           )
