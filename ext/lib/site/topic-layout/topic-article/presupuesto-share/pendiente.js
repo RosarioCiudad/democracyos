@@ -90,6 +90,7 @@ export default class Pendiente extends Component {
         }
         <div className='social-links'>
           <span className='hashtag'>#YoVotoPorMiBarrio</span>
+          <a target='_blank' href={`whatsapp://send?text=${topic.mediaTitle} - ${window.location.origin}${topic.url}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wp'></a>
           <SharerFacebook
             className='fb'
             params={{
