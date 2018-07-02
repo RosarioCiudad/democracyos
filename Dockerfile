@@ -1,6 +1,6 @@
-FROM democracyos/democracyos:2.9.13
+FROM democracyos/democracyos:2.11.8
 
-MAINTAINER Matías Lescano <matias@democraciaenred.org>
+MAINTAINER Muni <matias@democraciaenred.org>
 
 ENV LOCALE=es \
   ENFORCE_LOCALE=true \
