@@ -1,8 +1,13 @@
+extends ../../../../lib/layout/index.jade
 extends ../../../../lib/site/layout/index.jade
 
 block extraHeader
+  meta(name="google-site-verification" content="6Bb0Rg0SjK_b-OEMC-VTysMe6Z9Lm6z7uyH1aF1WRZ8")
   meta(og:image=initialState.og.img)
   meta(og:title=initialState.og.title)
+  meta(name="keywords" content="presupuesto,participativo,presupuesto participativo,proyectos,participa")
+  meta(name="keywords" content=initialState.og.title)
+
 
 block fonts
   link(href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,900|Noto+Serif:100,400,700&subset=latin-ext', rel='stylesheet', type='text/css')
