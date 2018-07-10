@@ -114,7 +114,7 @@ export default class SignupComplete extends Component {
                   onChange={this.handleInputChange}
                   disabled={this.state.loading || this.state.sexo_disabled}
                   required>
-                  <option className='opcion' value='' disabled>¿Cuál es tu sexo?</option>
+                  <option className='opcion' value='' disabled>¿Cuál es tu sexo?*</option>
                   <option className='opcion' value='F'>Femenino</option>
                   <option className='opcion' value='M'>Masculino</option>
                 </select>
@@ -131,7 +131,7 @@ export default class SignupComplete extends Component {
                   onChange={this.handleInputChange}
                   disabled={this.state.loading || this.state.cod_doc_disabled}
                   required>
-                  <option value='' disabled>Tipo</option>
+                  <option value='' disabled>Tipo*</option>
                   <option value='DNI'>DNI</option>
                   <option value='LC'>LC</option>
                   <option value='LE'>LE</option>
@@ -148,7 +148,7 @@ export default class SignupComplete extends Component {
                 onChange={this.handleInputNumberChange}
                 value={prettyNumber(this.state.data.nro_doc)}
                 disabled={this.state.loading || this.state.nro_doc_disabled}
-                placeholder='Número de documento'
+                placeholder='Número de documento*'
                 required />
             </div>
           </div>
