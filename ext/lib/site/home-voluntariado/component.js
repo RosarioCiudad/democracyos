@@ -91,6 +91,13 @@ class HomeVoluntariados extends Component {
           logo='/ext/lib/site/home-multiforum/voluntariado-icono.png'
           title='Voluntariado social'
           description='Muchas organizaciones sociales buscan tu apoyo! Conocé a quienes trabajan por una ciudad mejor.' />
+        <div className='jumbotron add-ong'>
+          <div className='container'>
+            <h1 className='display-4'>¿Sos una organización?</h1>
+            <p className='lead'>Si querés sumar tu organización a este listado, completá el siguiente formulario.</p>
+            <a className='btn btn-primary btn-lg' onClick={this.openPopup} href='#'>Sumar mi organización</a>
+          </div>
+        </div>
         <h2 className='filter'>
           Ver las organizaciones que trabajan sobre
           <select onChange={this.tagsFilterChange}>
@@ -109,13 +116,7 @@ class HomeVoluntariados extends Component {
             </div>
           </div>
         )}
-        <div className='jumbotron add-ong'>
-          <div className='container'>
-            <h1 className='display-4'>¿Sos una organización?</h1>
-            <p className='lead'>Si querés sumar tu organización a este listado, completá el siguiente formulario.</p>
-            <a className='btn btn-primary btn-lg' onClick={this.openPopup} href='#'>Sumar mi organización</a>
-          </div>
-        </div>
+        
         {topics && <Footer />}
       </div>
     )
