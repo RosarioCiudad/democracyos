@@ -108,7 +108,7 @@ export default withRouter(({ topic, router, fadeTopic, isSelected, isBlocked, st
         {
           window.innerWidth <= 630 &&
           (
-          <a target='_blank' href={`whatsapp://send?text=${topic.mediaTitle} - ${topicUrl}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh share'> </a>
+          <a target='_blank' href={`whatsapp://send?text=${topicUrl}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh share'> </a>
           )
          }
           <SharerFacebook
