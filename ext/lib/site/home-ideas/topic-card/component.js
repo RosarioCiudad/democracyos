@@ -12,7 +12,7 @@ export default ({ topic, onVote }) => (
         style={{ backgroundImage: `url(${topic.coverUrl})` }} />
     )}
     */}
-    <div className='topic-card-info'>
+    <div className={`topic-card-info ${topic.attrs.rosario2030=="si" ? 'card2030' : ''}`}>
       <div className='topic-creation'>
         <div
           className='avatar'
@@ -58,6 +58,9 @@ export default ({ topic, onVote }) => (
           ¡Gracias!
         </button>
       )}
+        <div className={`pie2030 ${topic.attrs.rosario2030=="no" ? 'no2030' : ''}`}>
+          Rosario 2030
+        </div>
       {!topic.voted && (
         <button
           onClick={() => onVote(topic.id)}
