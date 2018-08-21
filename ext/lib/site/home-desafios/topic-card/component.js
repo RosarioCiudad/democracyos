@@ -10,17 +10,20 @@ export default ({ topic }) => (
         className='topic-card-cover'
         style={{ backgroundImage: `url(${topic.coverUrl})` }} />
     )}
-    <div className='topic-card-info'>
+    <div className={`topic-card-info ${topic.attrs.rosario2030=="si" ? 'card2030' : ''}`}>
       <h1 className='topic-card-title'>
         <Link to={topic.url}>{topic.mediaTitle}</Link>
       </h1>
       <div className='participants'>
+      <div className={`pie2030 ${topic.attrs.rosario2030=="no" ? 'no2030' : ''}`}>
+          Rosario 2030
+        </div>
       <div className='fecha'>{moment(topic.createdAt).format('D/M/YY')}</div>
         {topic.count ? ` ${topic.count} participante${topic.count !== 1 ? 's' : ''}` : ''}
       </div>
     </div>
     <div className='topic-card-footer'>
-      <Link to={topic.url} className='btn btn-block btn-primary'>
+      <Link to={topic.url} className={`btn btn-block btn-primary ${topic.attrs.rosario2030=="si" ? 'quiero2030' : ''}`}>
         Quiero ser parte
       </Link>
     </div>
