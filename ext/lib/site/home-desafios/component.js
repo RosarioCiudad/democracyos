@@ -8,8 +8,10 @@ import Cover from '../cover'
 import TopicCard from './topic-card/component'
 
 const filters = {
+ 
   new: {
     text: 'Más Nuevos',
+    
     filter: (topic) => topic.status === 'open' && !topic.voted,
     emptyMsg: '¡Ya participaste en todos los desafíos!'
   },
@@ -27,8 +29,23 @@ const filters = {
     text: 'Finalizados',
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron desafíos finalizados.'
-  }
+  },
+
+  desafios: {
+    text: 'Desafíos',
+    filter: (topic) => topic.attrs.rosario2030 === 'no',
+    emptyMsg: 'No se encontraron desafíos.'
+  },
+
+  rosario2030: {
+    text: 'Rosario2030',
+    filter: (topic) => topic.attrs.rosario2030 === 'si',
+    emptyMsg: 'Actualmente no hay desafíos para el 2030.'
+  },
+
 }
+
+
 
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
@@ -41,7 +58,7 @@ class HomeDesafios extends Component {
     this.state = {
       forum: null,
       topics: null,
-      filter: 'open',
+      filter: 'rosario2030',
       sort: 'pop'
     }
   }
@@ -64,8 +81,9 @@ class HomeDesafios extends Component {
         this.setState({
           forum,
           filter: filterKey,
-          topics: filtered
+          topics: filtered,
         })
+        console.log(topics)
 
         Promise.all(filtered.map(this.getTopicCount))
           .then((topics) => { this.setState({ topics }) })
@@ -157,13 +175,28 @@ class HomeDesafios extends Component {
   }
 }
 
+
+
+
 const Filter = ({ onChange, active }) => (
   <div className='container'>
     <div className='topics-filter'>
       {Object.keys(filters).map((key) => (
+
         <button
           key={key}
-          className={`btn btn-secondary btn-sm ${active === key ? 'active' : ''}`}
+          className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'boton2030' : (key === 'desafios' ? 'boton2030' : 'filtrostatus')}${''} ${active === key ? 'active' : ''}`}
+          onClick={() => onChange(key)}>
+          {filters[key].text}
+        </button>
+      ))}
+    </div>
+    <div className='pp-nav2'>
+      {Object.keys(filters).map((key) => (
+
+        <button
+          key={key}
+          className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'filtro2030' : (key === 'desafios' ? 'filtrodesafios' : 'filtrosocultos')}${''} ${active === key ? 'active' : ''}`}
           onClick={() => onChange(key)}>
           {filters[key].text}
         </button>
