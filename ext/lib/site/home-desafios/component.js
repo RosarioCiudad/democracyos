@@ -30,20 +30,8 @@ const filters = {
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron desafíos finalizados.'
   },
-
-  desafios: {
-    text: 'Desafíos',
-    filter: (topic) => topic.attrs.rosario2030 === 'no',
-    emptyMsg: 'No se encontraron desafíos.'
-  },
-
-  rosario2030: {
-    text: 'Rosario2030',
-    filter: (topic) => topic.attrs.rosario2030 === 'si',
-    emptyMsg: 'Actualmente no hay desafíos para el 2030.'
-  },
-
 }
+
 
 
 
@@ -58,8 +46,8 @@ class HomeDesafios extends Component {
     this.state = {
       forum: null,
       topics: null,
-      filter: 'rosario2030',
-      sort: 'pop'
+      filter: 'open',
+      sort: 'pop',
     }
   }
 
@@ -185,23 +173,13 @@ const Filter = ({ onChange, active }) => (
 
         <button
           key={key}
-          className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'boton2030' : (key === 'desafios' ? 'boton2030' : 'filtrostatus')}${''} ${active === key ? 'active' : ''}`}
+          className={`btn btn-secondary btn-sm ${active === key ? 'active' : ''}`}
           onClick={() => onChange(key)}>
           {filters[key].text}
         </button>
       ))}
     </div>
-    <div className='pp-nav2'>
-      {Object.keys(filters).map((key) => (
-
-        <button
-          key={key}
-          className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'filtro2030' : (key === 'desafios' ? 'filtrodesafios' : 'filtrosocultos')}${''} ${active === key ? 'active' : ''}`}
-          onClick={() => onChange(key)}>
-          {filters[key].text}
-        </button>
-      ))}
-    </div>
+  
   </div>
 )
 
