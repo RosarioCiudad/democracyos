@@ -9,6 +9,7 @@ import BannerPresupuesto from './banner-presupuesto/component'
 import BannerVotoEnProceso from './banner-en-proceso/component'
 import Countdown from './countdown/component'
 import distritos from './distritos.json'
+import Noticias from '../home-multiforum/noticias/component'
 
 class HomePresupuesto extends Component {
   constructor (props) {
@@ -24,6 +25,7 @@ class HomePresupuesto extends Component {
       edad: ['joven', 'adulto'],
       distrito: ['centro', 'noroeste', 'norte', 'oeste', 'sudoeste', 'sur'],
       anio: ['2017', '2018'],
+      // anio: ['2017', '2018', '2019'],
       estado: ['proyectado', 'ejecutandose', 'terminado']
     }
   }
@@ -119,12 +121,14 @@ class HomePresupuesto extends Component {
     const anios = Object.keys(filtros.anio)
       .filter(k =>  filtros.anio[k])
       .map(anio => {
-        if (anio === 'proyectos2017') {
-          return '2017'
-        }
-        if (anio === 'proyectos2018') {
-          return '2018'
-        }
+        switch (anio) {
+    case 'proyectos2017':
+      return '2017'
+    case 'proyectos2018':
+      return '2018'
+    // case 'proyectos2019':
+      // return '2019'
+  }
       })
 
     const estado = Object.keys(filtros.estado).filter(k => filtros.estado[k])
@@ -178,6 +182,8 @@ class HomePresupuesto extends Component {
   changeStage = (stage) => {
     this.setState({ stage })
   }
+  
+  
 
   render () {
     return (
@@ -190,8 +196,12 @@ class HomePresupuesto extends Component {
             background='/ext/lib/site/boot/presupuesto-participativo.jpg'
             logo='/ext/lib/site/home-multiforum/presupuesto-icono.png'
             title='Presupuesto Participativo'
-            description='Vos decidís cómo invertir parte del presupuesto de la ciudad.Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.' />
+            description='Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.' />
         }
+        
+        <Noticias tagName="presupuesto participativo" />
+        
+
         <div className='topics-section-container filters-wrapper'>
           <FiltersNavbar
             stage={this.state.stage}
@@ -244,12 +254,14 @@ function estadoNum (e) {
 
 function anioNum (e) {
   switch (e) {
+    // case '2019':
+    // return 1
     case '2018':
-      return 1
-    case '2017':
       return 2
-    default:
+    case '2017':
       return 3
+    default:
+      return 4
   }
 }
 

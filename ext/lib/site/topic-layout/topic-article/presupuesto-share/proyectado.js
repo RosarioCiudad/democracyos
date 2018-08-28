@@ -44,7 +44,7 @@ export default ({ topic, forum }) => {
       </div>
       <div className='box-footer'>
         <span className='hashtag'>#YoVotoPorMiBarrio</span>
-        <a target='_blank' href={`whatsapp://send?text=${topic.mediaTitle} - ${topicUrl}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh'> </a>
+        <a target='_blank' href={`whatsapp://send?text=${topicUrl}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh'> </a>
         <a target='_blank' href={`http://www.facebook.com/sharer.php?u=${topicUrl}`} rel='noopener noreferrer' className='fb'> </a>
         <a target='_blank' href={`http://twitter.com/share?text=${twitText()}&url=${topicUrl}`} rel='noopener noreferrer' className='tw'> </a>
          

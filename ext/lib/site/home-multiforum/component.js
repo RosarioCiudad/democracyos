@@ -14,7 +14,7 @@ export default userConnector(({ user }) => {
     <div className='ext-home-multiforum'>
       <Cover toSteps={() => Anchor.goTo('participar')} toInfo={() => Anchor.goTo('info')} userLoaded={user.state.fulfilled} />
       <Anchor id='participar' />
-      <Noticias />
+      <Noticias tagName="home" />
       <Steps scrollInfo={() => Anchor.goTo('info')} />
       <Anchor className='info' id='info'>
         <div className='action action-consulta'>
