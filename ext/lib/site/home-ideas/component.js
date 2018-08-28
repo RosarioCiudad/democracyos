@@ -130,7 +130,7 @@ class HomeIdeas extends Component {
     let query = {}
     query.forum = forumId
     query.page = page
-    query.limit = 20
+    query.limit = 30
     query.sort = filters[this.state.filter].sort
     if (u.has('tag')) query.tag = u.get('tag')
     return topicStore.findAll(query).then(([topics, pagination]) => topics)
