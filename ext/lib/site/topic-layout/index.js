@@ -12,6 +12,7 @@ app.get(urlBuilder.for('site.topic'), visibility, function (req, res, next) {
       if (!topic) return
       res.locals.initialState.og.img = topic.coverUrl
       res.locals.initialState.og.title = topic.mediaTitle
+      // res.locals.initialState.og.description = topic.attrs.description
       next()
     }).catch(next)
 }, require('ext/lib/site/layout'))

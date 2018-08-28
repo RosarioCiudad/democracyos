@@ -39,6 +39,7 @@ export default ({ forum, topic }) => {
             <span>{moment(topic.createdAt).format('D/M/YY')}</span>
           </div>
         )}
+
         <div className={`label2030 ${topic.attrs.rosario2030=="no" ? 'no2030' : ''}`}>
           Rosario 2030
         </div>

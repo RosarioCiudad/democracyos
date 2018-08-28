@@ -8,7 +8,8 @@ services:
     environment:
       - NODE_ENV=development
       - DEBUG=democracyos*
-      - MONGO_URL=mongodb://mongo/rosario
+      - MONGO_URL=mongodb://mongo/democracy-staging
+    
     links:
       - mongo
     ports:

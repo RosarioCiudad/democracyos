@@ -19,6 +19,7 @@ import ExportUpdate from 'lib/admin/admin-topics/export-update/component'
 
 const log = debug('democracyos:admin-topics')
 
+
 /**
  * Creates a list view of topics
  */
@@ -29,48 +30,143 @@ export default class TopicsListView extends View {
       topics: topics.filter((t) => t.privileges.canEdit || t.privileges.canDelete),
       moment,
       forum,
-      urlBuilder
+      urlBuilder,
     })
-
+    
     this.forum = forum
     this.pagination = pagination
+
+    this.onChangeAnio = this.onChangeAnio.bind(this)
+    this.handlePageClick = this.handlePageClick.bind(this)
+    this.selMouse = this.selMouse.bind(this)
+  }
+  
+
+  selMouse(event) {
+     event.preventDefault()
+     console.log(event)
+     // this.toggleClass('selected')
+     // this.prop('selected', !this.prop('selected'))
+    return false
+     }
+
+
+  onChangeAnio(event) {
+    // Obtengo las opciones seleccionadas
+    var anios = Array.from(event.target.selectedOptions, option => option.value)
+
+    //concateno con "&"
+    var valuehash = anios.join("&")
+    //armo el hash
+    window.location.hash = `#anio=${valuehash}`
+    //filtro
+    this.list.filter(function(item) {
+     return ((anios).includes(item.values().topicanio) || !anios)
+    })
+
+    //preparo el paginado
+
+    this.pagination.count = this.list.matchingItems.length
+    
+    const pages = this.pagination.count / 50
+    const currentPage = (+getQueryVariable('page') || 1) - 1
+
+    if (pages > 1) {
+      ReactRender((
+        <ReactPaginate
+          forcePage={currentPage}
+          pageCount={pages}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          previousLabel='<'
+          nextLabel='>'
+          onPageChange={this.handlePageClick}
+          breakLabel={<a href="">...</a>}
+          breakClassName={"break-me"}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"} />
+      ), this.el[0].querySelector('.topics-pagination'))
+    }
   }
 
+    
+
+ 
   switchOn () {
-    this.bind('click', '.btn.delete-topic', this.bound('ondeletetopicclick'))
-    this.list = new List('topics-wrapper', { valueNames: ['topic-title', 'topic-id', 'topic-date'] })
+    this.bind('click', '.btn.delete-topic', this.bound('ondeletetopicclick'))    
+    this.list = new List('topics-wrapper', { valueNames: ['topic-title', 'topic-id', 'topic-date', 'topicanio', 'topic-distrito'] })
+    
+    // if(this.list.visibleItems[]._values['topic-anio']==='2018'){console.log(this.list)}
+
+   
    if (this.forum.name === 'presupuesto' && this.forum.privileges.canEdit){
-      ReactRender(
+    this.list = new List('topics-wrapper', { valueNames: ['topic-title', 'topic-id', 'topic-date', 'topicanio', 'topic-distrito'] })
+       // var hashfiltro = this.getHashVariable('anio')
+       // console.log(hashfiltro)
+       // this.list.filter(function(item) {
+       //    if (item.values().topicanio === '2018') {
+       //     return true
+       //    } else {
+       //          return false}
+       //  })        
+        // this.list.filter(this.getHashVariable('anio') || '2018', ['topicanio'])
+        ReactRender(
         (<UpdateStage 
         forum={this.forum} />), 
-        this.el[0].querySelector('.update-stage'))
+        this.el[0].querySelector('.update-stage'));        
+        
         ReactRender(
         (<ExportUpdate
         forum={this.forum} />), 
-        this.el[0].querySelector('.export-update'))
-    }
-    const pages = this.pagination.count / this.pagination.limit
+        this.el[0].querySelector('.export-update'));
+
+        ReactRender(
+         <div className='filtros'>
+          <div className='titulo'>
+           <h4>Filtrar proyectos</h4>
+          </div>
+          <div>
+            <label className='filtro-label'>
+              Año
+            </label>
+            <select className='select-filtro' multiple name="anio" id="anio" onMouseUp={this.selMouse} onChange={this.onChangeAnio}><option value="2017">2017</option><option value="2018">2018</option></select>
+          </div>
+        </div>,
+        this.el[0].querySelector('.filtros'));
+      }
+
+            
+        
+    
+
+    this.pagination.count = this.list.matchingItems.length
+    const pages = this.pagination.count / 50
     const currentPage = (+getQueryVariable('page') || 1) - 1
-    ReactRender((
-      <ReactPaginate
-        forcePage={currentPage}
-        pageCount={pages}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        previousLabel='<'
-        nextLabel='>'
-        onPageChange={this.handlePageClick}
-        breakLabel={<a href="">...</a>}
-        breakClassName={"break-me"}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"} />
-    ), this.el[0].querySelector('.topics-pagination'))
+    
+    if (pages > 1) {
+      ReactRender((
+        <ReactPaginate
+          forcePage={currentPage}
+          pageCount={pages}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          previousLabel='<'
+          nextLabel='>'
+          onPageChange={this.handlePageClick}
+          breakLabel={<a href="">...</a>}
+          breakClassName={"break-me"}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"} />
+      ), this.el[0].querySelector('.topics-pagination'))
+    }
   }
 
   handlePageClick (e) {
-    const { origin, pathname } = window.location
-    window.location = `${origin}${pathname}?page=${(e.selected + 1)}`
+    var anio = this.getHashVariable('anio') || '2018'
+    const { origin, pathname, hash } = window.location
+    window.location = `${origin}${pathname}?page=${(e.selected + 1)}#anio=${anio}`
   }
 
   ondeletetopicclick (ev) {
@@ -97,5 +193,12 @@ export default class TopicsListView extends View {
       .closable()
       .effect('slide')
       .show(onconfirmdelete)
+  }
+
+// Obtiene el hash para mantener la lista filtrada en el paginado ?page=2#anio=2017
+
+  getHashVariable(key) {
+    var matches = location.hash.match(new RegExp(key+'=([^&]*)'));
+    return matches ? matches : null;
   }
 }
