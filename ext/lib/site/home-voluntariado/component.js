@@ -7,6 +7,7 @@ import Footer from '../footer/component'
 import Cover from '../cover'
 import TopicCard from './topic-card/component'
 import PopupCenter from 'ext/lib/open-popup'
+import Noticias from '../home-multiforum/noticias/component'
 
 class HomeVoluntariados extends Component {
   constructor (props) {
@@ -98,6 +99,7 @@ class HomeVoluntariados extends Component {
             <a className='btn btn-primary btn-lg' onClick={this.openPopup} href='#'>Sumar mi organización</a>
           </div>
         </div>
+        <Noticias tagName="voluntariado" />
         <h2 className='filter'>
           Ver las organizaciones que trabajan sobre
           <select onChange={this.tagsFilterChange}>
