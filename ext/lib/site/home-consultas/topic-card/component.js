@@ -17,7 +17,7 @@ export default ({ forum, topic }) => {
           className='topic-card-cover'
           style={{ backgroundImage: `url(${topic.coverUrl})` }} />
       )}
-      <div className={`topic-card-info ${topic.attrs.rosario2030=="si" ? 'card2030' : ''}`}>
+      <div className='topic-card-info'>
         {topic.closingAt && (
           <div className='closing-at topic-time'>
             <span className='icon-clock' />
@@ -39,10 +39,6 @@ export default ({ forum, topic }) => {
             <span>{moment(topic.createdAt).format('D/M/YY')}</span>
           </div>
         )}
-
-        <div className={`label2030 ${topic.attrs.rosario2030=="no" ? 'no2030' : ''}`}>
-          Rosario 2030
-        </div>
         <h1 className='topic-card-title'>
           <Link to={topic.url}>{topic.mediaTitle}</Link>
         </h1>
