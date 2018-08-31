@@ -14,3 +14,40 @@
   	left: 26px
   @media (max-width: 375px)
     top: 470px
+
+
+.titulo
+    width: 100%
+    margin-top: 5px
+    margin-bottom: 5px
+    padding: auto
+    h4
+      margin-top: 0px
+      margin-bottom: 10px
+      font-size: 16
+
+.filtros
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  align-items: baseline
+  @media (max-width: 425px)
+    justify-content: center
+  div
+    @media (max-width: 425px)
+      display: flex
+      justify-content: center
+      flex-wrap: wrap
+    .filtro-label
+      font-size: 16px
+      font-weight: normal
+      line-height: 1.4
+      margin-right: 10px
+      @media (max-width: 425px)
+        text-align: center
+    .select-filtro
+      background-color: #FFF
+      border-radius: 2px
+      height: 34px
+      @media (max-width: 425px)
+        margin-bottom: 5px

@@ -88,7 +88,7 @@ export class UserBadge extends Component {
           </li>
           {!this.props.user.profileIsComplete() && (
               <li className='complete-data'>
-                <a className='complete-data-link' href='#completar-datos'>
+                <a className='complete-data-link' href='#completar-datos' target='_parent'>
                   <span>Completar datos</span>
                   <div></div>
                 </a>

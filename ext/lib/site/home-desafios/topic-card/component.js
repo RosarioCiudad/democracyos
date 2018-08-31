@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 
+
 export default ({ topic }) => (
   <div className='ext-topic-card desafios-topic-card'>
     {topic.coverUrl && (

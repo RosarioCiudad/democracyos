@@ -17,6 +17,7 @@ export default class ProfileForm extends FormView {
 
     constructor() {
         super(template)
+        console.log("Se instancia el componente")
         
     }
     // const userExtra = Object.keys(user.extra)
@@ -72,7 +73,8 @@ export default class ProfileForm extends FormView {
 
             if (user.locale && user.locale !== config.locale) {
                 setTimeout(function () {
-                    window.location.reload()
+                    console.log("Onsucces event")
+                    //window.location.reload()
                 }, 10)
             }
         })

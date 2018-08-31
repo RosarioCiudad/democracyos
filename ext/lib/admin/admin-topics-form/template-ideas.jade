@@ -70,8 +70,9 @@
 
         - if (forum.topicsAttrs.length > 0)
           fieldset.attrs-wrapper
-            legend= t('admin-topics-form.label.attrs')
             div(data-attrs)
+            span.help-text.
+              Indica si tu idea apunta a Rosario 2030.
         .form-group.hide
           label= t('admin-topics-form.label.topicId')
           - if (te('admin-topics-form.description.topicId'))

@@ -8,8 +8,10 @@ import Cover from '../cover'
 import TopicCard from './topic-card/component'
 
 const filters = {
+ 
   new: {
     text: 'Más Nuevos',
+    
     filter: (topic) => topic.status === 'open' && !topic.voted,
     emptyMsg: '¡Ya participaste en todos los desafíos!'
   },
@@ -27,8 +29,10 @@ const filters = {
     text: 'Finalizados',
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron desafíos finalizados.'
-  }
+  },
 }
+
+
 
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
@@ -42,7 +46,7 @@ class HomeDesafios extends Component {
       forum: null,
       topics: null,
       filter: 'open',
-      sort: 'pop'
+      sort: 'pop',
     }
   }
 
@@ -64,8 +68,9 @@ class HomeDesafios extends Component {
         this.setState({
           forum,
           filter: filterKey,
-          topics: filtered
+          topics: filtered,
         })
+        console.log(topics)
 
         Promise.all(filtered.map(this.getTopicCount))
           .then((topics) => { this.setState({ topics }) })
@@ -157,10 +162,14 @@ class HomeDesafios extends Component {
   }
 }
 
+
+
+
 const Filter = ({ onChange, active }) => (
   <div className='container'>
     <div className='topics-filter'>
       {Object.keys(filters).map((key) => (
+
         <button
           key={key}
           className={`btn btn-secondary btn-sm ${active === key ? 'active' : ''}`}
@@ -169,6 +178,7 @@ const Filter = ({ onChange, active }) => (
         </button>
       ))}
     </div>
+  
   </div>
 )
 

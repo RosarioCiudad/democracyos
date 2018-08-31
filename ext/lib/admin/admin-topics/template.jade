@@ -21,6 +21,8 @@
       .well.well-lg.clearfix.update-stage
       span.export-year Solo se exportarán proyectos del PP 2018
       .well.well-sm.clearfix.export-update
+      .well.well-sm.clearfix.filtros
+      span.titulo
     .list.list-group.col-xs-12
       - each topic in topics
         a.list-group-item(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), data-topicid=topic.id)
@@ -41,4 +43,7 @@
           - var tag = 'Distrito ' + ((topic.attrs && topic.attrs.district) ? topic.attrs.district : 'desconocido')
           span.text.topic-id=tag
           span.topic-date.hide=topic.createdAt
+          - if (forum.name === 'presupuesto' && forum.privileges.canEdit)
+            span.topicanio.hide=topic.attrs.anio
+            span.topic-distrito.hide=topic.attrs.district
     .topics-pagination

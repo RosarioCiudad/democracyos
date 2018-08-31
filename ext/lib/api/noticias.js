@@ -12,7 +12,7 @@ function getNoticias (req, res, next) {
       Tag.findOne({ name: req.query.tagName })
          .then((tag) => {
         Topic.findOne({ forum: forum._id, publishedAt: { $ne: null }, deletedAt: null, tag: tag._id})
-        .sort({ created_at: -1 })
+        .sort({ updatedAt: -1 })
         .exec(function (err, topic) {
          if (err) {
           res.json({ result: null, error: err })
