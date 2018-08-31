@@ -34,7 +34,6 @@ const filters = {
 
 
 
-
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
 }
