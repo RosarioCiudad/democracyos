@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 import Timeago from 'lib/site/timeago'
-import Poll from 'lib/site/topic-layout/topic-article/poll/component'
+// import Poll from 'lib/site/topic-layout/topic-article/poll/component'
+import Poll from '../../topic-layout/topic-article/poll/component'
 import { SharerFacebook } from 'ext/lib/site/sharer'
 
 export default ({ forum, topic }) => {
@@ -17,7 +18,7 @@ export default ({ forum, topic }) => {
           className='topic-card-cover'
           style={{ backgroundImage: `url(${topic.coverUrl})` }} />
       )}
-      <div className='topic-card-info'>
+      <div className={`topic-card-info ${topic.attrs.rosario2030=="si" ? 'card2030' : ''}`}>
         {topic.closingAt && (
           <div className='closing-at topic-time'>
             <span className='icon-clock' />
@@ -38,6 +39,9 @@ export default ({ forum, topic }) => {
           <div className='created-at topic-time'>
             <span>{moment(topic.createdAt).format('D/M/YY')}</span>
           </div>
+        )}
+        {topic.attrs.rosario2030=="si" && (
+        <div className="label2030 ">Rosario 2030</div>
         )}
         <h1 className='topic-card-title'>
           <Link to={topic.url}>{topic.mediaTitle}</Link>
