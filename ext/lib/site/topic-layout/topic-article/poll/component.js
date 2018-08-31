@@ -47,6 +47,7 @@ export class Poll extends Component {
           mostrarVotar: false
         }))
       })
+      
       .catch((err) => { throw err })
   }
 
@@ -73,6 +74,8 @@ export class Poll extends Component {
     })
     
   }
+
+
 
   changeVote = () => {
     this.setState({
