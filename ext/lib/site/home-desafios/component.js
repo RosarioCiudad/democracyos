@@ -30,6 +30,11 @@ const filters = {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
 }
@@ -66,10 +71,12 @@ class HomeDesafios extends Component {
           filter: filterKey,
           topics: filtered
         })
+<<<<<<< Updated upstream
+=======
+        //console.log(topics)
+>>>>>>> Stashed changes
 
-        Promise.all(filtered.map(this.getTopicCount))
-          .then((topics) => { this.setState({ topics }) })
-          .catch((err) => { console.log(err) })
+   
 
         bus.on('topic-store:update:all', this.fetchTopics)
       })
@@ -119,13 +126,10 @@ class HomeDesafios extends Component {
   handleFilterChange = (key) => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then(([topics, pagination]) => {
-        Promise.all(filter(key, topics).map(this.getTopicCount))
-          .then((topics) => { this.setState({ topics, filter: key }) })
-          .catch((err) => { console.log(err) })
-        // this.setState({
-        //   filter: key,
-        //   topics: filter(key, topics)
-        // })
+         this.setState({
+           filter: key,
+           topics: filter(key, topics)
+         })
       })
       .catch((err) => { throw err })
   }
