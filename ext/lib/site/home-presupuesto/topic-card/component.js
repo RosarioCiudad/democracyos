@@ -104,6 +104,15 @@ export default withRouter(({ topic, router, fadeTopic, isSelected, isBlocked, st
           )}
         </div>
         <div className='topic-card-links'>
+<<<<<<< Updated upstream
+=======
+        {
+          window.innerWidth <= 630 &&
+          (
+          <a target='_blank' href={`whatsapp://send?text=${topicUrl}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh share'> </a>
+          )
+         }
+>>>>>>> Stashed changes
           <SharerFacebook
             className='fb share'
             params={{
