@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 import Timeago from 'lib/site/timeago'
-import Poll from 'lib/site/topic-layout/topic-article/poll/component'
+// import Poll from 'lib/site/topic-layout/topic-article/poll/component'
+import Poll from '../../topic-layout/topic-article/poll/component'
 import { SharerFacebook } from 'ext/lib/site/sharer'
 
 export default ({ forum, topic }) => {
@@ -39,6 +40,12 @@ export default ({ forum, topic }) => {
             <span>{moment(topic.createdAt).format('D/M/YY')}</span>
           </div>
         )}
+<<<<<<< Updated upstream
+=======
+        {topic.attrs.rosario2030=="si" && (
+        <div className="label2030 ">Rosario 2030</div>
+        )}
+>>>>>>> Stashed changes
         <h1 className='topic-card-title'>
           <Link to={topic.url}>{topic.mediaTitle}</Link>
         </h1>
@@ -53,6 +60,13 @@ export default ({ forum, topic }) => {
               <span>{`${votes} participante${votes !== 1 ? 's' : ''}`}</span>
             </div>
             <div className='social-links'>
+              {window.innerWidth <= 600 &&
+                <span
+                  onClick={handleLinkClick}
+                  target='_blank'
+                  href={`whatsapp://send?text=${twitterDesc}`}
+                  className='wp' />
+              }
               <SharerFacebook
                 className='fb'
                 params={{ picture: topic.coverUrl, link: topicUrl }} />
@@ -62,12 +76,16 @@ export default ({ forum, topic }) => {
                 href={`http://twitter.com/home?status=${twitterDesc}`}>
                 <i className='icon-social-twitter' />
               </span>
+<<<<<<< Updated upstream
               {window.innerWidth <= 630 &&
                 <span
                   onClick={handleLinkClick}
                   href={`whatsapp://send?text=${twitterDesc}`}
                   className='wp' />
               }
+=======
+              
+>>>>>>> Stashed changes
             </div>
             <div className='comments'>
               <Link to={topic.url}>
