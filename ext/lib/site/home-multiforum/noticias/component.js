@@ -4,13 +4,40 @@ import Content from 'lib/site/topic-layout/topic-article/content/component'
 class Noticias extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
-      topic: null
+      topic: null,
+      tagName: this.props.tagName === undefined ? null : this.props.tagName,
     }
   }
 
+  
+    
+
+//   componentWillMount () {
+//   switch (this.state.tags) {
+//     case 'lucho':
+//       window.fetch(`/ext/api/noticias`)
+//        .then((res) => res.json())
+//        .then((res) => {
+//         if (res.result) {      
+//           this.setState({ topic: res.result.topic })
+//         }
+//       })
+//     case 'social':
+//      window.fetch(`/ext/api/noticiasSocial`)
+//        .then((res) => res.json())
+//        .then((res) => {
+//         if (res.result) {      
+//           this.setState({ topic: res.result.topic })
+//         }
+//       })
+
+//     }
+// }
+
   componentWillMount () {
-    window.fetch(`/ext/api/noticias`)
+    window.fetch(`/ext/api/noticias?tagName=${this.state.tagName}`)
       .then((res) => res.json())
       .then((res) => {
         if (res.result) {
@@ -18,6 +45,7 @@ class Noticias extends Component {
         }
       })
   }
+
 
   render () {
     const { topic } = this.state
