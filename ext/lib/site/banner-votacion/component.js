@@ -42,6 +42,7 @@ export default class BannerVotacion extends Component {
   render () {
     if (this.state.stageVotacion !== 'votacion-abierta' || this.checkLocation()) return null
     const { cierreVotacion } = this.state
+
     return this.state.visibility && (
       <div className='container-banner'>
         <button className='closes' onClick={this.closeBanner}>x</button>
@@ -49,7 +50,7 @@ export default class BannerVotacion extends Component {
           ¡Ya está abierta la votación para el Presupuesto Participativo de este año!
         </h3>
         <h3>
-          Tenés tiempo hasta el {cierreVotacion && cierreVotacion.toLocaleDateString()}
+          Tenés tiempo hasta el {cierreVotacion.toLocaleDateString()==="Invalid Date" ? "cierre de la votación" : cierreVotacion.toLocaleDateString()}
         </h3>
         <Link
           to='/presupuesto'
