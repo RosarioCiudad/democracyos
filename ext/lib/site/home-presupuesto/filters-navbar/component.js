@@ -22,7 +22,8 @@ class FiltersNavbar extends Component {
       },
       anio: {
         proyectos2017: false,
-        proyectos2018: false
+        proyectos2018: false,
+        proyectos2019: false
       },
       estado: {
         proyectado: false,
@@ -40,7 +41,8 @@ class FiltersNavbar extends Component {
         anio: 0,
         estado: 0
       },
-      activeDropdown: ''
+      activeDropdown: '',
+      forum: ''
     }
     this.filtersCache = null
   }
@@ -70,7 +72,12 @@ class FiltersNavbar extends Component {
         },
         anio: {
           proyectos2017: false,
+<<<<<<< Updated upstream
           proyectos2018: false
+=======
+          proyectos2018: true,
+          proyectos2019: false
+>>>>>>> Stashed changes
         },
         estado: {
           proyectado: false,
@@ -89,6 +96,7 @@ class FiltersNavbar extends Component {
 
           nextFilters.estado.pendiente = true
           nextFilters.anio.proyectos2018 = true
+          // nextFilters.anio.proyectos2019 = true
           nextFilters.edad[padron] = true
           nextFilters.distrito[distrito] = true
           break
@@ -96,6 +104,7 @@ class FiltersNavbar extends Component {
           nextFilters.estado.proyectado = true
           nextFilters.estado.perdedor = true
           nextFilters.anio.proyectos2018 = true
+          // nextFilters.anio.proyectos2019 = true
           nextFilters.edad.adulto = true
           nextFilters.distrito.centro = true
           break
@@ -409,6 +418,15 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2018'>2018</label>
                         </div>
+
+                          <div className='option-container'>
+                          <div className='check-container'>
+                            <input onChange={this.handleCheckboxChange('anio')} type='checkbox' id='proyectos2019' name='anio' checked={this.state.selectFilters.anio.proyectos2019} />
+                            <label htmlFor='proyectos2019'></label>
+                          </div>
+                          <label htmlFor='proyectos2019'>2019</label>
+                          </div>
+
                       </div>
               
                     </div>
