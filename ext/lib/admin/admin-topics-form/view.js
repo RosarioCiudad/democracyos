@@ -305,6 +305,7 @@ export default class TopicForm extends FormView {
         .catch((err) => {
           log('Found error %o', err)
         })
+
     }
 
     confirm(_t('title'), _t('body'))
