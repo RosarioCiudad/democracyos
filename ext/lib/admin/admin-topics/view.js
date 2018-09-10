@@ -83,7 +83,7 @@ export default class TopicsListView extends View {
 
     const onconfirmdelete = (ok) => {
       if (!ok) return
-
+      window.location.reload(true)
       topicStore.destroy(topicId)
         .catch((err) => {
           log('Found error %o', err)
