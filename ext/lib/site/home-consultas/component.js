@@ -27,7 +27,19 @@ const filters = {
     text: 'Finalizadas',
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron consultas finalizadas.'
-  }
+  },
+  consultas: {
+    text: 'Consultas',
+    filter: (topic) => topic.attrs.rosario2030 === 'no',
+    emptyMsg: 'No se encontraron consultas.'
+  },
+
+  rosario2030: {
+    text: 'Rosario2030',
+    filter: (topic) => topic.attrs.rosario2030 === 'si',
+    emptyMsg: 'Actualmente no hay consultas para el 2030.'
+  },
+
 }
 
 function filter (key, items = []) {
@@ -41,7 +53,7 @@ class HomeConsultas extends Component {
     this.state = {
       forum: null,
       topics: null,
-      filter: 'new'
+      filter: 'rosario2030',
     }
   }
 
@@ -63,13 +75,15 @@ class HomeConsultas extends Component {
         this.setState({
           forum,
           filter: filterKey,
-          topics: filtered
+          topics: filtered,
         })
-
+     
         bus.on('topic-store:update:all', this.fetchTopics)
       })
       .catch((err) => { throw err })
   }
+
+  
 
   componentWillUnmount = () => {
     bus.off('topic-store:update:all', this.fetchTopics)
@@ -78,9 +92,7 @@ class HomeConsultas extends Component {
   fetchTopics = () => {
     topicStore.findAll({ forum: this.state.forum.id })
       .then(([topics, pagination]) => {
-        this.setState({
-          topics: filter(this.state.filter, topics)
-        })
+        this.setState({ topics })
       })
       .catch((err) => { throw err })
   }
@@ -133,15 +145,27 @@ class HomeConsultas extends Component {
 }
 
 const Filter = ({ onChange, active }) => (
-  <div className='topics-filter'>
-    {Object.keys(filters).map((key) => (
-      <button
-        key={key}
-        className={`btn btn-secondary btn-sm ${active === key ? 'active' : ''}`}
-        onClick={() => onChange(key)}>
-        {filters[key].text}
-      </button>
-    ))}
+  <div className='container'>
+    <div className='topics-filter'>
+      {Object.keys(filters).map((key) => (
+        <button
+          key={key}
+          className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'boton2030' : (key === 'consultas' ? 'boton2030' : 'filtrostatus')}${''} ${active === key ? 'active' : ''}`}
+          onClick={() => onChange(key)}>
+          {filters[key].text}
+        </button>
+      ))}
+    </div> 
+    <div className='pp-nav2'>
+          {Object.keys(filters).map((key) => (
+           <button
+             key={key}
+             className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'filtro2030' : (key === 'consultas' ? 'filtroconsultas' : 'filtrosocultos')}${''} ${active === key ? 'active' : ''}`}
+             onClick={() => onChange(key)}>
+             {filters[key].text}
+           </button>
+          ))}
+    </div>
   </div>
 )
 
