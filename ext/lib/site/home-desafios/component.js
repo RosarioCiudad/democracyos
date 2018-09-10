@@ -30,11 +30,7 @@ const filters = {
   }
 }
 
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
 }
@@ -71,11 +67,6 @@ class HomeDesafios extends Component {
           filter: filterKey,
           topics: filtered
         })
-<<<<<<< Updated upstream
-=======
-        //console.log(topics)
->>>>>>> Stashed changes
-
    
 
         bus.on('topic-store:update:all', this.fetchTopics)
