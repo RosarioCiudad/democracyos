@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-FROM democracyos/democracyos:2.9.8
-=======
 FROM democracyos/democracyos:2.11.13
->>>>>>> Stashed changes
+
 
 MAINTAINER Matías Lescano <matias@democraciaenred.org>
 
