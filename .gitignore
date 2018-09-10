@@ -3,3 +3,6 @@
 node_modules
 public
 tmp
+/install_nvm.sh.save
+/install_nvm.sh
+/.install_nvm.sh.swp
