@@ -1,9 +1,6 @@
 {
-<<<<<<< Updated upstream
-  "version": "2.3.17",
-=======
+
   "version": "2.3.35",
->>>>>>> Stashed changes
   "name": "rosariociudad-democracyos",
   "description": "Municipalidad de la Ciudad de Rosario.",
   "main": "lib/boot",
