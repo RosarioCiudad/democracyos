@@ -40,12 +40,9 @@ export default ({ forum, topic }) => {
             <span>{moment(topic.createdAt).format('D/M/YY')}</span>
           </div>
         )}
-<<<<<<< Updated upstream
-=======
         {topic.attrs.rosario2030=="si" && (
         <div className="label2030 ">Rosario 2030</div>
         )}
->>>>>>> Stashed changes
         <h1 className='topic-card-title'>
           <Link to={topic.url}>{topic.mediaTitle}</Link>
         </h1>
@@ -76,16 +73,7 @@ export default ({ forum, topic }) => {
                 href={`http://twitter.com/home?status=${twitterDesc}`}>
                 <i className='icon-social-twitter' />
               </span>
-<<<<<<< Updated upstream
-              {window.innerWidth <= 630 &&
-                <span
-                  onClick={handleLinkClick}
-                  href={`whatsapp://send?text=${twitterDesc}`}
-                  className='wp' />
-              }
-=======
-              
->>>>>>> Stashed changes
+
             </div>
             <div className='comments'>
               <Link to={topic.url}>
