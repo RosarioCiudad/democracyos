@@ -103,9 +103,12 @@ class HomePresupuesto extends Component {
               .filter(this.filtroEstado)
               .filter(this.filtroAnio)
               .filter(this.filtroDistrito(distrito.name))
-              .sort(byState)
-              .sort(byEdad)
-              .sort(byArea)
+              .sort(genericSort)
+              // .sort(byState)
+              // .sort(byEdad)
+              // .sort(byArea)
+              // //orden por Anio
+              // .sort(byAnio)
           : []
 
         return distrito
@@ -248,16 +251,6 @@ function estadoNum (e) {
   }
 }
 
-<<<<<<< Updated upstream
-function byState (a, b) {
-  let ae = estadoNum(a.attrs && a.attrs.state)
-  let be = estadoNum(b.attrs && b.attrs.state)
-  return ae > be
-    ? 1
-    : ae < be
-    ? -1
-    : 0
-=======
 
 function anioNum (e) {
   switch (e) {
@@ -270,17 +263,65 @@ function anioNum (e) {
     default:
       return 4
   }
->>>>>>> Stashed changes
 }
 
-function byEdad (a, b) {
-  return a.attrs.edad === 'joven' ? 1 : -1
-}
 
-function byArea (a, b) {
-  let ae = a.attrs ? a.attrs.area : ''
-  let be = b.attrs ? b.attrs.area : ''
-  return ae > be
-    ? 1
-    : -1
-}
+    function genericSort(a,b){
+        /*ordeno por area*/
+        let areaA = a.attrs ? a.attrs.area : '';
+        let areaB = b.attrs ? b.attrs.area : '';
+
+        if (areaA < areaB) return -1;
+        if (areaA > areaB) return 1;
+
+        /*ordeno por año*/
+        let anioA = anioNum(a.attrs && a.attrs.anio);
+        let anioB = anioNum(b.attrs && b.attrs.anio);
+
+        if (anioA < anioB) return -1;
+        if (anioA > anioB) return 1;
+
+        /*ordeno por estado*/
+       
+        let estadoA = estadoNum(a.attrs && a.attrs.state);
+        let estadoB = estadoNum(b.attrs && b.attrs.state);
+
+        if (estadoA < estadoB) return -1;
+        if (estadoA > estadoB) return 1;
+
+        return 0;
+     }
+
+
+
+// function byState (a, b) {
+//   let ae = estadoNum(a.attrs && a.attrs.state)
+//   let be = estadoNum(b.attrs && b.attrs.state)
+//   return ae > be
+//     ? 1
+//     : ae < be
+//     ? -1
+//     : 0
+// }
+
+// function byEdad (a, b) {
+//   return a.attrs.edad === 'joven' ? 1 : -1
+// }
+
+// function byArea (a, b) {
+//   let ae = a.attrs ? a.attrs.area : ''
+//   let be = b.attrs ? b.attrs.area : ''
+//   return ae > be
+//     ? 1
+//     : -1
+// }
+
+// //agrego funcion para ordenar por Anio
+
+// function byAnio (a, b) {
+//   let ae = a.attrs ? a.attrs.anio : ''
+//   let be = b.attrs ? b.attrs.anio : ''
+//   return ae > be
+//     ? 1
+//     : -1
+// }
