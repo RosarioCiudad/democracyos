@@ -26,7 +26,21 @@ const filters = {
     sort: '-action.count',
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron ideas.'
-  }
+  },
+  ideas: {
+    text: 'Ideas',
+    sort: '-createdAt',
+    filter: (topic) => topic.attrs.rosario2030 === 'no',
+    emptyMsg: 'No se encontraron ideas.'
+  },
+
+  rosario2030: {
+    text: 'Rosario2030',
+    sort: '-createdAt',
+    filter: (topic) => topic.attrs.rosario2030 === 'si',
+    emptyMsg: 'Actualmente no hay ideas para el 2030.'
+  },
+
 }
 
 function filter (key, items = []) {
@@ -41,12 +55,31 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
           {Object.keys(filters).map((key) => (
             <button
               key={key}
-              className={`btn btn-secondary btn-sm ${activeFilter === key ? 'active' : ''}`}
+              className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'boton2030' : (key === 'ideas' ? 'boton2030' : 'filtrostatus')}${''} ${activeFilter === key ? 'active' : ''}`}
               onClick={() => onChangeFilter(key)}>
               {filters[key].text}
             </button>
           ))}
         </div>
+      </div>
+    </div>
+    <div className='row'>
+      <div className='col-md-12'>    
+        <div className='pp-nav2'>
+          {Object.keys(filters).map((key) => (
+           <button
+             key={key}
+             className={`btn btn-secondary btn-sm ${key === 'rosario2030' ? 'filtro2030' : (key === 'ideas' ? 'filtroideas' : 'filtrosocultos')}${''} ${activeFilter === key ? 'active' : ''}`}
+             onClick={() => onChangeFilter(key)}>
+             {filters[key].text}
+           </button>
+          ))}
+        </div>
+      </div>   
+    </div>
+    
+    <div className='row'>
+      <div className='col-md-8 escribir'> 
         <a
           href='/ideas/admin/topics/create'
           className='btn btn-lg btn-primary crear-idea'>
@@ -67,7 +100,7 @@ class HomeIdeas extends Component {
       forum: null,
       topics: null,
       tags: null,
-      filter: 'pop'
+      filter: 'rosario2030',
     }
   }
 
@@ -86,7 +119,7 @@ class HomeIdeas extends Component {
         this.setState({
           forum,
           topics: filter(this.state.filter, topics),
-          tags: tags.results.tags
+          tags: tags.results.tags.filter(tag => tag.count > 1).map(tag => tag.tag)
         })
       })
       .catch((err) => { throw err })
@@ -124,13 +157,13 @@ class HomeIdeas extends Component {
     var u = new window.URLSearchParams(window.location.search)
     if (u.has('tag')) query.tag = u.get('tag')
     query.forum = this.state.forum.id
-    query.sort = filters[this.state.filter].sort
+    query.sort = filters[key].sort
 
     this.setState({ filter: key }, () => {
       this.fetchTopics(1, this.state.forum.id)
         .then((topics) => {
           this.setState({
-            topics,
+            topics: filter(this.state.filter, topics),
             noMore: topics.length === 0 || topics.length < 20,
             page: 1
           })
