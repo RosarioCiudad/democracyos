@@ -34,8 +34,17 @@
       text-decoration: underline
 
     &.not-show-results
+      padding-right: 4em
       .circle
         border: 1px solid #8899A6
+        
+      &.winner
+        .results-bar
+          background-color: #c1ddff
+        .poll-option-label
+          font-weight: bold 
+        .poll-results
+          font-weight: bold  
 
     &.show-results
       cursor: inherit

@@ -118,7 +118,6 @@ class HomeVoluntariados extends Component {
             </div>
           </div>
         )}
-        
         {topics && <Footer />}
       </div>
     )

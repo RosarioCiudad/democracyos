@@ -120,8 +120,9 @@ export class Poll extends Component {
                 onSelect={this.select(result.value)}
                 value={result.value}
                 percentage={result.percentage}
+                winner={result.winner}
                 selected={selected === result.value}
-                votada={mostrarCambiar} />
+                votada={mostrarCambiar}/>
             ))
           }
           { showChangeVote && <ChangeVote handleClick={this.changeVote} /> }
@@ -153,11 +154,11 @@ export class Poll extends Component {
 
 export default userConnector(Poll)
 
-const Option = ({ onSelect, selected, percentage, value, votada }) => (
+const Option = ({ winner, onSelect, selected, percentage, value, votada }) => (
   <button
-    className={'btn btn-default poll-btn not-show-results'}
+    className={'btn btn-default poll-btn not-show-results'  +
+      (winner && votada ? ' winner' : '')}
     onClick={onSelect}>
-    {selected && <span className='circle icon-check' />}
     {selected && <span className='circle icon-check' />}
     {votada && <span className='poll-results'>{ percentage }%</span>}
       <span className='poll-option-label'>{ value }</span>
