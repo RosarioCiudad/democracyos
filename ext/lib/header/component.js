@@ -7,6 +7,7 @@ import userConnector from 'lib/site/connectors/user'
 import UserBadge from './user-badge/component'
 import CompleteUserData from './complete-data/component'
 
+
 class Header extends Component {
   constructor (props) {
     super(props)
