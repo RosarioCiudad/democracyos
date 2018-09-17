@@ -84,7 +84,7 @@ forms.Enum = ({
       name={`attrs.${name}`}
       defaultValue={value}
       required={mandatory}
-      validate={mandatory && 'required'}>
+      >
       {options.map((opt) => (
         <option key={opt.name} value={opt.name}>{opt.title}</option>
       ))}
