@@ -13,7 +13,7 @@ export default ({ scrollInfo }) => (
               <p>Registrate</p>
             </div>
             <Link to='/signin' className='p-text'>
-              Hacé click en <Link to='/signin'>Ingresar</Link>,
+              Hacé click en <span className="color-link">Ingresar</span>,
               completá el formulario y sé
               parte de Rosario Participa.
             </Link>
