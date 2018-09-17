@@ -57,8 +57,8 @@ export default userConnector(({ user }) => {
             <Link to='/voluntariado' className='btn btn-primary btn-lg'>Quiero sumarme</Link>
           </div>
         </div>
-        <Feed />
       </Anchor>
+        
       <TweetsFeed />
       <Footer />
     </div>
