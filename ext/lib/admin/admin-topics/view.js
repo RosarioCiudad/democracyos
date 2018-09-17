@@ -85,10 +85,11 @@ export default class TopicsListView extends View {
     if(!topicId) debugger
 
     const _t = (s) => t(`admin-topics-form.delete-topic.confirmation.${s}`)
-
-    const onconfirmdelete = (ok) => {
-      if (!ok) return
-      window.location.reload(true)
+ 
+    
+    const onconfirmdelete = (ok) => {  
+      if (!ok) 
+        return
       topicStore.destroy(topicId)
         .catch((err) => {
           log('Found error %o', err)
@@ -102,5 +103,6 @@ export default class TopicsListView extends View {
       .closable()
       .effect('slide')
       .show(onconfirmdelete)
+
   }
 }
