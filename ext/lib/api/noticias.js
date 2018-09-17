@@ -5,6 +5,7 @@ const Tag = require('lib/models').Tag
 
 const app = module.exports = express()
 
+
 app.get('/',
 function getNoticias (req, res, next) {
   Forum.findOne({ name: 'noticias' })
