@@ -215,6 +215,7 @@ export default class TopicForm extends FormView {
       return
     }
     this.find('form input[type=submit]')[0].click()
+    window.location.reload(true)
   }
 
   postserialize (data = {}) {
