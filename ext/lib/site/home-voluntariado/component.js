@@ -124,4 +124,5 @@ class HomeVoluntariados extends Component {
   }
 }
 
+
 export default userConnector(HomeVoluntariados)
