@@ -30,6 +30,7 @@ export class Poll extends Component {
     }
   }
 
+
   handlePoll = (e) => {
 
     if (!this.state.changingVote) {
