@@ -49,6 +49,7 @@ class Noticias extends Component {
 
   render () {
     const { topic } = this.state
+    console.log(topic)
     if (!topic) return null
     return (
       <div id='noticias' className='container'>
