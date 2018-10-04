@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import { render as ReactRender } from 'react-dom'
+import { dom as render } from 'lib/render/render'
 import 'whatwg-fetch'
 import t from 't-component'
 import urlBuilder from 'lib/url-builder'
+import * as serializer from 'lib/admin/admin-topics-form/body-serializer'
+import Datepicker from 'democracyos-datepicker'
+import topicStore from 'lib/stores/topic-store/topic-store'
+import FormView from 'lib/form-view/form-view'
 
 const stages = [
   {'name': 'votacion-abierta', 'title': 'Votación abierta'},
@@ -16,19 +22,41 @@ export default class UpdateStage extends Component {
       visibility: false,
       success: false,
       initialStage: '',
+      initialCierre:'',
       selectedStage: '',
       savedStage: '',
       disabled: true,
-      forum: ''
+      forum: '',
+      cierre: ''
     }
+      this.handleClick = this.handleClick.bind(this);
+      
   }
 
   componentWillMount () {
     this.setState ({
       initialStage: this.props.forum.extra.stage,
+      initialCierre: new Date(this.props.forum.extra.cierre),
+
       forum: this.props.forum.id
     })
   }
+
+  //datepicker
+
+  handleClick(e) {
+    this.renderDateTimePickers ()
+  }
+
+  renderDateTimePickers () {
+      this.closingAt = document.querySelector('[name=closingAt]');
+      //this.closingAtTime = document.querySelector('[name=closingTime]');
+      Datepicker(this.closingAt)
+      this.dp = new Datepicker(this.closingAt[0])
+      this.dp.toLocaleDateString()
+      return this
+  }
+
 
   chooseStage = (e) => {
     let option = e.target.value
@@ -98,10 +126,24 @@ export default class UpdateStage extends Component {
               })}
             </select>
           </div>
+           <div className="form-group closingAt">
+          <label>Fecha de cierre</label>
+          <span className="help-text">Fecha de cierre de la votación</span>
+          <div className="form-inline">
+          <div className="form-group">
+          <input name="closingAt" defaultValue={this.state.initialCierre.toLocaleDateString("es-ES")} placeholder="yyyy/mm/dd" onClick={this.handleClick} className="form-control" />
+          <input name="closingAtTime" defaultValue={this.state.initialCierre.toLocaleTimeString()} placeholder="hh:mm" className="form-control" />
+          </div>
+          <button type="button" data-clear-closing-at="data-clear-closing-at" className="btn btn-link remove-button">
+          <i className="icon-trash"></i></button>
+          </div>
+          </div>
+       
           <button className='btn btn-primary boton' onClick={this.changeStage} disabled={this.state.disabled}>
             Confirmar
           </button>
         </div>
+          
       </div>
       )
   }
