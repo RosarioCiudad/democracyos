@@ -1,5 +1,5 @@
 {
-  "version": "2.3.35",
+  "version": "2.7.1",
   "name": "rosariociudad-democracyos",
   "description": "Municipalidad de la Ciudad de Rosario.",
   "main": "lib/boot",
@@ -26,3 +26,4 @@
     "eslint-config-democracyos": "~1.2.1"
   }
 }
+
