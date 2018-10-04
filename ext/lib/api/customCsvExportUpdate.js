@@ -39,7 +39,7 @@ app.get('/topics.csv',
       if (topic.attrs === undefined) {
         topic.attrs = {}
       }
-      if (topic.attrs.anio === '2018') {
+      if (topic.attrs.anio === '2019') {
         infoTopics.push([
           `"${escapeTxt(topic.attrs.district)}"`.toUpperCase(),
           `"${escapeTxt(topic.attrs.number)}"`,

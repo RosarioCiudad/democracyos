@@ -73,7 +73,7 @@ class FiltersNavbar extends Component {
         anio: {
           proyectos2017: false,
           proyectos2018: true,
-          proyectos2019: false
+          proyectos2019: true
         },
         estado: {
           proyectado: false,
@@ -95,7 +95,7 @@ class FiltersNavbar extends Component {
 
           nextFilters.estado.pendiente = true
           nextFilters.anio.proyectos2018 = true
-          // nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2019 = true
           nextFilters.edad[padron] = true
           nextFilters.distrito[distrito] = true
           break
@@ -103,7 +103,7 @@ class FiltersNavbar extends Component {
           nextFilters.estado.proyectado = true
           nextFilters.estado.perdedor = true
           nextFilters.anio.proyectos2018 = true
-          // nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2019 = true
           nextFilters.edad.adulto = true
           nextFilters.distrito.centro = true
           break

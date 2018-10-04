@@ -24,8 +24,7 @@ class HomePresupuesto extends Component {
       topics: [],
       edad: ['joven', 'adulto'],
       distrito: ['centro', 'noroeste', 'norte', 'oeste', 'sudoeste', 'sur'],
-      anio: ['2017', '2018'],
-      // anio: ['2017', '2018', '2019'],
+      anio: ['2017', '2018', '2019'],
       estado: ['proyectado', 'ejecutandose', 'terminado']
     }
   }
@@ -126,8 +125,8 @@ class HomePresupuesto extends Component {
       return '2017'
     case 'proyectos2018':
       return '2018'
-    // case 'proyectos2019':
-      // return '2019'
+    case 'proyectos2019':
+      return '2019'
   }
       })
 
@@ -255,8 +254,8 @@ function estadoNum (e) {
 
 function anioNum (e) {
   switch (e) {
-    // case '2019':
-    // return 1
+    case '2019':
+      return 1
     case '2018':
       return 2
     case '2017':
