@@ -118,11 +118,11 @@ class HomeVoluntariados extends Component {
             </div>
           </div>
         )}
-        
         {topics && <Footer />}
       </div>
     )
   }
 }
+
 
 export default userConnector(HomeVoluntariados)

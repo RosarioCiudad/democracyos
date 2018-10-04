@@ -65,7 +65,7 @@
     display: flex
     justify-content: center
     align-items: center
-    padding: 15px
+    padding: 10px
     .hashtag
       font-size: 18px
     a
@@ -79,7 +79,7 @@
       .fb-share
         width: 30px
         height: 20px
-        margin: 0 4px 2px 7px
+        margin: 0 4px 2px 4px
         background-size: auto 20px
         background-repeat: no-repeat
         background-position: center
@@ -87,11 +87,13 @@
         background-image: unquote("url('/ext/lib/site/topic-layout/fb-icon.svg')")
     a.tw
       background-image: unquote("url('/ext/lib/site/topic-layout/tw-icon.svg')")
-      margin-bottom: 1px
+      margin-bottom: 2px
+
     @media screen and (max-width: 600px)
       a.wh
         background-image: unquote("url('/ext/lib/site/topic-layout/whatsapp-logo.svg')")
-        margin-bottom: 1px
+        margin-bottom: 2px
+
       
 .presupuesto-share.ganador
   max-width: 450px
@@ -168,6 +170,7 @@
     @media screen and (max-width: 600px)
       a.wh
         width: 24px
-        height: 25px
+        height: 22px
         background: unquote("url('/ext/lib/site/topic-layout/whatsapp-logo.svg')") no-repeat center
         background-size: contain
+        margin-bottom: 1px

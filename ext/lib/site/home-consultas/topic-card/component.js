@@ -57,6 +57,13 @@ export default ({ forum, topic }) => {
               <span>{`${votes} participante${votes !== 1 ? 's' : ''}`}</span>
             </div>
             <div className='social-links'>
+              {window.innerWidth <= 600 &&
+                <span
+                  onClick={handleLinkClick}
+                  target='_blank'
+                  href={`whatsapp://send?text=${twitterDesc}`}
+                  className='wp' />
+              }
               <SharerFacebook
                 className='fb'
                 params={{ picture: topic.coverUrl, link: topicUrl }} />
@@ -67,13 +74,7 @@ export default ({ forum, topic }) => {
                 href={`http://twitter.com/home?status=${twitterDesc}`}>
                 <i className='icon-social-twitter' />
               </span>
-              {window.innerWidth <= 600 &&
-                <span
-                  onClick={handleLinkClick}
-                  target='_blank'
-                  href={`whatsapp://send?text=${twitterDesc}`}
-                  className='wp' />
-              }
+
             </div>
             <div className='comments'>
               <Link to={topic.url}>

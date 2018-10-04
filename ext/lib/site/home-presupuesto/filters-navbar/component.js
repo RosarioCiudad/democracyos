@@ -3,8 +3,6 @@ import ReactOutsideEvent from 'react-outside-event'
 import update from 'immutability-helper'
 import distritos from '../distritos.json'
 
-
-
 class FiltersNavbar extends Component {
   constructor (props) {
     super(props)

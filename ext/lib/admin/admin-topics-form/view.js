@@ -215,6 +215,7 @@ export default class TopicForm extends FormView {
       return
     }
     this.find('form input[type=submit]')[0].click()
+    
   }
 
   postserialize (data = {}) {
@@ -305,6 +306,7 @@ export default class TopicForm extends FormView {
         .catch((err) => {
           log('Found error %o', err)
         })
+
     }
 
     confirm(_t('title'), _t('body'))

@@ -50,6 +50,7 @@ class Feed extends Component {
 export default Feed
 
 function topicCard (topic, forums, i) {
+  
   const forum = forums.find((f) => topic.forum === f.id)
   const url = urlBuilder.for('site.topic', {
     forum: forum.name,

@@ -13,7 +13,6 @@ class Noticias extends Component {
 
   
     
-
 //   componentWillMount () {
 //   switch (this.state.tags) {
 //     case 'lucho':
@@ -55,8 +54,8 @@ class Noticias extends Component {
         <div className='texto-container'>
           <h3>{topic.mediaTitle}</h3>
           <Content clauses={topic.clauses} />
-          {
-            topic.attrs.linkText && (
+            {
+              topic.attrs.linkText &&  (
               <a className='btn btn-primary' target='_blank' href={topic.attrs.linkUrl}>{topic.attrs.linkText}</a>
             )
           }
@@ -83,5 +82,6 @@ class Noticias extends Component {
     )
   }
 }
+
 
 export default Noticias

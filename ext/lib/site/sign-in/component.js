@@ -57,7 +57,7 @@ export class SignIn extends Component {
 
   openPopup = (e) => {
     e.preventDefault()
-    let url = 'https://t-www.rosario.gov.ar/form/id/actualizar-email'
+    let url = 'https://www.rosario.gov.ar/form/id/actualizar-email'
     PopupCenter(url, '', 500, 600)
   }
 

@@ -60,11 +60,12 @@ forms.String = ({
       className='form-control'
       type='text'
       name={`attrs.${name}`}
-      defaultValue={name === 'anio' ? (value || '2018') : value}
+      defaultValue={name === 'anio' ? (value || '2018') : (name=== 'linkText' ? (value || 'Ver Noticias') : value)}
       minLength={min}
       maxLength={max}
       required={mandatory}
-      validate={mandatory && 'required'} />
+      validate={mandatory && 'required'} 
+      />
   </div>
 )
 
@@ -84,7 +85,7 @@ forms.Enum = ({
       name={`attrs.${name}`}
       defaultValue={value}
       required={mandatory}
-      validate={mandatory && 'required'}>
+      >
       {options.map((opt) => (
         <option key={opt.name} value={opt.name}>{opt.title}</option>
       ))}

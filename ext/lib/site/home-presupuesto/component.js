@@ -236,6 +236,7 @@ class HomePresupuesto extends Component {
   }
 }
 
+
 export default userConnector(HomePresupuesto)
 
 function estadoNum (e) {
