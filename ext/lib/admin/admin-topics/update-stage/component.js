@@ -8,6 +8,7 @@ import * as serializer from 'lib/admin/admin-topics-form/body-serializer'
 import Datepicker from 'democracyos-datepicker'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import FormView from 'lib/form-view/form-view'
+import o from 'component-dom'
 
 const stages = [
   {'name': 'votacion-abierta', 'title': 'Votación abierta'},
@@ -30,8 +31,11 @@ export default class UpdateStage extends Component {
       cierre: ''
     }
       this.handleClick = this.handleClick.bind(this);
-      
+      this.handleChange = this.handleChange.bind(this);
+
   }
+
+  
 
   componentWillMount () {
     this.setState ({
@@ -44,16 +48,22 @@ export default class UpdateStage extends Component {
 
   //datepicker
 
-  handleClick(e) {
-    this.renderDateTimePickers ()
+  handleChange(e) {
+   console.log("hola")
+   }
+ 
+ handleClick(e) {
+   e.preventDefault()
+   this.renderDateTimePickers ()
   }
+  
 
-  renderDateTimePickers () {
-      this.closingAt = document.querySelector('[name=closingAt]');
-      //this.closingAtTime = document.querySelector('[name=closingTime]');
-      Datepicker(this.closingAt)
-      this.dp = new Datepicker(this.closingAt[0])
-      this.dp.toLocaleDateString()
+
+  renderDateTimePickers (e) {
+      this.cierre = document.querySelector('[name=closingAt]')
+      var valor = Datepicker(this.cierre)
+      console.log(valor)
+      //this.cierre.value('Datepicker(this.cierre)')
       return this
   }
 
@@ -131,7 +141,7 @@ export default class UpdateStage extends Component {
           <span className="help-text">Fecha de cierre de la votación</span>
           <div className="form-inline">
           <div className="form-group">
-          <input name="closingAt" defaultValue={this.state.initialCierre.toLocaleDateString("es-ES")} placeholder="yyyy/mm/dd" onClick={this.handleClick} className="form-control" />
+          <input name="closingAt" defaultValue={this.state.initialCierre.toLocaleDateString()} placeholder="yyyy/mm/dd" onClick={this.handleClick} onChange={this.handleChange} className="form-control" />
           <input name="closingAtTime" defaultValue={this.state.initialCierre.toLocaleTimeString()} placeholder="hh:mm" className="form-control" />
           </div>
           <button type="button" data-clear-closing-at="data-clear-closing-at" className="btn btn-link remove-button">
