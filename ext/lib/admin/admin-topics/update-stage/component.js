@@ -6,6 +6,7 @@ import t from 't-component'
 import urlBuilder from 'lib/url-builder'
 import * as serializer from 'lib/admin/admin-topics-form/body-serializer'
 import Datepicker from 'democracyos-datepicker'
+import moment from 'moment'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import FormView from 'lib/form-view/form-view'
 import o from 'component-dom'
@@ -23,49 +24,52 @@ export default class UpdateStage extends Component {
       visibility: false,
       success: false,
       initialStage: '',
-      initialCierre:'',
+      initialCierreFecha:'',
+      initialCierreHora:'',
+      fechaCierre:'',
+      horacierre:'',
       selectedStage: '',
       savedStage: '',
       disabled: true,
       forum: '',
       cierre: ''
     }
-      this.handleClick = this.handleClick.bind(this);
-      this.handleChange = this.handleChange.bind(this);
+
+      this.handleClick = this.handleClick.bind(this)
+      //this.renderDateTimePickers = this.renderDateTimePickers.bind(this) 
+
 
   }
 
-  
+
 
   componentWillMount () {
     this.setState ({
       initialStage: this.props.forum.extra.stage,
-      initialCierre: new Date(this.props.forum.extra.cierre),
+      //initialCierreFecha: new Date(this.props.forum.extra.cierre),
+      //initialCierreHora: new Date(this.props.forum.extra.cierre),
+      fechaCierre: moment(this.props.forum.extra.cierre).format('L'),
 
-      forum: this.props.forum.id
+      forum: this.props.forum.id,
     })
   }
 
   //datepicker
-
-  handleChange(e) {
-   console.log("hola")
-   }
- 
- handleClick(e) {
-   e.preventDefault()
+handleClick(e) {
    this.renderDateTimePickers ()
-  }
-  
+ }
 
 
-  renderDateTimePickers (e) {
-      this.cierre = document.querySelector('[name=closingAt]')
-      var valor = Datepicker(this.cierre)
-      console.log(valor)
-      //this.cierre.value('Datepicker(this.cierre)')
+
+  renderDateTimePickers () {
+      //this.cierre = this.find('[name=closingAt]', this.el)
+      this.cierre = document.querySelector('[name=closingAt]') 
+      this.dp= new Datepicker(this.cierre)
+      console.log(this.dp)
+      //this.cierre.value(Datepicker(this.cierre))
       return this
   }
+
 
 
   chooseStage = (e) => {
@@ -75,12 +79,13 @@ export default class UpdateStage extends Component {
         this.setState({disabled: true})
       } else {
         this.setState({disabled: false})
-      } 
+      }
     })
   }
 
   changeStage = () => {
     const sendStage = this.state.selectedStage
+    const cierre = new Date(this.state.initialCierre).toISOString()
     fetch('/ext/api/change-stage', {
           method: 'POST',
           credentials: 'same-origin',
@@ -88,7 +93,7 @@ export default class UpdateStage extends Component {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({stage: sendStage, forum: this.state.forum})
+          body: JSON.stringify({stage: sendStage, cierre: cierre, forum: this.state.forum})
     })
     .then((res) => {
       if (res.status === 200) {
@@ -112,7 +117,7 @@ export default class UpdateStage extends Component {
         }), 5000)
     })
   }
-  
+
   render () {
     return (
       <div>
@@ -141,19 +146,20 @@ export default class UpdateStage extends Component {
           <span className="help-text">Fecha de cierre de la votación</span>
           <div className="form-inline">
           <div className="form-group">
-          <input name="closingAt" defaultValue={this.state.initialCierre.toLocaleDateString()} placeholder="yyyy/mm/dd" onClick={this.handleClick} onChange={this.handleChange} className="form-control" />
-          <input name="closingAtTime" defaultValue={this.state.initialCierre.toLocaleTimeString()} placeholder="hh:mm" className="form-control" />
+
+          <input name="closingAt" placeholder="yyyy/mm/dd" defaultValue={this.state.fechaCierre} onClick={this.handleClick}  className="form-control" />
+          <input name="closingAtTime" placeholder="hh:mm" defaultValue={this.state.hora} className="form-control" />
           </div>
           <button type="button" data-clear-closing-at="data-clear-closing-at" className="btn btn-link remove-button">
           <i className="icon-trash"></i></button>
           </div>
           </div>
-       
+
           <button className='btn btn-primary boton' onClick={this.changeStage} disabled={this.state.disabled}>
             Confirmar
           </button>
         </div>
-          
+
       </div>
       )
   }
