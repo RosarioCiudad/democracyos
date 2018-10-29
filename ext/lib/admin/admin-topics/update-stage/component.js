@@ -5,11 +5,12 @@ import 'whatwg-fetch'
 import t from 't-component'
 import urlBuilder from 'lib/url-builder'
 import * as serializer from 'lib/admin/admin-topics-form/body-serializer'
-import Datepicker from 'democracyos-datepicker'
 import moment from 'moment'
+import 'moment-timezone'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import FormView from 'lib/form-view/form-view'
 import o from 'component-dom'
+import DatePicker from 'react-datepicker'
 
 const stages = [
   {'name': 'votacion-abierta', 'title': 'Votación abierta'},
@@ -24,58 +25,45 @@ export default class UpdateStage extends Component {
       visibility: false,
       success: false,
       initialStage: '',
-      initialCierreFecha:'',
-      initialCierreHora:'',
-      fechaCierre:'',
-      horacierre:'',
       selectedStage: '',
       savedStage: '',
       disabled: true,
       forum: '',
-      cierre: ''
+      startDate: moment(),
+      open: false
     }
 
-      this.handleClick = this.handleClick.bind(this)
-      //this.renderDateTimePickers = this.renderDateTimePickers.bind(this) 
-
+      this.handleChange = this.handleChange.bind(this)
 
   }
 
 
 
   componentWillMount () {
-    this.setState ({
+       this.setState ({
       initialStage: this.props.forum.extra.stage,
-      //initialCierreFecha: new Date(this.props.forum.extra.cierre),
-      //initialCierreHora: new Date(this.props.forum.extra.cierre),
-      fechaCierre: moment(this.props.forum.extra.cierre).format('L'),
+     //Inicializo la fecha y hora del calendario con la fecha de cierre guardada en la base y le sumo 3 horas por el formato GTM -3
+      startDate: moment(this.props.forum.extra.cierre).add(3, 'hours'),
 
       forum: this.props.forum.id,
     })
   }
 
-  //datepicker
-handleClick(e) {
-   this.renderDateTimePickers ()
- }
 
 
 
-  renderDateTimePickers () {
-      //this.cierre = this.find('[name=closingAt]', this.el)
-      this.cierre = document.querySelector('[name=closingAt]') 
-      this.dp= new Datepicker(this.cierre)
-      console.log(this.dp)
-      //this.cierre.value(Datepicker(this.cierre))
-      return this
-  }
-
-
+handleChange(date) {
+    this.setState({
+      startDate: date,
+      disabled: false,
+      selectedStage: this.state.initialStage
+    })
+    }
 
   chooseStage = (e) => {
     let option = e.target.value
     this.setState({selectedStage: option}, () => {
-      if (this.state.selectedStage === this.state.initialStage ) {
+      if (this.state.selectedStage === this.state.initialStage) {
         this.setState({disabled: true})
       } else {
         this.setState({disabled: false})
@@ -83,9 +71,10 @@ handleClick(e) {
     })
   }
 
-  changeStage = () => {
+  changeStage = (e) => {
+    e.preventDefault()
+    const cierre = this.state.startDate ? this.state.startDate.format('YYYY-MM-DDTHH:mm:ss') : null
     const sendStage = this.state.selectedStage
-    const cierre = new Date(this.state.initialCierre).toISOString()
     fetch('/ext/api/change-stage', {
           method: 'POST',
           credentials: 'same-origin',
@@ -141,17 +130,16 @@ handleClick(e) {
               })}
             </select>
           </div>
-           <div className="form-group closingAt">
+           <div className={`"form-group" ${this.state.selectedStage=="votacion-abierta" || (!this.state.selectedStage && this.state.initialStage=="votacion-abierta") ? '' : 'cierreoculto'}`}>
           <label>Fecha de cierre</label>
           <span className="help-text">Fecha de cierre de la votación</span>
           <div className="form-inline">
-          <div className="form-group">
-
-          <input name="closingAt" placeholder="yyyy/mm/dd" defaultValue={this.state.fechaCierre} onClick={this.handleClick}  className="form-control" />
-          <input name="closingAtTime" placeholder="hh:mm" defaultValue={this.state.hora} className="form-control" />
+          <div className="form-group formcierre">
+          <DatePicker dateFormat="YYYY/MM/DD" selected={this.state.startDate < moment() ? null : this.state.startDate} onChange={this.handleChange} onChange={this.handleChange} calendarClassName="fuente" isClearable={true}
+  placeholderText="Fecha" className="form-control datecierre"/>
+        
+          <DatePicker selected={this.state.startDate < moment() ? null : this.state.startDate} onChange={this.handleChange} showTimeSelect showTimeSelectOnly timeCaption="Time" dateFormat="LT" calendarClassName="fuente" className="form-control" placeholderText="Hora"/>
           </div>
-          <button type="button" data-clear-closing-at="data-clear-closing-at" className="btn btn-link remove-button">
-          <i className="icon-trash"></i></button>
           </div>
           </div>
 
@@ -159,8 +147,10 @@ handleClick(e) {
             Confirmar
           </button>
         </div>
-
       </div>
       )
   }
+
+
+
 }
