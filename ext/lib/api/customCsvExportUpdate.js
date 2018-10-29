@@ -39,7 +39,7 @@ app.get('/topics.csv',
       if (topic.attrs === undefined) {
         topic.attrs = {}
       }
-      if (topic.attrs.anio === '2018') {
+      if (topic.attrs.anio === '2019') {
         infoTopics.push([
           `"${escapeTxt(topic.attrs.district)}"`.toUpperCase(),
           `"${escapeTxt(topic.attrs.number)}"`,
@@ -84,13 +84,13 @@ app.post('/topics.csv',
       }
 
       Promise.all(csvTopics.map((csvTopic) => {
-        if (!~csvTopic['Jornada'].indexOf('2018')) return Promise.resolve()
+        if (!~csvTopic['Jornada'].indexOf('2019')) return Promise.resolve()
         Object.keys(csvTopic).forEach((csvKey) => {
           if (csvKey.indexOf('/r')) {
             csvTopic[csvKey.replace(/\r/g, '')] = csvTopic[csvKey]
           }
         })
-        const anio = '2018'
+        const anio = '2019'
         const distrito = csvTopic['Nombre Distrito'].toLowerCase()
         const numero = +csvTopic[' Numero Proyecto']
         const jornada = csvTopic['Jornada'] || ''

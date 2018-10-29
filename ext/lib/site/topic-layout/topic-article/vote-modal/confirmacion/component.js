@@ -15,7 +15,7 @@ export default ({ edad, toggleVotesModal }) => (
           params={{
             link: window.location.origin + '/presupuesto'
           }} />
-        <a target='_blank' href={`http://twitter.com/share?text=${encodeURIComponent(`Ya voté en el Presupuesto Participativo 2018 de Rosario. Participá entrando aquí! #YoVotoPorMiBarrio`)}&url=${window.location.origin}/presupuesto`} rel='noopener noreferrer' className='tw'></a>
+        <a target='_blank' href={`http://twitter.com/share?text=${encodeURIComponent(`Ya voté en el Presupuesto Participativo 2019 de Rosario. Participá entrando aquí! #YoVotoPorMiBarrio`)}&url=${window.location.origin}/presupuesto`} rel='noopener noreferrer' className='tw'></a>
       </div>
       <a className='return' href='/presupuesto'>Volver a los proyectos</a>
     </div>

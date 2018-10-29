@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import moment from 'moment'
+import 'moment-timezone'
+
 
 export default class Countdown extends Component {
   
@@ -46,7 +49,7 @@ export default class Countdown extends Component {
 
   tick = () => {
     // actualiza el contador
-    this.setState(this.remainingTime(this.props.cierre))
+    this.setState(this.remainingTime(moment(this.props.cierre).add(3, 'hours')))
   }
 
 
@@ -56,25 +59,25 @@ export default class Countdown extends Component {
         <div className='intro'>
           <div className='circle'></div>
           <div className='text'>
-            <h2>Presupuesto Participativo 2018</h2>
+            <h2>Presupuesto Participativo 2019</h2>
             <p>Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.</p>
           </div>
         </div>
         <main className='countdown'>
           <div className='clock'>
-            <span className='number'>{this.state.days}</span>
+            <span className='number'>{this.state.days >= 0 ? this.state.days : 0}</span>
             <span className='caption'>días</span>
           </div>
           <div className='clock'>
-            <span className='number'>{this.state.hours}</span>
+            <span className='number'>{this.state.hours >= 0 ? this.state.hours : 0}</span>
             <span className='caption'>horas</span>
           </div>
           <div className='clock'>
-            <span className='number'>{this.state.minutes}</span>
+            <span className='number'>{this.state.minutes >= 0 ? this.state.minutes : 0}</span>
             <span className='caption'>minutos</span>
           </div>
           <div className='clock'>
-            <span className='number'>{this.state.seconds}</span>
+            <span className='number'>{this.state.seconds >= 0 ? this.state.seconds : 0}</span>
             <span className='caption'>segundos</span>
           </div>
         </main>

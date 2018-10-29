@@ -183,6 +183,8 @@ export default class TopicForm extends FormView {
       this.closingAt = this.find('[name=closingAt]', this.el)
       this.closingAtTime = this.find('[name=closingAtTime]')
       this.dp = new Datepicker(this.closingAt[0])
+      console.log(this.dp)
+
       return this
     }
   }
@@ -321,7 +323,6 @@ export default class TopicForm extends FormView {
   onclearclosingat (ev) {
     ev.preventDefault()
     this.closingAt.value('')
-
     if (this.dp && this.dp.popover) {
       this.dp.popover.hide()
       this.dp = new Datepicker(this.closingAt[0])

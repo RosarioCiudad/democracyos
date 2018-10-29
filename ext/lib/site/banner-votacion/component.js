@@ -42,8 +42,9 @@ export default class BannerVotacion extends Component {
   render () {
     if (this.state.stageVotacion !== 'votacion-abierta' || this.checkLocation()) return null
     const { cierreVotacion } = this.state
+    var today = new Date()
 
-    return this.state.visibility && (
+    return this.state.visibility && this.state.cierreVotacion >= today && (
       <div className='container-banner'>
         <button className='closes' onClick={this.closeBanner}>x</button>
         <h3>

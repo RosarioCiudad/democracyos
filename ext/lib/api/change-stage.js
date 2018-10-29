@@ -15,12 +15,16 @@ function changeStage (req, res, err) {
 	log('POST/api/change-stage')
 	const possibleStages = ['votacion-abierta', 'votacion-cerrada', 'seguimiento']
 	let futureStage = req.body.stage
+	let futureCierre = new Date(req.body.cierre)
+
 	if (possibleStages.includes(futureStage)) {
 		Forum.findOneAndUpdate(
 			{'_id': req.forum.id},
 			{$set:
 				{extra: 
-					{stage: futureStage}
+					{stage: futureStage,
+					 cierre: futureCierre}
+			
 				}
 			})
 		.then((forum)=> {
