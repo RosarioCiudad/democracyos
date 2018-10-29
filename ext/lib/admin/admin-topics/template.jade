@@ -52,7 +52,7 @@
           h4.topicid.hide=id
           .row
             .col-xs-1.colnro
-              h4.topicnro=topic.attrs.number
+              h4.topicnro=((topic.attrs && topic.attrs.number) ?  topic.attrs.number : "")
                 span.h4="  -"
             .col-xs-9.coltitle
               h4.topic-title=topic.mediaTitle
@@ -69,7 +69,7 @@
                 if (topic.attrs.area)
                   h6.topicarea=areabarrial
               .col-lg-3 
-                h6.topicedad.hide=topic.attrs.edad
+                h6.topicedad.hide=((topic.attrs && topic.attrs.edad) ?  topic.attrs.edad : "")
                 if (topic.attrs.edad ==='joven')
                   h6.topicedad(class={tagjoven: topic.attrs.edad === 'joven'})=topic.attrs.edad
             small=topic.topicId
