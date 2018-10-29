@@ -1,11 +1,23 @@
 @import './update-stage/styles'
 
 
+.filanuevo
+  margin-bottom: 20px !important
+
+.barrapp
+  background-color: #FFF
+  margin-bottom: 5px
+  padding-bottom: 5px
+  border:none
+.barrabuscar
+  margin-bottom: 0px
+  border-bottom: none
+
 .export-year
   color: #777
   font-size: 12px
   position: absolute
-  top: 265px
+  top: 300px
   right: 26px
   @media (max-width: 991px)
   	top: 350px
@@ -26,28 +38,74 @@
       margin-bottom: 10px
       font-size: 16
 
+.topic-title
+  font-size: 18px
+
 .filtros
-  display: flex
-  justify-content: space-between
-  flex-wrap: wrap
-  align-items: baseline
+  border-top: none
+
+.filtro-label
+  font-size: 16px
+  font-weight: normal
+  line-height: 1.4
+  margin-right: 10px
   @media (max-width: 425px)
-    justify-content: center
-  div
-    @media (max-width: 425px)
-      display: flex
-      justify-content: center
-      flex-wrap: wrap
-    .filtro-label
-      font-size: 16px
-      font-weight: normal
-      line-height: 1.4
-      margin-right: 10px
-      @media (max-width: 425px)
-        text-align: center
-    .select-filtro
-      background-color: #FFF
-      border-radius: 2px
-      height: 34px
-      @media (max-width: 425px)
-        margin-bottom: 5px
+    text-align: center
+.select-filtro
+  background-color: #FFF
+  border-radius: 5px
+  height: 34px
+  @media (max-width: 425px)
+    margin-bottom: 5px
+
+.list-group-item
+  padding-bottom: 10px !important
+  &:hover
+    background-color: #ee86012e !important
+.joven
+  &:hover
+    background-color: #ff33660d !important
+
+.coltitle
+  padding-left: 0px !important
+.colnro
+  padding-right: 0px !important
+
+.topicedad
+  border-radius: 10px
+  font-size: 13px
+  padding: 2px 1px
+  text-align: center
+  width: 88px
+.tagjoven
+    border: 1px solid #f36
+    color: #f36
+.topicanio
+  border-radius: 10px
+  font-size: 13px
+  padding: 2px 1px
+  text-align: center
+  width: 88px
+  border: 1px solid #27ae60
+  color: #27ae60
+.topicdistrito
+  border-radius: 10px
+  font-size: 13px
+  padding: 2px 1px
+  text-align: center
+  width: 150px
+  border: 1px solid #ee8601
+  color: #ee8601
+.topicarea
+  border-radius: 10px
+  font-size: 13px
+  padding: 2px 1px
+  text-align: center
+  width: 110px
+  border: 1px solid #1daeec
+  color: #1daeec
+
+.delete-topic
+  &:hover
+    color: red
+    border-color: red
