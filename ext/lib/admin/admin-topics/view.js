@@ -125,11 +125,9 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Año
             </label>
-            <select className='select-filtro' id='anio' onChange={this.chooseAnio}>
+            <select className='select-filtro' defaultValue="2019" id='anio' onChange={this.chooseAnio}>
               {anios.map((anio, i)=> {
-                if(anio.name === "2019"){
-                return <option value={anio.name} key={i} selected>{anio.title}</option>
-              } else {return <option value={anio.name} key={i}>{anio.title}</option>}
+                return <option value={anio.name} key={i}>{anio.title}</option>
               })}
             </select>
               </div>
@@ -137,11 +135,9 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Modalidad
             </label>
-            <select className='select-filtro' id="modalidad" onChange={this.chooseAnio}>
+            <select className='select-filtro' defaultValue="Todos" id="modalidad" onChange={this.chooseAnio}>
               {modalidades.map((modalidad, i)=> {
-                if(modalidad.name === "todos"){
-                return <option value={modalidad.name} key={i} selected>{modalidad.title}</option>
-              } else {return <option value={modalidad.name} key={i}>{modalidad.title}</option>}
+                return <option value={modalidad.name} key={i}>{modalidad.title}</option>
               })}
 
             </select>
@@ -150,9 +146,9 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Distrito
             </label>
-            <select className='select-filtro' id="distrito" onChange={this.chooseAnio}>
+            <select className='select-filtro' defaultValue="Todos" id="distrito" onChange={this.chooseAnio}>
               {distritos.map((distrito, i)=> {
-              return <option value={distrito.name} key={i}>{distrito.title}</option>
+                return <option value={distrito.name} key={i}>{distrito.title}</option>
               })}
 
             </select>
