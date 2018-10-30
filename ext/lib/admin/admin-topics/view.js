@@ -15,7 +15,7 @@ import View from 'lib/view/view'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import { getQueryVariable } from 'lib/utils'
 import template from './template.jade'
-import UpdateStage from './update-stage/component'
+//import UpdateStage from './update-stage/component'
 import ExportUpdate from './export-update/component'
 
 
@@ -108,10 +108,10 @@ export default class TopicsListView extends View {
  
     this.list.sort("topicnro", {order: 'asc'})
 
-        ReactRender(
-        (<UpdateStage
-        forum={this.forum} />),
-        this.el[0].querySelector('.update-stage'));
+       // ReactRender(
+       // (<UpdateStage
+       // forum={this.forum} />),
+       // this.el[0].querySelector('.update-stage'));
 
         ReactRender(
         (<ExportUpdate
@@ -156,6 +156,7 @@ export default class TopicsListView extends View {
           </div>
         </div>,
         this.el[0].querySelector('.filtros'));
+        console.log (this.el[0].querySelector('.filtros'))
 
       }
 
