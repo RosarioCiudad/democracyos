@@ -120,13 +120,9 @@ handleChange(date) {
             <label className='stage-label'>
               Cambiar fase de Presupuesto Participativo
             </label>
-            <select className='select-stage' onChange={this.chooseStage}>
+            <select className='select-stage' defaultValue={this.state.initialStage} onChange={this.chooseStage}>
               {stages.map((stage, i)=> {
-                if (stage.name === this.state.initialStage) {
-                return <option value={stage.name} key={i} selected>{stage.title}</option>
-                } else {
                 return <option value={stage.name} key={i}>{stage.title}</option>
-                }
               })}
             </select>
           </div>
