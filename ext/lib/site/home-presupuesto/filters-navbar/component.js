@@ -94,7 +94,7 @@ class FiltersNavbar extends Component {
             : ppStatus.padron || 'adulto'
 
           nextFilters.estado.pendiente = true
-          nextFilters.anio.proyectos2018 = true
+          nextFilters.anio.proyectos2018 = false
           nextFilters.anio.proyectos2019 = true
           nextFilters.edad[padron] = true
           nextFilters.distrito[distrito] = true
@@ -102,7 +102,7 @@ class FiltersNavbar extends Component {
         case 'votacion-cerrada':
           nextFilters.estado.proyectado = true
           nextFilters.estado.perdedor = true
-          nextFilters.anio.proyectos2018 = true
+          nextFilters.anio.proyectos2018 = false
           nextFilters.anio.proyectos2019 = true
           nextFilters.edad.adulto = true
           nextFilters.distrito.centro = true
