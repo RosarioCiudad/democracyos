@@ -97,7 +97,7 @@ function handleLinkClick (evt) {
 // const Sharer = ({ topic }) => {
 //   const topicUrl = `${window.location.origin}${topic.url}`
 //
-//   const twitterDesc = encodeURIComponent(`Mirá el proyecto que quiero para mi barrio ${topicUrl} #YoVotoPorMiBarrio`)
+//   const twitterDesc = encodeURIComponent(`Mirá el proyecto que quiero para mi barrio ${topicUrl} #RosarioParticipa`)
 //
 //   return (
 //     <div className='social-links'>

@@ -44,7 +44,7 @@ export default withRouter(({ topic, router, fadeTopic, isSelected, isBlocked, st
   function twitText () {
     switch (topic.attrs.state) {
       case 'pendiente':
-        return encodeURIComponent(`Mirá el proyecto que quiero para mi barrio #YoVotoPorMiBarrio `)
+        return encodeURIComponent(`Mirá el proyecto que quiero para mi barrio #RosarioParticipa `)
       case 'perdedor':
         return encodeURIComponent(topic.mediaTitle)
       case 'proyectado':
