@@ -64,6 +64,7 @@ export default class TopicsListView extends View {
 
   }
 
+
   //Evento para filtrar
   chooseAnio(event) {
     //Obtengo los valores de cada select para mantener los filtros
