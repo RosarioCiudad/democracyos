@@ -15,7 +15,7 @@ import View from 'lib/view/view'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import { getQueryVariable } from 'lib/utils'
 import template from './template.jade'
-//import UpdateStage from './update-stage/component'
+import UpdateStage from './update-stage/component'
 import ExportUpdate from './export-update/component'
 
 
@@ -60,35 +60,35 @@ export default class TopicsListView extends View {
     })
     this.forum = forum
     //bind evento para filtrar
-    this.chooseAnio = this.chooseAnio.bind(this)
+    //this.chooseAnio = this.chooseAnio.bind(this)
 
   }
 
 
   //Evento para filtrar
-  chooseAnio(event) {
+  //chooseAnio(event) {
     //Obtengo los valores de cada select para mantener los filtros
-    var aniohtml = document.getElementById('anio')
-    var anio = aniohtml.options[aniohtml.selectedIndex].text
-    var modalidadhtml = document.getElementById('modalidad')
-    var modalidad = modalidadhtml.options[modalidadhtml.selectedIndex].text
-    var distritohtml = document.getElementById('distrito')
-    var distritotitle = distritohtml.options[distritohtml.selectedIndex].text
+    //var aniohtml = document.getElementById('anio')
+    //var anio = aniohtml.options[aniohtml.selectedIndex].text
+    //var modalidadhtml = document.getElementById('modalidad')
+    //var modalidad = modalidadhtml.options[modalidadhtml.selectedIndex].text
+    //var distritohtml = document.getElementById('distrito')
+    //var distritotitle = distritohtml.options[distritohtml.selectedIndex].text
    //Adapto el filtro distrito al valor que tiene la lista
-    var distrito = "Distrito ".concat(distritotitle.toLowerCase())
-    //Defino valor vacio para filtrar con la opcion "Todos"
-      if (anio === "Todos"){ anio=""}
-      if (distrito === "Distrito todos"){ distrito=""}
-      if (modalidad === "Todos"){ modalidad=""}
+    //var distrito = "Distrito ".concat(distritotitle.toLowerCase())
+    ////Defino valor vacio para filtrar con la opcion "Todos"
+     // if (anio === "Todos"){ anio=""}
+     // if (distrito === "Distrito todos"){ distrito=""}
+     // if (modalidad === "Todos"){ modalidad=""}
        
     //Filtro la lista
-      var lista =  this.list.filter(function(item) {
-     return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
+     // var lista =  this.list.filter(function(item) {
+     //return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
     //this.lista.sort("topicanio", {order: 'desc'})
-    })
-    this.list.sort("topicnro", {order: 'asc'})
+    //})
+    //this.list.sort("topicnro", {order: 'asc'})
     
-  }
+  //}
 
 
   switchOn () {
@@ -109,10 +109,10 @@ export default class TopicsListView extends View {
  
     this.list.sort("topicnro", {order: 'asc'})
 
-       // ReactRender(
-       // (<UpdateStage
-       // forum={this.forum} />),
-       // this.el[0].querySelector('.update-stage'));
+        ReactRender(
+        (<UpdateStage
+        forum={this.forum} />),
+        this.el[0].querySelector('.update-stage'));
 
         ReactRender(
         (<ExportUpdate
