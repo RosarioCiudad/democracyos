@@ -82,7 +82,7 @@ handleChange(date) {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({stage: sendStage,
+          body: JSON.stringify({stage: sendStage, forum: this.state.forum
             //cierre: cierre, forum: this.state.forum
           })
     })
