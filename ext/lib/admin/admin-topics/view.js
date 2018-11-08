@@ -1,8 +1,8 @@
 /**
  * Module dependencies.
  */
-//import React from 'react'
-import React, { Component } from 'react'
+import React from 'react'
+//import React, { Component } from 'react'
 import { render as ReactRender } from 'react-dom'
 import debug from 'debug'
 import t from 't-component'
@@ -65,7 +65,6 @@ export default class TopicsListView extends View {
     this.handlePageClick = this.handlePageClick.bind(this)
 
   }
-
   //Evento para filtrar
   chooseAnio(event) {
     //Obtengo los valores de cada select para mantener los filtros
@@ -88,12 +87,13 @@ export default class TopicsListView extends View {
       if (modalidad === "Todos"){ modalidad=""}
        
         // Obtengo las opciones seleccionadas
+
    
-      console.log(anio)
-      console.log(distrito)
+      
     //armo el hash
 
-    //Filtro la lista
+
+    Filtro la lista
     this.list.filter(function(item) {
     return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
     })
@@ -101,10 +101,8 @@ export default class TopicsListView extends View {
     
     var filtros = 'anio=' + anio + '&' +'modalidad=' + modalidad + '&' + 'distrito=' + distritotitle.toLowerCase()
     
-
     window.location.hash= `#${filtros}`
 
- 
 
 }
 
@@ -132,13 +130,12 @@ export default class TopicsListView extends View {
     let distritoini = distritoinicial.replace("%20","")
 
     this.list.filter(function(item) {
-    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial)  && item.values().topicdistrito.includes(distritoini)
+    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial) && item.values().topicedad.includes(distritoini)
     })
     this.list.sort("topicnro", {order: 'asc'})
 
 
     this.pagination.count = this.list.matchingItems.length
-    console.log(this.pagination.count)
 
     const pages = this.pagination.count / 25
     const currentPage = (+getQueryVariable('page') || 1) - 1
@@ -209,7 +206,6 @@ export default class TopicsListView extends View {
           </div>
         </div>,
         this.el[0].querySelector('.filtros'));
-        console.log (this.el[0].querySelector('.filtros'))
 
       }
   }
@@ -249,6 +245,13 @@ export default class TopicsListView extends View {
     var anio = this.getHashVariable('anio')[1] || ''
     var modalidad = this.getHashVariable('modalidad')[1] || ''
     var distrito = this.getHashVariable('distrito')[1] || ''
+    
+    var aniohtml = document.getElementById('anio')
+    var anioinicio = aniohtml.options[aniohtml.selectedIndex].text
+
+    if (anioinicio==='2019'){
+      anio = anioinicio
+    }
 
     const { origin, pathname, hash } = window.location
     window.location = `${origin}${pathname}?page=${(e.selected + 1)}#anio=${anio}&modalidad=${modalidad}&distrito=${distrito}`
