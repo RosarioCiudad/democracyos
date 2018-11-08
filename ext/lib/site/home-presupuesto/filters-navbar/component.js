@@ -308,6 +308,7 @@ class FiltersNavbar extends Component {
                   className={`btn btn-md btn-outline-primary ${this.state.appliedFilters.edad.adulto ? 'active' : ''}`}>
                   <span className='btn-content'><span className='btn-text'>Presupuesto Participativo</span></span>
                 </button>
+                {/*
                 <button
                   type='button'
                   data-name='joven'
@@ -315,6 +316,7 @@ class FiltersNavbar extends Component {
                   className={`btn btn-md btn-outline-primary ${this.state.appliedFilters.edad.joven ? 'active' : ''}`}>
                   <span className='btn-content'><span className='btn-text'>Presupuesto Participativo Joven</span></span>
                 </button>
+              */}
               </nav>
               <p className='header-text'>Filtros adicionales:</p>
             </div>
