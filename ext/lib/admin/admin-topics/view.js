@@ -41,8 +41,8 @@ const distritos =  [
   {'name': 'noroeste', 'title': 'Noroeste'},
   {'name': 'norte', 'title': 'Norte'},
   {'name': 'oeste', 'title': 'Oeste'},
-  {'name': 'sudoeste', 'title': 'sudoeste'},
-  {'name': 'Sur', 'title': 'Sur'},
+  {'name': 'sudoeste', 'title': 'Sudoeste'},
+  {'name': 'sur', 'title': 'Sur'},
 
 ]
 
@@ -59,15 +59,19 @@ export default class TopicsListView extends View {
       urlBuilder,
     })
     this.forum = forum
+    this.pagination = pagination
     //bind evento para filtrar
     this.chooseAnio = this.chooseAnio.bind(this)
+    this.handlePageClick = this.handlePageClick.bind(this)
 
   }
-
 
   //Evento para filtrar
   chooseAnio(event) {
     //Obtengo los valores de cada select para mantener los filtros
+
+    //console.log(this.getHashVariable("anio"))
+    
     var aniohtml = document.getElementById('anio')
     var anio = aniohtml.options[aniohtml.selectedIndex].text
     var modalidadhtml = document.getElementById('modalidad')
@@ -77,37 +81,83 @@ export default class TopicsListView extends View {
    //Adapto el filtro distrito al valor que tiene la lista
     var distrito = "Distrito ".concat(distritotitle.toLowerCase())
     ////Defino valor vacio para filtrar con la opcion "Todos"
-      if (anio === "Todos"){ anio=""}
-      if (distrito === "Distrito todos"){ distrito=""}
+      if (anio === "Todos") { anio = ""}
+      if (distrito === "Distrito todos"){ 
+        distrito=""
+        distritotitle=""}
       if (modalidad === "Todos"){ modalidad=""}
        
+        // Obtengo las opciones seleccionadas
+   
+      console.log(anio)
+      console.log(distrito)
+    //armo el hash
+
     //Filtro la lista
-      var lista =  this.list.filter(function(item) {
-     return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
-    this.lista.sort("topicanio", {order: 'desc'})
+    this.list.filter(function(item) {
+    return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
     })
     this.list.sort("topicnro", {order: 'asc'})
     
-  }
+    var filtros = 'anio=' + anio + '&' +'modalidad=' + modalidad + '&' + 'distrito=' + distritotitle.toLowerCase()
+    
 
+    window.location.hash= `#${filtros}`
+
+ 
+
+}
 
   switchOn () {
     this.bind('click', '.btn.delete-topic', this.bound('ondeletetopicclick'))
     this.list = new List('topics-wrapper', { valueNames: ['topic-title', 'topicid', 'topic-date', 'topicanio', 'topicdistrito','topicedad'] })
 
+  
 
    if (this.forum.name === 'presupuesto' && this.forum.privileges.canEdit){
     this.list = new List('topics-wrapper', { valueNames: ['topicnro','topic-title', 'topicid', 'topic-date', 'topicanio', 'topicdistrito','topicarea','topicedad'] })
 
-  
+      //Obtengo los hash de los filtros
+
+      //window.location.hash = `#anio=2019&modalidad=&distrito=`
+
       //Filtro la lista por año actual
       
-      let option = '2019'
-      this.list.filter(function(item) {
-      return (item.values().topicanio.includes(option))  
-   })
- 
+     let anioinicial = this.getHashVariable("anio") === null ? "2019" : this.getHashVariable("anio")[1]
+     let modalidadinicial = this.getHashVariable("modalidad") === null ? "" : this.getHashVariable("modalidad")[1]
+     let distritoinicial = this.getHashVariable("distrito") === null ? "" : this.getHashVariable("distrito")[1]
+
+
+    //let distritoini =  distritoinicial.substring(11)
+    let distritoini = distritoinicial.replace("%20","")
+
+    this.list.filter(function(item) {
+    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial)  && item.values().topicdistrito.includes(distritoini)
+    })
     this.list.sort("topicnro", {order: 'asc'})
+
+
+    this.pagination.count = this.list.matchingItems.length
+    console.log(this.pagination.count)
+
+    const pages = this.pagination.count / 25
+    const currentPage = (+getQueryVariable('page') || 1) - 1
+    ReactRender((
+      <ReactPaginate
+        forcePage={currentPage}
+        pageCount={pages}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        previousLabel='<'
+        nextLabel='>'
+        onPageChange={this.handlePageClick}
+        breakLabel={<a href="">...</a>}
+        breakClassName={"break-me"}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"} />
+    ), this.el[0].querySelector('.topics-pagination'))
+ 
 
         ReactRender(
         (<UpdateStage
@@ -119,6 +169,8 @@ export default class TopicsListView extends View {
         forum={this.forum} />),
         this.el[0].querySelector('.export-update'));
 
+      
+
         ReactRender(
          <div className='filtros'>
           <div className='row'>
@@ -126,7 +178,7 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Año
             </label>
-            <select className='select-filtro' defaultValue="2019" id='anio' onChange={this.chooseAnio}>
+            <select className='select-filtro' id='anio' defaultValue={this.getHashVariable("anio") === null ? "2019" : this.getHashVariable("anio")[1] } onChange={this.chooseAnio}>
               {anios.map((anio, i)=> {
                 return <option value={anio.name} key={i}>{anio.title}</option>
               })}
@@ -136,7 +188,7 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Modalidad
             </label>
-            <select className='select-filtro' defaultValue="Todos" id="modalidad" onChange={this.chooseAnio}>
+            <select className='select-filtro' defaultValue={this.getHashVariable("modalidad") === null ? "Todos" : this.getHashVariable("modalidad")[1] } id="modalidad" onChange={this.chooseAnio}>
               {modalidades.map((modalidad, i)=> {
                 return <option value={modalidad.name} key={i}>{modalidad.title}</option>
               })}
@@ -147,7 +199,7 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Distrito
             </label>
-            <select className='select-filtro' defaultValue="Todos" id="distrito" onChange={this.chooseAnio}>
+            <select className='select-filtro' defaultValue={this.getHashVariable("distrito") === null ? "Todos" : this.getHashVariable("distrito")[1] } id="distrito" onChange={this.chooseAnio}>
               {distritos.map((distrito, i)=> {
                 return <option value={distrito.name} key={i}>{distrito.title}</option>
               })}
@@ -160,9 +212,9 @@ export default class TopicsListView extends View {
         console.log (this.el[0].querySelector('.filtros'))
 
       }
-
-
   }
+
+  
 
   ondeletetopicclick (ev) {
     ev.preventDefault()
@@ -192,5 +244,23 @@ export default class TopicsListView extends View {
       .effect('slide')
       .show(onconfirmdelete)
   }
+
+ handlePageClick (e) {
+    var anio = this.getHashVariable('anio')[1] || ''
+    var modalidad = this.getHashVariable('modalidad')[1] || ''
+    var distrito = this.getHashVariable('distrito')[1] || ''
+
+    const { origin, pathname, hash } = window.location
+    window.location = `${origin}${pathname}?page=${(e.selected + 1)}#anio=${anio}&modalidad=${modalidad}&distrito=${distrito}`
+    this.list.filter(function(item) {
+    return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
+    })
+  }
+
+getHashVariable(key) {
+    var matches = location.hash.match(new RegExp(key+'=([^&]*)'));
+    return matches ? matches : null;
+  }
+
 }
 
