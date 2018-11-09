@@ -93,7 +93,7 @@ export default class TopicsListView extends View {
     //armo el hash
 
 
-    Filtro la lista
+    //Filtro la lista
     this.list.filter(function(item) {
     return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
     })
@@ -130,7 +130,7 @@ export default class TopicsListView extends View {
     let distritoini = distritoinicial.replace("%20","")
 
     this.list.filter(function(item) {
-    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial) && item.values().topicedad.includes(distritoini)
+    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial) && item.values().topicdistrito.includes(distritoini)
     })
     this.list.sort("topicnro", {order: 'asc'})
 
