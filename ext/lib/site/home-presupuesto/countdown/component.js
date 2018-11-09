@@ -52,7 +52,6 @@ export default class Countdown extends Component {
     this.setState(this.remainingTime(moment(this.props.cierre).add(3, 'hours')))
   }
 
-
   render () {
     return (
       <section className='countdown-wrapper'>
