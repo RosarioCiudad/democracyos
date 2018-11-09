@@ -419,7 +419,6 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2018'>2018</label>
                         </div>
-                        
                         {/*
                           <div className='option-container'>
                           <div className='check-container'>
