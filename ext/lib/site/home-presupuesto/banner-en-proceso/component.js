@@ -16,7 +16,7 @@ export default withRouter(({ router }) => {
 
   return votacionEnProceso && (
     <div className='container-banner-votacion'>
-      <p>Estás en proceso de votación</p>
+      <p>Estás en proceso de votación. Elegí otro proyecto.</p>
       <button className='btn btn-md' onClick={cancelarVotacion(router.push)}>Cancelar votación</button>
     </div>
   )

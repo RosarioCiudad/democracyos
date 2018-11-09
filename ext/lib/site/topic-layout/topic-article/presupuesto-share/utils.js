@@ -26,7 +26,7 @@ export function prettyDecimals (number) {
 export function twitText (state, title) {
   switch (state) {
     case 'pendiente':
-      return encodeURIComponent(`Mirá el proyecto que quiero para mi barrio #YoVotoPorMiBarrio `)
+      return encodeURIComponent(`Mirá el proyecto que quiero para mi barrio #RosarioParticipa `)
     case 'perdedor':
       return encodeURIComponent(title)
     case 'proyectado':

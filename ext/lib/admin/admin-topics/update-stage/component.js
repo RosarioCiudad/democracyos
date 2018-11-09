@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
+import { render as ReactRender } from 'react-dom'
+import { dom as render } from 'lib/render/render'
 import 'whatwg-fetch'
 import t from 't-component'
 import urlBuilder from 'lib/url-builder'
+import * as serializer from 'lib/admin/admin-topics-form/body-serializer'
+import moment from 'moment'
+import 'moment-timezone'
+import topicStore from 'lib/stores/topic-store/topic-store'
+import FormView from 'lib/form-view/form-view'
+import o from 'component-dom'
+//import DatePicker from 'react-datepicker'
 
 const stages = [
   {'name': 'votacion-abierta', 'title': 'Votación abierta'},
@@ -19,29 +28,52 @@ export default class UpdateStage extends Component {
       selectedStage: '',
       savedStage: '',
       disabled: true,
-      forum: ''
+      forum: '',
+      startDate: moment(),
+      open: false
     }
+
+      this.handleChange = this.handleChange.bind(this)
+
   }
 
+
+
   componentWillMount () {
-    this.setState ({
+       this.setState ({
       initialStage: this.props.forum.extra.stage,
-      forum: this.props.forum.id
+     //Inicializo la fecha y hora del calendario con la fecha de cierre guardada en la base y le sumo 3 horas por el formato GTM -3
+      //startDate: moment(this.props.forum.extra.cierre).add(3, 'hours'),
+
+      forum: this.props.forum.id,
     })
   }
+
+
+
+
+handleChange(date) {
+    this.setState({
+      //startDate: date,
+      disabled: false,
+      selectedStage: this.state.initialStage
+    })
+    }
 
   chooseStage = (e) => {
     let option = e.target.value
     this.setState({selectedStage: option}, () => {
-      if (this.state.selectedStage === this.state.initialStage ) {
+      if (this.state.selectedStage === this.state.initialStage) {
         this.setState({disabled: true})
       } else {
         this.setState({disabled: false})
-      } 
+      }
     })
   }
 
-  changeStage = () => {
+  changeStage = (e) => {
+    e.preventDefault()
+    //const cierre = this.state.startDate ? this.state.startDate.format('YYYY-MM-DDTHH:mm:ss') : null
     const sendStage = this.state.selectedStage
     fetch('/ext/api/change-stage', {
           method: 'POST',
@@ -50,7 +82,9 @@ export default class UpdateStage extends Component {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({stage: sendStage, forum: this.state.forum})
+          body: JSON.stringify({stage: sendStage, forum: this.state.forum
+            //cierre: cierre, forum: this.state.forum
+          })
     })
     .then((res) => {
       if (res.status === 200) {
@@ -74,7 +108,7 @@ export default class UpdateStage extends Component {
         }), 5000)
     })
   }
-  
+
   render () {
     return (
       <div>
@@ -88,16 +122,27 @@ export default class UpdateStage extends Component {
             <label className='stage-label'>
               Cambiar fase de Presupuesto Participativo
             </label>
-            <select className='select-stage' onChange={this.chooseStage}>
+            <select className='select-stage' defaultValue={this.state.initialStage} onChange={this.chooseStage}>
               {stages.map((stage, i)=> {
-                if (stage.name === this.state.initialStage) {
-                return <option value={stage.name} key={i} selected>{stage.title}</option>
-                } else {
                 return <option value={stage.name} key={i}>{stage.title}</option>
-                }
               })}
             </select>
           </div>
+          {/*
+           <div className={`"form-group" ${this.state.selectedStage=="votacion-abierta" || (!this.state.selectedStage && this.state.initialStage=="votacion-abierta") ? '' : 'cierreoculto'}`}>
+          <label>Fecha de cierre</label>
+          <span className="help-text">Fecha de cierre de la votación</span>
+          <div className="form-inline">
+          <div className="form-group formcierre">
+          <DatePicker dateFormat="YYYY/MM/DD" selected={this.state.startDate < moment() ? null : this.state.startDate} onChange={this.handleChange} onChange={this.handleChange} calendarClassName="fuente" isClearable={true}
+  placeholderText="Fecha" className="form-control datecierre"/>
+        
+          <DatePicker selected={this.state.startDate < moment() ? null : this.state.startDate} onChange={this.handleChange} showTimeSelect showTimeSelectOnly timeCaption="Time" dateFormat="LT" calendarClassName="fuente" className="form-control" placeholderText="Hora"/>
+          </div>
+          </div>
+          </div>
+          */}
+
           <button className='btn btn-primary boton' onClick={this.changeStage} disabled={this.state.disabled}>
             Confirmar
           </button>
@@ -105,4 +150,7 @@ export default class UpdateStage extends Component {
       </div>
       )
   }
+
+
+
 }

@@ -73,7 +73,7 @@ class FiltersNavbar extends Component {
         anio: {
           proyectos2017: false,
           proyectos2018: true,
-          proyectos2019: false
+          proyectos2019: true
         },
         estado: {
           proyectado: false,
@@ -94,16 +94,16 @@ class FiltersNavbar extends Component {
             : ppStatus.padron || 'adulto'
 
           nextFilters.estado.pendiente = true
-          nextFilters.anio.proyectos2018 = true
-          // nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2018 = false
+          nextFilters.anio.proyectos2019 = true
           nextFilters.edad[padron] = true
           nextFilters.distrito[distrito] = true
           break
         case 'votacion-cerrada':
           nextFilters.estado.proyectado = true
           nextFilters.estado.perdedor = true
-          nextFilters.anio.proyectos2018 = true
-          // nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2018 = false
+          nextFilters.anio.proyectos2019 = true
           nextFilters.edad.adulto = true
           nextFilters.distrito.centro = true
           break
@@ -308,13 +308,6 @@ class FiltersNavbar extends Component {
                   className={`btn btn-md btn-outline-primary ${this.state.appliedFilters.edad.adulto ? 'active' : ''}`}>
                   <span className='btn-content'><span className='btn-text'>Presupuesto Participativo</span></span>
                 </button>
-                <button
-                  type='button'
-                  data-name='joven'
-                  onClick={() => this.handleEdadFilterChange('joven')}
-                  className={`btn btn-md btn-outline-primary ${this.state.appliedFilters.edad.joven ? 'active' : ''}`}>
-                  <span className='btn-content'><span className='btn-text'>Presupuesto Participativo Joven</span></span>
-                </button>
               </nav>
               <p className='header-text'>Filtros adicionales:</p>
             </div>
@@ -417,7 +410,7 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2018'>2018</label>
                         </div>
-
+                        {/*
                           <div className='option-container'>
                           <div className='check-container'>
                             <input onChange={this.handleCheckboxChange('anio')} type='checkbox' id='proyectos2019' name='anio' checked={this.state.selectFilters.anio.proyectos2019} />
@@ -425,9 +418,8 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2019'>2019</label>
                           </div>
-
+                          */}
                       </div>
-              
                     </div>
                     <div className='dropdown-actions'>
                       <a className='cancelar' onClick={this.cancelApplyFilters}>Cancelar</a>

@@ -24,14 +24,17 @@ export default ({ userLoaded, toSteps, toInfo }) => (
       </div>
     )}
     <div className='container'>
-      <h1>Queremos que seas parte de las decisiones</h1>
-      <h2>Las opiniones y las acciones colectivas<br />mejoran la ciudad.</h2>
-      <button onClick={userLoaded ? toInfo : toSteps} className='btn btn-primary btn-lg'>
+      <h1>El cambio de tu barrio está en tus manos</h1>
+      <h2>Elegí tus proyectos</h2>
+      <a href="/presupuesto">
+      <button className='btn btn-primary btn-lg'>
         Participá
       </button>
+      </a>
       <div className='follow-arrow'>
         <span onClick={toSteps} className='icon-arrow-down' />
       </div>
     </div>
   </div>
 )
+//<button onClick={userLoaded ? toInfo : toSteps} className='btn btn-primary btn-lg'>//
