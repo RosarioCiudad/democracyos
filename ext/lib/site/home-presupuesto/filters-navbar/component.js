@@ -308,6 +308,13 @@ class FiltersNavbar extends Component {
                   className={`btn btn-md btn-outline-primary ${this.state.appliedFilters.edad.adulto ? 'active' : ''}`}>
                   <span className='btn-content'><span className='btn-text'>Presupuesto Participativo</span></span>
                 </button>
+                <button
+                  type='button'
+                  data-name='joven'
+                  onClick={() => {this.handleEdadFilterChange('joven')}}
+                  className={`btn btn-md btn-outline-primary ${this.state.appliedFilters.edad.joven ? 'active' : ''}`}>
+                  <span className='btn-content'><span className='btn-text'>Presupuesto Participativo Joven</span></span>
+                </button>
               </nav>
               <p className='header-text'>Filtros adicionales:</p>
             </div>
@@ -515,17 +522,17 @@ function DistritoFilter (props) {
               className={`btn btn-md btn-outline-primary ${appliedFilters.edad.adulto ? 'active' : ''} ${(votacionEnProceso && ppStatus.padron === 'joven') ? 'disabled' : ''}`}>
               <span className='btn-content'><span className='btn-text'>Presupuesto Participativo</span></span>
             </button>
-            
-            <button
+            {/*<button
               type='button'
               data-name='joven'
               onClick={() => {
                 if (votacionEnProceso && ppStatus.padron === 'adulto') return
                 changeEdad('joven')
               }}
-              className={`btn btn-md btn-outline-primary ocultarjoven ${appliedFilters.edad.joven ? 'active' : ''} ${(votacionEnProceso && ppStatus.padron === 'adulto') ? 'disabled' : ''}`}>
+              className={`btn btn-md btn-outline-primary ${appliedFilters.edad.joven ? 'active' : ''} ${(votacionEnProceso && ppStatus.padron === 'adulto') ? 'disabled' : ''}`}>
               <span className='btn-content'><span className='btn-text'>Presupuesto Participativo Joven</span></span>
             </button>
+          */}
           </nav>
           <p className='header-text'>Elegí tu distrito:</p>
         </div>
