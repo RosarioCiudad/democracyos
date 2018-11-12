@@ -25,19 +25,12 @@ export default class SignupComplete extends Component {
 
   handleForm = (evt) => {
     evt.preventDefault()
-
     this.setState({
       error: '',
-      loading: true,
+      loading: true
     })
 
-    user.saveExtraData(
-        {
-          cod_doc: this.state.data.cod_doc,
-          nro_doc: this.state.data.nro_doc.replace(/[^0-9]/g, ''),
-          sexo: this.state.data.sexo
-        }
-      ).then({
+    user.saveExtraData(this.state.data).then(() => {
       this.setState({
         error: '',
         loading: false
@@ -46,7 +39,6 @@ export default class SignupComplete extends Component {
       user.update(Object.assign({}, user.state.value, {
         extra: this.state.data
       }))
-      
 
       this.props.toggleUserModal()
 
