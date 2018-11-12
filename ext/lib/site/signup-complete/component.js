@@ -65,10 +65,9 @@ export default class SignupComplete extends Component {
   }
 
   handleInputChange = (evt) => {
-    const input = evt.target
-    const name = input.getAttribute('name')
-
-    const data = Object.assign({}, this.state.data, {
+  const input = evt.target
+  const name = input.getAttribute('name')
+  const data = Object.assign({}, this.state.data, {
       [name]: input.value
     })
 
@@ -112,7 +111,7 @@ export default class SignupComplete extends Component {
                   id='sexo'
                   value={this.state.data.sexo}
                   onChange={this.handleInputChange}
-                  disabled={this.state.loading || this.state.sexo_disabled}
+                  //disabled={this.state.loading || this.state.sexo_disabled}
                   required>
                   <option className='opcion' value='' disabled>¿Cuál es tu sexo?*</option>
                   <option className='opcion' value='F'>Femenino</option>
@@ -129,7 +128,7 @@ export default class SignupComplete extends Component {
                   id='cod_doc'
                   value={this.state.data.cod_doc}
                   onChange={this.handleInputChange}
-                  disabled={this.state.loading || this.state.cod_doc_disabled}
+                  //disabled={this.state.loading || this.state.cod_doc_disabled}
                   required>
                   <option value='' disabled>Tipo*</option>
                   <option value='DNI'>DNI</option>
@@ -146,8 +145,8 @@ export default class SignupComplete extends Component {
                 id='nro_doc'
                 maxLength='10'
                 onChange={this.handleInputNumberChange}
-                value={this.state.data.nro_doc}
-                disabled={this.state.loading || this.state.nro_doc_disabled}
+                value={prettyNumber(this.state.data.nro_doc)}
+                //disabled={this.state.loading || this.state.nro_doc_disabled}
                 placeholder='Número de documento*'
                 required />
             </div>
