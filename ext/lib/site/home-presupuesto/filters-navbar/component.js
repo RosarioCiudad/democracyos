@@ -522,7 +522,7 @@ function DistritoFilter (props) {
               className={`btn btn-md btn-outline-primary ${appliedFilters.edad.adulto ? 'active' : ''} ${(votacionEnProceso && ppStatus.padron === 'joven') ? 'disabled' : ''}`}>
               <span className='btn-content'><span className='btn-text'>Presupuesto Participativo</span></span>
             </button>
-            {/*<button
+            <button
               type='button'
               data-name='joven'
               onClick={() => {
@@ -532,7 +532,6 @@ function DistritoFilter (props) {
               className={`btn btn-md btn-outline-primary ${appliedFilters.edad.joven ? 'active' : ''} ${(votacionEnProceso && ppStatus.padron === 'adulto') ? 'disabled' : ''}`}>
               <span className='btn-content'><span className='btn-text'>Presupuesto Participativo Joven</span></span>
             </button>
-          */}
           </nav>
           <p className='header-text'>Elegí tu distrito:</p>
         </div>
