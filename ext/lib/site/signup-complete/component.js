@@ -18,9 +18,10 @@ export default class SignupComplete extends Component {
       data: {
         cod_doc: extra.cod_doc || '',
         sexo: extra.sexo || '',
-        nro_doc: extra.nro_doc || ''
+        nro_doc: extra.nro_doc || '',
       }
     }
+    
   }
 
   handleForm = (evt) => {
