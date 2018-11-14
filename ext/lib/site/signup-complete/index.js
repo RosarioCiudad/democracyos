@@ -39,12 +39,13 @@ function postSignupCompleteParseData (req, res, next) {
     'extra.cod_doc': req.body.cod_doc,
     'extra.sexo': req.body.sexo,
     'extra.nro_doc': Number(req.body.nro_doc)
+
   }
 
   const modifying = Object.keys(data).find((key) => {
     return user.extra[key] && user.extra[key] !== data[key]
   })
-
+  
   if (modifying) {
     res.json(400, {
       status: 400,

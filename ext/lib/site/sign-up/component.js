@@ -39,6 +39,7 @@ export default class SignUp extends Component {
     this.checkPassLength = this.checkPassLength.bind(this)
     this.onCaptchaChange = this.onCaptchaChange.bind(this)
     this.onSubmitClick = this.onSubmitClick.bind(this)
+
   }
 
   componentWillMount () {
@@ -71,6 +72,7 @@ export default class SignUp extends Component {
   }
 
   onFail (err) {
+    console.log(err)
     if (err[0].code === 'DUPLICATED_VOTING_DATA') {
       err[0].message = [`El número de documento ingresado se encuentra utilizado por una cuenta con la dirección de correo ${err[0].docOwner}, en caso que no pueda ingresar con dicha cuenta puede hacer su reclamo haciendo clic`]
    }
@@ -92,16 +94,43 @@ export default class SignUp extends Component {
 
   saveSex (e) {
     this.setState({ sexo: e.target.value })
-  }
+    const sex = e.target.value
+    if (!sex) {
+      document.getElementById("nro_doc").removeAttribute("required")
+      document.getElementsByName("extra.cod_doc")[0].removeAttribute("required")
+
+    }else{
+    document.getElementById("nro_doc").setAttribute("required",true)
+    document.getElementsByName("extra.cod_doc")[0].setAttribute("required",true)
+    }
+}
 
   saveIdType (e) {
     this.setState({ cod_doc: e.target.value })
+    const tipo = e.target.value
+    if (!tipo) {
+      document.getElementById("nro_doc").removeAttribute("required")
+      document.getElementsByName("extra.sexo")[0].removeAttribute("required")
+
+    }else{
+    document.getElementById("nro_doc").setAttribute("required",true)
+    document.getElementsByName("extra.sexo")[0].setAttribute("required",true)
+    }
+
   }
 
   saveIdNumber (e) {
     const input = e.target.value.replace(/[^0-9]/g, '')
     this.setState({ nro_doc: input })
-  }
+    if (!input) {
+      document.getElementsByName("extra.sexo")[0].removeAttribute("required")
+      document.getElementsByName("extra.cod_doc")[0].removeAttribute("required")
+
+    }else{
+    document.getElementsByName("extra.sexo")[0].setAttribute("required",true)
+    document.getElementsByName("extra.cod_doc")[0].setAttribute("required",true)
+    }
+}
 
   savePass (e) {
     this.setState({ pass: e.target.value })
@@ -127,6 +156,7 @@ export default class SignUp extends Component {
     const expr = new RegExp('^[0-9]{7,8}$')
     if (!expr.test(idNumber)) {
       e.target.setCustomValidity('Ingresa un número de documento válido')
+      console.log(e.target)
     } else {
       e.target.setCustomValidity('')
       return idNumber
@@ -146,6 +176,7 @@ export default class SignUp extends Component {
   }
 
   onSubmitClick (e) {
+
     if (config.recaptchaSite && !this.state.captchaKey) {
       this.captcha.execute()
       e.preventDefault()
