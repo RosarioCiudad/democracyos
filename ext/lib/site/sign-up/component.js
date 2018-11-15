@@ -218,6 +218,7 @@ export default class SignUp extends Component {
                   {
                     this.state.errors && this.state.errors
                       .map((error, key) => {
+                        console.log(error.code)
                         if (error.code === 'DUPLICATED_VOTING_DATA') {
                           return(
                             <li key={key}>
@@ -228,7 +229,7 @@ export default class SignUp extends Component {
                           )
                         } else {
                           return(
-                              <li key={key}>{error.message}</li>
+                              <li key={key}>{error.message || error}</li>
                             )
                         }
                       })
