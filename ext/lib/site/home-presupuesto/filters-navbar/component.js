@@ -219,6 +219,7 @@ class FiltersNavbar extends Component {
         stageType = 'seguimiento'
         exposedFilters.estado.pendiente = false
         exposedFilters.estado.perdedor = false
+        exposedFilters.anio.proyectos2019 = false
         break
       case 'votacion-abierta':
         stageType = 'votacion'
