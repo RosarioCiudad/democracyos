@@ -71,10 +71,44 @@ app.get('/topics.csv',
     }, { prependHeader: false })
   })
 
+const privileges = require('lib/privileges/forum')
+const privilegesMiddlewares = Object.keys(privileges).reduce((middles, privilege) => {
+  function middleware (req, res, next) {
+    console.log('privilegesMiddlewares.' + privilege)
+    if (privileges[privilege](req.forum, req.user)) return next()
+
+    const err = new Error('User doesn\'t have enough privileges on forum.')
+    err.status = 403
+    err.code = 'LACK_PRIVILEGES'
+
+    next(err)
+  }
+
+  middles[privilege] = middleware
+  return middles
+}, {})
+
+const api = require('lib/api-v2/db-api')
+const findForumMiddleware = (req, res, next) => {
+  console.log('findForumMiddleware')
+  api.forums.find({ _id: req.query.forum })
+    .findOne()
+    .exec()
+    .then((forum) => {
+      if (!forum) return next(new Error404(id))
+
+      req.forum = forum
+
+      next()
+    })
+    .catch(next)
+
+}
+
 app.post('/topics.csv',
   middlewares.users.restrict,
-  middlewares.forums.findFromQuery,
-  middlewares.forums.privileges.canChangeTopics,
+  findForumMiddleware,
+  privilegesMiddlewares.canChangeTopics,
   function postCsv (req, res) {
     const body = req.body.csv
     csv2json(body, function (err, csvTopics) {
