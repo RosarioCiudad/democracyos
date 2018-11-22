@@ -64,6 +64,7 @@ export default class TopicsListView extends View {
     this.chooseAnio = this.chooseAnio.bind(this)
     this.handlePageClick = this.handlePageClick.bind(this)
 
+ 
   }
   //Evento para filtrar
   chooseAnio(event) {
@@ -135,9 +136,14 @@ export default class TopicsListView extends View {
     this.list.sort("topicnro", {order: 'asc'})
 
 
-    this.pagination.count = this.list.matchingItems.length
 
-    const pages = this.pagination.count / 25
+    console.log(this.list.matchingItems.length)
+    this.pagination.count = this.list.matchingItems.length
+    
+
+    const pages = this.pagination.count / 100
+    console.log(pages)
+    console.log(this.pagination.count)
     const currentPage = (+getQueryVariable('page') || 1) - 1
     ReactRender((
       <ReactPaginate

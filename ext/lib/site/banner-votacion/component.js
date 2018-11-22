@@ -33,7 +33,8 @@ export default class BannerVotacion extends Component {
   }
 
   checkLocation = () => {
-    if (window.location.pathname === '/signup' || window.location.pathname === '/signin') {
+    let urltopic= window.location.href.indexOf("presupuesto/topic/") > -1
+    if (window.location.pathname === '/signup' || window.location.pathname === '/signin' || window.location.pathname === '/presupuesto' || urltopic ) {
       return true
     }
     return false
