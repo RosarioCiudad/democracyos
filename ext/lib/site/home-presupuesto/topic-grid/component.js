@@ -86,7 +86,7 @@ export default class TopicGrid extends Component {
                   <div className='topics-section'>
                     <Anchor id='distrito'>
                       <h2 className='topics-section-container topics-section-title'>
-                        Proyectos para tu distrito
+                        Selecciona 1 proyecto para tu distrito
                       </h2>
                       <div className='topics-container'>
                         {this.props.loading && <div className='loader' />}
@@ -108,7 +108,7 @@ export default class TopicGrid extends Component {
                   <div className='topics-section'>
                     <Anchor id='barrio'>
                       <h2 className='topics-section-container topics-section-title topics-section-title-area'>
-                        Proyectos para tu barrio
+                        Selecciona 1 proyecto para tu barrio
                       </h2>
                       <div className='topics-container topics-container-area'>
                         {this.props.loading && <div className='loader' />}
