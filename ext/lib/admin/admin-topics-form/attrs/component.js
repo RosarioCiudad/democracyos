@@ -39,8 +39,8 @@ forms.Number = ({
       min={min}
       max={max}
       required={mandatory}
-      //validate={mandatory && 'required'}
-      //disabled={name === 'votes'} 
+      validate={mandatory && 'required'}
+      disabled={name === 'votes'} 
       />
   </div>
 )
@@ -65,7 +65,7 @@ forms.String = ({
       minLength={min}
       maxLength={max}
       required={mandatory}
-      //validate={mandatory && 'required'} 
+      validate={mandatory && 'required'} 
       />
   </div>
 )
@@ -133,7 +133,7 @@ forms.Boolean = class extends Component {
             defaultValue={this.state.checked ? 'true' : undefined}
             name={this.state.checked ? `attrs.${name}` : undefined}
             required={mandatory}
-            //validate={mandatory && 'required'} 
+            validate={mandatory && 'required'} 
             />
           <span className='attrs-title'>{title}</span>
           {description && <span className='help-text'>{description}</span>}
