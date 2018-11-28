@@ -1,21 +1,26 @@
 #noticias
   display: flex
   justify-content: center
-  align-items: center
   padding-top: 50px
+  @media (max-width: 950px)
+    flex-direction: column
+    flex-wrap: wrap
+    
   .texto-container
     .topic-article-content
+      position: relative
       max-width: none
       padding: 0!important
       color: #757575
       font-size: 1.1em
-    a.btn
-      margin-top: 20px
     h3
-      margin-top: 0
+      margin-top: 0!important
       font-size: 24px
       font-weight: 400
       color: #4f5353
+    a.btn
+      color: #FFF
+
   .media-container
     flex: 1
     padding: 0 0 0 50px
@@ -32,4 +37,7 @@
       background-repeat: no-repeat
   @media (max-width: 950px)
     .media-container
-      display: none
+      margin-top: 10px
+      padding: 0 0 0 0px
+
+  
