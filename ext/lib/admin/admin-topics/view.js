@@ -89,14 +89,13 @@ export default class TopicsListView extends View {
        
         // Obtengo las opciones seleccionadas
 
-   
       
     //armo el hash
-
+    console.log(distrito.substring(9,13))
 
     //Filtro la lista
     this.list.filter(function(item) {
-    return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
+    return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.substring(9,13).includes(distrito.substring(9,13))
     })
     this.list.sort("topicnro", {order: 'asc'})
     
@@ -115,7 +114,7 @@ export default class TopicsListView extends View {
 
    if (this.forum.name === 'presupuesto' && this.forum.privileges.canEdit){
     this.list = new List('topics-wrapper', { valueNames: ['topicnro','topic-title', 'topicid', 'topic-date', 'topicanio', 'topicdistrito','topicarea','topicedad'] })
-
+    console.log(this.list)
       //Obtengo los hash de los filtros
 
       //window.location.hash = `#anio=2019&modalidad=&distrito=`
@@ -131,18 +130,18 @@ export default class TopicsListView extends View {
     let distritoini = distritoinicial.replace("%20","")
 
     this.list.filter(function(item) {
-    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial) && item.values().topicdistrito.includes(distritoini)
+    return item.values().topicanio.includes(anioinicial) && item.values().topicedad.includes(modalidadinicial) && item.values().topicdistrito.substring(9,13).includes(distritoini.substring(0,4))
     })
     this.list.sort("topicnro", {order: 'asc'})
 
 
 
-    console.log(this.list.matchingItems.length)
+    //console.log(this.list.matchingItems.length)
     this.pagination.count = this.list.matchingItems.length
     
 
     const pages = this.pagination.count / 100
-    console.log(pages)
+    //console.log(pages)
     console.log(this.pagination.count)
     const currentPage = (+getQueryVariable('page') || 1) - 1
     ReactRender((
@@ -262,7 +261,7 @@ export default class TopicsListView extends View {
     const { origin, pathname, hash } = window.location
     window.location = `${origin}${pathname}?page=${(e.selected + 1)}#anio=${anio}&modalidad=${modalidad}&distrito=${distrito}`
     this.list.filter(function(item) {
-    return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.includes(distrito)
+    return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.substring(9,13).includes(distrito.substring(0,4))
     })
   }
 
@@ -272,4 +271,3 @@ getHashVariable(key) {
   }
 
 }
-

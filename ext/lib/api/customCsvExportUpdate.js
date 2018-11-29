@@ -84,7 +84,7 @@ app.post('/topics.csv',
       }
 
       Promise.all(csvTopics.map((csvTopic) => {
-        if (!~csvTopic['Jornada'].indexOf('2019')) return Promise.resolve()
+        if (!csvTopic['Jornada'].indexOf('2019')) return Promise.resolve()
         Object.keys(csvTopic).forEach((csvKey) => {
           if (csvKey.indexOf('/r')) {
             csvTopic[csvKey.replace(/\r/g, '')] = csvTopic[csvKey]
@@ -99,17 +99,17 @@ app.post('/topics.csv',
           : ~jornada.toLowerCase().indexOf('adulto')
             ? 'adulto'
             : null
-        const state = csvTopic['Estado']
+        
         return Topic.findOne({
           'attrs.anio': anio,
           'attrs.district': distrito,
           'attrs.number': numero,
           'attrs.edad': edad,
-//agrego estado
-          'attrs.state': state
+          'deletedAt' : null
 
         })
         .then((topic) => {
+          console.log(topic)
           if (!topic) return
           const state = ~csvTopic[' incluido (SI/NO)'].indexOf('SI')
             ? 'proyectado'
@@ -128,5 +128,5 @@ app.post('/topics.csv',
         log('post csv: find and modify topic from csv error', err)
         res.status(500).end()
       })
-    }, { delimiter: { wrap: '"' } })
+    }, { delimiter: { field: ',' } })
   })
