@@ -3,7 +3,7 @@
     "video": "https://www.rosario.gob.ar/ArchivosWeb/pp/IMG_1494.mp4",
     "image": "https://www.rosario.gov.ar/ArchivosWeb/pp/cierre1.jpg"
   },
-  {
+  /*{
     "video": "https://www.rosario.gov.ar/ArchivosWeb/pp2.mp4",
     "image": "https://www.rosario.gov.ar/ArchivosWeb/pp2.jpg"
   },
@@ -18,5 +18,5 @@
   {
     "video": "https://rosariociudad.blob.core.windows.net/assets/rosario-05.mp4",
     "image": "https://rosariociudad.blob.core.windows.net/assets/rosario-05.jpg"
-  }
+  }*/
 ]
