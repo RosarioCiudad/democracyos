@@ -84,7 +84,7 @@ forms.Enum = ({
     <select
       className='form-control'
       name={`attrs.${name}`}
-      defaultValue={value}
+      defaultValue={name='attrs.rosario2030' ? (value || 'no') : value}
       required={mandatory}
       >
       {options.map((opt) => (
