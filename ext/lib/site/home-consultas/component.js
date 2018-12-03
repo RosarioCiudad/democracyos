@@ -53,7 +53,8 @@ class HomeConsultas extends Component {
     this.state = {
       forum: null,
       topics: null,
-      filter: 'rosario2030',
+      //filter: 'rosario2030',
+      filter: 'consultas'
     }
   }
 
