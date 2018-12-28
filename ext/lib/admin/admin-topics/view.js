@@ -166,11 +166,12 @@ export default class TopicsListView extends View {
         forum={this.forum} />),
         this.el[0].querySelector('.update-stage'));
 
+
         ReactRender(
         (<ExportUpdate
         forum={this.forum} />),
         this.el[0].querySelector('.export-update'));
-
+  
       
 
         ReactRender(
@@ -213,6 +214,13 @@ export default class TopicsListView extends View {
         this.el[0].querySelector('.filtros'));
 
       }
+   if (this.forum.name === 'consultas' && this.forum.privileges.canEdit){
+        ReactRender(
+        (<ExportUpdate
+        forum={this.forum} />),
+        this.el[0].querySelector('.export-update'));
+      }
+
   }
 
   
