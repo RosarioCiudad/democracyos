@@ -76,12 +76,14 @@ export default class ExportUpdate extends Component {
         <a
           href={urlBuilder.for('admin.topics.csv', { forum: forum.name })}
           target="_blank" className='btn btn-primary'>
-          Exportar proyectos 2019 (.csv)
+          {forum.name==='presupuesto' ? "Exportar proyectos 2019 (.csv)" : "Exportar resultados" }
         </a>
+        {forum.name === 'presupuesto' && (
         <label className='btn btn-primary label-file'>
           {this.state.loading ? t('form.please-wait') : "Importar resultados votación (.csv)" }
           <input type='file' id='input-file' accept='.csv' onChange={this.onLoadFile} ref='inputCsv' />
         </label>
+        )}
       </div>
     )
   }

@@ -44,6 +44,8 @@
             button.btn.btn-primary.sort(data-sort='topic-title')
               span.glyphicon.glyphicon-font
       .well.well-sm.clearfix.filtros
+    - if (forum.name === 'consultas' && forum.privileges.canEdit)
+      .well.well-lg.clearfix.export-update
     .list.list-group.col-xs-12
       - each topic in topics
         a.list-group-item(class={joven: topic.attrs && topic.attrs.edad === 'joven'} href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), data-topicid=topic.id)
