@@ -72,7 +72,7 @@ app.get('/topics.csv',
 
 
     if(req.forum.name === 'consultas'){
-      if(!topic.deletedAt && topic.publishedAt){
+      if(!topic.deletedAt && topic.publishedAt && topic.closingAt){
       
 if(topic.action.results.length === 2){
       infoTopics.push([{
