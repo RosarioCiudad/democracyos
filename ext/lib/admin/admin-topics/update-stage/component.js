@@ -10,7 +10,7 @@ import 'moment-timezone'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import FormView from 'lib/form-view/form-view'
 import o from 'component-dom'
-//import DatePicker from 'react-datepicker'
+import DatePicker from 'react-datepicker'
 
 const stages = [
   {'name': 'votacion-abierta', 'title': 'Votación abierta'},
@@ -42,8 +42,8 @@ export default class UpdateStage extends Component {
   componentWillMount () {
        this.setState ({
       initialStage: this.props.forum.extra.stage,
-     //Inicializo la fecha y hora del calendario con la fecha de cierre guardada en la base y le sumo 3 horas por el formato GTM -3
-      //startDate: moment(this.props.forum.extra.cierre).add(3, 'hours'),
+     /*Inicializo la fecha y hora del calendario con la fecha de cierre guardada en la base y le sumo 3 horas por el formato GTM -3*/
+      startDate: moment(this.props.forum.extra.cierre).add(3, 'hours'),
 
       forum: this.props.forum.id,
     })
@@ -54,7 +54,7 @@ export default class UpdateStage extends Component {
 
 handleChange(date) {
     this.setState({
-      //startDate: date,
+      startDate: date,
       disabled: false,
       selectedStage: this.state.initialStage
     })
@@ -73,7 +73,7 @@ handleChange(date) {
 
   changeStage = (e) => {
     e.preventDefault()
-    //const cierre = this.state.startDate ? this.state.startDate.format('YYYY-MM-DDTHH:mm:ss') : null
+    const cierre = this.state.startDate ? this.state.startDate.format('YYYY-MM-DDTHH:mm:ss') : null
     const sendStage = this.state.selectedStage
     fetch('/ext/api/change-stage', {
           method: 'POST',
@@ -82,8 +82,8 @@ handleChange(date) {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({stage: sendStage, forum: this.state.forum
-            //cierre: cierre, forum: this.state.forum
+          body: JSON.stringify({stage: sendStage, forum: this.state.forum,
+            cierre: cierre
           })
     })
     .then((res) => {
@@ -128,7 +128,7 @@ handleChange(date) {
               })}
             </select>
           </div>
-          {/*
+          
            <div className={`"form-group" ${this.state.selectedStage=="votacion-abierta" || (!this.state.selectedStage && this.state.initialStage=="votacion-abierta") ? '' : 'cierreoculto'}`}>
           <label>Fecha de cierre</label>
           <span className="help-text">Fecha de cierre de la votación</span>
@@ -141,7 +141,6 @@ handleChange(date) {
           </div>
           </div>
           </div>
-          */}
 
           <button className='btn btn-primary boton' onClick={this.changeStage} disabled={this.state.disabled}>
             Confirmar
