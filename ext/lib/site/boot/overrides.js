@@ -22,9 +22,16 @@ import * as SignIn from 'lib/site/sign-in/component'
 import * as SignInOverride from 'ext/lib/site/sign-in/component'
 
 
+import * as Router from 'lib/site/boot/router'
+import * as RouterOverride from 'ext/lib/site/boot/router'
+
+import * as Routes from 'lib/site/boot/routes'
+import * as RoutesOverride from 'ext/lib/site/boot/routes'
 
 
 
+Object.assign(Router, RouterOverride)
+Object.assign(Routes, RoutesOverride)
 Object.assign(HomeMultiforum, HomeMultiforumOverride)
 Object.assign(HomeForum, HomeForumOverride)
 Object.assign(TopicLayoutSidebar, TopicLayoutSidebarOverride)
