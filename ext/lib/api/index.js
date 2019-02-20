@@ -3,7 +3,6 @@ const express = require('express')
 const validate = require('lib/api-v2/validate')
 
 const log = debug('democracyos:ext:api')
-
 const app = module.exports = express()
 
 app.use('/ext/api', require('./participatory-budget'))
@@ -15,6 +14,8 @@ app.use('/ext/api/change-stage', require('./change-stage'))
 app.use('/api/v2', require('./fixedOpenTopicMethod'))
 app.use('/api/v2', require('./customCsvExportUpdate'))
 app.use('/api', require('./signup'))
+app.use('/api', require('./forgot-email/index'))
+
 
 app.use(function validationErrorHandler (err, req, res, next) {
   if (res.headersSent) return next(err)

@@ -8,3 +8,4 @@ import * as topicMiddlewares from 'lib/middlewares/topic-middlewares/topic-middl
 import * as topicMiddlewaresOverride from 'ext/lib/middlewares/topic-middlewares/topic-middlewares'
 
 Object.assign(topicMiddlewares, topicMiddlewaresOverride)
+
