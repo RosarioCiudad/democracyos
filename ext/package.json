@@ -14,7 +14,7 @@
     "jump.js": "~1.0.2",
     "lodash.debounce": "~4.0.8",
     "module-alias": "1.0.10",
-    "react-datepicker": "^1.6.0",
+    "react-datepicker": "1.4.1",
     "rosariociudad-bootstrap": "^1.0.3",
     "string.prototype.padstart": "3.0.0",
     "twitter": "~1.4.0"
