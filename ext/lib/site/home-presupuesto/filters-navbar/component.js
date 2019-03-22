@@ -219,7 +219,7 @@ class FiltersNavbar extends Component {
         stageType = 'seguimiento'
         exposedFilters.estado.pendiente = false
         exposedFilters.estado.perdedor = false
-        exposedFilters.anio.proyectos2019 = false
+        exposedFilters.anio.proyectos2019 = true
         break
       case 'votacion-abierta':
         stageType = 'votacion'
@@ -418,7 +418,7 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2018'>2018</label>
                         </div>
-                        {/*
+                        
                           <div className='option-container'>
                           <div className='check-container'>
                             <input onChange={this.handleCheckboxChange('anio')} type='checkbox' id='proyectos2019' name='anio' checked={this.state.selectFilters.anio.proyectos2019} />
@@ -426,7 +426,7 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2019'>2019</label>
                           </div>
-                          */}
+                          
                       </div>
                     </div>
                     <div className='dropdown-actions'>
