@@ -278,8 +278,8 @@ function anioNum (e) {
         let anioA = anioNum(a.attrs && a.attrs.anio);
         let anioB = anioNum(b.attrs && b.attrs.anio);
 
-        if (anioA < anioB) return -1;
-        if (anioA > anioB) return 1;
+        if (anioA < anioB) return 1;
+        if (anioA > anioB) return -1;
 
         /*ordeno por estado*/
        
