@@ -72,7 +72,7 @@ class FiltersNavbar extends Component {
         },
         anio: {
           proyectos2017: false,
-          proyectos2018: true,
+          proyectos2018: false,
           proyectos2019: true
         },
         estado: {
@@ -109,6 +109,8 @@ class FiltersNavbar extends Component {
           break
         case 'seguimiento':
           nextFilters.edad.adulto = true
+          nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2018 = false
           break
       }
 
