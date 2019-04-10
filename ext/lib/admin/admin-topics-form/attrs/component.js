@@ -50,6 +50,7 @@ forms.String = ({
   title,
   description,
   mandatory,
+  placeholder,
   min,
   max,
   value
@@ -62,6 +63,7 @@ forms.String = ({
       type='text'
       name={`attrs.${name}`}
       defaultValue={name === 'anio' ? (value || '2019') : (name=== 'linkText' ? (value || 'Ver Noticias') : value)}
+      placeholder={name=== 'iFrame' ? 'Ej: https://www.google.com/maps/d/embed?mid=1cHSzK4B4jGzZkU8-ehIO6Y1c_rY' : ''}
       minLength={min}
       maxLength={max}
       required={mandatory}
