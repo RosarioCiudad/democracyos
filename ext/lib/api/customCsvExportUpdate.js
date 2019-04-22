@@ -9,9 +9,18 @@ const log = debug('democracyos:api:topic:csv')
 const app = module.exports = express()
 
 function escapeTxt (text) {
-  if (!text) return ''
+  if (!text) return '-'
   text += ''
-  return text.replace(/"/g, '\'').replace(/\r/g, '').replace(/\n/g, '')
+  return text.replace(/"/g, '\'').replace(/\r/g, '').replace(/\n/g, '').replace("[",'').replace("]",'').replace('"','')
+
+}
+
+function convertUTCDateToLocalDate(date) {
+    var str = date.getUTCFullYear().toString() + "/" +
+          (date.getUTCMonth() + 1).toString() +
+          "/" + date.getUTCDate() + " " + date.getUTCHours() +
+          ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds()
+    return str
 }
 
 function sortTopics (a, b) {
@@ -32,13 +41,17 @@ app.get('/topics.csv',
   middlewares.topics.findAllFromForum,
   middlewares.forums.privileges.canChangeTopics,
   function getCsv (req, res, next) {
-    const infoTopics = []
+    var infoTopics = []
     const topics = req.topics.sort(sortTopics)
 
     topics.forEach((topic) => {
       if (topic.attrs === undefined) {
         topic.attrs = {}
       }
+      if (topic.action === undefined){
+        topic.action = {}
+      }
+      if(req.forum.name === 'presupuesto'){
       if (topic.attrs.anio === '2019') {
         infoTopics.push([
           `"${escapeTxt(topic.attrs.district)}"`.toUpperCase(),
@@ -54,8 +67,73 @@ app.get('/topics.csv',
           `"${escapeTxt(topic.attrs.state)}"`
         ])
       }
+    }
+    
+
+
+    if(req.forum.name === 'consultas'){
+      if(!topic.deletedAt && topic.publishedAt && topic.closingAt){
+      
+if(topic.action.results.length === 2){
+      infoTopics.push([{
+      "Consulta": `"${escapeTxt(topic.mediaTitle)}"`,
+      "Participantes": `"${escapeTxt(topic.action.count)}"`,
+      "Opcion A": `"${escapeTxt(topic.action.results[0].value)}"`,
+      "Votos A": `"${escapeTxt(topic.action.results[0].votes)}"`,
+      "Porcentaje A": `"${escapeTxt(topic.action.results[0].percentage)}"`,
+      "Opcion B": `"${escapeTxt(topic.action.results[1].value)}"`,
+      "Votos B": `"${escapeTxt(topic.action.results[1].votes)}"`,
+      "Porcentaje B": `"${escapeTxt(topic.action.results[1].percentage)}"`,
+      "Opcion C": "-",
+      "Votos C": "0",
+      "Porcentaje C": "0",
+      "Cerrada el": `"${convertUTCDateToLocalDate(topic.closingAt)}"`
+      }])
+    }else{
+      infoTopics.push([{
+      "Consulta": `"${escapeTxt(topic.mediaTitle)}"`,
+      "Participantes": `"${escapeTxt(topic.action.count)}"`,
+      "Opcion A": `"${escapeTxt(topic.action.results[0].value)}"`,
+      "Votos A": `"${escapeTxt(topic.action.results[0].votes)}"`,
+      "Porcentaje A": `"${escapeTxt(topic.action.results[0].percentage)}"`,
+      "Opcion B": `"${escapeTxt(topic.action.results[1].value)}"`,
+      "Votos B": `"${escapeTxt(topic.action.results[1].votes)}"`,
+      "Porcentaje B": `"${escapeTxt(topic.action.results[1].percentage)}"`,
+      "Opcion C": `"${escapeTxt(topic.action.results[2].value)}"`,
+      "Votos C": `"${escapeTxt(topic.action.results[2].votes)}"`,
+      "Porcentaje C": `"${escapeTxt(topic.action.results[2].percentage)}"`,
+      "Cerrada el": `"${convertUTCDateToLocalDate(topic.closingAt)}"`
+      }])
+    }
+
+    }
+    }
+
+
     })
 
+    if(req.forum.name === 'presupuesto'){
+    json2csv({infoTopics, del: ','}, function (err, csv) {
+      if (err) {
+        log('get csv: array to csv error', err)
+        return res.status(500).end()
+      }
+      res.status(200)
+      res.set({
+        'Content-Type': 'text/csv; charset=utf-8',
+        'Content-Disposition': `attachment; filename=${req.forum.name.replace(/\s/g, '-')}-${Math.floor((new Date()) / 1000)}.csv`
+      })
+      res.write(csv)
+      res.end()
+    }, { prependHeader: true })
+}
+
+
+if(req.forum.name === 'consultas'){
+    
+    //const fields = ['titulo']
+    //const json2csvParser = new Json2csvParser({ fields })
+    console.log(infoTopics)
     json2csv(infoTopics, function (err, csv) {
       if (err) {
         log('get csv: array to csv error', err)
@@ -68,7 +146,10 @@ app.get('/topics.csv',
       })
       res.write(csv)
       res.end()
-    }, { prependHeader: false })
+    }, { prependHeader: true })
+}
+
+
   })
 
 app.post('/topics.csv',

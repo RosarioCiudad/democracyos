@@ -61,6 +61,14 @@ class Noticias extends Component {
           }
         </div>
         {
+          (topic.attrs.iFrame && !topic.attrs.videoUrl) &&
+          <div className='iframe'>
+          {
+           <iframe width='560' height='315' src={topic.attrs.iFrame} frameBorder='0' allowFullScreen />
+          }
+          </div>
+        }
+        {
           (topic.attrs.videoUrl || topic.attrs.imgUrl) &&
           <div className='media-container'>
             {

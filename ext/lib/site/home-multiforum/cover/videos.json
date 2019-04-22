@@ -1,22 +1,19 @@
 [
   {
-    "video": "https://www.rosario.gob.ar/ArchivosWeb/pp/IMG_1494.mp4",
-    "image": "https://www.rosario.gov.ar/ArchivosWeb/pp/cierre1.jpg"
-  },
-  /*{
-    "video": "https://www.rosario.gov.ar/ArchivosWeb/pp2.mp4",
-    "image": "https://www.rosario.gov.ar/ArchivosWeb/pp2.jpg"
+    "video": "https://www.rosario.gob.ar/ArchivosWeb/cursos_oficios_video.mp4",
+    "image": "https://www.rosario.gob.ar/ArchivosWeb/cursos_oficios.jpg"
   },
   {
-    "video": "https://www.rosario.gov.ar/ArchivosWeb/pp3.mp4",
-    "image": "https://www.rosario.gov.ar/ArchivosWeb/pp3.jpg"
+    "video": "https://www.rosario.gob.ar/ArchivosWeb/espacios_culturales_video.mp4",
+    "image": "https://www.rosario.gob.ar/ArchivosWeb/espacios_culturales.jpg"
   },
   {
-    "video": "https://rosariociudad.blob.core.windows.net/assets/rosario-04.mp4",
-    "image": "https://rosariociudad.blob.core.windows.net/assets/rosario-04.jpg"
+    "video": "https://www.rosario.gob.ar/ArchivosWeb/estacion_aerobica_video.mp4",
+    "image": "https://www.rosario.gob.ar/ArchivosWeb/estacion_aerobica.jpg"
   },
+  
   {
-    "video": "https://rosariociudad.blob.core.windows.net/assets/rosario-05.mp4",
-    "image": "https://rosariociudad.blob.core.windows.net/assets/rosario-05.jpg"
-  }*/
+    "video": "https://www.rosario.gob.ar/ArchivosWeb/plaza_colectora_video.mp4",
+    "image": "https://www.rosario.gob.ar/ArchivosWeb/parque_colectora.JPG"
+  }
 ]

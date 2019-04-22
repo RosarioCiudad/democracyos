@@ -93,8 +93,13 @@ export class SignIn extends Component {
         )}
         <div className='form-group'>
         <div className='forgot'>
-         <a tabIndex={4} onClick={this.openPopup} href='#'>¿Olvidaste tu correo?</a>
-        </div>
+         <Link
+              to='/forgot-email'
+              tabIndex={0}>
+
+              {t("¿Olvidaste tu correo?")}
+            </Link>
+          </div>
           <label htmlFor=''>{t('signup.email')}</label>
           <input
             type='email'

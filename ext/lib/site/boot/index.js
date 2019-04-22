@@ -14,3 +14,5 @@ app.use(require('../static-pages'))
 app.use(require('../tweets-feed'))
 app.use(require('../facebook-card'))
 app.use(require('../topic-layout'))
+app.use(require('../forgot-email'))
+
