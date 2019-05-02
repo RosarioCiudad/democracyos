@@ -14,7 +14,7 @@ import Richtext from 'lib/richtext/richtext'
 import urlBuilder from 'lib/url-builder'
 import FormView from 'lib/form-view/form-view'
 import topicStore from 'lib/stores/topic-store/topic-store'
-import * as serializer from 'lib/admin/admin-topics-form/body-serializer'
+import * as serializer from './body-serializer'
 import ForumTagsSearch from 'lib/admin/admin-topics-form/tag-autocomplete/component'
 import linkTemplate from './link.jade'
 import Attrs from './attrs/component'
@@ -79,6 +79,7 @@ export default class TopicForm extends FormView {
 
     var body = this.find('textarea[name=body]')
     this.richtext = new Richtext(body)
+
   }
 
   /**
@@ -183,7 +184,6 @@ export default class TopicForm extends FormView {
       this.closingAt = this.find('[name=closingAt]', this.el)
       this.closingAtTime = this.find('[name=closingAtTime]')
       this.dp = new Datepicker(this.closingAt[0])
-      console.log(this.dp)
 
       return this
     }
@@ -238,7 +238,9 @@ export default class TopicForm extends FormView {
       delete data.closingAtTime
     }
 
+  /*  console.log(data.body)*/
     data.clauses = serializer.toArray(data.body)
+/*    console.log(data.clauses)*/
     delete data.body
 
     if (data['action.options']) {
