@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-console.log("estoy en forgot")
+
 var log = require('debug')('democracyos:forgotemail')
 var t = require('t-component')
 var api = require('lib/db-api')
@@ -32,7 +32,7 @@ exports.createToken = function createToken (email, meta, callback) {
   email = normalizeEmail(email)
 
   User.findByEmail(email, function (err, user) {
-  console.log("estoy en forgot")
+  
     if (err) return callback(err)
     if (!user) return callback(new Error(t('common.no-user-for-email') + ' ' + email))
     if (!user.emailValidated) {

@@ -60,7 +60,7 @@
             .col-xs-9.coltitle
               h4.topic-title=topic.mediaTitle
             .col-xs-2
-              button.btn.btn-default.pull-right.delete-topic
+              button.btn.btn-default.pull-right.delete-topic(class="", data-topicid=topic.id)
                 span.glyphicon.glyphicon-trash
           if (forum.name === 'presupuesto' && forum.privileges.canEdit)
             .row
