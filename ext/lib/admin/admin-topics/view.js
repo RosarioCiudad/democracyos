@@ -123,7 +123,7 @@ export default class TopicsListView extends View {
 
    if (this.forum.name === 'presupuesto' && this.forum.privileges.canEdit){
     this.list = new List('topics-wrapper', { valueNames: ['topicnro','topic-title', 'topicid', 'topic-date', 'topicanio', 'topicdistrito','topicarea','topicedad'] })
- /*   console.log(this.list)*/
+
       //Obtengo los hash de los filtros
 
       //window.location.hash = `#anio=2019&modalidad=&distrito=`
@@ -143,7 +143,7 @@ export default class TopicsListView extends View {
     })
     this.list.sort("topicnro", {order: 'asc'})
 
-    console.log(window.location.search)
+   
 
     //console.log(this.list.matchingItems.length)
     this.pagination.count = this.list.matchingItems.length
