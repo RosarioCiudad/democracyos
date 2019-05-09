@@ -10,7 +10,7 @@ export default ({ forum, topic }) => {
         if (topic && topic.attrs && topic.attrs.hasOwnProperty(attr.name)) {
           val = topic.attrs[attr.name]
         }
-        console.log(attr.name, val)
+        
         return <FormInput key={attr.name} {...attr} value={val} />
       })}
     </div>

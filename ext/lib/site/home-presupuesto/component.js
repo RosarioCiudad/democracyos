@@ -75,13 +75,13 @@ class HomePresupuesto extends Component {
   paginateFoward = () => {
     this.setState({ loading: true }, () => {
       let s = this.state.s
-      s += 20
+      s += 50
       this.fetchTopics(s)
         .then((topics) => {
           this.setState({
             loading: false,
             topics: this.state.topics.concat(topics),
-            noMore: topics.length === 0 || topics.length < 20,
+            noMore: topics.length === 0 || topics.length < 50,
             s
           })
         })

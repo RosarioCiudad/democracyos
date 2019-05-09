@@ -58,16 +58,20 @@ export default class TopicsListView extends View {
       forum,
       urlBuilder,
     })
+    this.topics = topics
     this.forum = forum
     this.pagination = pagination
     //bind evento para filtrar
     this.chooseAnio = this.chooseAnio.bind(this)
     this.handlePageClick = this.handlePageClick.bind(this)
-
  
   }
-  //Evento para filtrar
+  
+  //Evento para filtrar/data-/g
   chooseAnio(event) {
+
+    /*var url = window.location.href.replace(window.location.search,'')
+    console.log(url)*/
     //Obtengo los valores de cada select para mantener los filtros
 
     //console.log(this.getHashVariable("anio"))
@@ -91,18 +95,23 @@ export default class TopicsListView extends View {
 
       
     //armo el hash
-    console.log(distrito.substring(9,13))
+    /*console.log(distrito.substring(9,13))*/
 
     //Filtro la lista
     this.list.filter(function(item) {
     return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.substring(9,13).includes(distrito.substring(9,13))
     })
+    
+   this.list.update()
+
     this.list.sort("topicnro", {order: 'asc'})
     
     var filtros = 'anio=' + anio + '&' +'modalidad=' + modalidad + '&' + 'distrito=' + distritotitle.toLowerCase()
     
+  
     window.location.hash= `#${filtros}`
-
+    
+    if(window.location.search){window.location.search= ``}
 
 }
 
@@ -114,7 +123,7 @@ export default class TopicsListView extends View {
 
    if (this.forum.name === 'presupuesto' && this.forum.privileges.canEdit){
     this.list = new List('topics-wrapper', { valueNames: ['topicnro','topic-title', 'topicid', 'topic-date', 'topicanio', 'topicdistrito','topicarea','topicedad'] })
-    console.log(this.list)
+
       //Obtengo los hash de los filtros
 
       //window.location.hash = `#anio=2019&modalidad=&distrito=`
@@ -134,7 +143,7 @@ export default class TopicsListView extends View {
     })
     this.list.sort("topicnro", {order: 'asc'})
 
-
+   
 
     //console.log(this.list.matchingItems.length)
     this.pagination.count = this.list.matchingItems.length
@@ -142,7 +151,7 @@ export default class TopicsListView extends View {
 
     const pages = this.pagination.count / 100
     //console.log(pages)
-    console.log(this.pagination.count)
+    /*console.log(this.pagination.count)*/
     const currentPage = (+getQueryVariable('page') || 1) - 1
     ReactRender((
       <ReactPaginate
@@ -227,11 +236,9 @@ export default class TopicsListView extends View {
 
   ondeletetopicclick (ev) {
     ev.preventDefault()
-    //const el = ev.delegateTarget.parentElement
-    //const topicId = el.getAttribute('data-topicid')
-    //las 2 lineas anteriores no funcionan, por eso obtengo el data-topicid de la siguiente linea
-    const  topicId= ev.path[4].getAttribute('data-topicid')
-    //if(!topicId) debugger
+    const el = ev.delegateTarget
+    const topicId = el.getAttribute("data-topicid")
+   
 
     const _t = (s) => t(`admin-topics-form.delete-topic.confirmation.${s}`)
 
@@ -267,7 +274,10 @@ export default class TopicsListView extends View {
     }
 
     const { origin, pathname, hash } = window.location
+    
+    
     window.location = `${origin}${pathname}?page=${(e.selected + 1)}#anio=${anio}&modalidad=${modalidad}&distrito=${distrito}`
+
     this.list.filter(function(item) {
     return item.values().topicanio.includes(anio) && item.values().topicedad.includes(modalidad)  && item.values().topicdistrito.substring(9,13).includes(distrito.substring(0,4))
     })
