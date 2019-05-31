@@ -22,7 +22,7 @@ import NotAllowed from 'lib/site/error-pages/not-allowed/component'
   More info: https://github.com/ReactTraining/react-router/blob/v2.8.1/docs/guides/RouteConfiguration.md
 */
 
-console.log("alooo")
+
 export default {
 
   path: '/',

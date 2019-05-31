@@ -20,8 +20,8 @@ export class UserBadge extends Component {
       menuUserBadge: false,
       canChangeTopics: false
     }
-  }
 
+  }
   componentDidMount () {
     bus.on('forum:change', this.setChangeTopicsPermission)
   }
