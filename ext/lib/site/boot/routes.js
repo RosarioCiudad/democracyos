@@ -1,5 +1,5 @@
 var urlBuilder = require('lib/url-builder')
-console.log("hola uso este routes")
+
 
 module.exports = function (multiForum) {
   var forum = multiForum ? '/:forum' : ''

@@ -1,0 +1,22 @@
+#user-badges-wrapper.hide(data-section=urlBuilder.for('settings.user-badges'))
+  .password-settings
+    .heading
+      .circle
+        i.icon-lock
+      h1= t('Administración de Usuarios')
+    div
+      ul.form-messages
+      .form-group.user-search
+      .form-group(name="formulario")
+        .user-card
+          .picture
+          p.name
+        label #{"Número de documento"}
+        input.form-control(type='text', name='dni', tabindex=1, placeholder=t(''), value='', validate='required' disabled, maxlength=100)
+        label #{"Correo electrónico"}
+        input.form-control(type='email', name='email', tabindex=2, placeholder=t(''), value='', validate='required', maxlength=100)
+        br
+        .form-group: button#submit-email.btn.btn-success.btn-block.btn-lg(tabindex=3)=t('Actualizar y Renviar Correo')
+        label #{t('settings.badge')}
+        input.form-control(type='text', name='badge', tabindex=4, placeholder=t(''), value='', validate='required', maxlength=50)
+      .form-group(name="boton"): button#submit-badge.btn.btn-success.btn-block.btn-lg(tabindex=5)=t('Guardar etiqueta')
