@@ -13,7 +13,7 @@ export default class UserBadgeView extends FormView {
     this.onSelect = this.onSelect.bind(this)
     this.onSubmitEmail = this.onSubmitEmail.bind(this)
     this.onSubmitBadge = this.onSubmitBadge.bind(this)
-
+    
     this.addUserInput = new AddUserInput({
       onSelect: this.onSelect,
       container: this.el[0].querySelector('.user-search')
@@ -135,11 +135,12 @@ onSubmitBadge (e) {
    */
 
   onsuccessemail (email) {
-    this.messages(["El correo electrónico ha sido actualizado, se envió un mail al usuario para validar la cuenta."], 'success')
+    var email = {email: email}
     request
     .post('/api/signup/resend-validation-email')
     .send(email)
     .end()
+    this.messages(["El correo electrónico ha sido actualizado, se envió un mail al usuario para validar la cuenta."], 'success')
   }
 
   onsuccessbadge () {
