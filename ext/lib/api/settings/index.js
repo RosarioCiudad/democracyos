@@ -16,7 +16,6 @@ var app = module.exports = express()
 
 
 app.post('/settings/email', restrict, function (req, res) {
-  if (!req.user.staff) return res.send(401)
   var id = req.body.id
 
   log('Updating user %s email', id)
