@@ -9,10 +9,10 @@ import Required from 'lib/site/topic-layout/topic-article/required/component'
 
 export class Poll extends Component {
   static getResults (topic, userVote) {
+
     const results = topic.action.results
 
     const winnerCount = Math.max(...results.map((opt) => opt.percentage))
-
     return results.map((opt) => Object.assign({
       winner: winnerCount === opt.percentage,
       voted: opt.value === userVote
@@ -28,6 +28,7 @@ export class Poll extends Component {
       mostrarCambiar:false,
       mostrarVotar:false
     }
+    
   }
 
 
@@ -42,14 +43,22 @@ export class Poll extends Component {
 
     topicStore.vote(this.props.topic.id, this.state.selected)
       .then(() => {
-        this.setState((prevState) => ({
-          changingVote: false,
-          mostrarCambiar: true,
-          mostrarVotar: false
-        }))
+        topicStore.findOne(this.props.topic.id).then((newTopic) => {
+          console.log(newTopic)
+
+          this.setState((prevState) => ({
+            changingVote: false,
+            mostrarCambiar: true,
+            mostrarVotar: false,
+            results: Poll.getResults(newTopic, this.state.selected),
+            selected: this.state.selected
+          }))
+        })
+       
       })
       
       .catch((err) => { throw err })
+
   }
 
   select = (option) => (e) => {
@@ -63,6 +72,7 @@ export class Poll extends Component {
   }
 
   componentWillReceiveProps (props) {
+    console.log("recibo props")
     this.setStateFromProps(props)
   }
 
