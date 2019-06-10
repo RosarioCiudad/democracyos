@@ -27,7 +27,9 @@ export default class UserBadgeView extends FormView {
       .then((res) => {
         if (res.result) {
           this.el[0].querySelector('input[name="email"]').value = res.result.user.email || ''
-          this.el[0].querySelector('input[name="dni"]').value = res.result.user.extra.nro_doc || ''
+          if(res.result.user.extra){
+            this.el[0].querySelector('input[name="dni"]').value = res.result.user.extra.nro_doc || ''
+          }
         }
       })
 
