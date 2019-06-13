@@ -212,6 +212,9 @@ export default class TopicForm extends FormView {
 
   onsaveclick (ev) {
     ev.preventDefault()
+      if (this.dp && this.dp.popover) {
+      this.dp.popover.hide()
+    }
     if (this.find('.method-input')[0].value === 'poll' && this.find('.poll-options > input')[0].value === '') {
       this.messages(t('admin-topics-form.message.validation.pollOptions-required'), 'error')
       return
