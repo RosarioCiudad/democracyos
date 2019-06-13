@@ -43,10 +43,12 @@ export default class UpdateStage extends Component {
        this.setState ({
       initialStage: this.props.forum.extra.stage,
      /*Inicializo la fecha y hora del calendario con la fecha de cierre guardada en la base y le sumo 3 horas por el formato GTM -3*/
-      startDate: moment(this.props.forum.extra.cierre).add(3, 'hours'),
+      startDate: moment(this.props.forum.extra.cierre).add(3,'hours'),
 
       forum: this.props.forum.id,
     })
+        console.log(this.state.startDate)
+
   }
 
 
@@ -56,7 +58,7 @@ handleChange(date) {
     this.setState({
       startDate: date,
       disabled: false,
-      selectedStage: this.state.initialStage
+      /*selectedStage: this.state.initialStage*/
     })
     }
 
@@ -74,7 +76,9 @@ handleChange(date) {
   changeStage = (e) => {
     e.preventDefault()
     const cierre = this.state.startDate ? this.state.startDate.format('YYYY-MM-DDTHH:mm:ss') : null
-    const sendStage = this.state.selectedStage
+    console.log(cierre)
+    const sendStage = this.state.selectedStage ? this.state.selectedStage : this.state.initialStage
+    console.log(sendStage)
     fetch('/ext/api/change-stage', {
           method: 'POST',
           credentials: 'same-origin',
@@ -134,10 +138,10 @@ handleChange(date) {
           <span className="help-text">Fecha de cierre de la votación</span>
           <div className="form-inline">
           <div className="form-group formcierre">
-          <DatePicker dateFormat="YYYY/MM/DD" selected={this.state.startDate < moment() ? null : this.state.startDate} onChange={this.handleChange} onChange={this.handleChange} calendarClassName="fuente" isClearable={true}
+          <DatePicker dateFormat="YYYY/MM/DD" selected={this.state.startDate} onChange={this.handleChange} onChange={this.handleChange} calendarClassName="fuente" isClearable={true}
   placeholderText="Fecha" className="form-control datecierre"/>
         
-          <DatePicker selected={this.state.startDate < moment() ? null : this.state.startDate} onChange={this.handleChange} showTimeSelect showTimeSelectOnly timeCaption="Time" dateFormat="LT" calendarClassName="fuente" className="form-control" placeholderText="Hora"/>
+          <DatePicker selected={this.state.startDate} onChange={this.handleChange} showTimeSelect showTimeSelectOnly timeCaption="Time" dateFormat="LT" calendarClassName="fuente" className="form-control" placeholderText="Hora"/>
           </div>
           </div>
           </div>

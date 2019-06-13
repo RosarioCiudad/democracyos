@@ -137,12 +137,13 @@ class HomeIdeas extends Component {
   }
 
   paginateForward = () => {
+    let filtro= this.state.filter
     let page = this.state.page
     page++
     this.fetchTopics(page, this.state.forum.id)
     .then((topics) => {
       this.setState({
-        topics: this.state.topics.concat(topics),
+        topics: this.state.topics.concat(filter(filtro, topics)),
         noMore: topics.length === 0 || topics.length < 20,
         page
       })
