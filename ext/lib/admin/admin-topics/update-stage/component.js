@@ -76,7 +76,6 @@ handleChange(date) {
   changeStage = (e) => {
     e.preventDefault()
     const cierre = this.state.startDate ? this.state.startDate.format('YYYY-MM-DDTHH:mm:ss') : null
-    console.log(cierre)
     const sendStage = this.state.selectedStage ? this.state.selectedStage : this.state.initialStage
     console.log(sendStage)
     fetch('/ext/api/change-stage', {

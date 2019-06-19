@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import moment from 'moment'
-import 'moment-timezone'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import userConnector from 'lib/site/connectors/user'
 import Footer from '../footer/component'
@@ -12,11 +10,6 @@ import BannerVotoEnProceso from './banner-en-proceso/component'
 import Countdown from './countdown/component'
 import distritos from './distritos.json'
 import Noticias from '../home-multiforum/noticias/component'
-
-
-const stages = [
-  {'name': 'votacion-cerrada', 'title': 'Resultados de votación'},
-]
 
 class HomePresupuesto extends Component {
   constructor (props) {
@@ -34,22 +27,6 @@ class HomePresupuesto extends Component {
       anio: ['2017', '2018', '2019'],
       estado: ['proyectado', 'ejecutandose', 'terminado']
     }
-    this.cerrarVotacion=this.cerrarVotacion.bind(this)
-  }
-
-  componentWillMount () {
-    forumStore.findOneByName('presupuesto')
-    .then((forum) => {
-      this.setState({
-        loading: false,
-        stage: forum.extra.stage,
-        forumStage: forum.extra.stage,
-        cierre: forum.extra.cierre
-      })
-      if(this.state.forumStage==='votacion-abierta'){
-      this.cerrarVotacion(forum)
-    }
-    })
   }
 
   componentDidMount () {
@@ -70,7 +47,6 @@ class HomePresupuesto extends Component {
         forumStage: forum.extra.stage,
         cierre: forum.extra.cierre
       })
-     /* this.cerrarVotacion(forum)*/
     })
     .catch((err) => {
       this._fetchingForums = false
@@ -80,24 +56,6 @@ class HomePresupuesto extends Component {
       })
     })
   }
-
-  cerrarVotacion(forum){
-    const fechacierre = moment(this.state.cierre).add(3, 'hours').format('YYYY-MM-DDTHH:mm:ss')
-    let t = Date.parse(fechacierre) - Date.parse(new Date())
-    if (t <= 0){
-      fetch('/ext/api/change-stage', {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({stage: 'votacion-cerrada', forum: forum.id,
-            cierre: fechacierre
-          })
-      })
-    }
-}
 
   fetchTopics (s) {
     const { edad, distrito, anio, estado } = this.state
@@ -145,11 +103,6 @@ class HomePresupuesto extends Component {
               .filter(this.filtroAnio)
               .filter(this.filtroDistrito(distrito.name))
               .sort(genericSort)
-              // .sort(byState)
-              // .sort(byEdad)
-              // .sort(byArea)
-              // //orden por Anio
-              // .sort(byAnio)
           : []
 
         return distrito
@@ -333,37 +286,3 @@ function anioNum (e) {
 
         return 0;
      }
-
-
-
-// function byState (a, b) {
-//   let ae = estadoNum(a.attrs && a.attrs.state)
-//   let be = estadoNum(b.attrs && b.attrs.state)
-//   return ae > be
-//     ? 1
-//     : ae < be
-//     ? -1
-//     : 0
-// }
-
-// function byEdad (a, b) {
-//   return a.attrs.edad === 'joven' ? 1 : -1
-// }
-
-// function byArea (a, b) {
-//   let ae = a.attrs ? a.attrs.area : ''
-//   let be = b.attrs ? b.attrs.area : ''
-//   return ae > be
-//     ? 1
-//     : -1
-// }
-
-// //agrego funcion para ordenar por Anio
-
-// function byAnio (a, b) {
-//   let ae = a.attrs ? a.attrs.anio : ''
-//   let be = b.attrs ? b.attrs.anio : ''
-//   return ae > be
-//     ? 1
-//     : -1
-// }

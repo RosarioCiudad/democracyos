@@ -12,9 +12,10 @@ export default class Countdown extends Component {
       seconds : 0,
       minutes : 0,
       hours : 0,
-      days : 0
+      days : 0,
     }
   }
+ 
 
   componentDidMount() {
     // inicializa el contador
@@ -34,6 +35,7 @@ export default class Countdown extends Component {
   remainingTime = (date) => {
     // calcula la diferencia de milisegundos entre la fecha de cierre y la de ahora
     let t = Date.parse(date) - Date.parse(new Date())
+
     // calcula cantidad de tiempo
     let seconds = Math.floor( (t/1000) % 60 );
     let minutes = Math.floor( (t/1000/60) % 60 );
@@ -80,9 +82,8 @@ export default class Countdown extends Component {
             <span className='caption'>segundos</span>
           </div>
         </main>
-        <footer>Para el cierre de la votación</footer>
+        <footer>{this.state.seconds >= 0 ? "Para el cierre de la votación" : "Votación Finalizada"}</footer>
       </section>
     )
   }
-  
 }
