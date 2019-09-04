@@ -52,7 +52,12 @@ class FiltersNavbar extends Component {
     let memFilters = JSON.parse(sessionStorage.getItem(`filtros-${stageType}`))
     const proyectos = JSON.parse(sessionStorage.getItem('pp-proyectos')) || []
     const votacionEnProceso = proyectos.length > 0
-    if (!votacionEnProceso && memFilters) {
+    /*Verifico si se utilizo algun filtro en la sesion*/
+    let distritosvalues = Object.values(memFilters.distrito)
+    let distritosfiltrados = distritosvalues.toString().indexOf('false')
+
+    //agrego condición en el if de distritosfiltrados que determina si se uso o no un filtro para guardarlo en la sesion.
+    if (!votacionEnProceso && memFilters && distritosfiltrados > -1 ) {
       this.setState({ appliedFilters: memFilters }, this.exposeFilters)
       return
     }
@@ -183,7 +188,6 @@ class FiltersNavbar extends Component {
     const target = e.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const id = target.id
-
     let selectFilters = update(this.state.selectFilters, { [select]: { [id]: { $set: value } } })
 
     this.setState({
