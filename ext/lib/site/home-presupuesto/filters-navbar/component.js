@@ -53,14 +53,16 @@ class FiltersNavbar extends Component {
     const proyectos = JSON.parse(sessionStorage.getItem('pp-proyectos')) || []
     const votacionEnProceso = proyectos.length > 0
     /*Verifico si se utilizo algun filtro en la sesion*/
-    let distritosvalues = Object.values(memFilters.distrito)
-    let distritosfiltrados = distritosvalues.toString().indexOf('false')
-
-    //agrego condición en el if de distritosfiltrados que determina si se uso o no un filtro para guardarlo en la sesion.
-    if (!votacionEnProceso && memFilters && distritosfiltrados > -1 ) {
-      this.setState({ appliedFilters: memFilters }, this.exposeFilters)
-      return
-    }
+    if(memFilters){
+      let distritosvalues = Object.values(memFilters.distrito)
+      let distritosfiltrados = distritosvalues.toString().indexOf('false')
+  
+      //agrego condición en el if de distritosfiltrados que determina si se uso o no un filtro para guardarlo en la sesion.
+      if (!votacionEnProceso && distritosfiltrados > -1 ) {
+        this.setState({ appliedFilters: memFilters }, this.exposeFilters)
+        return
+      }
+   }
     if (props.stage !== this.props.stage) {
       let nextFilters = {
         distrito: {
