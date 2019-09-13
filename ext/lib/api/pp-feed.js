@@ -14,7 +14,7 @@ function getFeed (req, res, next) {
   delete filters.s
   const validFilters = {
     edad: ['joven', 'adulto'],
-    distrito: ['centro', 'noroeste', 'norte', 'oeste', 'sudoeste', 'sur'],
+    distrito: ['centro', 'noroeste', 'norte', 'oeste', 'sudoeste', 'sur','none'],
     anio: ['2017', '2018','2019'],
     estado: ['proyectado', 'ejecutandose', 'terminado', 'pendiente', 'perdedor']
   }

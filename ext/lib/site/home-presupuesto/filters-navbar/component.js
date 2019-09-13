@@ -14,7 +14,8 @@ class FiltersNavbar extends Component {
         norte: false,
         oeste: false,
         sudoeste: false,
-        sur: false
+        sur: false,
+        none: false
       },
       edad: {
         adulto: false,
@@ -46,7 +47,6 @@ class FiltersNavbar extends Component {
     }
     this.filtersCache = null
   }
-
   componentWillReceiveProps (props) {
     let stageType = props.stage === 'seguimiento' ? 'seguimiento' : 'votacion'
     let memFilters = JSON.parse(sessionStorage.getItem(`filtros-${stageType}`))
@@ -95,7 +95,7 @@ class FiltersNavbar extends Component {
       switch (props.stage) {
         case 'votacion-abierta':
           const ppStatus = JSON.parse(localStorage.getItem('ppStatus')) || {}
-          const distrito = votacionEnProceso ? proyectos[0].attrs.district : 'centro'
+          const distrito = votacionEnProceso ? proyectos[0].attrs.district : 'none'
           const padron = ppStatus.padron === 'mixto'
             ? sessionStorage.getItem('pp-padron') || 'adulto'
             : ppStatus.padron || 'adulto'
@@ -125,6 +125,7 @@ class FiltersNavbar extends Component {
     }
   }
 
+
   // FUNCTIONS
   handleDistritoFilterChange = (distrito) => {
     // resetea los filtros
@@ -135,7 +136,8 @@ class FiltersNavbar extends Component {
         norte: { $set: false },
         oeste: { $set: false },
         sudoeste: { $set: false },
-        sur: { $set: false }
+        sur: { $set: false },
+        none: { $set: false }
       }
     })
     // setea el filtro activo
@@ -507,6 +509,8 @@ function DistritoFilter (props) {
   const ppStatus = JSON.parse(localStorage.getItem('ppStatus')) || {}
   const proyectos = JSON.parse(sessionStorage.getItem('pp-proyectos')) || []
   const votacionEnProceso = proyectos.length > 0
+  const stageType = props.stage === 'seguimiento' ? 'seguimiento' : 'votacion'
+  const memFilters = JSON.parse(sessionStorage.getItem(`filtros-${stageType}`))
   return (
     <header>
       { stage === 'votacion-abierta' && (
@@ -578,20 +582,22 @@ function DistritoFilter (props) {
       <nav>
         <div className='filter'>
           {distritos.map((d) => {
-            const isActive = d.name === active ? 'active' : ''
-            return (
-              <button
-                type='button'
-                key={d.name}
-                data-name={d.name}
-                onClick={() => {
-                  if (votacionEnProceso && proyectos[0].attrs.district !== d.name) return
-                  onChange(d)
-                }}
-                className={`btn btn-md btn-outline-primary btn-votacion ${isActive} ${votacionEnProceso && proyectos[0].attrs.district !== d.name ? 'disabled' : ''}`}>
-                <span className='btn-content'><span className='btn-text'>{d.title}</span></span>
-              </button>
-            )
+            if  (d.name !== 'none'){
+              const isActive = d.name === active  ? 'active' : ''
+              return (
+                <button
+                  type='button'
+                  key={d.name}
+                  data-name={d.name}
+                  onClick={() => {
+                    if (votacionEnProceso && proyectos[0].attrs.district !== d.name) return
+                    onChange(d)
+                  }}
+                  className={`btn btn-md btn-outline-primary btn-votacion ${isActive} ${votacionEnProceso && proyectos[0].attrs.district !== d.name ? 'disabled' : ''}`}>
+                  <span className='btn-content'><span className='btn-text'>{d.title}</span></span>
+                </button>
+              )
+            }
           })}
         </div>
       </nav>

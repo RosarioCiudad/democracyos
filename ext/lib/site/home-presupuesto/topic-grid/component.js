@@ -202,7 +202,7 @@ export default class TopicGrid extends Component {
 
         <div className='grid-bottom'>
           {
-            !this.props.noMore && <button className='ver-mas' onClick={this.props.paginateFoward}>Ver más</button>
+            !this.props.noMore || this.props.noMore===0 && <button className='ver-mas' onClick={this.props.paginateFoward}>Ver más</button>
           }
         </div>
       </div>
