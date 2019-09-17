@@ -10,6 +10,7 @@ import BannerVotoEnProceso from './banner-en-proceso/component'
 import Countdown from './countdown/component'
 import distritos from './distritos.json'
 import Noticias from '../home-multiforum/noticias/component'
+import Steps from './steps-votacion/component'
 
 class HomePresupuesto extends Component {
   constructor (props) {
@@ -194,6 +195,7 @@ class HomePresupuesto extends Component {
         }
         
         <Noticias tagName="presupuesto participativo" />
+        <Steps />
         
 
         <div className='topics-section-container filters-wrapper'>
