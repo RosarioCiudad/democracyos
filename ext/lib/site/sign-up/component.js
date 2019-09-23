@@ -270,6 +270,8 @@ export default class SignUp extends Component {
                     placeholder={t('signup.lastname')}
                     required />
                 </div>
+
+                <div className="extras">
                 <div className='form-group'>
                   <label htmlFor=''>Sexo</label>
                   <span className='optional-field'>Este campo es opcional.</span>
@@ -306,6 +308,7 @@ export default class SignUp extends Component {
                     onChange={this.saveIdNumber}
                     onWheel={this.avoidScroll()}
                     onBlur={this.checkIdNumber} />
+                </div>
                 </div>
                 <div className='form-group'>
                   <label htmlFor=''>{t('password')}</label>

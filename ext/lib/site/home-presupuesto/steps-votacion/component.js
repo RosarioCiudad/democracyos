@@ -18,7 +18,7 @@ export default ({ scrollInfo }) => (
               parte de Rosario Participa.
             </Link>*/}
           </div>
-          <div className='p-step' onClick={scrollInfo} style={{ cursor: 'pointer' }}>
+          <div className='p-step'>
             <div>
               <span className='num'>2</span>
               <p>Seleccioná un proyecto para tu distrito.</p>
