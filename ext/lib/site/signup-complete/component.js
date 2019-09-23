@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import user from 'lib/site/user/user'
+import request from 'lib/request/request'
 
 export default class SignupComplete extends Component {
   constructor (props) {
@@ -8,10 +9,17 @@ export default class SignupComplete extends Component {
 
     const attrs = user.state.value || {}
     const extra = attrs.extra || {}
-
+   
     this.state = {
       error: '',
       loading: false,
+      encontrado: false,
+      docIngresado: extra.nro_doc || '',
+      mensajeNoEncontrado:'',
+      sexoEncontrado: '',
+      codDocEncontrado: '',
+      nombreEncontrado: '',
+      apellidoEncontrado: '',
       cod_doc_disabled: !!extra.cod_doc,
       sexo_disabled: !!extra.sexo,
       nro_doc_disabled: !!extra.nro_doc,
@@ -21,7 +29,48 @@ export default class SignupComplete extends Component {
         nro_doc: extra.nro_doc || '',
       }
     }
-    
+    this.buscarPersona = this.buscarPersona.bind(this)
+  }
+  
+
+  async buscarPersona() {
+    const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/M'
+    const resp = await fetch(url)
+    const data = await resp.json()
+    if(data.nombre){
+      this.setState({
+        sexoEncontrado: data.sexo,
+        codDocEncontrado: data.documento.tipo.abreviatura,
+        nombreEncontrado: data.nombre,
+        apellidoEncontrado: data.apellido,
+        encontrado: true
+        })
+    }else{
+      const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/F'
+      const resp = await fetch(url)
+      const data = await resp.json()
+      if(data.nombre){
+        this.setState({
+          sexoEncontrado: data.sexo,
+          codDocEncontrado: data.documento.tipo.abreviatura,
+          nombreEncontrado: data.nombre,
+          apellidoEncontrado: data.apellido,
+          encontrado: true
+        })
+      }else{
+        this.setState({
+          mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral'
+        })
+      }
+    }
+  }
+
+  async guardarInfo(){
+    const sexoGuardado = this.state.sexoEncontrado
+    const codDocGuardado = this.state.codDocEncontrado
+    const docGuardado = this.state.docIngresado
+    const data = await this.setState(Object.assign(this.state.data,{sexo: sexoGuardado,cod_doc: codDocGuardado,nro_doc: docGuardado}))
+    await this.setState({ data })
   }
 
   handleForm = (evt) => {
@@ -30,21 +79,27 @@ export default class SignupComplete extends Component {
       error: '',
       loading: true
     })
-
-    user.saveExtraData(this.state.data).then(() => {
+    
+    this.guardarInfo()
+    const datos= this.state.data 
+   
+       /*location.reload()*/
+    user.saveExtraData(datos).then(() => {
       this.setState({
         error: '',
         loading: false
       })
 
       user.update(Object.assign({}, user.state.value, {
-        extra: this.state.data
+        extra: datos
       }))
 
-      this.props.toggleUserModal()
+    this.props.toggleUserModal()
 
       // browserHistory.push('/')
     }).catch((err) => {
+      console.log(err)
+      /*this.props.toggleUserModal()*/
       err.res.json().then((body) => {
         if (!body) throw err
 
@@ -65,21 +120,11 @@ export default class SignupComplete extends Component {
     })
   }
 
-  handleInputChange = (evt) => {
-  const input = evt.target
-  const name = input.getAttribute('name')
-  const data = Object.assign({}, this.state.data, {
-      [name]: input.value
-    })
-
-    this.setState({ data })
-  }
-
   handleInputNumberChange = (evt) => {
     const input = evt.target
     const value = input.value.replace(/[^0-9]/g, '')
     const data = Object.assign({}, this.state.data, { nro_doc: value })
-    this.setState({ data }, () => {
+    this.setState({ docIngresado: value }, () => {
       // arregla movimiento del cursor mientras se escribe, en android
       const displayValue = prettyNumber(value)
       setTimeout(() => input.setSelectionRange(displayValue.length, displayValue.length), 0)
@@ -93,7 +138,7 @@ export default class SignupComplete extends Component {
         <form role='form' onSubmit={this.handleForm} method='POST'>
           <div className='form-header'>
             <h3 className='title'>Completá tus datos</h3>
-            <p>Para poder votar es necesario completar estos datos. En caso de no querer hacerlo ahora, podés hacerlo en cualquier momento desde tu perfil de usuario.</p>
+            <p>Para participar de la votación es requisito que tu domicilio se encuentre en Rosario en el último padrón electoral.</p>
           </div>
           <div className='form-fields'>
             {this.state.error && (
@@ -103,41 +148,6 @@ export default class SignupComplete extends Component {
                 }} />
               </div>
             )}
-            <div className='form-group field-sexo'>
-              <div className='form-select-wrapper'>
-                <i />
-                <select
-                  className='form-control custom-select field-sexo'
-                  name='sexo'
-                  id='sexo'
-                  value={this.state.data.sexo}
-                  onChange={this.handleInputChange}
-                  //disabled={this.state.loading || this.state.sexo_disabled}
-                  required>
-                  <option className='opcion' value='' disabled>¿Cuál es tu sexo?*</option>
-                  <option className='opcion' value='F'>Femenino</option>
-                  <option className='opcion' value='M'>Masculino</option>
-                </select>
-              </div>
-            </div>
-            <div className='form-group field-cod-doc'>
-              <div className='form-select-wrapper'>
-                <i />
-                <select
-                  className='form-control custom-select'
-                  name='cod_doc'
-                  id='cod_doc'
-                  value={this.state.data.cod_doc}
-                  onChange={this.handleInputChange}
-                  //disabled={this.state.loading || this.state.cod_doc_disabled}
-                  required>
-                  <option value='' disabled>Tipo*</option>
-                  <option value='DNI'>DNI</option>
-                  <option value='LC'>LC</option>
-                  <option value='LE'>LE</option>
-                </select>
-              </div>
-            </div>
             <div className='form-group field-nro-doc'>
               <input
                 className='form-control custom-select'
@@ -146,15 +156,28 @@ export default class SignupComplete extends Component {
                 id='nro_doc'
                 maxLength='10'
                 onChange={this.handleInputNumberChange}
-                value={prettyNumber(this.state.data.nro_doc)}
-                //disabled={this.state.loading || this.state.nro_doc_disabled}
+                value={prettyNumber(this.state.docIngresado)}
                 placeholder='Número de documento*'
                 required />
             </div>
           </div>
-
+          <div className='persona'>
+              {this.state.encontrado && (
+                <p>Estas registrado como: <br /> <b>{this.state.nombreEncontrado} {this.state.apellidoEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
+          )}
+              {!this.state.encontrado && this.state.mensajeNoEncontrado &&(
+                <p><b>{this.state.mensajeNoEncontrado}</b>.<br />Escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a> para validar tus datos.</p>
+          )}
+            </div>
           <div className='form-actions'>
-            {!user.profileIsComplete() && (
+             {!user.profileIsComplete() && !this.state.encontrado &&(
+              <Link
+                onClick={this.buscarPersona}
+                className='btn-modal-buscar'>
+                Buscar
+              </Link>
+            )}
+            {!user.profileIsComplete() && this.state.encontrado && (
               <button
                 className='btn-modal'
                 type='submit'
@@ -191,3 +214,4 @@ function prettyNumber (number) {
     .reverse()
     .join('')
 }
+ 

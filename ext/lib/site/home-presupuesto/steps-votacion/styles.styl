@@ -10,7 +10,7 @@
       margin-top: 16px
       line-height: 28px
       letter-spacing: 1px
-      font-weight: 300
+      font-weight: 300px
       text-align: center
       color: #818181
       background-color: #ffc8c0;
@@ -19,6 +19,11 @@
       a
         font-weight: 400
         color: #00adef
+      @media screen and (max-width: 980px)
+        margin-left: 50px
+       @media screen and (max-width: 575px)
+        margin-left: 5px
+        margin-right: 5px
 
   .color-link
     color: #32a7d3
@@ -37,8 +42,9 @@
     width: 100%
     display: block
     padding: 0 15px
-    @media screen and (max-width: 940px)
-      padding: 0 105px
+    @media screen and (max-width: 946px)
+      padding: 0 20px
+      margin-left: 20px
     @media screen and (min-width: 940px)
       display: flex
       justify-content: space-between
@@ -106,6 +112,9 @@
         top: -10px
         left: -7px
         display: block
+        @media screen and (max-width: 600px)
+          font-size: 20px
+          padding: 8px 16px
         @media screen and (min-width: 940px)
           display: block
         @media screen and (max-width: 940px)
@@ -122,3 +131,5 @@
           border: 5px solid #f7f7f7
           width: 225px
           height: 225px
+        @media screen and (max-width: 400px)
+          font-size: 23px

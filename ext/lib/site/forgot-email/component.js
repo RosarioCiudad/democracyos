@@ -83,15 +83,24 @@ export default class ForgotEmail extends Component {
             {t('Ingresá tu nro de documento')}.
           </p>
           <p className={(this.state.success && this.state.email) ? 'success-message' : 'hide'}>
-            {t('Tu correo electrónico es: ' + this.state.email)}.
+            <p>
+            <b>{'El correo que utilizaste para registrarte es: ' + this.state.email}</b>.
+            </p>
             <p>{t('Si ya no utilizas esa cuenta podes solicitar un cambio ->')}
             <a onClick={this.openPopup} href='#'> aquí.</a>
             </p>
+            <p>{t('Si no recordas tu contraseña podés reestablecerla->')}
+            <a onClick={this.openPopup} href='/forgot'> aquí.</a></p>
           </p>
-
           <p className={(this.state.errors && this.state.errors[0].code==='SERVER_ERROR') ? 'error-message' : 'hide'}> 
-             {t('El Nro de documento ' + this.state.nro_doc + ' no se encuentra registrado. Si tenés problemas para ingresar contactanos -> ')}
-              <a onClick={this.openPopup} href='#'> aquí.</a>
+             <b>{t('El Nro de documento ' + this.state.nro_doc + ' no se encuentra registrado.')}</b>
+             <hr />
+            <p>Podés registrarte-->
+              <a href='/signup'> aquí.</a></p>
+             <p>O ingresar con Facebook --> 
+              <a href='/signin'> aquí.</a></p>
+            <p>Si tenés problemas para ingresar contactanos -->
+              <a onClick={this.openPopup} href='#'> aquí.</a></p>
             </p>
 
             <FormAsync
