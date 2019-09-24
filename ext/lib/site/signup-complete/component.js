@@ -33,22 +33,18 @@ export default class SignupComplete extends Component {
   }
   
 
-  async buscarPersona() {
+  buscarPersona() {
     const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/M'
-    const resp = await fetch(url)
-    const data = await resp.json()
-    if(data.nombre){
-      this.setState({
-        sexoEncontrado: data.sexo,
-        codDocEncontrado: data.documento.tipo.abreviatura,
-        nombreEncontrado: data.nombre,
-        apellidoEncontrado: data.apellido,
-        encontrado: true
-        })
-    }else{
-      const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/F'
-      const resp = await fetch(url)
-      const data = await resp.json()
+    return fetch(url)
+    .then(response => {
+      if (response.status == 200) {
+        let data = response.json()
+        return data
+      } else {
+          throw new Error(response.status)
+        }
+    })
+    .then( data => {
       if(data.nombre){
         this.setState({
           sexoEncontrado: data.sexo,
@@ -58,19 +54,41 @@ export default class SignupComplete extends Component {
           encontrado: true
         })
       }else{
-        this.setState({
-          mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral'
+        const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/F'
+        return fetch(url)
+        .then(response => {
+        if (response.status == 200) {
+          let data = response.json()
+          return data
+        } else {
+          throw new Error(response.status)
+          }
+        })
+        .then(data => {
+          if(data.nombre){ 
+            this.setState({
+              sexoEncontrado: data.sexo,
+              codDocEncontrado: data.documento.tipo.abreviatura,
+              nombreEncontrado: data.nombre,
+              apellidoEncontrado: data.apellido,
+              encontrado: true
+            })
+          }else{
+            this.setState({
+              mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral'
+            })
+          }
         })
       }
-    }
+    })
   }
 
-  async guardarInfo(){
-    const sexoGuardado = this.state.sexoEncontrado
-    const codDocGuardado = this.state.codDocEncontrado
-    const docGuardado = this.state.docIngresado
-    const data = await this.setState(Object.assign(this.state.data,{sexo: sexoGuardado,cod_doc: codDocGuardado,nro_doc: docGuardado}))
-    await this.setState({ data })
+    guardarInfo(){
+      const sexoGuardado = this.state.sexoEncontrado
+      const codDocGuardado = this.state.codDocEncontrado
+      const docGuardado = this.state.docIngresado
+      const data = this.setState(Object.assign(this.state.data,{sexo: sexoGuardado,cod_doc: codDocGuardado,nro_doc: docGuardado}))
+      this.setState({ data })
   }
 
   handleForm = (evt) => {
