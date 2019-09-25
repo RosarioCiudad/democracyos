@@ -90,7 +90,7 @@ export default class ForgotEmail extends Component {
             <a onClick={this.openPopup} href='#'> aquí.</a>
             </p>
             <p>{t('Si no recordas tu contraseña podés reestablecerla->')}
-            <a onClick={this.openPopup} href='/forgot'> aquí.</a></p>
+            <a href='/forgot'> aquí.</a></p>
           </p>
           <p className={(this.state.errors && this.state.errors[0].code==='SERVER_ERROR') ? 'error-message' : 'hide'}> 
              <b>{t('El Nro de documento ' + this.state.nro_doc + ' no se encuentra registrado.')}</b>
