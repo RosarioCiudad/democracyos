@@ -148,10 +148,10 @@ const Navigation = withRouter(({ router, onClick }) => (
 ))
 
 Navigation.links = [
+  { slug: 'presupuesto', title: 'Presupuesto Participativo' },
   { slug: 'consultas', title: 'Consultas' },
   { slug: 'ideas', title: 'Ideas' },
   { slug: 'desafios', title: 'Desafíos' },
-  { slug: 'presupuesto', title: 'Presupuesto participativo' },
   { slug: 'voluntariado', title: 'Voluntariado Social' }
 ]
 

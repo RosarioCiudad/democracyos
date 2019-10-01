@@ -17,6 +17,14 @@ export default userConnector(({ user }) => {
       <Noticias tagName="home" />
       <Steps scrollInfo={() => Anchor.goTo('info')} />
       <Anchor className='info' id='info'>
+        <div className='action action-presupuesto'>
+          <div className='action-img' />
+            <div className='action-content'>
+              <h3>Presupuesto Participativo</h3>
+                <p>Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.</p>
+              <Link to='/presupuesto' className='btn btn-primary btn-lg'>Quiero decidir</Link>
+            </div>
+        </div>
         <div className='action action-consulta'>
           <div className='action-img' />
           <div className='action-content'>
@@ -39,14 +47,6 @@ export default userConnector(({ user }) => {
             <h3>Ideas</h3>
             <p>¿Tenés ideas para mejorar la vida en la ciudad? Compartilas.</p>
             <Link to='/ideas' className='btn btn-primary btn-lg'>Quiero proponer</Link>
-          </div>
-        </div>
-        <div className='action action-presupuesto'>
-          <div className='action-img' />
-          <div className='action-content'>
-            <h3>Presupuesto participativo</h3>
-            <p>Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.</p>
-            <Link to='/presupuesto' className='btn btn-primary btn-lg'>Quiero decidir</Link>
           </div>
         </div>
         <div className='action action-voluntariado'>
