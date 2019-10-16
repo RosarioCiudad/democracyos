@@ -52,20 +52,20 @@ app.get('/topics.csv',
         topic.action = {}
       }
       if(req.forum.name === 'presupuesto'){
-      if (topic.attrs.anio === '2019') {
-        infoTopics.push([
-          `"${escapeTxt(topic.attrs.district)}"`.toUpperCase(),
-          `"${escapeTxt(topic.attrs.number)}"`,
-          `"${escapeTxt(topic.mediaTitle)}"`,
-          `"${escapeTxt(topic.attrs.area)}"`,
-          `"${escapeTxt(topic.attrs.budget)}"`,
-          `"${escapeTxt('DESCONOCIDO')}"`,
-          `"${escapeTxt(topic.attrs.description)}"`,
-          `"${topic.coverUrl}"`,
-          `"${escapeTxt(topic.attrs.edad.charAt(0).toUpperCase() + (topic.attrs.edad).slice(1).toLowerCase())}"`,
+      if (topic.attrs.anio === '2020') {
+        infoTopics.push([{
+          "Distrito": `"${escapeTxt(topic.attrs.district)}"`.toUpperCase(),
+          "Número": `"${escapeTxt(topic.attrs.number)}"`,
+          "Título": `"${escapeTxt(topic.mediaTitle)}"`,
+          "Area Barrial": `"${escapeTxt(topic.attrs.area)}"`,
+          "Presupuesto": `"${escapeTxt(topic.attrs.budget)}"`,
+          "Desconocido": `"${escapeTxt('DESCONOCIDO')}"`,
+          "Descripción": `"${escapeTxt(topic.attrs.description)}"`,
+          "Imagen": `"${topic.coverUrl}"`,
+          "Edad": `"${escapeTxt(topic.attrs.edad.charAt(0).toUpperCase() + (topic.attrs.edad).slice(1).toLowerCase())}"`,
           //agrego estado
-          `"${escapeTxt(topic.attrs.state)}"`
-        ])
+          "Estado": `"${escapeTxt(topic.attrs.state)}"`
+        }])
       }
     }
     
@@ -113,7 +113,7 @@ if(topic.action.results.length === 2){
     })
 
     if(req.forum.name === 'presupuesto'){
-    json2csv({infoTopics, del: ','}, function (err, csv) {
+    json2csv(infoTopics, function (err, csv) {
       if (err) {
         log('get csv: array to csv error', err)
         return res.status(500).end()

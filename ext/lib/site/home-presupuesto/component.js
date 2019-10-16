@@ -25,7 +25,7 @@ class HomePresupuesto extends Component {
       topics: [],
       edad: ['joven', 'adulto'],
       distrito: ['centro', 'noroeste', 'norte', 'oeste', 'sudoeste', 'sur'],
-      anio: ['2017', '2018', '2019'],
+      anio: ['2017', '2018', '2019', '2020'],
       estado: ['proyectado', 'ejecutandose', 'terminado']
     }
   }
@@ -123,6 +123,8 @@ class HomePresupuesto extends Component {
       return '2018'
     case 'proyectos2019':
       return '2019'
+    case 'proyectos2020':
+      return '2020'
   }
       })
 
@@ -191,7 +193,7 @@ class HomePresupuesto extends Component {
             background='/ext/lib/site/boot/presupuesto-participativo.jpg'
             logo='/ext/lib/site/home-multiforum/presupuesto-icono.png'
             title='Presupuesto Participativo'
-            description='"Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a mejorar tu barrio y seguir su ejecución.' />
+            description='Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a mejorar tu barrio y seguir su ejecución.' />
         }
         
         <Noticias tagName="presupuesto participativo" />
@@ -251,14 +253,16 @@ function estadoNum (e) {
 
 function anioNum (e) {
   switch (e) {
-    case '2019':
+    case '2020':
       return 1
-    case '2018':
+    case '2019':
       return 2
-    case '2017':
+    case '2018':
       return 3
-    default:
+    case '2017':
       return 4
+    default:
+      return 5
   }
 }
 

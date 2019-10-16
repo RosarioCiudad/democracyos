@@ -120,7 +120,6 @@ export default class SignupComplete extends Component {
       /*this.props.toggleUserModal()*/
       err.res.json().then((body) => {
         if (!body) throw err
-
         if (body.error && body.error.code === 'DUPLICATED_VOTING_DATA') {
           this.setState({
             error: `El número de documento ingresado se encuentra utilizado por una cuenta con la dirección de correo ${body.error.docOwner}, si esa dirección no te pertenece o notas algún problema comunicate a participa@rosario.gob.ar`,

@@ -7,5 +7,4 @@ module.exports = function (multiForum) {
   urlBuilder.register('site.topic', forum + '/topic/:id')
   urlBuilder.register('site.notifications', '/notifications')
   urlBuilder.register('forgot-email', '/forgot-email')
-
 }

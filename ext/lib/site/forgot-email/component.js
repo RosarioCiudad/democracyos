@@ -6,6 +6,8 @@ import { Link } from 'react-router'
 import bus from 'bus'
 import config from 'lib/config'
 import PopupCenter from 'ext/lib/open-popup'
+import BtnGoogle from '../sign-in/btn-google'
+import BtnFacebook from '../sign-in/btn-facebook'
 
 
 
@@ -17,7 +19,10 @@ export default class ForgotEmail extends Component {
       errors: null,
       nro_doc: '',
       success: false,
-      email: ''
+      email: '',
+      profileGoogle: false,
+      gmail:'',
+      profileFacebook: false
     }
     this.onSuccess = this.onSuccess.bind(this)
     this.onFail = this.onFail.bind(this)
@@ -35,6 +40,17 @@ export default class ForgotEmail extends Component {
 
   onSuccess (res) {
     console.log(res)
+    if (res.results[0].profiles){
+      if(res.results[0].profiles.facebook){
+        this.setState({profileFacebook: true})
+      }
+      if(res.results[0].profiles.twitter){
+        this.setState({
+          profileGoogle: true,
+          gmail: res.results[0].profiles.twitter.email
+          })
+      }
+    }
     this.setState({
       email: res.results[0].email,
       loading: false,
@@ -82,7 +98,19 @@ export default class ForgotEmail extends Component {
           <p className={!this.state.success && !this.state.email ? 'explanation-message' : 'hide'}>
             {t('Ingresá tu nro de documento')}.
           </p>
-          <p className={(this.state.success && this.state.email) ? 'success-message' : 'hide'}>
+          <p className={(this.state.success && this.state.profileFacebook && !this.state.profileGoogle) ? 'success-message' : 'hide'}>
+            <p>
+            <b>{'Te registraste con tu perfil Facebook'}</b>.
+            </p>
+            <BtnFacebook />
+           </p>
+          <p className={(this.state.success && this.state.profileGoogle) ? 'success-message' : 'hide'}>
+            <p>
+            <b>{'Te registraste con tu cuenta de Google: ' + this.state.gmail}</b>.
+            </p>
+            <BtnGoogle />
+           </p>  
+          <p className={(this.state.success && !this.state.profileGoogle && !this.state.profileFacebook && this.state.email) ? 'success-message' : 'hide'}>
             <p>
             <b>{'El correo que utilizaste para registrarte es: ' + this.state.email}</b>.
             </p>
@@ -97,8 +125,9 @@ export default class ForgotEmail extends Component {
              <hr />
             <p>Podés registrarte-->
               <a href='/signup'> aquí.</a></p>
-             <p>O ingresar con Facebook --> 
-              <a href='/signin'> aquí.</a></p>
+             <p>O ingresar con: </p>
+             <p><BtnGoogle /></p>
+             <p><BtnFacebook /></p>
             <p>Si tenés problemas para ingresar contactanos -->
               <a onClick={this.openPopup} href='#'> aquí.</a></p>
             </p>

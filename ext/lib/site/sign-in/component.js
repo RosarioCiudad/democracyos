@@ -6,6 +6,7 @@ import config from 'lib/config'
 import FormAsync from 'lib/site/form-async'
 import userConnector from 'lib/site/connectors/user'
 import BtnFacebook from './btn-facebook'
+import BtnGoogle from './btn-google'
 import PopupCenter from 'ext/lib/open-popup'
 
 export class SignIn extends Component {
@@ -94,13 +95,6 @@ export class SignIn extends Component {
         )}
      
            <div className='form-group'>
-             <div className='forgot'>
-               <Link
-                 to='/forgot-email'
-                 tabIndex={0}>
-                 {t("¿Olvidaste tu correo?")}
-               </Link>
-             </div>
              <label htmlFor=''>{t('signup.email')}</label>
              <input
                type='email'
@@ -148,6 +142,33 @@ export class SignIn extends Component {
              {t('signin.login')}
             </button>
            )}
+            <div className='registrado'>
+              <div className='form-group'>
+                <div className='signup'>
+                  <p>
+                  <span>{t('signin.dont-have-account')}  </span>
+                  <Link
+                    to='/signup'
+                    tabIndex={5}>
+                    {t('signin.action.signup')}
+                  </Link>
+                  </p>
+                  <p>
+                   <Link
+                    to='/forgot-email'
+                    tabIndex={0}>
+                    {t("No recuerdo si estoy registrado")}
+                    </Link>
+                  </p>
+                </div>
+              </div>
+              {/*<Link
+                to='/forgot-email'
+                tabIndex={-1}
+                className='btn btn-block btn-primary olvidaste'>
+                {t("¿Estoy registrado?")}
+              </Link>*/}
+            </div>  
       </FormAsync>
     )
 
@@ -163,6 +184,7 @@ export class SignIn extends Component {
             </div>
           )}
         </div>
+        <GoogleForm />
         {config.facebookSignin && <FacebookForm />}
         {form}
       </div>
@@ -177,24 +199,17 @@ function FacebookForm () {
   return (
     <div className='facebook-auth-form'>
       <BtnFacebook />
-         <Link
-              to='/forgot-email'
-              tabIndex={-1}
-              className='btn btn-block btn-primary olvidaste'>
-
-              {t("¿Estoy registrado?")}
-          </Link>
-      <div className='form-group'>
-             <div className='signup'>
-               <span>{t('signin.dont-have-account')}</span>
-               <Link
-                 to='/signup'
-                 tabIndex={5}>
-                 {t('signin.action.signup')}
-               </Link>
-             </div>
-           </div>    
+      
       <hr />
+      <p className='muted'>{t('signin.or-login-with-email')}</p>
+    </div>
+  )
+}
+
+function GoogleForm () {
+  return (
+    <div className='facebook-auth-form'>
+      <BtnGoogle />
       {/*<p className='muted'>{t('signin.or-login-with-email')}</p>*/}
     </div>
   )

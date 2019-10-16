@@ -1,0 +1,52 @@
+.google-button {
+  height: 40px
+  border: 1px solid #9d9d9d
+  background: white
+  color: #737373
+  white-space: nowrap
+  padding: 0
+  
+  &:focus,
+  &:hover {
+    background-color: #adadad
+    color: white
+  }
+  
+  &:active {
+    background-color: #e5e5e5
+    box-shadow: none
+    transition-duration: 10ms
+  }
+}
+    
+.google-button__icon {
+  display: inline-block
+  vertical-align: middle
+  margin: 8px -8px 8px 8px
+  width: 18px
+  height: 18px
+  box-sizing: border-box
+}
+
+.google-button__text {
+  display: inline-block
+  vertical-align: middle
+  padding: 0 24px
+}
+
+// Boilerplate stuff
+
+html, body {
+  height: 100%
+}
+
+body {
+  background-color: #f0f0f0
+  display: flex
+  align-items: center
+  justify-content: center
+}
+
+button ~ button {
+  margin-left: 20px
+}

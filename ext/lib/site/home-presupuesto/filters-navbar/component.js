@@ -24,7 +24,8 @@ class FiltersNavbar extends Component {
       anio: {
         proyectos2017: false,
         proyectos2018: false,
-        proyectos2019: false
+        proyectos2019: false,
+        proyectos2020: false
       },
       estado: {
         proyectado: false,
@@ -80,7 +81,8 @@ class FiltersNavbar extends Component {
         anio: {
           proyectos2017: false,
           proyectos2018: false,
-          proyectos2019: false
+          proyectos2019: false,
+          proyectos2020: false
         },
         estado: {
           proyectado: false,
@@ -102,7 +104,8 @@ class FiltersNavbar extends Component {
 
           nextFilters.estado.pendiente = true
           nextFilters.anio.proyectos2018 = false
-          nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2019 = false
+          nextFilters.anio.proyectos2020 = true
           nextFilters.edad[padron] = true
           nextFilters.distrito[distrito] = true
           break
@@ -110,12 +113,14 @@ class FiltersNavbar extends Component {
           nextFilters.estado.proyectado = true
           nextFilters.estado.perdedor = true
           nextFilters.anio.proyectos2018 = false
-          nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2019 = false
+          nextFilters.anio.proyectos2020 = true
           nextFilters.edad.adulto = true
           nextFilters.distrito.centro = true
           break
         case 'seguimiento':
           nextFilters.edad.adulto = true
+          nextFilters.anio.proyectos2020 = false
           nextFilters.anio.proyectos2019 = true
           nextFilters.anio.proyectos2018 = false
           break
@@ -434,6 +439,14 @@ class FiltersNavbar extends Component {
                             <label htmlFor='proyectos2019'></label>
                           </div>
                           <label htmlFor='proyectos2019'>2019</label>
+                          </div>
+
+                          <div className='option-container'>
+                          <div className='check-container'>
+                            <input onChange={this.handleCheckboxChange('anio')} type='checkbox' id='proyectos2020' name='anio' checked={this.state.selectFilters.anio.proyectos2020} />
+                            <label htmlFor='proyectos2020'></label>
+                          </div>
+                          <label htmlFor='proyectos2020'>2020</label>
                           </div>
                           
                       </div>

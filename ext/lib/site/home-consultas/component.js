@@ -54,7 +54,7 @@ class HomeConsultas extends Component {
       forum: null,
       topics: null,
       //filter: 'rosario2030',
-      filter: 'consultas'
+      filter: 'open'
     }
   }
 
