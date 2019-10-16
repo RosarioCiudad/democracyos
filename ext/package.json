@@ -17,7 +17,9 @@
     "react-datepicker": "1.4.1",
     "rosariociudad-bootstrap": "^1.0.3",
     "string.prototype.padstart": "3.0.0",
-    "twitter": "~1.4.0"
+    "twitter": "~1.4.0",
+    "express-session": "^1.15.6",
+    "passport-google-oauth20": "2.0.0"
   },
   "browser": {
     "lib/config": "lib/config/config"

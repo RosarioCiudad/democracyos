@@ -164,7 +164,6 @@ function getUserStatusToken (user) {
 }
 
 function getUserVotingToken (user, voteData) {
-  console.log(user)
   const userProfile = exposeProfile(user)
   return jwt.encode({
     modalidad: voteData.modalidad,
@@ -179,3 +178,4 @@ function getUserVotingToken (user, voteData) {
     sexo: userProfile.sexo
   }, config.ext.participatoryBudget.secret)
 }
+

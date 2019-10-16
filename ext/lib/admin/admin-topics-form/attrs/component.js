@@ -62,7 +62,7 @@ forms.String = ({
       className='form-control'
       type='text'
       name={`attrs.${name}`}
-      defaultValue={name === 'anio' ? (value || '2019') : (name=== 'linkText' ? (value || 'Ver Noticias') : value)}
+      defaultValue={name === 'anio' ? (value || '2020') : (name=== 'linkText' ? (value || 'Ver Noticias') : value)}
       placeholder={name=== 'iFrame' ? 'Ej: https://www.google.com/maps/d/embed?mid=1cHSzK4B4jGzZkU8-ehIO6Y1c_rY' : ''}
       minLength={min}
       maxLength={max}

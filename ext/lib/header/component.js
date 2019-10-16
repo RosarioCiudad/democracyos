@@ -37,6 +37,7 @@ class Header extends Component {
   showSub () {
     const pathname = window.location.pathname
     const show = !(
+      pathname.includes('auth/google/confirm/authorize') ||
       pathname.includes('auth/facebook/confirm/authorize') ||
       pathname.includes('signin') ||
       pathname.includes('signup') ||

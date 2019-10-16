@@ -8,7 +8,7 @@ app.use(require('../layout'))
 if (config.auth.facebook.clientID) {
   app.use(require('../auth-facebook'))
 }
-
+app.use(require('../auth-google'))
 app.use(require('../signup-complete'))
 app.use(require('../static-pages'))
 app.use(require('../tweets-feed'))
