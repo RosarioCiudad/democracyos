@@ -20,4 +20,4 @@
         label #{t('settings.badge')}
         input.form-control(type='text', name='badge', tabindex=4, placeholder=t(''), value='', validate='required', maxlength=50)
       .form-group(name="boton"): button#submit-badge.btn.btn-success.btn-block.btn-lg(tabindex=5)=t('Guardar etiqueta')
-      .form-group: button#submit-invitar.btn.btn-success.btn-block.btn-lg(tabindex=6)=t('Generar tokens de ingreso')
+      .form-group(name="invitar"): button#submit-invitar.btn.btn-success.btn-block.btn-lg(tabindex=6)=t('Generar tokens de ingreso')
