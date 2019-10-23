@@ -49,7 +49,7 @@ export default class BannerVotacion extends Component {
       <div className='container-banner'>
         <button className='closes' onClick={this.closeBanner}>x</button>
         <h3>
-          ¡Ya está abierta la votación para el Presupuesto Participativo.
+          ¡Ya está abierta la votación para el Presupuesto Participativo!.
         </h3>
         {/*<h3>
           Tenés tiempo hasta el {cierreVotacion.toLocaleDateString()==="Invalid Date" ? "cierre de la votación." : cierreVotacion.toLocaleDateString()}

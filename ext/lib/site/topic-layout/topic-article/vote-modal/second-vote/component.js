@@ -6,7 +6,7 @@ export default ({ proyectos, sendTopics, toggleVotesModal }) => (
     <a className='close-modal' onClick={toggleVotesModal}>X</a>
     <div className='form-component-wrapper'>
       <h3>Paso 2 de 2 </h3>
-      <p>Presioná CONFIRMAR MI VOTO para confirmar para finalizar.</p>
+      <p>Presioná CONFIRMAR MI VOTO para finalizar.</p>
       <div className='proyectos-container'>
         {proyectos.map((p, i) => <TopicCard key={i} topic={p} isBlocked />)}
       </div>
