@@ -1,5 +1,6 @@
 #sign-in
   @import './btn-facebook'
+  @import './btn-google'
   
   max-width: 300px
   margin: 0 auto
@@ -9,21 +10,55 @@
       text-align: center
       font-size: 0.9em
       color: #999
+
   hr
-    margin: 2em auto
+    margin: 1em auto
     max-width: 80px
     width: 100%
     height: 1px
     border: 0
     background-color: #f0f0f0
 
+  .forgot
+    position relative
+
+    a
+      position absolute
+      right 0
+      font-size 12px
+      top 3px
+
+  .registrado
+    margin-top: 10px
+
+    a
+      font-size: 16px !important
+
+  .olvidaste
+    margin-top: 30px
+    margin-bottom: 30px
+    background-color: #f59231
+    border-color: #f59231
+    &:hover
+        background-color: #c88645 !important
+        border-color: #c88645 !important
+
+
+    a
+      color: white
+      font-weight: 400
+      
+
+
   .form-group
     overflow hidden
 
     .signup
-      float right
+      float left
       color #666
-      font-size 12px
+      font-size 14px
+      a
+        font-size: 18px
 
       span
         margin-right 5px
@@ -35,7 +70,7 @@
     a
       position absolute
       right 0
-      font-size 12px
+      font-size 13px
       top 3px
 
   .resend-validation-email

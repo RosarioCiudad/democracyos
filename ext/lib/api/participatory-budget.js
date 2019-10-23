@@ -178,3 +178,4 @@ function getUserVotingToken (user, voteData) {
     sexo: userProfile.sexo
   }, config.ext.participatoryBudget.secret)
 }
+

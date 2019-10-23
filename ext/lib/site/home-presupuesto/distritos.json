@@ -4,5 +4,6 @@
   {"title": "Norte", "name": "norte"},
   {"title": "Oeste", "name": "oeste"},
   {"title": "Sudoeste", "name": "sudoeste"},
-  {"title": "Sur", "name": "sur"}
+  {"title": "Sur", "name": "sur"},
+  {"title": "None", "name": "none"}
 ]

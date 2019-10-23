@@ -11,5 +11,6 @@ require('ext/lib/notifier')
 
 app.use(require('ext/lib/api'))
 app.use(require('ext/lib/api/forgot-email'))
+app.use(require('ext/lib/api/invitaciones'))
 app.use(require('ext/lib/api/settings/index'))
 app.use(require('ext/lib/site/boot'))

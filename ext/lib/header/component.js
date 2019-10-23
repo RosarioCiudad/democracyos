@@ -37,6 +37,7 @@ class Header extends Component {
   showSub () {
     const pathname = window.location.pathname
     const show = !(
+      pathname.includes('auth/google/confirm/authorize') ||
       pathname.includes('auth/facebook/confirm/authorize') ||
       pathname.includes('signin') ||
       pathname.includes('signup') ||
@@ -148,10 +149,10 @@ const Navigation = withRouter(({ router, onClick }) => (
 ))
 
 Navigation.links = [
+  { slug: 'presupuesto', title: 'Presupuesto Participativo' },
   { slug: 'consultas', title: 'Consultas' },
   { slug: 'ideas', title: 'Ideas' },
   { slug: 'desafios', title: 'Desafíos' },
-  { slug: 'presupuesto', title: 'Presupuesto participativo' },
   { slug: 'voluntariado', title: 'Voluntariado Social' }
 ]
 

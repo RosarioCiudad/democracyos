@@ -28,7 +28,8 @@ import * as RouterOverride from 'ext/lib/site/boot/router'
 import * as Routes from 'lib/site/boot/routes'
 import * as RoutesOverride from 'ext/lib/site/boot/routes'
 
-
+import * as Resend from 'lib/site/resend/component'
+import * as ResendOverride from 'ext/lib/site/resend/component'
 
 Object.assign(Router, RouterOverride)
 Object.assign(Routes, RoutesOverride)
@@ -39,3 +40,4 @@ Object.assign(TopicArticle, TopicArticleOverride)
 Object.assign(SignUp, SignUpOverride)
 Object.assign(SignIn, SignInOverride)
 Object.assign(Layout, LayoutOverride)
+Object.assign(Resend, ResendOverride)

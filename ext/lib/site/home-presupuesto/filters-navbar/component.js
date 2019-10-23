@@ -14,7 +14,8 @@ class FiltersNavbar extends Component {
         norte: false,
         oeste: false,
         sudoeste: false,
-        sur: false
+        sur: false,
+        none: false
       },
       edad: {
         adulto: false,
@@ -23,7 +24,8 @@ class FiltersNavbar extends Component {
       anio: {
         proyectos2017: false,
         proyectos2018: false,
-        proyectos2019: false
+        proyectos2019: false,
+        proyectos2020: false
       },
       estado: {
         proyectado: false,
@@ -46,16 +48,22 @@ class FiltersNavbar extends Component {
     }
     this.filtersCache = null
   }
-
   componentWillReceiveProps (props) {
     let stageType = props.stage === 'seguimiento' ? 'seguimiento' : 'votacion'
     let memFilters = JSON.parse(sessionStorage.getItem(`filtros-${stageType}`))
     const proyectos = JSON.parse(sessionStorage.getItem('pp-proyectos')) || []
     const votacionEnProceso = proyectos.length > 0
-    if (!votacionEnProceso && memFilters) {
-      this.setState({ appliedFilters: memFilters }, this.exposeFilters)
-      return
-    }
+    /*Verifico si se utilizo algun filtro en la sesion*/
+    if(memFilters){
+      let distritosvalues = Object.values(memFilters.distrito)
+      let distritosfiltrados = distritosvalues.toString().indexOf('false')
+  
+      //agrego condición en el if de distritosfiltrados que determina si se uso o no un filtro para guardarlo en la sesion.
+      if (!votacionEnProceso && distritosfiltrados > -1 ) {
+        this.setState({ appliedFilters: memFilters }, this.exposeFilters)
+        return
+      }
+   }
     if (props.stage !== this.props.stage) {
       let nextFilters = {
         distrito: {
@@ -73,7 +81,8 @@ class FiltersNavbar extends Component {
         anio: {
           proyectos2017: false,
           proyectos2018: false,
-          proyectos2019: false
+          proyectos2019: false,
+          proyectos2020: false
         },
         estado: {
           proyectado: false,
@@ -88,14 +97,15 @@ class FiltersNavbar extends Component {
       switch (props.stage) {
         case 'votacion-abierta':
           const ppStatus = JSON.parse(localStorage.getItem('ppStatus')) || {}
-          const distrito = votacionEnProceso ? proyectos[0].attrs.district : 'centro'
+          const distrito = votacionEnProceso ? proyectos[0].attrs.district : 'none'
           const padron = ppStatus.padron === 'mixto'
             ? sessionStorage.getItem('pp-padron') || 'adulto'
             : ppStatus.padron || 'adulto'
 
           nextFilters.estado.pendiente = true
           nextFilters.anio.proyectos2018 = false
-          nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2019 = false
+          nextFilters.anio.proyectos2020 = true
           nextFilters.edad[padron] = true
           nextFilters.distrito[distrito] = true
           break
@@ -103,12 +113,14 @@ class FiltersNavbar extends Component {
           nextFilters.estado.proyectado = true
           nextFilters.estado.perdedor = true
           nextFilters.anio.proyectos2018 = false
-          nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2019 = false
+          nextFilters.anio.proyectos2020 = true
           nextFilters.edad.adulto = true
           nextFilters.distrito.centro = true
           break
         case 'seguimiento':
           nextFilters.edad.adulto = true
+          nextFilters.anio.proyectos2020 = false
           nextFilters.anio.proyectos2019 = true
           nextFilters.anio.proyectos2018 = false
           break
@@ -117,6 +129,7 @@ class FiltersNavbar extends Component {
       this.setState({ appliedFilters: nextFilters }, this.exposeFilters)
     }
   }
+
 
   // FUNCTIONS
   handleDistritoFilterChange = (distrito) => {
@@ -128,7 +141,8 @@ class FiltersNavbar extends Component {
         norte: { $set: false },
         oeste: { $set: false },
         sudoeste: { $set: false },
-        sur: { $set: false }
+        sur: { $set: false },
+        none: { $set: false }
       }
     })
     // setea el filtro activo
@@ -183,7 +197,6 @@ class FiltersNavbar extends Component {
     const target = e.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const id = target.id
-
     let selectFilters = update(this.state.selectFilters, { [select]: { [id]: { $set: value } } })
 
     this.setState({
@@ -427,6 +440,14 @@ class FiltersNavbar extends Component {
                           </div>
                           <label htmlFor='proyectos2019'>2019</label>
                           </div>
+
+                          <div className='option-container'>
+                          <div className='check-container'>
+                            <input onChange={this.handleCheckboxChange('anio')} type='checkbox' id='proyectos2020' name='anio' checked={this.state.selectFilters.anio.proyectos2020} />
+                            <label htmlFor='proyectos2020'></label>
+                          </div>
+                          <label htmlFor='proyectos2020'>2020</label>
+                          </div>
                           
                       </div>
                     </div>
@@ -501,6 +522,8 @@ function DistritoFilter (props) {
   const ppStatus = JSON.parse(localStorage.getItem('ppStatus')) || {}
   const proyectos = JSON.parse(sessionStorage.getItem('pp-proyectos')) || []
   const votacionEnProceso = proyectos.length > 0
+  const stageType = props.stage === 'seguimiento' ? 'seguimiento' : 'votacion'
+  const memFilters = JSON.parse(sessionStorage.getItem(`filtros-${stageType}`))
   return (
     <header>
       { stage === 'votacion-abierta' && (
@@ -572,20 +595,22 @@ function DistritoFilter (props) {
       <nav>
         <div className='filter'>
           {distritos.map((d) => {
-            const isActive = d.name === active ? 'active' : ''
-            return (
-              <button
-                type='button'
-                key={d.name}
-                data-name={d.name}
-                onClick={() => {
-                  if (votacionEnProceso && proyectos[0].attrs.district !== d.name) return
-                  onChange(d)
-                }}
-                className={`btn btn-md btn-outline-primary btn-votacion ${isActive} ${votacionEnProceso && proyectos[0].attrs.district !== d.name ? 'disabled' : ''}`}>
-                <span className='btn-content'><span className='btn-text'>{d.title}</span></span>
-              </button>
-            )
+            if  (d.name !== 'none'){
+              const isActive = d.name === active  ? 'active' : ''
+              return (
+                <button
+                  type='button'
+                  key={d.name}
+                  data-name={d.name}
+                  onClick={() => {
+                    if (votacionEnProceso && proyectos[0].attrs.district !== d.name) return
+                    onChange(d)
+                  }}
+                  className={`btn btn-md btn-outline-primary btn-votacion ${isActive} ${votacionEnProceso && proyectos[0].attrs.district !== d.name ? 'disabled' : ''}`}>
+                  <span className='btn-content'><span className='btn-text'>{d.title}</span></span>
+                </button>
+              )
+            }
           })}
         </div>
       </nav>

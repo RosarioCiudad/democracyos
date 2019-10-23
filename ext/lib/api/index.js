@@ -17,6 +17,7 @@ app.use('/api/v2', require('./fixedOpenTopicMethod'))
 app.use('/api/v2', require('./customCsvExportUpdate'))
 app.use('/api', require('./signup'))
 app.use('/api', require('./forgot-email/index'))
+app.use('/api', require('./invitaciones/index'))
 
 
 app.use(function validationErrorHandler (err, req, res, next) {

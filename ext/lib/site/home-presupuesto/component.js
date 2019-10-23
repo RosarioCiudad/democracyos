@@ -10,6 +10,7 @@ import BannerVotoEnProceso from './banner-en-proceso/component'
 import Countdown from './countdown/component'
 import distritos from './distritos.json'
 import Noticias from '../home-multiforum/noticias/component'
+import Steps from './steps-votacion/component'
 
 class HomePresupuesto extends Component {
   constructor (props) {
@@ -24,7 +25,7 @@ class HomePresupuesto extends Component {
       topics: [],
       edad: ['joven', 'adulto'],
       distrito: ['centro', 'noroeste', 'norte', 'oeste', 'sudoeste', 'sur'],
-      anio: ['2017', '2018', '2019'],
+      anio: ['2017', '2018', '2019', '2020'],
       estado: ['proyectado', 'ejecutandose', 'terminado']
     }
   }
@@ -103,11 +104,6 @@ class HomePresupuesto extends Component {
               .filter(this.filtroAnio)
               .filter(this.filtroDistrito(distrito.name))
               .sort(genericSort)
-              // .sort(byState)
-              // .sort(byEdad)
-              // .sort(byArea)
-              // //orden por Anio
-              // .sort(byAnio)
           : []
 
         return distrito
@@ -127,6 +123,8 @@ class HomePresupuesto extends Component {
       return '2018'
     case 'proyectos2019':
       return '2019'
+    case 'proyectos2020':
+      return '2020'
   }
       })
 
@@ -195,10 +193,11 @@ class HomePresupuesto extends Component {
             background='/ext/lib/site/boot/presupuesto-participativo.jpg'
             logo='/ext/lib/site/home-multiforum/presupuesto-icono.png'
             title='Presupuesto Participativo'
-            description='Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.' />
+            description='Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a mejorar tu barrio y seguir su ejecución.' />
         }
         
         <Noticias tagName="presupuesto participativo" />
+        <Steps />
         
 
         <div className='topics-section-container filters-wrapper'>
@@ -254,14 +253,16 @@ function estadoNum (e) {
 
 function anioNum (e) {
   switch (e) {
-    case '2019':
+    case '2020':
       return 1
-    case '2018':
+    case '2019':
       return 2
-    case '2017':
+    case '2018':
       return 3
-    default:
+    case '2017':
       return 4
+    default:
+      return 5
   }
 }
 
@@ -291,37 +292,3 @@ function anioNum (e) {
 
         return 0;
      }
-
-
-
-// function byState (a, b) {
-//   let ae = estadoNum(a.attrs && a.attrs.state)
-//   let be = estadoNum(b.attrs && b.attrs.state)
-//   return ae > be
-//     ? 1
-//     : ae < be
-//     ? -1
-//     : 0
-// }
-
-// function byEdad (a, b) {
-//   return a.attrs.edad === 'joven' ? 1 : -1
-// }
-
-// function byArea (a, b) {
-//   let ae = a.attrs ? a.attrs.area : ''
-//   let be = b.attrs ? b.attrs.area : ''
-//   return ae > be
-//     ? 1
-//     : -1
-// }
-
-// //agrego funcion para ordenar por Anio
-
-// function byAnio (a, b) {
-//   let ae = a.attrs ? a.attrs.anio : ''
-//   let be = b.attrs ? b.attrs.anio : ''
-//   return ae > be
-//     ? 1
-//     : -1
-// }

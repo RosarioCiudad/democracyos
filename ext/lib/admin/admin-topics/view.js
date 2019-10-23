@@ -26,7 +26,8 @@ const anios = [
   {'name': 'todos', 'title': 'Todos'},
   {'name': '2017', 'title': '2017'},
   {'name': '2018', 'title': '2018'},
-  {'name': '2019', 'title': '2019' }
+  {'name': '2019', 'title': '2019' },
+  {'name': '2020', 'title': '2020' }
 ]
 
 const modalidades =  [
@@ -130,7 +131,7 @@ export default class TopicsListView extends View {
 
       //Filtro la lista por año actual
       
-     let anioinicial = this.getHashVariable("anio") === null ? "2019" : this.getHashVariable("anio")[1]
+     let anioinicial = this.getHashVariable("anio") === null ? "2020" : this.getHashVariable("anio")[1]
      let modalidadinicial = this.getHashVariable("modalidad") === null ? "" : this.getHashVariable("modalidad")[1]
      let distritoinicial = this.getHashVariable("distrito") === null ? "" : this.getHashVariable("distrito")[1]
 
@@ -190,7 +191,7 @@ export default class TopicsListView extends View {
             <label className='filtro-label'>
               Año
             </label>
-            <select className='select-filtro' id='anio' defaultValue={this.getHashVariable("anio") === null ? "2019" : this.getHashVariable("anio")[1] } onChange={this.chooseAnio}>
+            <select className='select-filtro' id='anio' defaultValue={this.getHashVariable("anio") === null ? "2020" : this.getHashVariable("anio")[1] } onChange={this.chooseAnio}>
               {anios.map((anio, i)=> {
                 return <option value={anio.name} key={i}>{anio.title}</option>
               })}

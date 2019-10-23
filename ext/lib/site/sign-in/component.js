@@ -6,6 +6,7 @@ import config from 'lib/config'
 import FormAsync from 'lib/site/form-async'
 import userConnector from 'lib/site/connectors/user'
 import BtnFacebook from './btn-facebook'
+import BtnGoogle from './btn-google'
 import PopupCenter from 'ext/lib/open-popup'
 
 export class SignIn extends Component {
@@ -15,7 +16,8 @@ export class SignIn extends Component {
     this.state = {
       loading: false,
       errors: null,
-      showResend: null
+      showResend: null,
+      ingresar: false,
     }
  this.openPopup = this.openPopup.bind(this)
   }
@@ -91,87 +93,98 @@ export class SignIn extends Component {
             </Link>
           </div>
         )}
-        <div className='form-group'>
-        <div className='forgot'>
-         <Link
-              to='/forgot-email'
-              tabIndex={0}>
-
-              {t("¿Olvidaste tu correo?")}
-            </Link>
-          </div>
-          <label htmlFor=''>{t('signup.email')}</label>
-          <input
-            type='email'
-            className='form-control'
-            name='email'
-            placeholder={t('forgot.mail.example')}
-            tabIndex={1}
-            maxLength='200'
-            onBlur={this.checkEmail}
-            required />
-        </div>
-        <div className='form-group'>
-          <div className='forgot'>
-            <Link
-              to='/forgot'
-              tabIndex={4}>
-
-              {t('forgot.question')}
-            </Link>
-          </div>
-          <label htmlFor=''>{t('password')}</label>
-          <input
-            type='password'
-            className='form-control'
-            name='password'
-            placeholder={t('password')}
-            tabIndex={2}
-            maxLength='200'
-            required />
-        </div>
-        <div className='form-group'>
-          <div className='signup'>
-            <span>{t('signin.dont-have-account')}</span>
-            <Link
-              to='/signup'
-              tabIndex={5}>
-              {t('signin.action.signup')}
-            </Link>
-          </div>
-        </div>
-        <div className='form-group' />
-        {!this.state.loading && (
-          <button
-            className='btn btn-block btn-primary'
-            type='submit'>
-            {t('signin.login')}
-          </button>
-        )}
-        {this.state.loading && (
-          <button
-            className='loader-btn btn btn-block btn-default'
-            type='button'
-            tabIndex='-1'>
-            <div className='loader' />
-            {t('signin.login')}
-          </button>
-        )}
+     
+           <div className='form-group'>
+             <label htmlFor=''>{t('signup.email')}</label>
+             <input
+               type='email'
+               className='form-control'
+               name='email'
+               placeholder={t('forgot.mail.example')}
+               tabIndex={1}
+               maxLength='200'
+               onBlur={this.checkEmail} 
+               required />
+           </div>
+           <div className='form-group'>
+             <div className='forgot'>
+               <Link
+                 to='/forgot'
+                 tabIndex={4}>
+                 {t('forgot.question')}
+               </Link>
+             </div>
+             <label htmlFor=''>{t('password')}</label>
+             <input
+               type='password'
+               className='form-control'
+               name='password'
+               placeholder={t('password')}
+               tabIndex={2}
+               maxLength='200'
+               required /> 
+           </div>
+           <div className='form-group' />
+           {!this.state.loading && (
+             <button
+               className='btn btn-block btn-primary'
+               type='submit'>
+               {t('signin.login')}
+             </button>
+           )}
+     
+          {this.state.loading && (
+            <button
+              className='loader-btn btn btn-block btn-default'
+              type='button'
+              tabIndex='-1'>
+              <div className='loader' />
+             {t('signin.login')}
+            </button>
+           )}
+            <div className='registrado'>
+              <div className='form-group'>
+                <div className='signup'>
+                  <p>
+                  <span>{t('signin.dont-have-account')}  </span>
+                  <Link
+                    to='/signup'
+                    tabIndex={5}>
+                    {t('signin.action.signup')}
+                  </Link>
+                  </p>
+                  <p>
+                   <Link
+                    to='/forgot-email'
+                    tabIndex={0}>
+                    {t("No recuerdo si estoy registrado")}
+                    </Link>
+                  </p>
+                </div>
+              </div>
+              {/*<Link
+                to='/forgot-email'
+                tabIndex={-1}
+                className='btn btn-block btn-primary olvidaste'>
+                {t("¿Estoy registrado?")}
+              </Link>*/}
+            </div>  
       </FormAsync>
     )
 
     return (
       <div id='sign-in'>
         <div className='title-page'>
-          <div className='circle'>
+          {/*<div className='circle'>
             <i className='icon-login' />
-          </div>
+          </div>*/}
           {!config.facebookSignin && (
             <div className='title-page'>
               <h1>{t('header.signin')}</h1>
             </div>
           )}
         </div>
+        <GoogleForm />
         {config.facebookSignin && <FacebookForm />}
         {form}
       </div>
@@ -181,12 +194,23 @@ export class SignIn extends Component {
 
 export default userConnector(SignIn)
 
+
 function FacebookForm () {
   return (
     <div className='facebook-auth-form'>
       <BtnFacebook />
+      
       <hr />
       <p className='muted'>{t('signin.or-login-with-email')}</p>
+    </div>
+  )
+}
+
+function GoogleForm () {
+  return (
+    <div className='facebook-auth-form'>
+      <BtnGoogle />
+      {/*<p className='muted'>{t('signin.or-login-with-email')}</p>*/}
     </div>
   )
 }
