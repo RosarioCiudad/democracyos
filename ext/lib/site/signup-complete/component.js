@@ -34,55 +34,70 @@ export default class SignupComplete extends Component {
   
 
   buscarPersona() {
-    const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/M'
-    return fetch(url)
-    .then(response => {
-      if (response.status == 200) {
-        let data = response.json()
-        return data
-      } else {
-          throw new Error(response.status)
-        }
-    })
-    .then( data => {
-      if(data.nombre){
-        this.setState({
-          sexoEncontrado: data.sexo,
-          codDocEncontrado: data.documento.tipo.abreviatura,
-          nombreEncontrado: data.nombre,
-          apellidoEncontrado: data.apellido,
-          encontrado: true
+      this.setState({
+        loading: true
+      })
+     const dni = this.state.docIngresado
+     var sexo = 'M'
+      return fetch(`/ext/api/persona?dni=${dni}&sexo=${sexo}`,
+         {
+          method: 'GET',
+          credentials: 'same-origin'
         })
-      }else{
-        const url = 'https://ws.rosario.gob.ar/persona/persona/fisica/' + this.state.docIngresado + '/F'
-        return fetch(url)
-        .then(response => {
-        if (response.status == 200) {
-          let data = response.json()
-          return data
-        } else {
-          throw new Error(response.status)
+      .then((res) => res.json())
+        .then((res) => {
+          if (res.status !== 200 || !res.results) {
+            return { failed: true }
           }
+          let data = res.results
+          return data
         })
         .then(data => {
-          if(data.nombre){ 
+          if(data.nombre){
             this.setState({
               sexoEncontrado: data.sexo,
               codDocEncontrado: data.documento.tipo.abreviatura,
               nombreEncontrado: data.nombre,
               apellidoEncontrado: data.apellido,
-              encontrado: true
+              encontrado: true,
+              loading: false
             })
           }else{
+            var sexo = 'F'
+            return fetch(`/ext/api/persona?dni=${dni}&sexo=${sexo}`,
+            {
+              method: 'GET',
+              credentials: 'same-origin'
+            })
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.status !== 200 || !res.results) {
+                return { failed: true }
+              }
+              let data = res.results
+              return data
+            })
+            .then(data => {
+              if(data.nombre){
+                this.setState({
+                  sexoEncontrado: data.sexo,
+                  codDocEncontrado: data.documento.tipo.abreviatura,
+                  nombreEncontrado: data.nombre,
+                  apellidoEncontrado: data.apellido,
+                  encontrado: true,
+                  loading: false
+                })
+              }else{
             this.setState({
-              mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral'
+              mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral',
+              loading: false
             })
           }
         })
       }
     })
   }
-
+    
     guardarInfo(){
       const sexoGuardado = this.state.sexoEncontrado
       const codDocGuardado = this.state.codDocEncontrado
@@ -190,7 +205,8 @@ export default class SignupComplete extends Component {
              {!user.profileIsComplete() && !this.state.encontrado &&(
               <Link
                 onClick={this.buscarPersona}
-                className='btn-modal-buscar'>
+                className='btn-modal-buscar'
+                disabled={this.state.loading}>
                 Buscar
               </Link>
             )}
