@@ -13,6 +13,9 @@
       "votingEndpoint": ""
     },
     "facebookTrackingId": "",
-    "client": []
+    "client": [],
+    "persona": {
+      "url": ""
+    }
   }
 }
