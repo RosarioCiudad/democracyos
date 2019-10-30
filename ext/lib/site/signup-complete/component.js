@@ -170,7 +170,7 @@ export default class SignupComplete extends Component {
         <form role='form' onSubmit={this.handleForm} method='POST'>
           <div className='form-header'>
             <h3 className='title'>Completá tus datos</h3>
-            <p>Para participar de la votación es requisito que tu domicilio se encuentre en Rosario en el último padrón electoral.</p>
+            <p>Para participar de la votación es requisito que tu domicilio se encuentre en Rosario o alrededores en el último padrón electoral.</p>
           </div>
           <div className='form-fields'>
             {this.state.error && (
