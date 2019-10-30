@@ -41,7 +41,7 @@ export default ({ scrollInfo }) => (
           </div>
         </div>
         <div>
-        <p className='p-mensaje'>Para participar de la votación es requisito que tu <b>domicilio</b> se encuentre en <b>Rosario</b> en el último padrón electoral. En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a>.</p>
+        <p className='p-mensaje'>Para participar de la votación es requisito que tu <b>domicilio</b> se encuentre en <b>Rosario o alrededores</b> en el último padrón electoral. En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a>.</p>
         </div>      
       </div>
     </div>
