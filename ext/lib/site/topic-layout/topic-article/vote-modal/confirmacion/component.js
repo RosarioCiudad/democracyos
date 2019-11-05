@@ -6,7 +6,7 @@ export default ({ edad, toggleVotesModal }) => (
     <a className='close-modal' onClick={toggleVotesModal}>X</a>
     <div className='confirmation-wrapper'>
       <div className='vote-img' />
-      <h3 className='confirmation-title'>¡Tu voto fue enviado!</h3>
+      <h3 className='confirmation-title'>¡Tu voto fue registrado!</h3>
       <p>Gracias por participar</p>
       <p className='sharing-text'>¡Invitá a otros a votar!</p>
       <div className='social-sharing'>

@@ -8,10 +8,12 @@ export default ({ scrollInfo }) => (
         <h2 className='container'>¿Cómo votar?</h2>
         <div className='participa-steps'>
           <div className='p-step'>
+            <a href="#filter">
             <div>
               <span className='num'>1</span>
               <p>Elegí tu distrito.</p>
             </div>
+            </a>
             {/*<Link to='/signin' className='p-text'>
               Hacé click en <span className="color-link">Ingresar</span>,
               completá el formulario y sé
