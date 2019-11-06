@@ -105,7 +105,7 @@ export class UserBadge extends Component {
             </li>
           ))}
           <li>
-            <a href="/" onClick={this.props.user.logout}>
+            <a href={(window.location.href.indexOf('signup/validate/') > -1) ? '/' : null}  onClick={this.props.user.logout}>
               {t('header.logout')}
             </a>
           </li>

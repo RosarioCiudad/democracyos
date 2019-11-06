@@ -98,7 +98,8 @@ class Header extends Component {
               <Link
                 to={{
                   pathname: '/signin',
-                  query: window.location.pathname !== '/signup'
+                  query: window.location.pathname !== '/signup',
+                  query: window.location.pathname !=='/forgot-email'
                    ? { ref: window.location.pathname }
                    : null
                 }}
