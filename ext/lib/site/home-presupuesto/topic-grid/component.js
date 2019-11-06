@@ -112,6 +112,7 @@ export default class TopicGrid extends Component {
                       </h2>
                       <div className='topics-container topics-container-area'>
                         {this.props.loading && <div className='loader' />}
+                        {console.log(district.topics)}
                         {district.topics
                           .filter((topic) => topic.attrs.area !== '0')
                           .map((topic, i) =>

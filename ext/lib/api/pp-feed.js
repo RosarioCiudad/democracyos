@@ -47,7 +47,7 @@ function getFeed (req, res, next) {
             results: { $push: '$$ROOT' }
           } },
           { $project: {
-            topics: { $slice: ['$results', s, 20] }
+            topics: { $slice: ['$results', s, 40] }
           }
         }
       ], function (err, results) {

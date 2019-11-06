@@ -593,7 +593,7 @@ function DistritoFilter (props) {
         </div>
       )}
       <nav>
-        <div className='filter'>
+        <div id="filter" className='filter'>
           {distritos.map((d) => {
             if  (d.name !== 'none'){
               const isActive = d.name === active  ? 'active' : ''

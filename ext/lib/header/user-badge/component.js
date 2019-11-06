@@ -104,22 +104,11 @@ export class UserBadge extends Component {
               <Link to={link.path}>{link.label}</Link>
             </li>
           ))}
-          { 
-          /*agregro validacion para que redirija al Home cuando cierro cesion en el validar email*/
-            window.location.href.indexOf('signup/validate/') > -1 && ( 
           <li>
-            <a href="https://participa.rosario.gob.ar/" onClick={this.props.user.logout}>
+            <a href={(window.location.href.indexOf('signup/validate/') > -1) ? '/' : null}  onClick={this.props.user.logout}>
               {t('header.logout')}
             </a>
           </li>
-            )}
-           { window.location.href.indexOf('signup/validate/') === -1 && ( 
-          <li>
-            <a onClick={this.props.user.logout}>
-              {t('header.logout')}
-            </a>
-          </li>
-            )}
         </ul>
       </div>
     )

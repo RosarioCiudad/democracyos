@@ -60,7 +60,7 @@ export default class Countdown extends Component {
         <div className='intro'>
           <div className='circle'></div>
           <div className='text'>
-            <h2>Presupuesto Participativo 2019</h2>
+            <h2>Presupuesto Participativo 2020</h2>
             <p>Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a cambiar tu barrio y seguir su ejecución.</p>
           </div>
         </div>
