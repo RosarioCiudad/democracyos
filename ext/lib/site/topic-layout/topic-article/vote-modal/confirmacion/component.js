@@ -10,13 +10,13 @@ export default ({ edad, toggleVotesModal }) => (
       <p>Gracias por participar</p>
       <p className='sharing-text'>¡Invitá a otros a votar!</p>
       <div className='social-sharing'>
-        <a target='_blank' href={`whatsapp://send?text=${encodeURIComponent(`Ya voté en el Presupuesto Participativo 2019 de Rosario. Participá entrando aquí! #RosarioParticipa`)}&url=${window.location.origin}+${encodeURIComponent(`/presupuesto`)}`} data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh'> </a>
+        <a target='_blank' href='whatsapp://send?text=Ya voté en el Presupuesto Participativo 2020 de Rosario. Participá entrando a https://participa.rosario.gob.ar/presupuesto' data-action="share/whatsapp/share" rel='noopener noreferrer' className='wh'> </a>
         <SharerFacebook
           className='fb'
           params={{
             link: window.location.origin + '/presupuesto'
           }} />
-        <a target='_blank' href={`http://twitter.com/share?text=${encodeURIComponent(`Ya voté en el Presupuesto Participativo 2019 de Rosario. Participá entrando aquí! #RosarioParticipa`)}&url=${window.location.origin}+${encodeURIComponent(`/presupuesto`)}`} rel='noopener noreferrer' className='tw'></a>
+        <a target='_blank' href={`http://twitter.com/share?text=${encodeURIComponent(`Ya voté en el Presupuesto Participativo 2020 de Rosario. Participá entrando aquí! #RosarioParticipa`)}&url=${window.location.origin}+${encodeURIComponent(`/presupuesto`)}`} rel='noopener noreferrer' className='tw'></a>
       </div>
       <a className='return' href='/presupuesto'>Volver a los proyectos</a>
     </div>
