@@ -18,8 +18,8 @@ function assignProfile (user, profile, accessToken, fn) {
       user.set('firstName', profile._json.given_name)
     }
 
-    if (profile._json.amily_name) {
-      user.set('lastName', profile._json.amily_name)
+    if (profile._json.family_name) {
+      user.set('lastName', profile._json.family_name)
     }
 
     if (profile._json.email) {
