@@ -32,9 +32,17 @@ export default class SignupComplete extends Component {
     }
     this.buscarPersona = this.buscarPersona.bind(this)
     this.iniciarSesion = this.iniciarSesion.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
     this.forgot = this.forgot.bind(this)
   }
   
+
+  handleKeyDown = (event) => {
+    if(event.keyCode === 13){
+      alert('Presionar Buscar')
+      event.preventDefault()
+    }
+  }
 
   buscarPersona() {
       this.setState({
@@ -59,7 +67,7 @@ export default class SignupComplete extends Component {
           if(data.nombre){
             this.setState({
               sexoEncontrado: data.sexo,
-              codDocEncontrado: data.documento.tipo.abreviatura,
+              codDocEncontrado: 'DNI',
               nombreEncontrado: data.nombre,
               apellidoEncontrado: data.apellido,
               encontrado: true,
@@ -84,7 +92,7 @@ export default class SignupComplete extends Component {
               if(data.nombre){
                 this.setState({
                   sexoEncontrado: data.sexo,
-                  codDocEncontrado: data.documento.tipo.abreviatura,
+                  codDocEncontrado: 'DNI',
                   nombreEncontrado: data.nombre,
                   apellidoEncontrado: data.apellido,
                   encontrado: true,
@@ -213,6 +221,7 @@ export default class SignupComplete extends Component {
                 id='nro_doc'
                 maxLength='10'
                 onChange={this.handleInputNumberChange}
+                onKeyDown={this.handleKeyDown}
                 value={prettyNumber(this.state.docIngresado)}
                 placeholder='Número de documento*'
                 required />
@@ -261,7 +270,7 @@ export default class SignupComplete extends Component {
                 className='btn-modal'
                 type='submit'
                 disabled={this.state.loading}>
-                Enviar datos
+                Continuar
               </button>
             )}
 

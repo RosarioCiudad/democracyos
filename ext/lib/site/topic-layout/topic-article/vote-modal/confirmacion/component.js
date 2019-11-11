@@ -14,7 +14,10 @@ export default ({ edad, toggleVotesModal }) => (
         <SharerFacebook
           className='fb'
           params={{
-            link: window.location.origin + '/presupuesto'
+            link: window.location.origin + '/presupuesto',
+            name: "Presupuesto Participativo 2020",
+            description: "Elegí los proyectos que van a cambiar tu barrio y seguí su ejecución.",
+            message: "Ya elegí mis proyectos del Presupuesto Participativo 2020 de Rosario. Elegí vos también entrando aqui:"
           }} />
         <a target='_blank' href='http://twitter.com/share?text=Ya elegí mis proyectos del Presupuesto Participativo 2020 de Rosario. Elegí vos también entrando a https://participa.rosario.gob.ar/presupuesto' rel='noopener noreferrer' className='tw'></a>
       </div>
