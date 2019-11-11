@@ -6,7 +6,7 @@ import AddUserInput from 'lib/admin/admin-permissions/add-user-input/add-user-in
 import FormView from 'lib/form-view/form-view'
 import request from 'lib/request/request'
 import template from './template.jade'
-import correos from '../../api/invitaciones/correos.json'
+/*import correos from '../../api/invitaciones/correos.json'*/
 import usuario from 'lib/user/user'
 
 
@@ -16,7 +16,7 @@ export default class UserBadgeView extends FormView {
     this.onSelect = this.onSelect.bind(this)
     this.onSubmitEmail = this.onSubmitEmail.bind(this)
     this.onSubmitBadge = this.onSubmitBadge.bind(this)
-    this.onSubmitInvitar = this.onSubmitInvitar.bind(this)
+/*    this.onSubmitInvitar = this.onSubmitInvitar.bind(this)*/
     
     this.addUserInput = new AddUserInput({
       onSelect: this.onSelect,
@@ -116,11 +116,11 @@ onSubmitBadge (e) {
    */
 
   switchOn () {
-    if(!usuario.load('me').staff){this.el[0].querySelector('.form-group(name="invitar")').style.display="none"}
+    /*if(!usuario.load('me').staff){this.el[0].querySelector('.form-group(name="invitar")').style.display="none"}*/
     this.el[0].querySelector('.form-group[name="formulario"]').style.display="none"
     this.el[0].querySelector('.form-group[name="boton"]').style.display="none"
     this.el[0].querySelector('#submit-email').addEventListener('click', this.onSubmitEmail)
-    this.el[0].querySelector('#submit-invitar').addEventListener('click', this.onSubmitInvitar)
+    /*this.el[0].querySelector('#submit-invitar').addEventListener('click', this.onSubmitInvitar)*/
     this.on('success', this.onsuccessemail.bind(this))
     this.on('error', this.onerrorEmail.bind(this))
     this.el[0].querySelector('#submit-badge').addEventListener('click', this.onSubmitBadge)
@@ -142,13 +142,14 @@ onSubmitBadge (e) {
    * @api private
    */
 
-  onSubmitInvitar () {
+   //Api para mandar correos con token
+  /*onSubmitInvitar () {
      request
       .post('/api/invitaciones')
       .send()
       .end()
       this.messages(["Se estan generando " +Object.keys(correos).length+ " tokens de ingreso."], 'success')
-  }
+  }*/
 
   onsuccessemail (email) {
     var email = {email: email}

@@ -558,7 +558,7 @@ function DistritoFilter (props) {
               <span className='btn-content'><span className='btn-text'>Presupuesto Participativo Joven</span></span>
             </button>
           </nav>
-          <p className='header-text'>Elegí tu distrito:</p>
+          <p id="participa" className='header-text'>Elegí tu distrito:</p>
         </div>
       </div>
       )}

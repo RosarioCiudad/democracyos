@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import user from 'lib/site/user/user'
 import request from 'lib/request/request'
+import PopupCenter from 'ext/lib/open-popup'
 
 export default class SignupComplete extends Component {
   constructor (props) {
@@ -30,6 +31,8 @@ export default class SignupComplete extends Component {
       }
     }
     this.buscarPersona = this.buscarPersona.bind(this)
+    this.iniciarSesion = this.iniciarSesion.bind(this)
+    this.forgot = this.forgot.bind(this)
   }
   
 
@@ -106,6 +109,25 @@ export default class SignupComplete extends Component {
       this.setState({ data })
   }
 
+  iniciarSesion(){
+    this.props.toggleUserModal()
+    user.logout()
+    window.location.href= "/signin?ref=%2Fpresupuesto"
+  }
+
+  forgot(){
+    this.props.toggleUserModal()
+    user.logout()
+    window.location.href= "/forgot"
+  }
+
+  openPopup = (e) => {
+        e.preventDefault()
+        this.props.toggleUserModal()
+        let url = 'https://www.rosario.gov.ar/form/id/actualizar-email'
+         PopupCenter(url, '', 500, 600)
+       }
+
   handleForm = (evt) => {
     evt.preventDefault()
     this.setState({
@@ -137,7 +159,7 @@ export default class SignupComplete extends Component {
         if (!body) throw err
         if (body.error && body.error.code === 'DUPLICATED_VOTING_DATA') {
           this.setState({
-            error: `El número de documento ingresado se encuentra utilizado por una cuenta con la dirección de correo ${body.error.docOwner}, si esa dirección no te pertenece o notas algún problema comunicate a participa@rosario.gob.ar`,
+            error: `El número de documento ${this.state.docIngresado} ya se encuentra asignado a la cuenta ${body.error.docOwner}.`,
             loading: false
           })
         } else {
@@ -170,7 +192,9 @@ export default class SignupComplete extends Component {
         <form role='form' onSubmit={this.handleForm} method='POST'>
           <div className='form-header'>
             <h3 className='title'>Completá tus datos</h3>
+            {!this.state.error && (
             <p>Para participar de la votación es requisito que tu domicilio se encuentre en Rosario o alrededores en el último padrón electoral.</p>
+            )}
           </div>
           <div className='form-fields'>
             {this.state.error && (
@@ -180,6 +204,7 @@ export default class SignupComplete extends Component {
                 }} />
               </div>
             )}
+            {!this.state.error && (
             <div className='form-group field-nro-doc'>
               <input
                 className='form-control custom-select'
@@ -192,9 +217,10 @@ export default class SignupComplete extends Component {
                 placeholder='Número de documento*'
                 required />
             </div>
+            )}
           </div>
           <div className='persona'>
-              {this.state.encontrado && (
+              {this.state.encontrado && !this.state.error &&(
                 <p>Estas registrado como: <br /> <b>{this.state.nombreEncontrado} {this.state.apellidoEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
           )}
               {!this.state.encontrado && this.state.mensajeNoEncontrado &&(
@@ -210,7 +236,27 @@ export default class SignupComplete extends Component {
                 Buscar
               </Link>
             )}
-            {!user.profileIsComplete() && this.state.encontrado && (
+
+            {!user.profileIsComplete() && this.state.encontrado && this.state.error &&(
+              <div className='iniciosesion'>
+                <p>Si esa cuenta te pertenece:</p>
+                <button
+                  className='btn-modal iniciobtn'
+                  onClick={this.iniciarSesion}>
+                  Inicia sesión
+                </button>
+                <p>Si ya no utilizás esa cuenta: <a className="linksolicita" onClick={this.openPopup} href='#'>Solicitá un cambio.</a></p>
+                <p>Si no recordás tu contraseña: 
+                <Link
+                  onClick={this.forgot}
+                  className='linkforgot'>
+                  Modificala.
+              </Link>
+              </p>              
+              </div>
+            )}
+
+            {!user.profileIsComplete() && this.state.encontrado && !this.state.error &&(
               <button
                 className='btn-modal'
                 type='submit'
