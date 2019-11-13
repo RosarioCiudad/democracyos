@@ -260,8 +260,8 @@ export default class SignupComplete extends Component {
                       //disabled={this.state.loading || this.state.sexo_disabled}
                       required>
                       <option className='opcion' value='' disabled>Seleccioná tu Nombre*</option>
-                      <option className='opcion' value='M'>{this.state.nombreHombreEncontrado + this.state.apellidoHombreEncontrado}</option>
-                      <option className='opcion' value='F'>{this.state.nombreMujerEncontrado + this.state.apellidoMujerEncontrado}</option>
+                      <option className='opcion' value='M'>{this.state.nombreHombreEncontrado + ' ' + this.state.apellidoHombreEncontrado}</option>
+                      <option className='opcion' value='F'>{this.state.nombreMujerEncontrado + ' ' + this.state.apellidoMujerEncontrado}</option>
                     </select>
                   </div>
                 </div>
