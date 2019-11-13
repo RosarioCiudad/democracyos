@@ -215,8 +215,6 @@ export default class SignupComplete extends Component {
   }
 
   render () {
-    const hombre = (this.state.encontradoHombre && !this.state.encontradoMujer) ? true : false
-    const mujer =  (!this.state.encontradoHombre && this.state.encontradoMujer) ? true : false
     return (
       <div className='ext-signup-complete'>
         {this.state.loading && <div className='loader' />}
@@ -270,10 +268,10 @@ export default class SignupComplete extends Component {
             )}
           </div>
           <div className='persona'>
-              {this.state.busco && hombre && !this.state.error && (
+              {this.state.busco && this.state.encontradoHombre && !this.state.encontradoMujer && !this.state.error && (
                 <p>Estas registrado como: <br /> <b>{this.state.nombreHombreEncontrado} {this.state.apellidoHombreEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
           )}
-              {this.state.busco && mujer && !this.state.error && (
+              {this.state.busco && !this.state.encontradoHombre && this.state.encontradoMujer && !this.state.error && (
                 <p>Estas registrado como: <br /> <b>{this.state.nombreMujerEncontrado} {this.state.apellidoMujerEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
           )}
               {this.state.mensajeNoEncontrado &&(
