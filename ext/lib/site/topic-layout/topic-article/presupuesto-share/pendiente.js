@@ -64,7 +64,7 @@ export default class Pendiente extends Component {
                   <button
                     onClick={() => { location.hash = '#completar-datos' }}
                     className='btn btn-active btn-pending'>
-                    Votar este proyecto
+                    Ingresa tu DNI para votar
                     </button>
                 }
                 { // User logged in & status failed, falling back to old system

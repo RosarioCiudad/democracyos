@@ -16,7 +16,7 @@ export default ({ topic, saveTopic, toggleVotesModal }) => {
         <div className='proyectos-container'>
           <TopicCard topic={topic} isBlocked />
         </div>
-        <button onClick={saveTopic} className='btn btn-active btn-pending'>Votar este proyecto</button>
+        <button onClick={saveTopic} className='btn btn-active btn-pending'>Continuar</button>
         <a className='cancel' onClick={toggleVotesModal}>Cancelar</a>
       </div>
     </div>

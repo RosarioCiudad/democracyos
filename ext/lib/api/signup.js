@@ -37,7 +37,7 @@ function postSignupCompleteCheckDocDuplication (req, res, next) {
     .then(function (users) {
       if (users.length === 0) return next()
       let ofuscatedEmail = users[0].email.split('@')
-      ofuscatedEmail[0] = ofuscatedEmail[0].substring(0, 3) + '******'
+      ofuscatedEmail[0] = ofuscatedEmail[0].substring(0, 5) + '******'
       console.log(ofuscatedEmail[0])
       ofuscatedEmail = ofuscatedEmail.join('@')
       res.json(200, {

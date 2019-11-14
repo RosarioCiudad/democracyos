@@ -153,21 +153,8 @@ export class SignIn extends Component {
                     {t('signin.action.signup')}
                   </Link>
                   </p>
-                  <p>
-                   <Link
-                    to='/forgot-email'
-                    tabIndex={0}>
-                    {t("No recuerdo si estoy registrado")}
-                    </Link>
-                  </p>
                 </div>
               </div>
-              {/*<Link
-                to='/forgot-email'
-                tabIndex={-1}
-                className='btn btn-block btn-primary olvidaste'>
-                {t("¿Estoy registrado?")}
-              </Link>*/}
             </div>  
       </FormAsync>
     )
@@ -209,6 +196,15 @@ function FacebookForm () {
 function GoogleForm () {
   return (
     <div className='facebook-auth-form'>
+      <div className="norecuerdo">
+        <p>
+                   <Link
+                    to='/forgot-email'
+                    tabIndex={0}>
+                    {t("No recuerdo si estoy registrado")}
+                    </Link>
+                  </p>
+      </div>
       <BtnGoogle />
       {/*<p className='muted'>{t('signin.or-login-with-email')}</p>*/}
     </div>

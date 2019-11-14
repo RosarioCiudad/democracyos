@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import user from 'lib/site/user/user'
 import request from 'lib/request/request'
+import PopupCenter from 'ext/lib/open-popup'
 
 export default class SignupComplete extends Component {
   constructor (props) {
@@ -11,15 +12,17 @@ export default class SignupComplete extends Component {
     const extra = attrs.extra || {}
    
     this.state = {
+      busco: false,
       error: '',
       loading: false,
-      encontrado: false,
+      encontradoHombre: false,
+      encontradoMujer: false,
       docIngresado: extra.nro_doc || '',
       mensajeNoEncontrado:'',
-      sexoEncontrado: '',
-      codDocEncontrado: '',
-      nombreEncontrado: '',
-      apellidoEncontrado: '',
+      nombreHombreEncontrado: '',
+      apellidoHombreEncontrado: '',
+      nombreMujerEncontrado: '',
+      apellidoMujerEncontrado: '',
       cod_doc_disabled: !!extra.cod_doc,
       sexo_disabled: !!extra.sexo,
       nro_doc_disabled: !!extra.nro_doc,
@@ -30,12 +33,23 @@ export default class SignupComplete extends Component {
       }
     }
     this.buscarPersona = this.buscarPersona.bind(this)
+    this.iniciarSesion = this.iniciarSesion.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.forgot = this.forgot.bind(this)
   }
   
 
+  handleKeyDown = (event) => {
+    if(event.keyCode === 13){
+      alert('Presionar Buscar')
+      event.preventDefault()
+    }
+  }
+
   buscarPersona() {
       this.setState({
-        loading: true
+        loading: true,
+        busco: true
       })
      const dni = this.state.docIngresado
      var sexo = 'M'
@@ -54,16 +68,16 @@ export default class SignupComplete extends Component {
         })
         .then(data => {
           if(data.nombre){
+
             this.setState({
-              sexoEncontrado: data.sexo,
-              codDocEncontrado: data.documento.tipo.abreviatura,
-              nombreEncontrado: data.nombre,
-              apellidoEncontrado: data.apellido,
-              encontrado: true,
+              nombreHombreEncontrado: data.nombre,
+              apellidoHombreEncontrado: data.apellido,
+              encontradoHombre: true,
               loading: false
             })
-          }else{
-            var sexo = 'F'
+          }
+  
+            sexo = 'F'
             return fetch(`/ext/api/persona?dni=${dni}&sexo=${sexo}`,
             {
               method: 'GET',
@@ -80,31 +94,54 @@ export default class SignupComplete extends Component {
             .then(data => {
               if(data.nombre){
                 this.setState({
-                  sexoEncontrado: data.sexo,
-                  codDocEncontrado: data.documento.tipo.abreviatura,
-                  nombreEncontrado: data.nombre,
-                  apellidoEncontrado: data.apellido,
-                  encontrado: true,
+                  nombreMujerEncontrado: data.nombre,
+                  apellidoMujerEncontrado: data.apellido,
+                  encontradoMujer: true,
                   loading: false
                 })
-              }else{
-            this.setState({
-              mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral',
-              loading: false
-            })
-          }
+              }
+
+              if (!this.state.encontradoHombre && !this.state.encontradoMujer){
+                this.setState({
+                mensajeNoEncontrado: 'No encontramos tu número de documento en el padrón electoral',
+                loading: false
+                })
+              }
+
         })
-      }
     })
   }
-    
+
     guardarInfo(){
-      const sexoGuardado = this.state.sexoEncontrado
-      const codDocGuardado = this.state.codDocEncontrado
-      const docGuardado = this.state.docIngresado
-      const data = this.setState(Object.assign(this.state.data,{sexo: sexoGuardado,cod_doc: codDocGuardado,nro_doc: docGuardado}))
-      this.setState({ data })
+        const docGuardado = this.state.docIngresado
+        if(this.state.encontradoHombre && !this.state.encontradoMujer){
+          const data = this.setState(Object.assign(this.state.data,{sexo: 'M',cod_doc: 'DNI',nro_doc: docGuardado}))
+          this.setState({ data })
+          }
+        if(!this.state.encontradoHombre && this.state.encontradoMujer){
+          const data = this.setState(Object.assign(this.state.data,{sexo: 'F',cod_doc: 'DNI',nro_doc: docGuardado}))
+          this.setState({ data })
+          }
+    }
+
+  iniciarSesion(){
+    this.props.toggleUserModal()
+    user.logout()
+    window.location.href= "/signin?ref=%2Fpresupuesto"
   }
+
+  forgot(){
+    this.props.toggleUserModal()
+    user.logout()
+    window.location.href= "/forgot"
+  }
+
+  openPopup = (e) => {
+        e.preventDefault()
+        this.props.toggleUserModal()
+        let url = 'https://www.rosario.gov.ar/form/id/actualizar-email'
+         PopupCenter(url, '', 500, 600)
+       }
 
   handleForm = (evt) => {
     evt.preventDefault()
@@ -137,7 +174,7 @@ export default class SignupComplete extends Component {
         if (!body) throw err
         if (body.error && body.error.code === 'DUPLICATED_VOTING_DATA') {
           this.setState({
-            error: `El número de documento ingresado se encuentra utilizado por una cuenta con la dirección de correo ${body.error.docOwner}, si esa dirección no te pertenece o notas algún problema comunicate a participa@rosario.gob.ar`,
+            error: `El número de documento ${this.state.docIngresado} ya se encuentra asignado a la cuenta ${body.error.docOwner}.`,
             loading: false
           })
         } else {
@@ -150,6 +187,20 @@ export default class SignupComplete extends Component {
         })
       })
     })
+  }
+
+
+    handleInputChange = (evt) => {
+      const input = evt.target
+      if(input.value=='F'){
+        this.setState({
+          encontradoHombre: false
+        })
+      } else{
+        this.setState({
+          encontradoMujer: false
+        })
+      }
   }
 
   handleInputNumberChange = (evt) => {
@@ -170,7 +221,9 @@ export default class SignupComplete extends Component {
         <form role='form' onSubmit={this.handleForm} method='POST'>
           <div className='form-header'>
             <h3 className='title'>Completá tus datos</h3>
+            {!this.state.error && (
             <p>Para participar de la votación es requisito que tu domicilio se encuentre en Rosario o alrededores en el último padrón electoral.</p>
+            )}
           </div>
           <div className='form-fields'>
             {this.state.error && (
@@ -180,6 +233,7 @@ export default class SignupComplete extends Component {
                 }} />
               </div>
             )}
+            {!this.state.error && (
             <div className='form-group field-nro-doc'>
               <input
                 className='form-control custom-select'
@@ -188,21 +242,44 @@ export default class SignupComplete extends Component {
                 id='nro_doc'
                 maxLength='10'
                 onChange={this.handleInputNumberChange}
+                onKeyDown={this.handleKeyDown}
                 value={prettyNumber(this.state.docIngresado)}
                 placeholder='Número de documento*'
                 required />
             </div>
+          )}          
+              {this.state.encontradoHombre && this.state.encontradoMujer && this.state.busco && (
+                <div className='form-group field-sexo'>
+                  <div className='form-select-wrapper'>
+                    <select
+                      className='form-control custom-select field-sexo'
+                      name='sexo'
+                      id='sexo'
+                      value={this.state.data.sexo}
+                      onChange={this.handleInputChange}
+                      //disabled={this.state.loading || this.state.sexo_disabled}
+                      required>
+                      <option className='opcion' value='' disabled>Seleccioná tu Nombre*</option>
+                      <option className='opcion' value='M'>{this.state.nombreHombreEncontrado + ' ' + this.state.apellidoHombreEncontrado}</option>
+                      <option className='opcion' value='F'>{this.state.nombreMujerEncontrado + ' ' + this.state.apellidoMujerEncontrado}</option>
+                    </select>
+                  </div>
+                </div>
+            )}
           </div>
           <div className='persona'>
-              {this.state.encontrado && (
-                <p>Estas registrado como: <br /> <b>{this.state.nombreEncontrado} {this.state.apellidoEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
+              {this.state.busco && this.state.encontradoHombre && !this.state.encontradoMujer && !this.state.error && (
+                <p>Estas registrado como: <br /> <b>{this.state.nombreHombreEncontrado} {this.state.apellidoHombreEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
           )}
-              {!this.state.encontrado && this.state.mensajeNoEncontrado &&(
+              {this.state.busco && !this.state.encontradoHombre && this.state.encontradoMujer && !this.state.error && (
+                <p>Estas registrado como: <br /> <b>{this.state.nombreMujerEncontrado} {this.state.apellidoMujerEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
+          )}
+              {this.state.mensajeNoEncontrado &&(
                 <p><b>{this.state.mensajeNoEncontrado}</b>.<br />Escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a> para validar tus datos.</p>
           )}
             </div>
           <div className='form-actions'>
-             {!user.profileIsComplete() && !this.state.encontrado &&(
+             {!user.profileIsComplete() && !this.state.encontradoHombre && !this.state.encontradoHombre && !this.state.busco &&(
               <Link
                 onClick={this.buscarPersona}
                 className='btn-modal-buscar'
@@ -210,12 +287,32 @@ export default class SignupComplete extends Component {
                 Buscar
               </Link>
             )}
-            {!user.profileIsComplete() && this.state.encontrado && (
+
+            {!user.profileIsComplete() && (this.state.encontradoHombre || this.state.encontradoMujer) && this.state.error &&(
+              <div className='iniciosesion'>
+                <p>Si esa cuenta te pertenece:</p>
+                <button
+                  className='btn-modal iniciobtn'
+                  onClick={this.iniciarSesion}>
+                  Inicia sesión
+                </button>
+                <p>Si ya no utilizás esa cuenta: <a className="linksolicita" onClick={this.openPopup} href='#'>Solicitá un cambio.</a></p>
+                <p>Si no recordás tu contraseña: 
+                <Link
+                  onClick={this.forgot}
+                  className='linkforgot'>
+                  Modificala.
+              </Link>
+              </p>              
+              </div>
+            )}
+
+            {!user.profileIsComplete() && (this.state.encontradoHombre || this.state.encontradoMujer) && !this.state.error &&(
               <button
                 className='btn-modal'
                 type='submit'
                 disabled={this.state.loading}>
-                Enviar datos
+                Continuar
               </button>
             )}
 

@@ -83,6 +83,12 @@ export default class Countdown extends Component {
           </div>
         </main>
         <footer>{this.state.seconds >= 0 ? "Para el cierre de la votación" : "Votación Finalizada"}</footer>
+        <a href="#participa">
+          <button className='btn btn-primary btn-lg participa'>
+            Participá
+          </button>
+        </a>
+
       </section>
     )
   }

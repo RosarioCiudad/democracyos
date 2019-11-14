@@ -86,7 +86,7 @@ export default withRouter(({ topic, router, fadeTopic, isSelected, isBlocked, st
           <div className='state'>{state}</div>
         )}
         <div className='topic-location'>
-          <span>{topic.attrs && topic.attrs.area && topic.attrs.area !== '0' ? `Área Barrial ${topic.attrs.area}` : `Distrito ${distritos[topic.attrs.district]}`}</span>
+          <span className={topic.attrs && topic.attrs.area && topic.attrs.area !== '0' ? 'arealabel' : ''}>{topic.attrs && topic.attrs.area && topic.attrs.area !== '0' ? `Área Barrial ${topic.attrs.area}` : `Distrito ${distritos[topic.attrs.district]}`}</span>
           {topic.attrs && topic.attrs.number && (
             <span className='number'>
               {topic.attrs.anio}

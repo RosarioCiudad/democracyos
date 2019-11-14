@@ -14,7 +14,6 @@ Promise.all([
     // if (pp.extra && pp.extra.stage) return Topic.find({ forum: pp.id }).exec()
     return Topic.find({ forum: ppJoven.id }).exec()
       .then((topics) => {
-        console.log(topics.length)
         if (topics.length === 0) return Topic.find({ forum: pp.id }).exec()
         return Topic.find({ forum: pp.id }).exec()
           .then((topics) => Promise.all(topics.map((topic) => {

@@ -34,7 +34,9 @@ export default class BannerVotacion extends Component {
 
   checkLocation = () => {
     let urltopic= window.location.href.indexOf("presupuesto/topic/") > -1
-    if (window.location.pathname === '/signup' || window.location.pathname === '/signin' || window.location.pathname === '/presupuesto' || urltopic ) {
+    let urlforgot= window.location.pathname.indexOf("/forgot") > -1
+    let urlnorecuerdo= window.location.pathname.indexOf("/forgot-email") > -1
+    if (window.location.pathname === '/signup' || window.location.pathname === '/signin' || window.location.pathname === '/presupuesto' || urltopic || urlforgot || urlnorecuerdo ) {
       return true
     }
     return false
@@ -49,7 +51,7 @@ export default class BannerVotacion extends Component {
       <div className='container-banner'>
         <button className='closes' onClick={this.closeBanner}>x</button>
         <h3>
-          ¡Ya está abierta la votación para el Presupuesto Participativo!.
+          ¡Ya está abierta la votación para el Presupuesto Participativo!
         </h3>
         {/*<h3>
           Tenés tiempo hasta el {cierreVotacion.toLocaleDateString()==="Invalid Date" ? "cierre de la votación." : cierreVotacion.toLocaleDateString()}
