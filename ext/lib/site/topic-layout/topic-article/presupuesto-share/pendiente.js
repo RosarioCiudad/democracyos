@@ -33,7 +33,7 @@ export default class Pendiente extends Component {
     const statusFail = !Object.keys(ppStatus).length
     const profileIsComplete = user.profileIsComplete()
     const messagePadron = topic.attrs.edad === 'joven' ? 'No estás habilitado a votar en Presupuesto Participativo Joven.' : 'Sólo estás habilitado a votar en Presupuesto Participativo Joven'
-
+  
     return (
       <aside className='presupuesto-share pendiente'>
         {

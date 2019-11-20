@@ -165,13 +165,13 @@ app.post('/topics.csv',
       }
 
       Promise.all(csvTopics.map((csvTopic) => {
-        if (!csvTopic['Jornada'].indexOf('2019')) return Promise.resolve()
+        if (!csvTopic['Jornada'].indexOf('2020')) return Promise.resolve()
         Object.keys(csvTopic).forEach((csvKey) => {
           if (csvKey.indexOf('/r')) {
             csvTopic[csvKey.replace(/\r/g, '')] = csvTopic[csvKey]
           }
         })
-        const anio = '2019'
+        const anio = '2020'
         const distrito = csvTopic['Nombre Distrito'].toLowerCase()
         const numero = +csvTopic[' Numero Proyecto']
         const jornada = csvTopic['Jornada'] || ''
