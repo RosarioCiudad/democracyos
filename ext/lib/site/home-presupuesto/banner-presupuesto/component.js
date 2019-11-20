@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 let texts = {
   cerrada: {
-    title: '¡Mirá los resultados de la votación de proyectos del Presupuesto Participativo 2019!',
+    title: '¡Mirá los resultados de la votación de proyectos del Presupuesto Participativo 2020!',
     btn: 'Ver proyectos'
   },
   seguimiento: {

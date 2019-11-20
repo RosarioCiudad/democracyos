@@ -1,5 +1,5 @@
 {
-  "version": "3.0.5",
+  "version": "3.0.16",
   "name": "rosariociudad-democracyos",
   "description": "Municipalidad de la Ciudad de Rosario.",
   "main": "lib/boot",
@@ -10,16 +10,16 @@
   "license": "GPL-3.0",
   "dependencies": {
     "classnames": "~2.2.5",
+    "express-session": "^1.15.6",
     "immutability-helper": "2.4.0",
     "jump.js": "~1.0.2",
     "lodash.debounce": "~4.0.8",
     "module-alias": "1.0.10",
+    "passport-google-oauth20": "2.0.0",
     "react-datepicker": "1.4.1",
     "rosariociudad-bootstrap": "^1.0.3",
     "string.prototype.padstart": "3.0.0",
-    "twitter": "~1.4.0",
-    "express-session": "^1.15.6",
-    "passport-google-oauth20": "2.0.0"
+    "twitter": "~1.4.0"
   },
   "browser": {
     "lib/config": "lib/config/config"

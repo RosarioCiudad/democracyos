@@ -21,3 +21,4 @@ function getUser (req, res, next) {
       res.json({ result: null, error: err })
     })
   })
+

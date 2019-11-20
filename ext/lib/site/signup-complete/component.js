@@ -221,7 +221,7 @@ export default class SignupComplete extends Component {
         <form role='form' onSubmit={this.handleForm} method='POST'>
           <div className='form-header'>
             <h3 className='title'>Completá tus datos</h3>
-            {!this.state.error && (
+            {!this.state.error && !this.state.busco && (
             <p>Para participar de la votación es requisito que tu domicilio se encuentre en Rosario o alrededores en el último padrón electoral.</p>
             )}
           </div>
@@ -272,7 +272,7 @@ export default class SignupComplete extends Component {
                 <p>Estas registrado como: <br /> <b>{this.state.nombreHombreEncontrado} {this.state.apellidoHombreEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
           )}
               {this.state.busco && !this.state.encontradoHombre && this.state.encontradoMujer && !this.state.error && (
-                <p>Estas registrado como: <br /> <b>{this.state.nombreMujerEncontrado} {this.state.apellidoMujerEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
+                <p>Estas registrada como: <br /> <b>{this.state.nombreMujerEncontrado} {this.state.apellidoMujerEncontrado}</b>.<br />En caso de que haya un error, escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a></p>
           )}
               {this.state.mensajeNoEncontrado &&(
                 <p><b>{this.state.mensajeNoEncontrado}</b>.<br />Escribinos a <a href="mailto:participa@rosario.gob.ar">participa@rosario.gob.ar</a> para validar tus datos.</p>
