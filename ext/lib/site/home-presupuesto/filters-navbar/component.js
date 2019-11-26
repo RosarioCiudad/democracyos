@@ -302,11 +302,19 @@ class FiltersNavbar extends Component {
         )}
         {this.props.stage === 'seguimiento' && (
           <header>
-              {(this.props.forumStage === 'votacion-abierta' || this.props.forumStage === 'votacion-cerrada') && (
+              {this.props.forumStage === 'votacion-abierta' && (
                 <a
                   className='link-stage'
                   onClick={() => { this.props.changeStage(this.props.forumStage) }}>
                     Volver a Votación
+                </a>
+              )
+            }
+            {this.props.forumStage === 'votacion-cerrada' && (
+                <a
+                  className='link-stage'
+                  onClick={() => { this.props.changeStage(this.props.forumStage) }}>
+                    Volver a Resultados
                 </a>
               )
             }

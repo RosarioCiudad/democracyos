@@ -51,8 +51,11 @@ export default class ForgotEmail extends Component {
           })
       }
     }
+     let ofuscatedEmail = res.results[0].email.split('@')
+      ofuscatedEmail[0] = ofuscatedEmail[0].substring(0, 5) + '******'
+      ofuscatedEmail = ofuscatedEmail.join('@')
     this.setState({
-      email: res.results[0].email,
+      email: ofuscatedEmail,
       loading: false,
       success: true,
       errors: null
@@ -106,7 +109,7 @@ export default class ForgotEmail extends Component {
            </p>
           <p className={(this.state.success && this.state.profileGoogle) ? 'success-message' : 'hide'}>
             <p>
-            <b>{'Te registraste con tu cuenta de Google: ' + this.state.gmail}</b>.
+            <b>{'Te registraste con tu cuenta de Google: '}</b>.
             </p>
             <BtnGoogle />
            </p>  

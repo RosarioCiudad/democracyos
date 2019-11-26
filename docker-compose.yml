@@ -20,6 +20,7 @@ services:
       - ./ext/lib:/usr/src/ext/lib
       - ./ext/package.json:/usr/src/ext/package.json
       - ./public:/usr/src/public
+      - ./dos-overrides/lib/db-api/user.js:/usr/src/lib/db-api/user.js
     tty: true
 
   mongo:

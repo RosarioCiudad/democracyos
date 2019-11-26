@@ -2,6 +2,8 @@ FROM democracyos/democracyos:2.11.13
 
 MAINTAINER Muni <matias@democraciaenred.org>
 
+COPY ./dos-overrides/lib/db-api/user.js /usr/src/lib/db-api/user.js
+
 ENV LOCALE=es \
   ENFORCE_LOCALE=true \
   AVAILABLE_LOCALES=es,en \
