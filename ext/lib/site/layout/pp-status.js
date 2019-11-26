@@ -96,7 +96,7 @@ export default function ppHOC(Layout) {
           ppStatus.puede_votar = status.puede_votar
           ppStatus.msj = status.mensaje_aclaratorio
           ppStatus.padron = status.padron_adulto && status.padron_joven ? 'mixto' : status.padron_adulto ? 'adulto' : status.padron_joven ? 'joven' : ''
-
+        
           return ppStatus
         })
         .catch((err) => {

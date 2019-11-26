@@ -197,8 +197,9 @@ class HomePresupuesto extends Component {
         }
         
         <Noticias tagName="presupuesto participativo" />
+        { this.state.cierre && this.state.stage === 'votacion-abierta' && (
         <Steps />
-        
+        )}
 
         <div className='topics-section-container filters-wrapper'>
           <FiltersNavbar
