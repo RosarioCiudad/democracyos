@@ -7,6 +7,7 @@ import tagsConnector from 'lib/site/connectors/tags'
 import Cover from '../cover'
 import Footer from '../footer/component'
 import TopicCard from './topic-card/component'
+import CoverIdeas from './cover/component'
 
 const filters = {
   new: {
@@ -41,6 +42,13 @@ const filters = {
     emptyMsg: 'Actualmente no hay ideas para el 2030.'
   },
 
+  para: {
+    text: 'Para la consigna',
+    sort: '-createdAt',
+    filter: (topic) => topic.attrs.para === 'belgrano2020',
+    emptyMsg: 'Actualmente no hay ideas para esta consigna.'
+  },
+
 }
 
 function filter (key, items = []) {
@@ -51,7 +59,7 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
   <div className='container'>
     <div className='row'>
       <div className='col-md-8 list-tools'>
-        <div className='topics-filter'>
+        {/*<div className='topics-filter'>
           {Object.keys(filters).map((key) => (
             <button
               key={key}
@@ -60,12 +68,12 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
               {filters[key].text}
             </button>
           ))}
-        </div>
+        </div>*/}
       </div>
     </div>
     <div className='row'>
       <div className='col-md-12'>    
-        <div className='pp-nav2'>
+        {/*<div className='pp-nav2'>
           {Object.keys(filters).map((key) => (
            <button
              key={key}
@@ -74,7 +82,7 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
              {filters[key].text}
            </button>
           ))}
-        </div>
+        </div>*/}
       </div>   
     </div>
     
@@ -100,7 +108,7 @@ class HomeIdeas extends Component {
       forum: null,
       topics: null,
       tags: null,
-      filter: 'rosario2030',
+      filter: 'para',
     }
   }
 
@@ -193,22 +201,24 @@ class HomeIdeas extends Component {
   render () {
     const { forum, topics, tags } = this.state
 
+
     return (
       <div className='ext-home-ideas'>
-        <Cover
-          logo='/ext/lib/site/home-multiforum/ideas-icono.png'
+        {/*<Cover
+          logo='/ext/lib/site/home-multiforum/ideas_belgrano.svg'
           title='Ideas'
-          description='¿Tenés ideas para mejorar la vida en la ciudad? Compartilas.' />
+          description='¿Tenés ideas para mejorar la vida en la ciudad? Compartilas.' />*/}
+        <CoverIdeas/>
         <ListTools
           activeFilter={this.state.filter}
           onChangeFilter={this.handleFilterChange} />
         <div className='container topics-container'>
           <div className='row'>
             <div className='col-md-4 push-md-8 etiquetas'>
-              <h3>Distritos</h3>
+              {/*<h3>Distritos</h3>
               {forum && <TagsList tags={forum.initialTags} forumName={forum.name} />}
               <h3>Temas</h3>
-              {forum && <TagsList tags={tags} forumName={forum.name} without={forum.initialTags} />}
+              {forum && <TagsList tags={tags} forumName={forum.name} without={forum.initialTags} />}*/}
             </div>
             <div className='col-md-8 pull-md-4'>
 

@@ -191,7 +191,7 @@ class HomePresupuesto extends Component {
             cierre={this.state.cierre} />
           : <Cover
             background='/ext/lib/site/boot/presupuesto-participativo.jpg'
-            logo='/ext/lib/site/home-multiforum/presupuesto-icono.png'
+            logo='/ext/lib/site/home-multiforum/participa.svg'
             title='Presupuesto Participativo'
             description='Vos decidís cómo invertir parte del presupuesto de la ciudad. Podés elegir los proyectos que van a mejorar tu barrio y seguir su ejecución.' />
         }

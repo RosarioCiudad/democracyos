@@ -25,16 +25,16 @@ export default ({ userLoaded, toSteps, toInfo }) => (
     )}
     <div className='container'>
       {/*<h1 className="number">107.252</h1> */}
-      <h1>Las decisiones y acciones colectivas mejoran la ciudad</h1>
-      <h2>Sumate a participar</h2>
-     {/* <a href="/presupuesto">
-      <button className='btn btn-primary btn-lg'>
-        Participá
-      </button>
-      </a>*/}
-      <div className='follow-arrow'>
+      <h1>Sumá tus ideas para el año de Belgrano</h1>
+      {/*<h2>Sumate a participar</h2>*/}
+        <a href="/ideas">
+          <button className='btn btn-primary btn-lg'>
+            Quiero proponer
+          </button>
+        </a>
+      {/*<div className='follow-arrow'>
         <span onClick={toSteps} className='icon-arrow-down' />
-      </div>
+      </div>*/}
     </div>
   </div>
 )

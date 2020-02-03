@@ -5,6 +5,7 @@ const User = require('lib/models').User
 const utils = require('lib/utils')
 const config = require('lib/config')
 
+
 const app = module.exports = express()
 
 const callbackURL = utils.buildUrl(config, {

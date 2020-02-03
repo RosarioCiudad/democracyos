@@ -71,22 +71,26 @@ class Header extends Component {
       )}
 
         <div className='ext-header-prefix'>
-          <a href='http://rosario.gob.ar' rel='noopener noreferrer' target='_blank'>
+          {/*<a href='http://rosario.gob.ar' rel='noopener noreferrer' target='_blank'>
             <img src='/ext/lib/header/rosarioigual.png' />
-          </a>
+          </a>*/}
         </div>
         <div className='ext-header-main'>
           <div className='container-simple'>
             <div className='current-date'>
-              <span>{capitalizeFirstLetter(moment().format('dddd D'))}</span>
-              <span>{capitalizeFirstLetter(moment().format('MMMM YYYY'))}</span>
+              {/*<span>{capitalizeFirstLetter(moment().format('dddd D'))}</span>
+              <span>{capitalizeFirstLetter(moment().format('MMMM YYYY'))}</span>*/}
+              <a href='/' rel='noopener noreferrer' target='_parent'>
+                <img src='/ext/lib/header/rosario_participa.svg' />
+              </a>
             </div>
-
-            <h1 className='logo'>
-              <Link to={config.homeLink}>
-                <img src={config.logo} />
-              </Link>
-            </h1>
+            <a href='/ideas' rel='noopener noreferrer' target='_parent'> 
+              <div className={window.location.pathname.includes('admin') ? 'adminlogo' : 'logo'}>
+             
+                {/*<img src={config.logo} />*/} 
+                <img src='ext/lib/header/arribabelgrano.svg' />
+              </div>
+            </a>  
 
             { this.props.user.state.fulfilled && (
               <ul className='user-nav nav navbar-nav'>
@@ -150,9 +154,9 @@ const Navigation = withRouter(({ router, onClick }) => (
 ))
 
 Navigation.links = [
+  { slug: 'ideas', title: 'Ideas' },
   { slug: 'presupuesto', title: 'Presupuesto Participativo' },
   { slug: 'consultas', title: 'Consultas' },
-  { slug: 'ideas', title: 'Ideas' },
   { slug: 'desafios', title: 'Desafíos' },
   { slug: 'voluntariado', title: 'Voluntariado Social' }
 ]
