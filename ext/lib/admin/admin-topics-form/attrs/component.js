@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-export default ({ forum, topic }) => {
+export default ({ forum, topic, staff }) => {
   return (
-    <div className='attrs'>
+    <div className={!staff ? 'attrs ocultarpara' : 'attrs'}>
       {forum.topicsAttrs.map((attr) => {
         const FormInput = forms[attr.kind]
         let val
@@ -86,7 +86,7 @@ forms.Enum = ({
     <select
       className='form-control'
       name={`attrs.${name}`}
-      defaultValue={name='attrs.rosario2030' ? (value || 'no') : value}
+      defaultValue={name='attrs.para' ? (value || 'belgrano2020') : value}
       required={mandatory}
       >
       {options.map((opt) => (
@@ -95,6 +95,30 @@ forms.Enum = ({
     </select>
   </div>
 )
+
+/*forms.Enum = ({
+  name,
+  title,
+  description,
+  mandatory,
+  options,
+  value
+}) => (
+  <div className='form-group kind-enum'>
+    <label>{title}</label>
+    {description && <span className='help-text'>{description}</span>}
+    <select
+      className='form-control'
+      name={`attrs.${name}`}
+      defaultValue={name='attrs.para' ? (value || 'belgrano2020') : value}
+      required={mandatory}
+      >
+      {options.map((opt) => (
+        <option key={opt.name} value={opt.name}>{opt.title}</option>
+      ))}
+    </select>
+  </div>
+)*/
 
 forms.Boolean = class extends Component {
   constructor (props) {

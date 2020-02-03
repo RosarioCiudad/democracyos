@@ -115,7 +115,7 @@ class HomeConsultas extends Component {
     return (
       <div className='ext-home-consultas'>
         <Cover
-          logo='/ext/lib/site/home-multiforum/consultas-icono.png'
+          logo='/ext/lib/site/home-multiforum/consultas.svg'
           title='Consultas'
           description='Queremos conocer tu opinión sobre diferentes temas. Elegí la mejor opción para la ciudad.' />
         <div className='container'>

@@ -15,8 +15,16 @@ export default userConnector(({ user }) => {
       <Cover toSteps={() => Anchor.goTo('participar')} toInfo={() => Anchor.goTo('info')} userLoaded={user.state.fulfilled} />
       <Anchor id='participar' />
       <Noticias tagName="home" />
-      <Steps scrollInfo={() => Anchor.goTo('info')} />
+      {/*<Steps scrollInfo={() => Anchor.goTo('info')} />*/}
       <Anchor className='info' id='info'>
+        <div className='action action-ideas'>
+          <div className='action-img' />
+          <div className='action-content'>
+            <h3>Ideas</h3>
+            <p>¿Tenés ideas para mejorar la vida en la ciudad? Compartilas.</p>
+            <Link to='/ideas' className='btn btn-primary btn-lg'>Quiero proponer</Link>
+          </div>
+        </div>
         <div className='action action-presupuesto'>
           <div className='action-img' />
             <div className='action-content'>
@@ -39,14 +47,6 @@ export default userConnector(({ user }) => {
             <h3>Desafíos</h3>
             <p>Tenemos desafíos como comunidad y podemos resolverlos juntos.</p>
             <Link to='/desafios' className='btn btn-primary btn-lg'>Quiero ser parte</Link>
-          </div>
-        </div>
-        <div className='action action-ideas'>
-          <div className='action-img' />
-          <div className='action-content'>
-            <h3>Ideas</h3>
-            <p>¿Tenés ideas para mejorar la vida en la ciudad? Compartilas.</p>
-            <Link to='/ideas' className='btn btn-primary btn-lg'>Quiero proponer</Link>
           </div>
         </div>
         <div className='action action-voluntariado'>

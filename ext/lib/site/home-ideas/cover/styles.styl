@@ -1,8 +1,8 @@
 .ext-home-cover
-  z-index: 0
+  z-index: 10
   display: flex
   position: relative
-  padding: 2.5em 0
+  padding: 1em 0
   align-items: center
   color: #fff
   font-size: .8em
@@ -10,52 +10,53 @@
   background-size: cover
   background-repeat: no-repeat
   background-position: center center
-
+  @media (min-width: 768px)
+    text-align: left
+    font-size: 1em
   @media screen and (min-height: 600px)
     padding-top: 7.5em
     padding-bottom: 2.5em
-
-  @media screen and (min-width: 768px)
-    font-size: 1em
-
+  
   .container
+    position: relative
     z-index: 10
-    max-width: 720px
+    max-width: 1140px
+    @media (min-width: 768px)
+      display: flex
+      flex-direction: row
+      align-items: center
+      justify-content: center
+      top: -40px
+
+
+    .ext-site-cover-isologo
+      width: 8em
+      border-radius: 50%
+      box-shadow: 2px 2px 4px rgba(81, 81, 81, .4)
+      background-size: 75%
+      background-color: #0066cc
+      background-repeat: no-repeat
+      background-position: center center
+      @media (max-width: 768px)
+        margin: auto
+
+      &:after
+        content: ' '
+        display: block
+        padding-top: 100%
 
   h1
     font-size: 3em
-    margin: 0 0 .4em
+    margin: 0 0
     text-shadow: 2px 2px 4px rgba(81, 81, 81, .8)
   
-  .number
-    font-size: 4em 
-      
-
   h2
-    display: block
-    margin: 0 0 1.3em
-    font-size: 1.8em
+    margin: 0
+    max-width: 560px
+    font-size: 1.5em
+    line-height: 1.2
     font-weight: 400
     text-shadow: 2px 2px 4px rgba(81, 81, 81, .8)
-
-  .follow-arrow
-    display: none
-    margin-top: 4em
-    text-align: center
-
-    @media screen and (min-height: 600px)
-      display: block
-      margin-top: 4em
-
-    .icon-arrow-down
-      display: inline-block
-      font-size: 2em
-      cursor: pointer
-      color: inherit
-      animation-name: bounce
-      animation-duration: 2s
-      animation-delay: 2s
-      animation-iteration-count: infinite
 
   .banner
     display: none
@@ -86,6 +87,7 @@
       min-width: 1000px
       z-index: -1
 
+
 @css {
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -105,3 +107,7 @@
     60% { transform: translateY(-15px); }
   }
 }
+    .ext-site-cover-isologo
+      margin: 0 2em 0 0
+
+

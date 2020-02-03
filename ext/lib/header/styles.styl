@@ -8,7 +8,7 @@
 
 .ext-header-prefix
   height: 29px
-  background-color: #1DAEEC
+  background-color: #0066cc
   z-index: 1
 
   img
@@ -81,7 +81,7 @@
 
     &:hover,
     &.active
-      color: #00acec
+      color: #0066cc
       background-color: #fff
 
     @media (min-width: 631px)
@@ -102,7 +102,7 @@
         content: none
 
 .ext-header-main
-  border-bottom: 3px solid #F59231
+  border-bottom: 3px solid #0066cc
 
   .container-simple
     position: relative
@@ -132,13 +132,31 @@
     display: inline-block
     text-align: center
     left: 0
-    margin: 0
+    margin: 0px
+    @media (min-width: 1200px)
+        left: 400px
+        position: absolute
+        top: 20px
 
     img
       max-width: 360px
 
       @media (max-width: 500px)
         max-width: 200px
+
+  .adminlogo
+    background-image: url('https://www.rosario.gob.ar/ArchivosWeb/arriba_belgrano/arribabelgrano.svg')
+    background-repeat: no-repeat
+    background-position-y: center
+    background-size: 360px
+    width: 380px
+    height:250px
+    @media (max-width: 500px)
+        background-size:200px
+        max-width: 210px
+    img
+      display:none
+
 
   .user-nav
     @import '../../../../lib/header/user-badge/styles'

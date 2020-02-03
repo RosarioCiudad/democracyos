@@ -23,19 +23,14 @@ export default ({ userLoaded, toSteps, toInfo }) => (
         </div>
       </div>
     )}
-    <div className='container'>
-      {/*<h1 className="number">107.252</h1> */}
-      <h1>Sumá tus ideas para el año de Belgrano</h1>
-      {/*<h2>Sumate a participar</h2>*/}
-        <a href="/ideas">
-          <button className='btn btn-primary btn-lg'>
-            Quiero proponer
-          </button>
-        </a>
-      {/*<div className='follow-arrow'>
-        <span onClick={toSteps} className='icon-arrow-down' />
-      </div>*/}
+      <div className='container'>
+        <div
+          className='ext-site-cover-isologo'
+          style={{ backgroundImage: `url('/ext/lib/site/home-multiforum/ideas_belgrano.svg')` }} />
+        <div>    
+        <h1>Ideas para el año de Belgrano</h1>
+          <h2>Queremos que la ciudad celebre a la Bandera y a su creador, en todos sus rincones. Sumate a esta agenda colectiva!</h2>
+        </div>
+      </div>
     </div>
-  </div>
 )
-//<button onClick={userLoaded ? toInfo : toSteps} className='btn btn-primary btn-lg'>//

@@ -89,7 +89,7 @@ class HomeVoluntariados extends Component {
     return (
       <div className='ext-home-voluntariados'>
         <Cover
-          logo='/ext/lib/site/home-multiforum/voluntariado-icono.png'
+          logo='/ext/lib/site/home-multiforum/voluntariado.svg'
           title='Voluntariado social'
           description='Muchas organizaciones sociales buscan tu apoyo! Conocé a quienes trabajan por una ciudad mejor.' />
         <div className='jumbotron add-ong'>
