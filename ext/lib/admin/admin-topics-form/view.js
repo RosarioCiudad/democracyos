@@ -20,6 +20,7 @@ import linkTemplate from './link.jade'
 import Attrs from './attrs/component'
 import template from './template.jade'
 import templateIdeas from './template-ideas.jade'
+import user from 'lib/user/user.js'
 
 const log = debug('democracyos:admin-topics-form')
 
@@ -36,7 +37,8 @@ export default class TopicForm extends FormView {
       tags: tags,
       moment: moment,
       forum,
-      urlBuilder
+      urlBuilder,
+      staff: false
     }
 
     if (topic) {
@@ -55,11 +57,12 @@ export default class TopicForm extends FormView {
     }
 
     if (forum.name === 'ideas') {
+      console.log(locals)
       super(templateIdeas, locals)
     } else {
       super(template, locals)
     }
-
+    this.staff = user.load('me').staff
     this.topic = topic
     this.tags = tags
     this.forum = forum
@@ -101,6 +104,8 @@ export default class TopicForm extends FormView {
     this.bind('change', '.method-input', this.bound('onmethodchange'))
     this.on('success', this.onsuccess)
 
+
+
     const actionMethod =
       this.topic && this.topic.action ? this.topic.action.method : ''
     const pollOptions = this.find('.poll-options')
@@ -127,7 +132,7 @@ export default class TopicForm extends FormView {
       const attrsWrapper = this.el[0].querySelector('[data-attrs]')
 
       ReactRender(
-        <Attrs forum={this.forum} topic={this.topic} />,
+        <Attrs forum={this.forum} topic={this.topic} staff={this.staff}/>,
         attrsWrapper
       )
     }
@@ -264,7 +269,6 @@ export default class TopicForm extends FormView {
     var view = this
 
     this.pubButton.addClass('disabled')
-
     topicStore.publish(this.topic.id)
       .then(() => {
         view.pubButton.removeClass('disabled').addClass('hide')

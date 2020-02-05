@@ -105,7 +105,7 @@ app.get('/auth/google/confirm/authorize',
     }
     /*next()*/
     jwt.setUserOnCookie(req.user, res)
-    return res.redirect('/presupuesto')
+    return res.redirect('/ideas')
   },
   require('lib/site/layout')
 

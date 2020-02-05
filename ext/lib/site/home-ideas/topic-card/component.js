@@ -58,9 +58,9 @@ export default ({ topic, onVote }) => (
           ¡Gracias!
         </button>
       )}
-        <div className={`pie2030 ${topic.attrs.rosario2030=="no" ? 'no2030' : ''}`}>
+        {/*<div className={`pie2030 ${topic.attrs.para=="rosario2030" ? 'no2030' : ''}`}>
           Rosario 2030
-        </div>
+        </div>*/}
       {!topic.voted && (
         <button
           onClick={() => onVote(topic.id)}
