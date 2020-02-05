@@ -43,7 +43,7 @@ export class SignIn extends Component {
 
     if (this.props.location.query.ref) {
       var url = window.decodeURI(this.props.location.query.ref)
-      browserHistory.push(url === '/signup' ? '/' : url)
+      browserHistory.push(url === '/signup' ? '/ideas' : url)
     } else {
       browserHistory.push('/')
     }

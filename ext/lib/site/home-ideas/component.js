@@ -8,6 +8,7 @@ import Cover from '../cover'
 import Footer from '../footer/component'
 import TopicCard from './topic-card/component'
 import CoverIdeas from './cover/component'
+import user from 'lib/user/user.js'
 
 const filters = {
   new: {
@@ -50,7 +51,6 @@ const filters = {
   },
 
 }
-
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
 }
@@ -85,11 +85,10 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
         </div>*/}
       </div>   
     </div>
-    
     <div className='row'>
       <div className='col-md-8 escribir'> 
         <a
-          href='/ideas/admin/topics/create'
+          href={user.load('me').id ? 'ideas/admin/topics/create' : 'signin?ref=%2Fideas/admin/topics/create' }
           className='btn btn-lg btn-primary crear-idea'>
           Escribí tu idea
         </a>
@@ -113,6 +112,7 @@ class HomeIdeas extends Component {
   }
 
   componentDidMount = () => {
+  console.log(user.load('me'))
 
     forumStore.findOneByName('ideas')
       .then((forum) => {

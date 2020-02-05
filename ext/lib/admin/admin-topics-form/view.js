@@ -57,6 +57,7 @@ export default class TopicForm extends FormView {
     }
 
     if (forum.name === 'ideas') {
+      console.log(locals)
       super(templateIdeas, locals)
     } else {
       super(template, locals)
@@ -274,7 +275,6 @@ export default class TopicForm extends FormView {
         view.privButton.removeClass('hide')
       })
       .catch((err) => {
-        console.log(err)
         view.pubButton.removeClass('disabled')
         log('Found error %o', err)
       })
