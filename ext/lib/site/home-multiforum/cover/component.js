@@ -25,11 +25,12 @@ export default ({ userLoaded, toSteps, toInfo }) => (
     )}
     <div className='container'>
       {/*<h1 className="number">107.252</h1> */}
-      <h1>Sumá tus ideas para el año de Belgrano</h1>
+      <h1>Elegí la imagen que más te guste de nuestro héroe. La que gane la pintamos en el Pasaje Juramento. #ArribaBelgrano
+</h1>
       {/*<h2>Sumate a participar</h2>*/}
-        <a href="/ideas">
+        <a href="/consultas">
           <button className='btn btn-primary btn-lg'>
-            Quiero proponer
+            Votá
           </button>
         </a>
       {/*<div className='follow-arrow'>

@@ -35,14 +35,6 @@ const filters = {
     filter: (topic) => topic.attrs.rosario2030 === 'no',
     emptyMsg: 'No se encontraron ideas.'
   },
-
-  rosario2030: {
-    text: 'Rosario2030',
-    sort: '-createdAt',
-    filter: (topic) => topic.attrs.rosario2030 === 'si',
-    emptyMsg: 'Actualmente no hay ideas para el 2030.'
-  },
-
   para: {
     text: 'Para la consigna',
     sort: '-createdAt',
@@ -215,6 +207,14 @@ class HomeIdeas extends Component {
         <div className='container topics-container'>
           <div className='row'>
             <div className='col-md-4 push-md-8 etiquetas'>
+              <div className='invita-consulta'>
+                <span>
+                  Votá por una imagen de Belgrano para el Pasaje Juramento
+                </span>
+                <a href='/consultas' rel='noopener noreferrer' target='_parent'>
+                  <img src='/ext/lib/site/home-multiforum/consultas.svg' className="invita-consulta"/>
+                </a>
+              </div>
               {/*<h3>Distritos</h3>
               {forum && <TagsList tags={forum.initialTags} forumName={forum.name} />}
               <h3>Temas</h3>
