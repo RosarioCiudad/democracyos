@@ -23,20 +23,14 @@ export default ({ userLoaded, toSteps, toInfo }) => (
         </div>
       </div>
     )}
-    <div className='container'>
-      {/*<h1 className="number">107.252</h1> */}
-      <h1>Elegí la imagen que más te guste de nuestro héroe. La que gane la pintamos en el Pasaje Juramento. #ArribaBelgrano
-</h1>
-      {/*<h2>Sumate a participar</h2>*/}
-        <a href="/consultas">
-          <button className='btn btn-primary btn-lg'>
-            Votá
-          </button>
-        </a>
-      {/*<div className='follow-arrow'>
-        <span onClick={toSteps} className='icon-arrow-down' />
-      </div>*/}
+      <div className='container'>
+        <div
+          className='ext-site-cover-isologo'
+          style={{ backgroundImage: `url('/ext/lib/site/home-multiforum/consultas.svg')` }} />
+        <div>    
+        <h1>Consultas</h1>
+          <h2>Queremos que seas parte de la celebración de la bandera y su creador. Sumate a decidir cómo ponemos linda nuestra ciudad.</h2>
+        </div>
+      </div>
     </div>
-  </div>
 )
-//<button onClick={userLoaded ? toInfo : toSteps} className='btn btn-primary btn-lg'>//

@@ -57,7 +57,6 @@ export default class TopicForm extends FormView {
     }
 
     if (forum.name === 'ideas') {
-      console.log(locals)
       super(templateIdeas, locals)
     } else {
       super(template, locals)
@@ -267,7 +266,6 @@ export default class TopicForm extends FormView {
   onmakepublicclick (ev) {
     ev.preventDefault()
     var view = this
-
     this.pubButton.addClass('disabled')
     topicStore.publish(this.topic.id)
       .then(() => {

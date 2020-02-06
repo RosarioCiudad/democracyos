@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default ({ forum, topic, staff }) => {
   return (
-    <div className={!staff ? 'attrs ocultarpara' : 'attrs'}>
+    <div className={!staff && forum.name !== "consultas" ? 'attrs ocultarpara' : 'attrs'}>
       {forum.topicsAttrs.map((attr) => {
         const FormInput = forms[attr.kind]
         let val

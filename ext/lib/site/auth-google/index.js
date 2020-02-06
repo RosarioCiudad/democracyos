@@ -25,7 +25,7 @@ function assignProfile (user, profile, accessToken, fn) {
     if (profile._json.email) {
       user.set('email', profile._json.email)
     }
-
+    
     user.save(fn)
   } catch (err) {
     console.error(err)
@@ -105,7 +105,7 @@ app.get('/auth/google/confirm/authorize',
     }
     /*next()*/
     jwt.setUserOnCookie(req.user, res)
-    return res.redirect('/ideas')
+    return res.redirect('/')
   },
   require('lib/site/layout')
 
