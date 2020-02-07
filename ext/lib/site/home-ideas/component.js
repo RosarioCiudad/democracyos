@@ -144,7 +144,7 @@ class HomeIdeas extends Component {
     .then((topics) => {
       this.setState({
         topics: this.state.topics.concat(filter(filtro, topics)),
-        noMore: topics.length === 0 || topics.length < 20,
+        noMore: topics.length === 0 || topics.length < 30,
         page
       })
     })
@@ -165,7 +165,7 @@ class HomeIdeas extends Component {
         .then((topics) => {
           this.setState({
             topics: filter(this.state.filter, topics),
-            noMore: topics.length === 0 || topics.length < 20,
+            noMore: topics.length === 0 || topics.length < 30,
             page: 1
           })
         })
@@ -192,7 +192,7 @@ class HomeIdeas extends Component {
 
   render () {
     const { forum, topics, tags } = this.state
-
+    console.log(this.state.noMore)
 
     return (
       <div className='ext-home-ideas'>
@@ -237,7 +237,7 @@ class HomeIdeas extends Component {
                   topic={topic} />
               ))}
               {
-                !this.state.noMore &&
+                this.state.noMore &&
                   (
                   <div className='more-topics'>
                     <button onClick={this.paginateForward}>Ver Más</button>

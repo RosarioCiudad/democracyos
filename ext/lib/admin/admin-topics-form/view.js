@@ -23,7 +23,6 @@ import templateIdeas from './template-ideas.jade'
 import user from 'lib/user/user.js'
 
 const log = debug('democracyos:admin-topics-form')
-
 /**
  * Creates a password edit view
  */
@@ -273,6 +272,7 @@ export default class TopicForm extends FormView {
         view.privButton.removeClass('hide')
       })
       .catch((err) => {
+        console.log(err)
         view.pubButton.removeClass('disabled')
         log('Found error %o', err)
       })
@@ -281,10 +281,10 @@ export default class TopicForm extends FormView {
   onmakeprivateclick (ev) {
     ev.preventDefault()
     var view = this
-
     this.privButton.addClass('disabled')
+    var id = this.topic.id
 
-    topicStore.unpublish(this.topic.id)
+    topicStore.unpublish(id)
       .then(() => {
         view.privButton.removeClass('disabled')
         view.privButton.addClass('hide')
