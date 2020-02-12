@@ -36,8 +36,7 @@ export default class TopicForm extends FormView {
       tags: tags,
       moment: moment,
       forum,
-      urlBuilder,
-      staff: false
+      urlBuilder
     }
 
     if (topic) {
@@ -60,7 +59,6 @@ export default class TopicForm extends FormView {
     } else {
       super(template, locals)
     }
-    this.staff = user.load('me').staff
     this.topic = topic
     this.tags = tags
     this.forum = forum
@@ -128,9 +126,8 @@ export default class TopicForm extends FormView {
 
     if (this.forum.topicsAttrs.length > 0) {
       const attrsWrapper = this.el[0].querySelector('[data-attrs]')
-
       ReactRender(
-        <Attrs forum={this.forum} topic={this.topic} staff={this.staff}/>,
+        <Attrs forum={this.forum} topic={this.topic} />,
         attrsWrapper
       )
     }

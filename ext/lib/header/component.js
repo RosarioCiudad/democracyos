@@ -84,7 +84,7 @@ class Header extends Component {
                 <img src='/ext/lib/header/rosario_participa.svg' />
               </a>
             </div>
-            <a href='/ideas' rel='noopener noreferrer' target='_parent'> 
+            <a href='/' rel='noopener noreferrer' target='_parent'> 
               <div className={window.location.pathname.includes('admin') || window.location.pathname.includes('topic')  ? 'adminlogo' : 'logo'}>
              
                 {/*<img src={config.logo} />*/} 
