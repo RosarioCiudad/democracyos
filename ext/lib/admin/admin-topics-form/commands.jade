@@ -1,33 +1,20 @@
 .commands.row
   - if (topic.id)
-  
-    .col-sm-3
-      a.btn.btn-success.btn-block.new(href=urlBuilder.for('admin.topics.create', {forum: forum.name}))
-        span.glyphicon.glyphicon-plus
-        = ' ' + t('admin-topics.list.add-topic')
-    .col-sm-3
+    .col-sm-4
       a.btn.btn-danger.btn-block.delete-topic(class=topic.privileges && topic.privileges.canDelete ? '' : 'hide')
-        span=t('admin-topics-form.delete-topic.button.delete')    
-  .col-sm-3(class=!forum.privileges.canChangeTopics ? 'hide' : '')
-    a.btn.btn-primary.btn-block.make-private(class=topic.public && topic.id  ? '' : 'hide')
+        span=t('admin-topics-form.delete-topic.button.delete')
+  .col-sm-4(class=!forum.privileges.canChangeTopics ? 'hide' : '')
+    a.btn.btn-primary.btn-block.make-private(class=topic.public && topic.id && forum.privileges && forum.privileges.canPublishTopics ? '' : 'hide')
       span=t('admin-topics-form.button.make-private')
-    a.btn.btn-primary.btn-block.make-public(class=topic.draft && topic.id  ? '' : 'hide')
+    a.btn.btn-primary.btn-block.make-public(class=topic.draft && topic.id && forum.privileges && forum.privileges.canPublishTopics ? '' : 'hide')
       span=t('admin-topics-form.button.make-public')
-  .col-sm-3
-    a.btn.btn-success.btn-block.save
-        span=t('admin-topics-form.button.submit')
-  - if (topic.id && forum.privileges.canChangeTopics)
-    .col-sm-3
+  - if (!topic.id && !forum.privileges.canChangeTopics)
+    .col-sm-4
       a.btn.btn-primary.btn-block.auto-save
         span=t('admin-topics-form.button.make-public')
-  //- if (topic.id && forum.privileges.canChangeTopics && topic.status === 'open')
-    //.col-sm-3
-      //button.btn.btn-warning.btn-block.archivar.hide
-        //span Archivar
-  //- if (topic.id && forum.privileges.canChangeTopics && topic.status === 'closed')
-    //.col-sm-4
-      //button.btn.btn-warning.btn-block.abrir.hide
-        //span Abrir
-    .col-sm-3(class=topic.id && !forum.privileges.canChangeTopics ? '' : 'hide')
-      a.btn.btn-success.btn-block.save
-        span=t('admin-topics-form.button.submit')    
+  .col-sm-4(class=(forum.privileges.canCreateTopics || topic.privileges.canEdit) && forum.name!=='ideas' ? '' : 'hide')
+    a.btn.btn-success.btn-block.save
+      span=t('admin-topics-form.button.submit')
+
+
+

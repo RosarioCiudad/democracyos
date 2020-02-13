@@ -107,7 +107,8 @@ export class Poll extends Component {
     const showVoteBox = (!(topic.closed && !!selected) || changingVote) && !showResults
 
     const showChangeVote = (!topic.closed && !changingVote && !!topic.voted) || (mostrarCambiar && !mostrarVotar)
-    const showVoteButton = (!topic.closed && !showChangeVote) || (mostrarVotar && !mostrarCambiar)
+    const showVoteButton = (this.props.user.state.fulfilled && !topic.closed && !showChangeVote) || (mostrarVotar && !mostrarCambiar && this.props.user.state.fulfilled)
+    const showSignInButton = (!this.props.user.state.fulfilled)
     const cantComment = user.state.fulfilled && !topic.privileges.canVote
     const isRequired = !user.state.fulfilled && !showResults
 
@@ -146,6 +147,15 @@ export class Poll extends Component {
               disabled={!this.state.selected || !user.state.fulfilled}>
               {t('topics.actions.poll.do')}
             </button>
+          }
+          {
+            showSignInButton && 
+            <a href="signin?ref=%2Fconsultas">
+              <button
+                className='btn btn-primary'>
+                Iniciar sesión para votar
+              </button>
+            </a>
           }
         </div>
         {

@@ -11,45 +11,37 @@ import CoverIdeas from './cover/component'
 import user from 'lib/user/user.js'
 
 const filters = {
-  new: {
+ /* new: {
     text: 'Más Nuevas',
     sort: '-createdAt',
-    filter: (topic) => topic.status === 'open',
+    filter: (topic) => topic.status === 'open' && topic.attrs.para === 'belgrano2020',
     emptyMsg: 'No se encontraron ideas.'
-  },
-  pop: {
-    text: 'Más Populares',
-    sort: '-action.count',
-    filter: (topic) => topic.status === 'open',
-    emptyMsg: 'No se encontraron ideas.'
-  },
-  closed: {
+  },*/
+ /* closed: {
     text: 'Archivadas',
-    sort: '-action.count',
+    sort: 'action.count',
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron ideas.'
-  },
-  ideas: {
+  },*/
+
+/*  ideas: {
     text: 'Ideas',
     sort: '-createdAt',
     filter: (topic) => topic.attrs.rosario2030 === 'no',
     emptyMsg: 'No se encontraron ideas.'
-  },
-
-  rosario2030: {
-    text: 'Rosario2030',
-    sort: '-createdAt',
-    filter: (topic) => topic.attrs.rosario2030 === 'si',
-    emptyMsg: 'Actualmente no hay ideas para el 2030.'
-  },
-
+  },*/
   para: {
-    text: 'Para la consigna',
+    text: 'Más nuevas',
     sort: '-createdAt',
-    filter: (topic) => topic.attrs.para === 'belgrano2020',
+    filter: (topic) => topic.status === 'open' && topic.attrs.para === 'belgrano2020',
     emptyMsg: 'Actualmente no hay ideas para esta consigna.'
   },
-
+ pop: {
+    text: 'Más Populares',
+    sort: '-action.count',
+    filter: (topic) => topic.status === 'open' && topic.attrs.para === 'belgrano2020',
+    emptyMsg: 'No se encontraron ideas.'
+  },
 }
 function filter (key, items = []) {
   return items.filter(filters[key].filter)
@@ -59,7 +51,7 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
   <div className='container'>
     <div className='row'>
       <div className='col-md-8 list-tools'>
-        {/*<div className='topics-filter'>
+        <div className='topics-filter'>
           {Object.keys(filters).map((key) => (
             <button
               key={key}
@@ -68,7 +60,7 @@ const ListTools = ({ onChangeFilter, activeFilter }) => (
               {filters[key].text}
             </button>
           ))}
-        </div>*/}
+        </div>
       </div>
     </div>
     <div className='row'>
@@ -112,7 +104,6 @@ class HomeIdeas extends Component {
   }
 
   componentDidMount = () => {
-  console.log(user.load('me'))
 
     forumStore.findOneByName('ideas')
       .then((forum) => {
@@ -129,21 +120,32 @@ class HomeIdeas extends Component {
           topics: filter(this.state.filter, topics),
           tags: tags.results.tags.filter(tag => tag.count > 1).map(tag => tag.tag)
         })
+        this.fetchTopics(this.state.page + 1, forum.id).then((topics) =>{
+          var topicsPageSiguiente = filter(this.state.filter, topics)
+          if (topicsPageSiguiente.length > 0){
+            this.setState({
+              noMore: true
+            })
+          }
+        })
       })
       .catch((err) => { throw err })
+
   }
+
 
   fetchTopics = (page, forumId) => {
     var u = new window.URLSearchParams(window.location.search)
     let query = {}
     query.forum = forumId
     query.page = page
-    query.limit = 30
+    query.limit = filters[this.state.filter].sort === '-action.count' ? 500 : 16
     query.sort = filters[this.state.filter].sort
     if (u.has('tag')) query.tag = u.get('tag')
     return topicStore.findAll(query).then(([topics, pagination]) => topics)
   }
 
+      
   paginateForward = () => {
     let filtro= this.state.filter
     let page = this.state.page
@@ -152,8 +154,15 @@ class HomeIdeas extends Component {
     .then((topics) => {
       this.setState({
         topics: this.state.topics.concat(filter(filtro, topics)),
-        noMore: topics.length === 0 || topics.length < 20,
+        /*noMore: topics.length > 5,*/
         page
+      })
+    this.fetchTopics(page, this.state.forum.id).then((topics) =>{
+        var topicsPageSiguiente = filter(filtro, topics)
+        console.log(topicsPageSiguiente)
+        this.setState({
+            noMore: topicsPageSiguiente.length > 0
+        })
       })
     })
     .catch((err) => {
@@ -171,9 +180,10 @@ class HomeIdeas extends Component {
     this.setState({ filter: key }, () => {
       this.fetchTopics(1, this.state.forum.id)
         .then((topics) => {
+          console.log(topics)
           this.setState({
             topics: filter(this.state.filter, topics),
-            noMore: topics.length === 0 || topics.length < 20,
+            noMore: this.state.filter==='para',
             page: 1
           })
         })
@@ -200,8 +210,6 @@ class HomeIdeas extends Component {
 
   render () {
     const { forum, topics, tags } = this.state
-
-
     return (
       <div className='ext-home-ideas'>
         {/*<Cover
@@ -215,6 +223,14 @@ class HomeIdeas extends Component {
         <div className='container topics-container'>
           <div className='row'>
             <div className='col-md-4 push-md-8 etiquetas'>
+              <div className='invita-consulta'>
+                <span>
+                  Votá por una imagen de Belgrano para el Pasaje Juramento
+                </span>
+                <a href='/consultas' rel='noopener noreferrer' target='_parent'>
+                  <img src='/ext/lib/site/home-multiforum/consultas.svg' className="invita-consulta"/>
+                </a>
+              </div>
               {/*<h3>Distritos</h3>
               {forum && <TagsList tags={forum.initialTags} forumName={forum.name} />}
               <h3>Temas</h3>
@@ -237,7 +253,7 @@ class HomeIdeas extends Component {
                   topic={topic} />
               ))}
               {
-                !this.state.noMore &&
+                this.state.noMore &&
                   (
                   <div className='more-topics'>
                     <button onClick={this.paginateForward}>Ver Más</button>

@@ -23,7 +23,6 @@ import templateIdeas from './template-ideas.jade'
 import user from 'lib/user/user.js'
 
 const log = debug('democracyos:admin-topics-form')
-
 /**
  * Creates a password edit view
  */
@@ -37,8 +36,7 @@ export default class TopicForm extends FormView {
       tags: tags,
       moment: moment,
       forum,
-      urlBuilder,
-      staff: false
+      urlBuilder
     }
 
     if (topic) {
@@ -57,12 +55,10 @@ export default class TopicForm extends FormView {
     }
 
     if (forum.name === 'ideas') {
-      console.log(locals)
       super(templateIdeas, locals)
     } else {
       super(template, locals)
     }
-    this.staff = user.load('me').staff
     this.topic = topic
     this.tags = tags
     this.forum = forum
@@ -130,9 +126,8 @@ export default class TopicForm extends FormView {
 
     if (this.forum.topicsAttrs.length > 0) {
       const attrsWrapper = this.el[0].querySelector('[data-attrs]')
-
       ReactRender(
-        <Attrs forum={this.forum} topic={this.topic} staff={this.staff}/>,
+        <Attrs forum={this.forum} topic={this.topic} />,
         attrsWrapper
       )
     }
@@ -267,7 +262,6 @@ export default class TopicForm extends FormView {
   onmakepublicclick (ev) {
     ev.preventDefault()
     var view = this
-
     this.pubButton.addClass('disabled')
     topicStore.publish(this.topic.id)
       .then(() => {
@@ -275,6 +269,7 @@ export default class TopicForm extends FormView {
         view.privButton.removeClass('hide')
       })
       .catch((err) => {
+        console.log(err)
         view.pubButton.removeClass('disabled')
         log('Found error %o', err)
       })
@@ -283,10 +278,10 @@ export default class TopicForm extends FormView {
   onmakeprivateclick (ev) {
     ev.preventDefault()
     var view = this
-
     this.privButton.addClass('disabled')
+    var id = this.topic.id
 
-    topicStore.unpublish(this.topic.id)
+    topicStore.unpublish(id)
       .then(() => {
         view.privButton.removeClass('disabled')
         view.privButton.addClass('hide')

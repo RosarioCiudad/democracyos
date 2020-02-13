@@ -6,6 +6,7 @@ import userConnector from 'lib/site/connectors/user'
 import Footer from '../footer/component'
 import Cover from '../cover'
 import TopicCard from './topic-card/component'
+import CoverConsultas from './cover/component'
 
 const filters = {
   new: {
@@ -28,18 +29,12 @@ const filters = {
     filter: (topic) => topic.status === 'closed',
     emptyMsg: 'No se encontraron consultas finalizadas.'
   },
-  consultas: {
-    text: 'Consultas',
-    filter: (topic) => topic.attrs.rosario2030 === 'no',
-    emptyMsg: 'No se encontraron consultas.'
+  para: {
+    text: 'Para la consigna',
+    sort: '-createdAt',
+    filter: (topic) => topic.attrs.para === 'belgrano2020',
+    emptyMsg: 'Actualmente no hay consultas para esta consigna.'
   },
-
-  rosario2030: {
-    text: 'Rosario2030',
-    filter: (topic) => topic.attrs.rosario2030 === 'si',
-    emptyMsg: 'Actualmente no hay consultas para el 2030.'
-  },
-
 }
 
 function filter (key, items = []) {
@@ -54,7 +49,7 @@ class HomeConsultas extends Component {
       forum: null,
       topics: null,
       //filter: 'rosario2030',
-      filter: 'open'
+      filter: 'para'
     }
   }
 
@@ -79,7 +74,7 @@ class HomeConsultas extends Component {
           topics: filtered,
         })
      
-        bus.on('topic-store:update:all', this.fetchTopics)
+        bus.on('topic-store:update:para', this.fetchTopics)
       })
       .catch((err) => { throw err })
   }
@@ -114,14 +109,15 @@ class HomeConsultas extends Component {
 
     return (
       <div className='ext-home-consultas'>
-        <Cover
+        {/*<Cover
           logo='/ext/lib/site/home-multiforum/consultas.svg'
           title='Consultas'
-          description='Queremos conocer tu opinión sobre diferentes temas. Elegí la mejor opción para la ciudad.' />
+          description='Queremos conocer tu opinión sobre diferentes temas. Elegí la mejor opción para la ciudad.' />*/}
+        <CoverConsultas />
         <div className='container'>
-          <Filter
+     {/*     <Filter
             onChange={this.handleFilterChange}
-            active={this.state.filter} />
+            active={this.state.filter} />*/}
           {topics && topics.length === 0 && (
             <div className='empty-msg'>
               <div className='alert alert-success' role='alert'>
