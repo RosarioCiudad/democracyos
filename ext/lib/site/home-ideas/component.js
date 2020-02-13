@@ -118,14 +118,16 @@ class HomeIdeas extends Component {
         this.setState({
           forum,
           topics: filter(this.state.filter, topics),
-          noMore: topics.length > 10,
           tags: tags.results.tags.filter(tag => tag.count > 1).map(tag => tag.tag)
         })
-        this.fetchTopics(this.state.page + 1, forum.id).then((topics) =>{if(topics.length > 1){
-          this.setState({
-            noMore: true
-          })
-        }})
+        this.fetchTopics(this.state.page + 1, forum.id).then((topics) =>{
+          var topicsPageSiguiente = filter(this.state.filter, topics)
+          if (topicsPageSiguiente.length > 0){
+            this.setState({
+              noMore: true
+            })
+          }
+        })
       })
       .catch((err) => { throw err })
 
@@ -137,7 +139,7 @@ class HomeIdeas extends Component {
     let query = {}
     query.forum = forumId
     query.page = page
-    query.limit = filters[this.state.filter].sort === '-action.count' ? 500 : 15
+    query.limit = filters[this.state.filter].sort === '-action.count' ? 500 : 16
     query.sort = filters[this.state.filter].sort
     if (u.has('tag')) query.tag = u.get('tag')
     return topicStore.findAll(query).then(([topics, pagination]) => topics)
@@ -152,8 +154,15 @@ class HomeIdeas extends Component {
     .then((topics) => {
       this.setState({
         topics: this.state.topics.concat(filter(filtro, topics)),
-  /*      noMore: topics.length > 10,*/
+        /*noMore: topics.length > 5,*/
         page
+      })
+    this.fetchTopics(page, this.state.forum.id).then((topics) =>{
+        var topicsPageSiguiente = filter(filtro, topics)
+        console.log(topicsPageSiguiente)
+        this.setState({
+            noMore: topicsPageSiguiente.length > 0
+        })
       })
     })
     .catch((err) => {

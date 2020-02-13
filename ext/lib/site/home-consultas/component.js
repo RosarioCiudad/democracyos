@@ -74,7 +74,7 @@ class HomeConsultas extends Component {
           topics: filtered,
         })
      
-        bus.on('topic-store:update:all', this.fetchTopics)
+        bus.on('topic-store:update:para', this.fetchTopics)
       })
       .catch((err) => { throw err })
   }
