@@ -51,15 +51,6 @@ class Noticias extends Component {
     if (!topic) return null
     return (
       <div id='noticias' className='container'>
-        <div className='texto-container'>
-          <h3>{topic.mediaTitle}</h3>
-          <Content clauses={topic.clauses} />
-            {
-              topic.attrs.linkText &&  (
-              <a className='btn btn-primary' target='_blank' href={topic.attrs.linkUrl}>{topic.attrs.linkText}</a>
-            )
-          }
-        </div>
         {
           (topic.attrs.iFrame && !topic.attrs.videoUrl) &&
           <div className='iframe'>
@@ -86,6 +77,15 @@ class Noticias extends Component {
             }
           </div>
         }
+         <div className='texto-container'>
+          <h3>{topic.mediaTitle}</h3>
+          <Content clauses={topic.clauses} />
+            {
+              topic.attrs.linkText &&  (
+              <a className='btn btn-primary' target='_blank' href={topic.attrs.linkUrl}>{topic.attrs.linkText}</a>
+            )
+          }
+        </div>
       </div>
     )
   }

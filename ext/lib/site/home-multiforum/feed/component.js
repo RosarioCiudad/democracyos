@@ -12,7 +12,7 @@ class Feed extends Component {
     super(props)
     this.state = {
       topics: null,
-      forums: null
+      forums: 'presupuesto'
     }
   }
 
