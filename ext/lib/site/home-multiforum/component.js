@@ -6,17 +6,22 @@ import Footer from '../footer/component'
 import Anchor from '../anchor'
 import Cover from './cover/component'
 import Steps from './steps/component'
+import Countdown from './countdown/component'
 import Feed from './feed/component'
 import Noticias from './noticias/component'
+import SliderView from './slider/component'
 
 export default userConnector(({ user }) => {
   return (
     <div className='ext-home-multiforum'>
       <Cover toSteps={() => Anchor.goTo('participar')} toInfo={() => Anchor.goTo('info')} userLoaded={user.state.fulfilled} />
+      <Countdown
+            cierre={'2020-06-20T09:00:20.000Z'} />
+        <SliderView />
       <Anchor id='participar' />
       <Noticias tagName="home" />
       {/*<Steps scrollInfo={() => Anchor.goTo('info')} />*/}
-      <Anchor className='info' id='info'>
+     {/* <Anchor className='info' id='info'>
         <div className='action action-ideas'>
           <div className='action-img' />
           <div className='action-content'>
@@ -57,8 +62,7 @@ export default userConnector(({ user }) => {
             <Link to='/voluntariado' className='btn btn-primary btn-lg'>Quiero sumarme</Link>
           </div>
         </div>
-      </Anchor>
-        
+      </Anchor>*/}
       <TweetsFeed />
       <Footer />
     </div>

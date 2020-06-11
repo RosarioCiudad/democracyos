@@ -155,10 +155,10 @@ const Navigation = withRouter(({ router, onClick }) => (
 
 Navigation.links = [
   { slug: 'ideas', title: 'Ideas' },
-  { slug: 'presupuesto', title: 'Presupuesto Participativo' },
+  // { slug: 'presupuesto', title: 'Presupuesto Participativo' },
   { slug: 'consultas', title: 'Consultas' },
-  { slug: 'desafios', title: 'Desafíos' },
-  { slug: 'voluntariado', title: 'Voluntariado Social' }
+  // { slug: 'desafios', title: 'Desafíos' },
+  // { slug: 'voluntariado', title: 'Voluntariado Social' }
 ]
 
 export default userConnector(Header)
