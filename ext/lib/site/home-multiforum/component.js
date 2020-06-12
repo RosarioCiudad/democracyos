@@ -17,7 +17,7 @@ export default userConnector(({ user }) => {
       <Cover toSteps={() => Anchor.goTo('participar')} toInfo={() => Anchor.goTo('info')} userLoaded={user.state.fulfilled} />
       <Countdown
             cierre={'2020-06-20T12:00:00.000Z'} />
-        <SliderView />
+      <SliderView />
       <Anchor id='participar' />
       <Noticias tagName="home" />
       {/*<Steps scrollInfo={() => Anchor.goTo('info')} />*/}
