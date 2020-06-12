@@ -25,7 +25,7 @@ export default class SliderView extends React.Component{
       arrows: true,
       adaptiveHeight: true,
       accessibility: true,
-      autoplay: window.innerWidth >= 900 ? false : true,
+      autoplay: false,
       responsive: [
         {
           breakpoint: 1024,

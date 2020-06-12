@@ -1,11 +1,17 @@
-.slick-slider, .slick-initialized
+.slick-slider, .slick-initialized, .slick-slide, .slick-active, .slick-list, .slick-cloned
   @media screen and (min-width: 1200px)
     max-height: 600px !important
-    margin-bottom: 120px !important
+    margin-bottom: 100px !important
+  @media screen and (max-width: 1200px)
+    max-height: 600px !important
+  @media screen and (max-width: 1100px)
+    max-height: 500px !important
   @media screen and (max-width: 900px)
     max-height: 400px !important
   @media screen and (max-width: 500px)
     max-height: 300px !important
+  @media screen and (max-width: 400px)
+    max-height: 180px !important
 
 .slick-slide img
   display: block
@@ -20,12 +26,7 @@
 
 .slick-list
   padding: 0px 0px !important
-  @media screen and (min-width: 1200px)
-    max-height: 600px !important
-  @media screen and (max-width: 900px)
-    max-height: 400px !important
-  @media screen and (max-width: 500px)
-    max-height: 300px !important
+
 
 .slick-prev
   left: 3% !important
@@ -69,15 +70,15 @@
 .slick-dots
   bottom: 60px !important
   @media screen and (max-width: 1300px)
-    bottom: 80px !important
+    bottom: -30px !important
   @media screen and (max-width: 1240px)
-    bottom: 120px !important
+    bottom: -10px !important
   @media screen and (max-width: 1200px)
-    bottom: 150px !important
+    bottom: 140px !important
   @media screen and (max-width: 1100px)
-    bottom: 190px !important
+    bottom: 120px !important
   @media screen and (max-width: 1000px)
-    bottom: 240px !important
+    bottom: 140px !important
   @media screen and (max-width: 900px)
     bottom: 70px !important
   @media screen and (max-width: 800px)
@@ -87,11 +88,11 @@
   @media screen and (max-width: 600px)
     bottom: 190px !important
   @media screen and (max-width: 500px)
-    bottom: 110px !important
+    bottom: 130px !important
   @media screen and (max-width: 460px)
     bottom: 140px !important
   @media screen and (max-width: 400px)
-    bottom: 160px !important
+    bottom: 40px !important
 
 
   .slick-active
@@ -101,6 +102,9 @@
     border-radius: 50% !important
     width: 15px;
     height: 15px;
+    @media screen and (max-width: 450px)
+      width: 10px !important
+      height: 10px !important
     button:before
       color: #fff0 !important
 

@@ -33,7 +33,7 @@ class TweetsFeed extends Component {
         <div className='tweet-box tweet-box-lg tweets-logo'>
           <div className='tweet-content'>
             <span>#ArribaBelgrano</span>
-            <span>#ArribaBandera</span>
+            <span>#ArribaLaBandera</span>
             <span>#ArribaRosario</span>
           </div>
         </div>
