@@ -1,0 +1,123 @@
+.countdown-wrapper
+  box-sizing: border-box
+  width: 100vw
+  padding: 40px 15px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-between
+  color: #0066cc
+  @media screen and (max-width: 600px)
+    padding: 25px 15px
+  
+  .participa
+    margin-top: 10px
+
+  .puntoswrap
+    padding-top: 30px !important
+    padding-left: 0px !important
+    padding-right: 0px !important
+    @media screen and (max-width: 600px) 
+      padding-top: 0px !important
+  .dospuntos
+    font-size: 3em !important
+    font-weight: 501 !important
+
+  .conborde
+    border-top: 2px solid #0066cc
+    border-bottom: 2px solid #0066cc
+
+  .circulo
+    border-radius: 50%
+    background-color: #0066cc
+    color: #fff
+    width: 100px;
+    height: 100px;
+    text-align: center
+    margin-right: 10px
+    @media screen and (max-width: 600px)
+      width: 60px;
+      height: 60px;
+    @media screen and (max-width: 400px)
+      width: 50px;
+      height: 50px;
+
+  .dias
+    flex-direction: inherit !important
+    margin-right: 20px !important
+    width: 35% !important
+    @media screen and (max-width: 600px)
+      width: 45% !important
+      margin-right: -10px !important
+
+
+  .intro
+    display: flex
+    align-items: center
+    max-width: 60%
+    @media screen and (max-width: 1240px)
+      max-width: 75%
+    @media screen and (max-width: 920px)
+      max-width: 85%
+    @media screen and (max-width: 800px)
+      align-items: flex-start
+    @media screen and (max-width: 800px)
+      max-width: 100%
+    @media screen and (max-width: 534px)
+      flex-wrap: wrap
+        
+    .text
+      flex: auto
+      h2
+        margin: 0 0 20px 0
+        font-size: 2.5em
+        font-weight: 500
+        @media screen and (max-width: 600px)
+          font-size: 2.2em
+      p
+        margin: 0
+        text-align: center
+        font-size: 1.5em
+        font-weight: 500
+        line-height: 1.2
+        @media screen and (max-width: 600px)
+          font-size: 1.3em
+        
+  .countdown
+    margin-top: 30px
+    display: flex
+    max-width: 96vw
+    font-size: 14px
+    @media screen and (max-width: 600px)
+      margin-top: 20px
+    .clock
+      width: 25%
+      margin: 10px 0
+      padding: 9 25px
+      display: flex
+      flex-direction: column
+      align-items: center
+      @media screen and (max-width: 600px)
+        padding: 8 15px
+      .number
+        font-size: 5em
+        font-weight: 501
+        line-height: 1.2
+        @media screen and (max-width: 600px)
+         font-size: 2.3em
+        @media screen and (max-width: 400px)
+         font-size: 2.0em
+      .caption
+        font-size: 1.3em
+        font-weight: 400
+        @media screen and (max-width: 600px)
+          font-size: 1em
+    .clock + .clock
+      border-left: none
+
+  footer
+    margin-top: 7px
+    font-size: 1.4em
+    font-weight: 400
+    @media screen and (max-width: 600px)
+      font-size: 1.1em

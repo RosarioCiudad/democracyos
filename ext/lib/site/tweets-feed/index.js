@@ -51,6 +51,7 @@ function twFetch () {
 }
 
 app.get('/tweets', function (req, res, next) {
+  console.log(req)
   if (!client) {
     const err = new Error('Twitter account is not configured in this server.')
     err.code = 'TWITTER_NOT_CONFIGURED'

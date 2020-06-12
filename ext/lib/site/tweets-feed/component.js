@@ -32,7 +32,9 @@ class TweetsFeed extends Component {
       <div className='tweets-box'>
         <div className='tweet-box tweet-box-lg tweets-logo'>
           <div className='tweet-content'>
-            <span>#RosarioParticipa</span>
+            <span>#ArribaBelgrano</span>
+            <span>#ArribaBandera</span>
+            <span>#ArribaRosario</span>
           </div>
         </div>
         <div className='tweet-box tweet-box-lg tweets-links'>
