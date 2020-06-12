@@ -72,6 +72,27 @@ export default class SliderView extends React.Component{
             <div className='box-image'>
               <img className='img-responsive' src={slideImages[2]}/>
             </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[3]}/>
+            </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[4]}/>
+            </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[5]}/>
+            </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[6]}/>
+            </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[7]}/>
+            </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[8]}/>
+            </div>
+            <div className='box-image'>
+              <img className='img-responsive' src={slideImages[9]}/>
+            </div>
            
         </Slider>
     );
