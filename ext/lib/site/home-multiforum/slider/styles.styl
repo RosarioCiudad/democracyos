@@ -68,9 +68,16 @@
   content: '>' !important
 
 .slick-dots
-  bottom: 60px !important
+  @media screen and (max-width: 1800px)
+    bottom: -60px !important
+  @media screen and (max-width: 1600px)
+    bottom: -60px !important
+  @media screen and (max-width: 1500px)
+    bottom: -70px !important
+  @media screen and (max-width: 1400px)
+    bottom: -50px !important
   @media screen and (max-width: 1300px)
-    bottom: -30px !important
+    bottom: -10px !important
   @media screen and (max-width: 1240px)
     bottom: 0px !important
   @media screen and (max-width: 1200px)
