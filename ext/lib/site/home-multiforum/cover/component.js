@@ -29,7 +29,7 @@ export default ({ userLoaded, toSteps, toInfo }) => (
     )*/}
     <div className='container'>
       {/*<h1 className="number">107.252</h1> */}
-      <h1>La promesa más grande de la historia</h1>
+      <h1>Arriba la Bandera, el 20 de junio gritemos bien fuerte</h1>
       {/*<h2>Sumate a participar</h2>*/}
         <a href="#" onClick={openPopup}>
           <button className='btn btn-primary btn-lg botonslider'>
