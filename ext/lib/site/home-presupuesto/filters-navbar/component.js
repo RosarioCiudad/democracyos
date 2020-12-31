@@ -120,8 +120,8 @@ class FiltersNavbar extends Component {
           break
         case 'seguimiento':
           nextFilters.edad.adulto = true
-          nextFilters.anio.proyectos2020 = false
-          nextFilters.anio.proyectos2019 = true
+          nextFilters.anio.proyectos2020 = true
+          nextFilters.anio.proyectos2019 = false
           nextFilters.anio.proyectos2018 = false
           break
       }
