@@ -80,15 +80,15 @@ class Header extends Component {
             <div className='current-date'>
               {/*<span>{capitalizeFirstLetter(moment().format('dddd D'))}</span>
               <span>{capitalizeFirstLetter(moment().format('MMMM YYYY'))}</span>*/}
-              <a href='/' rel='noopener noreferrer' target='_parent'>
+              {/*<a href='/' rel='noopener noreferrer' target='_parent'>
                 <img src='/ext/lib/header/rosario_participa.svg' />
-              </a>
+              </a>*/}
             </div>
             <a href='/' rel='noopener noreferrer' target='_parent'> 
-              <div className={window.location.pathname.includes('admin') || window.location.pathname.includes('topic')  ? 'adminlogo' : 'logo'}>
+              <div className='logo'>
              
-                {/*<img src={config.logo} />*/} 
-                <img src='ext/lib/header/arribabelgrano.svg' />
+                <img src={config.logo} /> 
+                {/*<img src='ext/lib/header/arribabelgrano.svg' />*/} 
               </div>
             </a>  
 
@@ -154,9 +154,9 @@ const Navigation = withRouter(({ router, onClick }) => (
 ))
 
 Navigation.links = [
-  { slug: 'ideas', title: 'Ideas' },
-  // { slug: 'presupuesto', title: 'Presupuesto Participativo' },
-  { slug: 'consultas', title: 'Consultas' },
+  // { slug: 'ideas', title: 'Ideas' },
+  { slug: 'presupuesto', title: 'Presupuesto Participativo' },
+  // { slug: 'consultas', title: 'Consultas' },
   // { slug: 'desafios', title: 'Desafíos' },
   // { slug: 'voluntariado', title: 'Voluntariado Social' }
 ]
