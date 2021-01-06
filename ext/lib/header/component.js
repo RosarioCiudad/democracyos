@@ -86,9 +86,7 @@ class Header extends Component {
             </div>
             <a href='/' rel='noopener noreferrer' target='_parent'> 
               <div className='logo'>
-             
-                <img src={config.logo} /> 
-                {/*<img src='ext/lib/header/arribabelgrano.svg' />*/} 
+                <img src='ext/lib/header/logo.png' /> 
               </div>
             </a>  
 
